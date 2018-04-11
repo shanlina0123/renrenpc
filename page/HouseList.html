@@ -14,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="css/master.css">
     <link rel="stylesheet" type="text/css" href="css/plugins/iCheck/custom.css">
     <link rel="stylesheet" type="text/css" href="js/plugins/layer/skin/layer.css">
-    <title>客户管理</title>
+    <title>房源列表</title>
 </head>
 <body class="gray-bg">
 <div class="wrapper wrapper-content">
@@ -25,14 +25,18 @@
                     <div class="col-sm-12">
                 </div>
                 </div>
+                <div class="ibox-title">
+                   <button type="submit" class="btn btn-primary">  <a class="J_menuItem" href="CreateHouse.html">新建房源</a>
+                                        </button>
+                </div>
                 <div class="ibox-content">
                     <div class="row">
                         <form  class="form-inline">
                                      <div class="col-sm-2 text-center">
                             <div class="form-group">
-                                 <label>客户状态：</label>
+                                 <label>房源类型：</label>
                                     <div class="col-sm-8 input-group">
-                                        <input  type="text" class="form-control" name="guestStatus">
+                                        <input  type="text" class="form-control" name="houseType">
                                     </div>
                             </div>
                         </div>
@@ -46,17 +50,17 @@
                         </div>
                         <div class="col-sm-2 text-center">
                            <div class="form-group">
-                                    <label>客户等级：</label>
+                                    <label>展示佣金：</label>
                                     <div class="col-sm-8 input-group">
-                                        <input  type="text" class="form-control" name="grade">
+                                        <input  type="text" class="form-control" name="showCommission">
                                     </div>
                                 </div>
                         </div>
                                     <div class="col-sm-2 text-center">
                             <div class="form-group">
-                                <label>业务员：</label>
+                                <label>发布日期：</label>
                                     <div class="col-sm-8 input-group">
-                                        <input  type="text" class="form-control" name="SalesMan">
+                                        <input  type="text" class="form-control" name="issueDate">
                                     </div>
                                 </div>
 
@@ -74,88 +78,69 @@
                         <table class="table table-striped table-hover" id="ListTB">
                             <thead>
                                 <tr>
-                                <th>列表</th>
                                  <th>ID</th>
-                                    <th>客户等级</th>
-                                    <th>客户姓名</th>
+                                    <th>图片</th>
                                     <th>楼盘</th>
-                                    <th>手机号</th>
-                                    <th>预约时间</th>
-                                    <th>上门时间</th>
-                                      <th>客户状态</th>
-                                      <th>公司</th>
-                                       <th>经纪人</th>
-                                    <th>跟进人</th>
-                                      <th>跟进次数</th>
-                                        <th>最后跟进时间</th>
-                                          <th>成交时间</th>
+                                    <th>房源类型</th>
+                                    <th>面积</th>
+                                    <th>房型</th>
+                                    <th>佣金规则</th>
+                                      <th>首页推荐</th>
+                                      <th>公众号展示</th>
+                                       <th>发布日期</th>
+                                    <th>展示佣金</i></th>
                                     <th>操作</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td> <input type="checkbox" name="mycheck"/></td>
                                     <td>1</td>
-                                    <td>vip</td>
-                                    <td>张三</td>
+                                    <td><img src="d:/ss.png"></td>
                                     <td>罗马景福城</td>
-                                    <td>15769157467</td>
-                                    <td>2018-03-15 15:12</td>
-                                    <td>2018-02-18</td>
-                                    <td>已上门</td>
-                                    <td>好利来</td>
-                                    <td>李四</td>
-                                     <td>王麻子</td>
-                                      <td>3</td>
+                                    <td>新房</td>
+                                    <td>537~1267</td>
+                                    <td>1室3厅</td>
+                                    <td>每单300</td>
+                                    <td>是</td>
+                                    <td>是</td>
                                      <td>2018-03-18</td>
-                                     <td>2018-03-18</td>
+                                    <td><button type="button" class="btn btn-warning" onclick="closeBtn()">是</button></td>
                                     <td>
-                                       <button type="button" class="btn btn-warning" onclick="closeBtn()">客户维护</button>
-                                        <button type="button" class="btn btn-warning" onclick="closeBtn()">编辑</button>
+                                        <button type="button" class="btn btn-warning" onclick="closeBtn()">修改</button>
                                         <button type="button" class="btn btn-success">删除</button>
                                     </td>
                                 </tr>
-                             <tr>
-                                    <td> <input type="checkbox" name="mycheck"/></td>
+                               <tr>
                                     <td>1</td>
-                                    <td>vip</td>
-                                    <td>张三</td>
+                                    <td><img src="d:/ss.png"></td>
                                     <td>罗马景福城</td>
-                                    <td>15769157467</td>
-                                    <td>2018-03-15 15:12</td>
-                                    <td>2018-02-18</td>
-                                    <td>已上门</td>
-                                    <td>好利来</td>
-                                    <td>李四</td>
-                                     <td>王麻子</td>
-                                      <td>3</td>
+                                    <td>新房</td>
+                                    <td>537~1267</td>
+                                    <td>1室3厅</td>
+                                    <td>每单300</td>
+                                    <td>是</td>
+                                    <td>是</td>
                                      <td>2018-03-18</td>
-                                     <td>2018-03-18</td>
+                                    <td><button type="button" class="btn btn-warning" onclick="closeBtn()">是</button></td>
                                     <td>
-                                       <button type="button" class="btn btn-warning" onclick="closeBtn()">客户维护</button>
-                                        <button type="button" class="btn btn-warning" onclick="closeBtn()">编辑</button>
+                                        <button type="button" class="btn btn-warning" onclick="closeBtn()">修改</button>
                                         <button type="button" class="btn btn-success">删除</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td> <input type="checkbox" name="mycheck"/></td>
                                     <td>1</td>
-                                    <td>vip</td>
-                                    <td>张三</td>
+                                    <td><img src="d:/ss.png"></td>
                                     <td>罗马景福城</td>
-                                    <td>15769157467</td>
-                                    <td>2018-03-15 15:12</td>
-                                    <td>2018-02-18</td>
-                                    <td>已上门</td>
-                                    <td>好利来</td>
-                                    <td>李四</td>
-                                     <td>王麻子</td>
-                                      <td>3</td>
+                                    <td>新房</td>
+                                    <td>537~1267</td>
+                                    <td>1室3厅</td>
+                                    <td>每单300</td>
+                                    <td>是</td>
+                                    <td>是</td>
                                      <td>2018-03-18</td>
-                                     <td>2018-03-18</td>
+                                    <td><button type="button" class="btn btn-warning" onclick="closeBtn()">是</button></td>
                                     <td>
-                                       <button type="button" class="btn btn-warning" onclick="closeBtn()">客户维护</button>
-                                        <button type="button" class="btn btn-warning" onclick="closeBtn()">编辑</button>
+                                        <button type="button" class="btn btn-warning" onclick="closeBtn()">修改</button>
                                         <button type="button" class="btn btn-success">删除</button>
                                     </td>
                                 </tr>
