@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css"  rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min_EDT.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/master.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" type="text/css" href="js/plugins/layer/skin/layer.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins/chosen/chosen.css">
+    <link href="css/layer.css" rel="stylesheet" type="text/css" />
+    <title>礼包模版新增/编辑（抽奖）</title>
+    <style>
+        *, :after, :before {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        main{padding-top: 3em;}
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+            text-align: center;
+        }
+        .draw {
+            width: 560px;
+            height: 600px;
+            margin: 0 auto;
+            padding:51px;
+            background-image: url(images/bg.png);
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        .draw .item {
+            width: 150px;
+            height: 150px;
+            background-image: url(images/bg1.png);
+            background-repeat: no-repeat;
+            background-size: 96%;
+        }
+        .draw .item.active {
+            background-image: url(images/bg2.png);
+            background-repeat: no-repeat;
+            background-size: 100%;
+        }
+        .draw .img {
+            display: table-cell;
+            width: 150px;
+            height: 61px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        .draw .img img {
+            vertical-align: top;
+        }
+        .draw .gap {
+            width: 5px;
+        }
+        .draw .gap-2 {
+            height: 5px;
+        }
+        .draw .name {
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        .draw .draw-btn {
+            display: block;
+            height: 150px;
+            line-height: 150px;
+            border-radius: 20px;
+            font-size: 25px;
+            font-weight: 700;
+            text-decoration: none;
+            background-image: url(images/bg3.png);
+            background-repeat: no-repeat;
+            background-size: 96%;
+        }
+    </style>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>礼包模版新增/编辑（抽奖）</h5>
+                </div>
+                <div class="ibox-content">
+                    <form class="form-horizontal m-t">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">名称：</label>
+                                    <div class="col-sm-6 input-group">
+                                        <input type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">标签：</label>
+                                    <div class="col-sm-6 input-group">
+                                        <select data-placeholder="选择省份" class="chosen-select col-sm-12" multiple tabindex="4">
+                                            <option value="">请选择省份</option>
+                                            <option value="110000" hassubinfo="true">北京</option>
+                                            <option value="120000" hassubinfo="true">天津</option>
+                                            <option value="130000" hassubinfo="true">河北省</option>
+                                            <option value="140000" hassubinfo="true">山西省</option>
+                                            <option value="150000" hassubinfo="true">内蒙古自治区</option>
+                                            <option value="210000" hassubinfo="true">辽宁省</option>
+                                            <option value="220000" hassubinfo="true">吉林省</option>
+                                            <option value="230000" hassubinfo="true">黑龙江省</option>
+                                            <option value="310000" hassubinfo="true">上海</option>
+                                            <option value="320000" hassubinfo="true">江苏省</option>
+                                            <option value="330000" hassubinfo="true">浙江省</option>
+                                            <option value="340000" hassubinfo="true">安徽省</option>
+                                            <option value="350000" hassubinfo="true">福建省</option>
+                                            <option value="360000" hassubinfo="true">江西省</option>
+                                            <option value="370000" hassubinfo="true">山东省</option>
+                                            <option value="410000" hassubinfo="true">河南省</option>
+                                            <option value="420000" hassubinfo="true">湖北省</option>
+                                            <option value="430000" hassubinfo="true">湖南省</option>
+                                            <option value="440000" hassubinfo="true">广东省</option>
+                                            <option value="450000" hassubinfo="true">广西壮族自治区</option>
+                                            <option value="460000" hassubinfo="true">海南省</option>
+                                            <option value="500000" hassubinfo="true">重庆</option>
+                                            <option value="510000" hassubinfo="true">四川省</option>
+                                            <option value="520000" hassubinfo="true">贵州省</option>
+                                            <option value="530000" hassubinfo="true">云南省</option>
+                                            <option value="540000" hassubinfo="true">西藏自治区</option>
+                                            <option value="610000" hassubinfo="true">陕西省</option>
+                                            <option value="620000" hassubinfo="true">甘肃省</option>
+                                            <option value="630000" hassubinfo="true">青海省</option>
+                                            <option value="640000" hassubinfo="true">宁夏回族自治区</option>
+                                            <option value="650000" hassubinfo="true">新疆维吾尔自治区</option>
+                                            <option value="710000" hassubinfo="true">台湾省</option>
+                                            <option value="810000" hassubinfo="true">香港特别行政区</option>
+                                            <option value="820000" hassubinfo="true">澳门特别行政区</option>
+                                            <option value="990000" hassubinfo="true">海外</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">图片上传：</label>
+                                    <div class="input-group col-sm-6">
+                                        <ul id="warp">
+                                            <li>
+                                                <input type="file" id="up_img_WU_FILE_0"  class="form-control"/>
+                                                <img id="imgShow_WU_FILE_0" width="100" height="100" style="margin-top:10px;" />
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2">活动标题：</label>
+                                    <div class="input-group col-sm-6">
+                                        <input name="name" type="text" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="form-group form-inline">
+                                    <label class="control-label col-sm-2">活动时间：</label>
+                                    <div class="input-group col-sm-3">
+                                        <input class="form-control"  name="StartTime" placeholder="开始时间" type="text" value="">
+                                        <span class="form-control-feedback"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                    <div class="input-group col-sm-3">
+                                        <input class="form-control"  name="EndTime" placeholder="结束时间" type="text" value="">
+                                        <span class="form-control-feedback"><span class="glyphicon glyphicon-calendar"></span></span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"></label>
+                                    <div class="input-group col-sm-6">
+                                        <div class="active-box">
+                                            <p>活动进行中仍可进行编辑没中奖品，每个用户只能中一次，故不能超过奖品种数每天可抽奖次数不影响每人可中奖份数达到最多可中奖份数，用户不再中奖。</p>
+                                            <div class="form-group" style="margin-left: 0">
+                                                <label class="control-label fl min-w">活动商品介绍：</label>
+                                                <div class="input-group col-sm-3">
+                                                    <input class="form-control" type="text">
+                                                    <span class="input-group-addon">次</span>
+                                                </div>
+                                            </div>
+                                            <div class="form-group" style="margin-left: 0">
+                                                <label class="control-label fl min-w">没人对多可中奖：</label>
+                                                <div class="input-group col-sm-3">
+                                                    <input class="form-control" type="text">
+                                                    <span class="input-group-addon">份不同奖品</span>
+                                                </div>
+                                                <span class="help-block">没中奖品，每个用户只能中一次，故不能超过奖品种数</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="control-label col-sm-2"></label>
+                                    <div class="input-group col-sm-6">
+                                        <div class="active-box">
+                                            <p>活动进行中仍可进行编辑没中奖品，每个用户只能中一次，故不能超过奖品种数每天可抽奖次数不影响每人可中奖份数达到最多可中奖份数，用户不再中奖。</p>
+                                            <main style="background: #f02d2f;">
+                                                <div class="draw" id="lottery">
+                                                    <table>
+                                                        <tr>
+                                                            <td class="item lottery-unit lottery-unit-0">
+                                                                <div class="img">
+                                                                    <img src="images/img1.png" alt="">
+                                                                </div>
+                                                                <span class="name">终身VIP会员</span>
+                                                            </td>
+                                                            <td class="gap"></td>
+                                                            <td class="item lottery-unit lottery-unit-1">
+                                                                <div class="img">
+                                                                    <img src="images/img2.png" alt="">
+                                                                </div>
+                                                                <span class="name">三年VIP会员</span>
+                                                            </td>
+                                                            <td class="gap"></td>
+                                                            <td class="item lottery-unit lottery-unit-2">
+                                                                <div class="img">
+                                                                    <img src="images/img3.png" alt="">
+                                                                </div>
+                                                                <span class="name">半年VIP会员</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="gap-2" colspan="5"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="item lottery-unit lottery-unit-7">
+                                                                <div class="img">
+                                                                    <img src="images/img4.png" alt="">
+                                                                </div>
+                                                                <span class="name">399元充值卡一张</span>
+                                                            </td>
+                                                            <td class="gap"></td>
+                                                            <td class="">
+                                                                <a class="draw-btn" href="javascript:"></a>
+                                                            </td>
+                                                            <td class="gap"></td>
+                                                            <td class="item lottery-unit lottery-unit-3">
+                                                                <div class="img">
+                                                                    <img src="images/img5.png" alt="">
+                                                                </div>
+                                                                <span class="name">100元充值卡一张</span>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="gap-2" colspan="5"></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="item lottery-unit lottery-unit-6">
+                                                                <div class="img">
+                                                                    <img src="images/img7.png" alt="">
+                                                                </div>
+                                                                <span class="name">免费体验一次</span>
+                                                            </td>
+                                                            <td class="gap"></td>
+                                                            <td class="item lottery-unit lottery-unit-5">
+                                                                <div class="img">
+                                                                    <img src="images/img6.png" alt="">
+                                                                </div>
+                                                                <span class="name">九折优惠券一张</span>
+                                                            </td>
+                                                            <td class="gap"></td>
+                                                            <td class="item lottery-unit lottery-unit-4">
+                                                                <div class="img">
+                                                                    <img src="images/img8.png" alt="">
+                                                                </div>
+                                                                <span class="name">参与大礼包一份</span>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </div>
+                                            </main>
+                                            <div id='info' style = "display : none">
+                                                <a href=""><img src="images/tk_img.png"></a>
+                                                <h1>100元</h1>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">活动介绍：</label>
+                                <div class="input-group col-sm-6">
+                                    <textarea class="form-control m-h">Donec augue enim, volutpat at ligula et, dictum laoreet sapien.</textarea>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">领取时间：</label>
+                                <div class="input-group col-sm-6">
+                                    <input name="name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">领取地址：</label>
+                                <div class="input-group col-sm-6">
+                                    <input name="name" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-sm-2">联系方式：</label>
+                                <div class="input-group col-sm-6">
+                                    <input name="name" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-center m-t">
+                            <button type="button" class="btn btn-primary"> <i class="fa fa-floppy-o"></i> 保存</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="js/plugins/layer/layer.min.js"></script>
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+<script src="js/layer.js"></script>
+<script src="js/uploadPreview.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $(".i-checks").iCheck({
+            checkboxClass:"icheckbox_square-green",
+            radioClass:"iradio_square-green"
+        });
+    });
+    var lottery = {
+        index: -1, //当前转动到哪个位置，起点位置
+        count: 0, //总共有多少个位置
+        timer: 0, //setTimeout的ID，用clearTimeout清除
+        speed: 20, //初始转动速度
+        times: 0, //转动次数
+        cycle: 50, //转动基本次数：即至少需要转动多少次再进入抽奖环节
+        prize: -1, //中奖位置
+        init: function(id) {
+            if($('#' + id).find('.lottery-unit').length > 0) {
+                $lottery = $('#' + id);
+                $units = $lottery.find('.lottery-unit');
+                this.obj = $lottery;
+                this.count = $units.length;
+                $lottery.find('.lottery-unit.lottery-unit-' + this.index).addClass('active');
+            };
+        },
+        roll: function() {
+            var index = this.index;
+            var count = this.count;
+            var lottery = this.obj;
+            $(lottery).find('.lottery-unit.lottery-unit-' + index).removeClass('active');
+            index += 1;
+            if(index > count - 1) {
+                index = 0;
+            };
+            $(lottery).find('.lottery-unit.lottery-unit-' + index).addClass('active');
+            this.index = index;
+            return false;
+        },
+        stop: function(index) {
+            this.prize = index;
+            return false;
+        }
+    };
+
+    function roll() {
+        lottery.times += 1;
+        lottery.roll(); //转动过程调用的是lottery的roll方法，这里是第一次调用初始化
+        if(lottery.times > lottery.cycle + 10 && lottery.prize == lottery.index) {
+            clearTimeout(lottery.timer);
+            layer.open({
+                type: 1,
+                shadeClose: true,
+                shade: false,
+                maxmin: true, //开启最大化最小化按钮
+                area: ['893px', '600px'],
+                content: $("#info").html()
+            });
+
+            lottery.prize = -1;
+            lottery.times = 0;
+            click = false;
+        } else {
+            if(lottery.times < lottery.cycle) {
+                lottery.speed -= 10;
+            } else if(lottery.times == lottery.cycle) {
+                var index = Math.random() * (lottery.count) | 0; //静态演示，随机产生一个奖品序号，实际需请求接口产生
+                lottery.prize = index;
+            } else {
+                if(lottery.times > lottery.cycle + 10 && ((lottery.prize == 0 && lottery.index == 7) || lottery.prize == lottery.index + 1)) {
+                    lottery.speed += 110;
+                } else {
+                    lottery.speed += 20;
+                }
+            }
+            if(lottery.speed < 40) {
+                lottery.speed = 40;
+            };
+            lottery.timer = setTimeout(roll, lottery.speed); //循环调用
+        }
+        return false;
+    }
+    var click = false;
+    window.onload = function() {
+        lottery.init('lottery');
+        $('.draw-btn').click(function() {
+            if(click) { //click控制一次抽奖过程中不能重复点击抽奖按钮，后面的点击不响应
+                return false;
+            } else {
+                lottery.speed = 100;
+                roll(); //转圈过程不响应click事件，会将click置为false
+                click = true; //一次抽奖完成后，设置click为true，可继续抽奖
+                return false;
+            }
+        });
+    };
+</script>
+<script src="js/demo/form-advanced-demo.min.js"></script>
+</body>
+</html>

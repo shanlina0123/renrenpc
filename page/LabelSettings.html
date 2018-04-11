@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css"  rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min_EDT.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/master.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins/iCheck/custom.css">
+    <title>标签设置</title>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>标签设置</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" style="width: 800px">
+                            <thead>
+                                <tr>
+                                    <th>标签名称</th>
+                                    <th><a><i class="fa fa-plus"></i> 操作</a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <input class="form-control">
+                                    </td>
+                                    <td>
+                                        <a href="#" class="btn btn-white">保存</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>标签1</td>
+                                    <td>
+                                        <a href="#" class="btn btn-white">删除</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>标签2</td>
+                                    <td>
+                                        <a href="#" class="btn btn-white">删除</a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>标签3</td>
+                                    <td>
+                                        <a href="#" class="btn btn-white">删除</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+<script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".i-checks").iCheck({
+            checkboxClass:"icheckbox_square-green",
+            radioClass:"iradio_square-green"
+        })
+    });
+</script>
+</body>
+</html>

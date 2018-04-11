@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css"  rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min_EDT.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/master.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins/iCheck/custom.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins/chosen/chosen.css">
+    <title>活动审批</title>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>活动审批</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="table-responsive">
+                        <h5 class="m-b">当前待审批：<span  class="text-danger">9999</span>个</h5>
+                        <table class="table table-striped table-hover" id="ListTB">
+                            <thead>
+                                <tr>
+                                    <th>活动名称</th>
+                                    <th>门店名称</th>
+                                    <th>模板名称</th>
+                                    <th>提交时间</th>
+                                    <th>描述</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>很长的活动名门店写的...</td>
+                                    <td>飞翔汽车维修服务有限公司</td>
+                                    <td>不能很长运营写的</td>
+                                    <td>2018.1.29 11：41</td>
+                                    <td><a href="ActivityDetails.html">详情</a></td>
+                                </tr>
+                                <tr>
+                                    <td>很长的活动名门店写的...</td>
+                                    <td>飞翔汽车维修服务有限公司</td>
+                                    <td>不能很长运营写的</td>
+                                    <td>2018.1.29 11：41</td>
+                                    <td><a href="ActivityDetails.html">详情</a></td>
+                                </tr>
+                                <tr>
+                                    <td>很长的活动名门店写的...</td>
+                                    <td>飞翔汽车维修服务有限公司</td>
+                                    <td>不能很长运营写的</td>
+                                    <td>2018.1.29 11：41</td>
+                                    <td><a href="ActivityDetails.html">详情</a></td>
+                                </tr>
+                                <tr>
+                                    <td>很长的活动名门店写的...</td>
+                                    <td>飞翔汽车维修服务有限公司</td>
+                                    <td>不能很长运营写的</td>
+                                    <td>2018.1.29 11：41</td>
+                                    <td><a href="ActivityDetails.html">详情</a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <nav class="navbar-right" id="pagination">
+                                <ul class="pagination no-margins">
+                                    <li class="active"><a href="javascript:;">1</a></li><li><a href="javascript:;" onclick="ToPageIndex(2)">2</a></li><li><a href="javascript:;" onclick="ToPageIndex(3)">3</a></li><li><a href="javascript:;" onclick="ToPageIndex(4)">4</a></li><li><a href="javascript:;" onclick="ToPageIndex(5)">5</a></li><li><a href="javascript:;" onclick="ToPageIndex(6)">6</a></li><li><a href="javascript:;" onclick="ToPageIndex(7)">7</a></li><li><a href="javascript:;" onclick="ToPageIndex(8)">8</a></li><li><a href="javascript:;" onclick="ToPageIndex(2)">&gt;</a></li><li><a aria-label="Next" href="javascript:;" onclick="ToPageIndex(32)"><span aria-hidden="true">&gt;&gt;</span></a></li>
+                                </ul>
+                            </nav>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="col-sm-3 text-left">
+                            共 <span class="text-danger">318 </span>条，第 <span class="text-danger">1 / 32 </span> 页
+                        </div>
+                        <div class="col-sm-3 text-right">
+                            <div data-toggle="buttons" class="btn-group" id="PageSizeRG">
+                                <label class="btn btn-sm btn-white active">
+                                    <input type="radio" name="PageSizeR" value="10">10</label>
+                                <label class="btn btn-sm btn-white">
+                                    <input type="radio" name="PageSizeR" value="20">20</label>
+                                <label class="btn btn-sm btn-white">
+                                    <input type="radio" name="PageSizeR" value="50">50</label>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+<script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script src="js/plugins/chosen/chosen.jquery.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".nav-tab-info li a:eq(0)").addClass("active");
+        $(".i-checks").iCheck({
+            checkboxClass:"icheckbox_square-green",
+            radioClass:"iradio_square-green"
+        });
+    });
+</script>
+</body>
+</html>

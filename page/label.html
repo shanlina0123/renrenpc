@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="renderer" content="webkit">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css">
+    <link href="css/font-awesome.min.css"  rel="stylesheet">
+    <link href="css/animate.min.css" rel="stylesheet">
+    <link href="css/style.min_EDT.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="css/master.css">
+    <link rel="stylesheet" type="text/css" href="css/plugins/iCheck/custom.css">
+    <title>标签</title>
+</head>
+<body class="gray-bg">
+<div class="wrapper wrapper-content">
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="ListTB">
+                <thead>
+                    <tr>
+                        <th>标签名称</th>
+                        <th>操作</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>引流</td>
+                        <td><input type="checkbox" class="i-checks" name="IDs" style="position: absolute; opacity: 0;"></td>
+                    </tr>
+                    <tr>
+                        <td>单品</td>
+                        <td><input type="checkbox" class="i-checks" name="IDs" style="position: absolute; opacity: 0;"></td>
+                    </tr>
+                    <tr>
+                        <td>单品</td>
+                        <td><input type="checkbox" class="i-checks" name="IDs" style="position: absolute; opacity: 0;"></td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+            <div class="col-sm-12 m-t text-center">
+                <button class="btn btn-primary " id="BtnSave" name="BtnSave" type="button"><i class="fa fa-floppy-o"></i> 保存</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="js/jquery.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+<script src="js/plugins/datapicker/bootstrap-datepicker.js"></script>
+<script>
+    $(document).ready(function(){
+        $(".i-checks").iCheck({
+            checkboxClass:"icheckbox_square-green",
+            radioClass:"iradio_square-green"
+        });
+    });
+</script>
+</body>
+</html>
