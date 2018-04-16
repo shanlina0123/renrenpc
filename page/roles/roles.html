@@ -1,0 +1,171 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>角色管理</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../../layer-v3.1.1/layer/theme/default/layer.css">
+    <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <script src="../../js/modernizr-2.6.2.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="wrap">
+        <div class="layui-layout layui-layout-admin">
+            <!--顶部-->
+            <div class="layui-header header">
+                <a href="index/html" class="logo fl"><img src="../../images/logo.png"></a>
+                <ul class="layui-nav handelUl">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <img src="../../images/uHead.jpg" class="layui-circle" width="35" height="35">
+                            <cite><span>管理员</span>，你好！</cite>
+                            <span class="layui-nav-more"></span>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+                            <dd><a href="../../login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main clearfix">
+            <!--左侧导航-->
+            <ul class="leftNav fl">
+                <li>
+                    <a href="javascript:;">角色管理</a>
+                    <!--<ul class="leftSubNav">
+                        <li><a href="javascript:;">添加角色</a></li>
+                        <li><a href="javascript:;">查看角色</a></li>
+                    </ul>-->
+                </li>
+                <li>
+                    <a href="javascript:;" class="on">用户管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">房源管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">公司管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">客户管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">经纪人管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">数据分析</a>
+                </li>
+                <li>
+                    <a href="javascript:;">系统配置</a>
+                </li>
+            </ul>
+            <!--右侧主要内容-->
+            <div class="rightMain fl">
+                <div class="addClient"><button class="layui-btn changeClient">添加角色</button></div>
+                <form class="layui-form lockForm">
+                    <table class="layui-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>客户姓名</th>
+                                <th>操作</th>
+                                <th>是否锁定</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>1</td>
+                            <td>张三</td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn layui-btn-sm editBtn ">编辑权限</button>
+                                    <button type="button" class="layui-btn layui-btn-sm deleteBtn">删除</button>
+                                </div>
+                            </td>
+                            <td><input type="checkbox" name="like[write]" title="锁定"></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+        <!--//main-->
+        <!--批量移交客户弹窗-->
+        <div class="custormHandelPop" style="display: none">
+            <div class="popFormWrap">
+                <form class="layui-form">
+                    <table class="clientHandlTable">
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">角色名称</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userHouse">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="submitBtnWrap">
+                        <button class="layui-btn">添加</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- //wrap -->
+    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            //添加角色
+            $(".changeClient").click(function() {
+                layer.open({
+                    type: 1,
+                    title: '添加角色',
+                    shadeClose: true,
+                    scrollbar: false,
+                    skin: 'layui-layer-rim',
+                    area: ['400px', '180px'],
+                    content: $(".custormHandelPop")
+                })
+            });
+            //删除用户
+            $(".deleteBtn").click(function() {
+                var $this = $(this);
+                layer.confirm('确定要删除吗？', {
+                    btn: ['确定', '取消']
+                }, function() {
+                    $this.parents("tr").remove();
+                    layer.msg('删除成功', {
+                        icon: 1
+                    });
+                });
+            });
+            //分页
+            layui.use(['form'], function() {
+
+            });
+        })
+    </script>
+</body>
+
+</html>

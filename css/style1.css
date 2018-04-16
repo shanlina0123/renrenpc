@@ -17,13 +17,16 @@
 .addClient .layui-btn {
   padding: 0 30px;
 }
-.userPopTable {
+.userPopTable,
+.clientPopTable {
   margin: 20px  auto 0 auto;
 }
-.userPopTable tr td {
+.userPopTable tr td,
+.clientPopTable tr td {
   padding: 5px 0;
 }
-.userPopTable tr td:first-child {
+.userPopTable tr td:first-child,
+.clientPopTable tr td:first-child {
   text-align: right;
   padding-right: 10px;
 }
@@ -153,3 +156,52 @@
 .forEditLeftMargin {
   margin-left: 0 !important;
 }
+/*客户列表页面*/
+.clientPopTable .layui-form-select .layui-input {
+  padding-right: 0;
+}
+.clientPopTable .layui-form-label {
+  width: 90px;
+}
+.clientPopTable .layui-input-block {
+  margin-left: 130px;
+}
+.followTable {
+  margin: 0 auto;
+}
+.followTable tr td {
+  padding: 10px 0;
+}
+.followTable .layui-textarea {
+  width: 500px;
+}
+.followUl,
+.followText {
+  width: 610px;
+  margin: 10px auto;
+}
+.followUl li,
+.followText li {
+  border: 1px solid #e6e6e6;
+  margin: 10px 0;
+  padding: 10px;
+}
+.followUl li > p,
+.followText li > p {
+  line-height: 20px;
+}
+.followUl li .followLog,
+.followText li .followLog {
+  padding: 5px 0;
+}
+.followText {
+  padding: 20px 0;
+}
+.clientHandlTable tr td {
+  padding: 10px 0;
+}
+.popFormWrap {
+  width: 400px;
+  margin: 0 auto;
+}
+/*角色管理*/

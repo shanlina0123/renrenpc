@@ -160,7 +160,7 @@
                                     <td>
                                         <div class="layui-btn-group">
                                             <a href="editHouseNew.html" class="layui-btn editHouseBtn">编辑</a>
-                                            <button class="layui-btn deleteHouseBtn">删除</button>
+                                            <button type="button" class="layui-btn deleteHouseBtn">删除</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -180,7 +180,7 @@
                                     <td>
                                         <div class="layui-btn-group">
                                             <a href="editHouseOld.html" class="layui-btn editHouseBtn">编辑</a>
-                                            <button class="layui-btn deleteHouseBtn">删除</button>
+                                            <button type="button" class="layui-btn deleteHouseBtn">删除</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -200,7 +200,7 @@
                                     <td>
                                         <div class="layui-btn-group">
                                             <a href="editHouseStore.html" class="layui-btn editHouseBtn">编辑</a>
-                                            <button class="layui-btn deleteHouseBtn">删除</button>
+                                            <button type="button" class="layui-btn deleteHouseBtn">删除</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -247,12 +247,11 @@
                 });
                 //删除房源
                 $(".deleteHouseBtn").click(function() {
-                    //debugger;
-                    // var $this = $(this);
+                    var $this = $(this);
                     layer.confirm('确定要删除吗？', {
                         btn: ['确定', '取消']
                     }, function() {
-                        //$this.parents("tr").remove();
+                        $this.parents("tr").remove();
                         layer.msg('删除成功', {
                             icon: 1
                         });
