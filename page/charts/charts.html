@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>数据分析</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="stylesheet" href="../../css/style2.css">
+    <link rel="stylesheet" href="../../layer-v3.1.1/layer/theme/default/layer.css">
+    <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <script src="../../js/modernizr-2.6.2.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="wrap">
+        <div class="layui-layout layui-layout-admin">
+            <!--顶部-->
+            <div class="layui-header header">
+                <a href="index/html" class="logo fl"><img src="../../images/logo.png"></a>
+                <ul class="layui-nav handelUl">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <img src="../../images/uHead.jpg" class="layui-circle" width="35" height="35">
+                            <cite><span>管理员</span>，你好！</cite>
+                            <span class="layui-nav-more"></span>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+                            <dd><a href="../../login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main clearfix">
+            <!--左侧导航-->
+            <ul class="leftNav fl">
+                <li>
+                    <a href="javascript:;">角色管理</a>
+                    <ul class="leftSubNav">
+                        <li><a href="javascript:;">添加角色</a></li>
+                        <li><a href="javascript:;">查看角色</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">用户管理</a>
+                    <ul class="leftSubNav">
+                        <li><a href="javascript:;">添加用户</a></li>
+                        <li><a href="javascript:;">查看用户</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">房源管理</a>
+                    <ul class="leftSubNav">
+                        <li><a href="javascript:;">添加房源</a></li>
+                        <li><a href="javascript:;">查看房源</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">公司管理</a>
+                    <ul class="leftSubNav">
+                        <li><a href="javascript:;">添加公司</a></li>
+                        <li><a href="javascript:;">查看公司</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">客户管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">经纪人管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">数据分析</a>
+                </li>
+                <li>
+                    <a href="javascript:;">系统配置</a>
+                </li>
+            </ul>
+            <!--右侧主要内容-->
+            <div class="rightMain fl">
+                <!--顶部筛选条件-->
+                <div class="sortWrap">
+                    <form class="layui-form">
+                        <div class="topSort">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">客户状态</label>
+                                <div class="layui-input-inline">
+                                    <select name="modules" lay-verify="required" lay-search="">
+					          <option value="">全部</option>
+					          <option value="1">有效</option>
+					          <option value="2">无效</option>
+					          <option value="3">未跟进</option>
+					          <option value="4">跟进中</option>
+					          <option value="5">已上门</option>
+					          <option value="6">已提交</option>
+					        </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">公司</label>
+                                <div class="layui-input-inline">
+                                    <select name="modules" lay-verify="required" lay-search="">
+					          <option value="">全部</option>
+					          <option value="1">万科</option>
+					          <option value="2">万达</option>
+					          <option value="3">公司名称</option>					
+					        </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">经纪人</label>
+                                <div class="layui-input-inline">
+                                    <select name="modules" lay-verify="required" lay-search="">
+					          <option value="">全部</option>					        
+					        </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">业务员</label>
+                                <div class="layui-input-inline">
+                                    <select name="modules" lay-verify="required" lay-search="">
+					          <option value="">全部</option>					     
+					        </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bottomSort">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">预约时间</label>
+                                <div class="layui-input-inline">
+                                    <input class="layui-input timePadding" id="test16" type="text" placeholder="请选择时间">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">上门时间</label>
+                                <div class="layui-input-inline">
+                                    <input class="layui-input timePadding" id="test17" type="text" placeholder="请选择时间">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">成交时间</label>
+                                <div class="layui-input-inline">
+                                    <input class="layui-input timePadding" id="test18" type="text" placeholder="请选择时间">
+                                </div>
+                            </div>
+                            <button class="layui-btn sortBtn">查询</button>
+                        </div>
+                    </form>
+                </div>
+                <!--客户数据表格-->
+                <div class="table1">
+                    <table class="layui-table" lay-size="lg">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>客户姓名</th>
+                                <th>客户状态</th>
+                                <th>合作公司</th>
+                                <th>业务员</th>
+                                <th>经纪人</th>
+                                <th>楼盘</th>
+                                <th>佣金规则</th>
+                                <th>预约时间</th>
+                                <th>上门时间</th>
+                                <th>成交时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <!--分页-->
+                <div class="pageWrap">
+                    <div id="pagerInner"></div>
+                </div>
+            </div>
+        </div>
+        <!-- //wrap -->
+        <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+        <script type="text/javascript" src="../../layer-v3.1.1/layer/layer.js"></script>
+        <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
+        <script type="text/javascript" src="../../js/common.js"></script>
+        <script type="text/javascript">
+            $(function() {
+                // 顶部导航右侧操作
+                $("body").on("click", ".layui-nav .layui-nav-item a", function() {
+                    $(this).siblings().addClass("layui-show");
+                });
+                //左侧导航效果
+                $(".leftNav > li > a").click(function() {
+                    if (!$(this).hasClass("on")) {
+                        $(this).siblings(".leftSubNav").slideDown();
+                        $(this).parents("li").siblings().find(".leftSubNav").slideUp();
+                        $(this).addClass("on").parents("li").siblings().find("a").removeClass("on");
+                    } else {
+                        $(this).removeClass("on");
+                        $(this).siblings(".leftSubNav").slideUp();
+                    }
+                })
+            });
+        </script>
+        <script>
+            layui.use('laydate', function() {
+                var laydate = layui.laydate;
+                //自定义格式		
+                laydate.render({
+                    elem: '#test16',
+                    type: 'datetime',
+                    range: '-',
+                    format: 'yyyy/M/d'
+                });
+            });
+            layui.use('laydate', function() {
+                var laydate = layui.laydate;
+                //自定义格式		
+                laydate.render({
+                    elem: '#test17',
+                    type: 'datetime',
+                    range: '-',
+                    format: 'yyyy/M/d'
+                });
+            });
+            layui.use('laydate', function() {
+                var laydate = layui.laydate;
+                //自定义格式		
+                laydate.render({
+                    elem: '#test18',
+                    type: 'datetime',
+                    range: '-',
+                    format: 'yyyy/M/d'
+                });
+            });
+
+            // 分页,表单
+            layui.use(['laypage', 'layer', 'form'], function() {
+                var laypage = layui.laypage,
+                    layer = layui.layer;
+                //总页数大于页码总数
+                laypage.render({
+                    elem: 'pagerInner',
+                    count: 70, //数据总数
+                    jump: function(obj) {
+                        //console.log(obj)
+                    }
+                });
+            });
+        </script>
+
+</body>
+
+</html>
