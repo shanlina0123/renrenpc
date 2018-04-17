@@ -5,6 +5,7 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js">
 <!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,10 +15,10 @@
     <link rel="stylesheet" href="../../css/normalize.css">
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/index.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
     <script src="../../js/modernizr-2.6.2.min.js"></script>
 </head>
+
 <body>
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -29,7 +30,7 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">账号</label>
                         <div class="layui-input-block">
-                        <input type="text" name="username" lay-verify="required" placeholder="请输入账号"  class="layui-input">
+                            <input type="text" name="username" lay-verify="required" placeholder="请输入账号" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item">
@@ -40,22 +41,24 @@
                 </form>
             </div>
         </div>
-    </div><!-- //wrap -->
+    </div>
+    <!-- //wrap -->
     <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"  charset="utf-8"></script>
+    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript">
-        layui.use(['form'], function(){
+        layui.use(['form'], function() {
             var form = layui.form;
             //自定义验证规则
             form.verify({
-                username: function(value){
-                    if(value.length < 5){
+                username: function(value) {
+                    if (value.length < 5) {
                         return '标题至少得5个字符啊';
                     }
-                }
-                ,password: [/(.+){6,12}$/, '密码必须6到12位']
+                },
+                password: [/(.+){6,12}$/, '密码必须6到12位']
             });
         });
     </script>
 </body>
+
 </html>

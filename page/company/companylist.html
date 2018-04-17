@@ -9,13 +9,12 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>用户管理</title>
+    <title>公司管理</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../css/normalize.css">
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/index.css">
     <link rel="stylesheet" href="../../css/style1.css">
     <link rel="stylesheet" href="../../layer-v3.1.1/layer/theme/default/layer.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
@@ -51,15 +50,19 @@
             <ul class="leftNav fl">
                 <li>
                     <a href="javascript:;">角色管理</a>
+                    <!--<ul class="leftSubNav">
+                        <li><a href="javascript:;">添加角色</a></li>
+                        <li><a href="javascript:;">查看角色</a></li>
+                    </ul>-->
                 </li>
                 <li>
-                    <a href="javascript:;" class="on">用户管理</a>
+                    <a href="javascript:;">用户管理</a>
                 </li>
                 <li>
                     <a href="javascript:;">房源管理</a>
                 </li>
                 <li>
-                    <a href="javascript:;">公司管理</a>
+                    <a href="javascript:;" class="on">公司管理</a>
                 </li>
                 <li>
                     <a href="javascript:;">客户管理</a>
@@ -76,45 +79,40 @@
             </ul>
             <!--右侧主要内容-->
             <div class="rightMain fl">
-                <div class="addClient"><button class="layui-btn"><i class="layui-icon"></i></button></div>
+                <div class="addClient"><button class="layui-btn changeClient">添加合作客户</button></div>
                 <form class="layui-form lockForm">
+                    <h2>公司列表</h2>
                     <table class="layui-table">
                         <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>姓名</th>
-                                <th>账号</th>
-                                <th>角色</th>
-                                <th>手机号</th>
-                                <th>状态</th>
+                                <th>公司</th>
+                                <th>联系人</th>
+                                <th>联系人电话</th>
                                 <th>操作</th>
                             </tr>
                         </thead>
                         <tr>
                             <td>1</td>
                             <td>张三</td>
-                            <td>zhangsan</td>
-                            <td>管理员</td>
+                            <td>A类客户</td>
                             <td>15965984578</td>
-                            <td><input type="checkbox" name="like[write]" title="锁定"></td>
                             <td>
-                                <div class="clientBtns">
-                                    <button class="layui-btn layui-btn-sm editUser"><i class="layui-icon"></i></button>
-                                    <button class="layui-btn layui-btn-sm deleteBtn"><i class="layui-icon"></i></button>
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn editBtn">编辑</button>
+                                    <button type="button" class="layui-btn deleteBtn">删除</button>
                                 </div>
                             </td>
                         </tr>
                         <tr>
                             <td>2</td>
                             <td>张四</td>
-                            <td>zhangsi</td>
-                            <td>用户</td>
-                            <td>15965984578</td>
-                            <td><input type="checkbox" name="like[write]" title="锁定"></td>
+                            <td>B类客户</td>
+                            <td>12345678910</td>
                             <td>
-                                <div class="clientBtns">
-                                    <button class="layui-btn layui-btn-sm editUser"><i class="layui-icon"></i></button>
-                                    <button class="layui-btn layui-btn-sm deleteBtn"><i class="layui-icon"></i></button>
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn editBtn">编辑</button>
+                                    <button type="button" class="layui-btn deleteBtn">删除</button>
                                 </div>
                             </td>
                         </tr>
@@ -134,56 +132,97 @@
             </div>
         </div>
         <!--//main-->
+        <!--查看编辑页面弹窗-->
         <div class="userPopWrap" style="display: none">
             <div class="userPopInner">
                 <form class="layui-form">
-                    <table class="userPopTable">
+                    <table class="clientPopTable">
                         <tr>
-                            <td>姓名</td>
-                            <td><input type="text" class="layui-input" name="userName"></td>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">公司</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userName">
+                                    </div>
+                                </div>
+                            </td>
+
                         </tr>
                         <tr>
-                            <td>角色</td>
                             <td>
-                                <div class="layui-inline">
-                                    <div class="layui-input-inline">
-                                        <select name="modules" lay-verify="required" lay-search="">
-                                            <option value="">业务员</option>
-                                            <option value="1">操作员</option>
-                                            <option value="2">管理员</option>
-                                            </select>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">联系人</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userName" value="A类客户">
                                     </div>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td>手机号</td>
-                            <td><input type="text" class="layui-input" name="userPhone"></td>
-                        </tr>
-                        <tr>
-                            <td>账号</td>
-                            <td><input type="text" class="layui-input" name="userNumber"></td>
-                        </tr>
-                        <tr>
-                            <td>密码</td>
-                            <td><input type="password" class="layui-input" name="userPwd" placeholder="默认密码" value="xxs111111" readonly></td>
-                        </tr>
-                        <tr>
-                            <td>状态</td>
                             <td>
-                                <div class="layui-inline">
-                                    <div class="layui-input-inline">
-                                        <select name="modules" lay-verify="required" lay-search="">
-                                            <option value="">启用</option>
-                                            <option value="1">锁定</option>
-                                            </select>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">联系人电话</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userPhone" value="15894689785" readonly>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                     </table>
                     <div class="submitBtnWrap">
-                        <button class="layui-btn">立即添加</button>
+                        <button class="layui-btn">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--添加合作客户弹窗-->
+        <div class="custormHandelPop">
+            <div class="popFormWrap">
+                <form class="layui-form">
+                    <table class="clientHandlTable" style="margin-left: 18px;">
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">公司</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userHouse">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">地址</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userHouse">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">联系人</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userHouse">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">联系人电话</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userHouse">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="submitBtnWrap">
+                        <button class="layui-btn add">提交</button>
                     </div>
                 </form>
             </div>
@@ -197,18 +236,30 @@
     <script type="text/javascript">
         $(function() {
             //添加编辑用户
-            $(".editUser,.addClient").click(function() {
-                    layer.open({
-                        type: 1,
-                        title: '新增编辑用户',
-                        shadeClose: true,
-                        scrollbar: false,
-                        skin: 'layui-layer-rim',
-                        area: ['500px', '500px'],
-                        content: $(".userPopWrap    ")
-                    })
+            $(".editBtn").click(function() {
+                layer.open({
+                    type: 1,
+                    title: '查看编辑用户',
+                    shadeClose: true,
+                    scrollbar: false,
+                    skin: 'layui-layer-rim',
+                    area: ['330px', '330px'],
+                    content: $(".userPopWrap")
                 })
-                //删除用户
+            });
+            //添加合作客户
+            $(".changeClient").click(function() {
+                layer.open({
+                    type: 1,
+                    title: '添加合作客户',
+                    shadeClose: true,
+                    scrollbar: false,
+                    skin: 'layui-layer-rim',
+                    area: ['400px', '400px'],
+                    content: $(".custormHandelPop")
+                })
+            });
+            //删除用户
             $(".deleteBtn").click(function() {
                 var $this = $(this);
                 layer.confirm('确定要删除吗？', {
@@ -220,6 +271,8 @@
                     });
                 });
             });
+
+
             //这个页面的分页用的是浏览器解析后的布局（其他页面使用的是解析前的，后期如果需要会统一修改）
             layui.use(['laypage', 'layer', 'form'], function() {
                 var laypage = layui.laypage,

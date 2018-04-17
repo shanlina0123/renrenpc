@@ -92,11 +92,11 @@
 .formWrap {
   margin-top: 60px;
 }
-.formWrap .nextBtnWrap {
+.nextBtnWrap {
   margin: 20px auto 0 auto;
   text-align: center;
 }
-.formWrap .nextBtnWrap .layui-btn {
+.nextBtnWrap .layui-btn {
   padding: 0 35px;
 }
 .formWrap1 {
@@ -204,4 +204,32 @@
   width: 400px;
   margin: 0 auto;
 }
-/*角色管理*/
+/*角色管理-编辑权限页面*/
+.powerTable {
+  margin: 0 auto;
+}
+.powerTable tr td {
+  padding: 10px 0;
+}
+.powerUl {
+  width: 700px;
+}
+.powerUl > li {
+  margin-bottom: 10px;
+  border: 1px solid #D2D2D2;
+  border-radius: 4px;
+}
+.powerUl .topCheck {
+  padding: 10px;
+  border-bottom: 1px solid #D2D2D2;
+}
+.powerUl .powerInnerUl {
+  padding: 10px 10px 0 10px;
+}
+.powerUl .powerInnerUl li {
+  float: left;
+  margin-bottom: 10px;
+}
+.timePadding {
+  padding-right: 30px;
+}

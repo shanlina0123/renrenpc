@@ -63,10 +63,13 @@ a { text-decoration: none; color: #000; }
             line-height: 45px;
             padding-left: 10px;
             border-left: 3px solid #23262E;
-            background: url(../images/down.png) 95% 18px no-repeat;
+            
             &.on{
                 border-color: #eb7221;
-                background-position: 95% -74px;
+                background-position: 95% -74px!important;
+            }
+            &.hasBg{
+                background: url(../images/down.png) 95% 18px no-repeat;
             }
         }
     }

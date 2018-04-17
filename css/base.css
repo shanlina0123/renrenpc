@@ -129,11 +129,13 @@ a:focus {
   line-height: 45px;
   padding-left: 10px;
   border-left: 3px solid #23262E;
-  background: url(../images/down.png) 95% 18px no-repeat;
 }
 .leftNav > li > a.on {
   border-color: #eb7221;
-  background-position: 95% -74px;
+  background-position: 95% -74px !important;
+}
+.leftNav > li > a.hasBg {
+  background: url(../images/down.png) 95% 18px no-repeat;
 }
 .leftSubNav {
   display: none;

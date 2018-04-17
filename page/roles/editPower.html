@@ -1,0 +1,263 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>编辑权限</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../../layer-v3.1.1/layer/theme/default/layer.css">
+    <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <script src="../../js/modernizr-2.6.2.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="wrap">
+        <div class="layui-layout layui-layout-admin">
+            <!--顶部-->
+            <div class="layui-header header">
+                <a href="index/html" class="logo fl"><img src="../../images/logo.png"></a>
+                <ul class="layui-nav handelUl">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <img src="../../images/uHead.jpg" class="layui-circle" width="35" height="35">
+                            <cite><span>管理员</span>，你好！</cite>
+                            <span class="layui-nav-more"></span>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="javascript:;"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+                            <dd><a href="../../login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main clearfix">
+            <!--左侧导航-->
+            <ul class="leftNav fl">
+                <li>
+                    <a href="javascript:;">角色管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;" class="on">用户管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">房源管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">公司管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">客户管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">经纪人管理</a>
+                </li>
+                <li>
+                    <a href="javascript:;">数据分析</a>
+                </li>
+                <li>
+                    <a href="javascript:;">系统配置</a>
+                </li>
+            </ul>
+            <!--右侧主要内容-->
+            <div class="rightMain fl">
+                <form class="layui-form" action="roles.html">
+                    <table class="powerTable">
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">角色</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input forSameWidth" name="houseName" value="业务员" readonly>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label">操作权限</label>
+                                    <div class="layui-input-inline">
+                                        <ul class="powerUl">
+                                            <li>
+                                                <div class="topCheck">
+                                                    <input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" class="checkAll" title="角色管理" checked="">
+                                                </div>
+                                                <ul class="powerInnerUl clearfix">
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="列表" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="添加" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="详情" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="编辑" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="锁定" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="权限列表" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="角色权限详情" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="勾选权限" checked=""></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="topCheck">
+                                                    <input type="checkbox" name="" lay-skin="primary" title="用户管理" checked="">
+                                                </div>
+                                                <ul class="powerInnerUl clearfix">
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="列表" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="添加" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="详情" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="编辑" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="锁定" checked=""></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="topCheck">
+                                                    <input type="checkbox" name="" lay-skin="primary" title="房源管理" checked="">
+                                                </div>
+                                                <ul class="powerInnerUl clearfix">
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="列表" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="添加房源信息" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="添加房源标签" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="添加房源图片发布资源" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="推荐房源" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="编辑房源" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="房源详情" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="删除房源" checked=""></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="topCheck">
+                                                    <input type="checkbox" name="" lay-skin="primary" title="客户管理" checked="">
+                                                </div>
+                                                <ul class="powerInnerUl clearfix">
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="列表" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="客户详情" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="跟进详情" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="跟进编辑" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="客户移交" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="客户删除" checked=""></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="topCheck">
+                                                    <input type="checkbox" name="" lay-skin="primary" title="公司管理" checked="">
+                                                </div>
+                                                <ul class="powerInnerUl clearfix">
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="列表" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="添加" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="详情" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="编辑" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="删除" checked=""></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="topCheck">
+                                                    <input type="checkbox" name="" lay-skin="primary" title="经纪人管理" checked="">
+                                                </div>
+                                                <ul class="powerInnerUl clearfix">
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="列表" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="锁定" checked=""></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="topCheck">
+                                                    <input type="checkbox" name="" lay-skin="primary" title="数据分析" checked="">
+                                                </div>
+                                                <ul class="powerInnerUl clearfix">
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="查询" checked=""></li>
+                                                </ul>
+                                            </li>
+                                            <li>
+                                                <div class="topCheck">
+                                                    <input type="checkbox" name="" lay-skin="primary" title="系统配置" checked="">
+                                                </div>
+                                                <ul class="powerInnerUl clearfix">
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="列表" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="单分类列表" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="属性详情" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="添加属性" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="编辑属性" checked=""></li>
+                                                    <li><input type="checkbox" name="" lay-skin="primary" title="锁定" checked=""></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label">视野权限</label>
+                                    <div class="layui-input-inline ">
+                                        <div class="layui-form-item">
+                                            <div class="layui-input-block forEditLeftMargin">
+                                                <input type="radio" name="isShow" value="全部" title="全部" checked="">
+                                                <input type="radio" name="isShow" value="仅个人" title="仅个人">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="nextBtnWrap">
+                        <button class="layui-btn nextBtn" lay-submit=" " lay-filter="filter1 ">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--//main-->
+    </div>
+    <!-- //wrap -->
+    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            layui.use(['form'], function() {
+                var form = layui.form;
+                //全选全不选
+                form.on('checkbox(allChoose)', function(data) {
+                    var childCheck = $(data.elem).parents(".topCheck").siblings(".powerInnerUl").find("input");
+                    childCheck.each(function(index, item) {
+                        item.checked = data.elem.checked;
+                    });
+                    form.render('checkbox');
+                });
+                //单选
+                // form.on('checkbox(oneChoose)', function(data) {
+                //     var i = 0;
+                //     var j = 0;
+                //     $("input[name='check[]']").each(function() {
+                //         if (this.checked === true) {
+                //             i++;
+                //         }
+                //         j++;
+                //     });
+                //     if (i == j) {
+                //         $(".checkboxAll").prop("checked", true);
+                //         form.render('checkbox');
+                //     } else {
+                //         $(".checkboxAll").removeAttr("checked");
+                //         form.render('checkbox');
+                //     }
+
+                // });
+            });
+        });
+    </script>
+</body>
+
+</html>
