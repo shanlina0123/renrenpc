@@ -1,0 +1,32 @@
+.layui-form{
+	width: 500px;
+}
+.layui-input-block input{
+	width: 60%;float: left;
+}
+.layui-input-block span{
+	float: left;
+	margin-left: 2%;
+	margin-top: 2%;
+	color: red;
+}
+.layui-input-block .layui-btn{
+	width: 60%;
+}
+.Validform_right{
+	color: green;
+}
+.loginFormWrap{
+	width: 800PX;
+	margin-left: -15%;
+}
+.pwd{
+	width: 100px;
+}
+.change{
+	width: 80px;
+	float: left;
+}
+.btn2{
+	margin-left: 20px;
+}

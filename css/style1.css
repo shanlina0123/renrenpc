@@ -35,7 +35,7 @@
   padding: 20px 0 10px 0;
 }
 .cartFlow {
-  margin-left: 440px;
+  margin-left: 20%;
 }
 .cartFlow .flow {
   width: 160px;
@@ -102,6 +102,9 @@
 .formWrap1 {
   width: 330px;
   margin: 0 auto;
+}
+.addHouseTable{
+	width:1200px;
 }
 .addHouseTable,
 .editHouseTable {
@@ -233,3 +236,25 @@
 .timePadding {
   padding-right: 30px;
 }
+/*111111111111111*/
+.size{
+	margin-top: 1.5%;margin-left: 10%;
+}
+/*.popFormWrap .layui-form{
+	padding-top: 20%;
+}*/
+
+/*tubiao*/
+ul.leftNav li i{
+	margin-right: 10px;
+}
+
+
+/*限制图片大小*/
+.layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
+/*二维码*/
+.cgewm{
+	background: url(../images/ewmbg.jpg) no-repeat;
+	background-size: 2500px 1000px;
+}
+

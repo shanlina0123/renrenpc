@@ -14,11 +14,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../css/normalize.css">
     <link rel="stylesheet" href="../../css/common.css">
-    <link rel="stylesheet" href="../../css/base.css">
-    <link rel="stylesheet" href="../../css/style2.css">
+    <link rel="stylesheet" href="../../css/base.css">    
     <link rel="stylesheet" href="../../layer-v3.1.1/layer/theme/default/layer.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
     <script src="../../js/modernizr-2.6.2.min.js"></script>
+    <link rel="stylesheet" href="../../css/style1.css">
 </head>
 
 <body>
@@ -29,7 +29,7 @@
         <div class="layui-layout layui-layout-admin">
             <!--顶部-->
             <div class="layui-header header">
-                <a href="index/html" class="logo fl"><img src="../../images/logo.png"></a>
+                <a href="index.html" class="logo fl"><img src="../../images/logo.png"></a>
                 <ul class="layui-nav handelUl">
                     <li class="layui-nav-item">
                         <a href="javascript:;">
@@ -38,8 +38,8 @@
                             <span class="layui-nav-more"></span>
                         </a>
                         <dl class="layui-nav-child">
-                            <dd><a href="javascript:;"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
-                            <dd><a href="../../login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+                            <dd><a href="../index/cgLogin.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+                            <dd><a href="../index/login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
                         </dl>
                     </li>
                 </ul>
@@ -47,52 +47,43 @@
         </div>
         <div class="main clearfix">
             <!--左侧导航-->
-            <ul class="leftNav fl">
+           <ul class="leftNav fl">
                 <li>
-                    <a href="javascript:;">角色管理</a>
+                    <a href="../roles/roles.html"><i class="layui-icon">&#xe60c;</i> 角色管理</a>
+                   
+                </li>
+                <li>
+                    <a href="../admin/admin.html">用户管理</a>                 
+                </li>
+                <li>
+                    <a href="../house/houseList.html">房源管理</a>
                     <ul class="leftSubNav">
-                        <li><a href="javascript:;">添加角色</a></li>
-                        <li><a href="javascript:;">查看角色</a></li>
+                        <li><a href="../house/addHouseStep1.html">添加房源</a></li>
+                        <li><a href="../house/houseList.html">房源列表</a></li>
                     </ul>
                 </li>
                 <li>
-                    <a href="javascript:;">用户管理</a>
-                    <ul class="leftSubNav">
-                        <li><a href="javascript:;">添加用户</a></li>
-                        <li><a href="javascript:;">查看用户</a></li>
-                    </ul>
+                    <a href="../company/companylist.html">公司管理</a>
                 </li>
                 <li>
-                    <a href="javascript:;">房源管理</a>
-                    <ul class="leftSubNav">
-                        <li><a href="javascript:;">添加房源</a></li>
-                        <li><a href="javascript:;">查看房源</a></li>
-                    </ul>
+                    <a href="../client/client.html">客户管理</a>
+                 
                 </li>
                 <li>
-                    <a href="javascript:;">公司管理</a>
-                    <ul class="leftSubNav">
-                        <li><a href="javascript:;">添加公司</a></li>
-                        <li><a href="javascript:;">查看公司</a></li>
-                    </ul>
+                    <a href="javascript:;" class="on">经纪人管理</a>
                 </li>
                 <li>
-                    <a href="javascript:;">客户管理</a>
+                    <a href="../charts/charts.html">数据分析</a>
                 </li>
                 <li>
-                    <a href="javascript:;">经纪人管理</a>
-                </li>
-                <li>
-                    <a href="javascript:;">数据分析</a>
-                </li>
-                <li>
-                    <a href="javascript:;">系统配置</a>
+                    <a href="../datas/setting.html">系统配置</a>
                 </li>
             </ul>
             <!--右侧主要内容-->
             <div class="rightMain fl">
                 <!--客户状态等-->
                 <form class="layui-form">
+                
                     <div class="sortWrap">
                         <div class="layui-inline">
                             <label class="layui-form-label">类型</label>
@@ -120,6 +111,8 @@
                     <!--表格及分页-->
                     <div class="table1">
                         <table class="layui-table" lay-size="lg">
+                         <h2>经纪人列表</h2>
+            
                             <thead>
                                 <tr>
                                     <th>ID</th>

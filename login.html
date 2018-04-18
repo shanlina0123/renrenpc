@@ -10,13 +10,15 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>登录</title>
+    <link rel="icon" href="images/icon.png">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/common.css">   
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="layui-v2.2.6/layui/css/layui.css">
     <script src="js/modernizr-2.6.2.min.js"></script>
+    <link rel="stylesheet" href="css/style2.css">
 </head>
 
 <body>
@@ -26,23 +28,25 @@
     <div class="wrap">
         <div class="layui-layout loginBg">
             <div class="loginFormWrap">
-                <form class="layui-form loginForm" action="">
+                <form class="layui-form loginForm" action="page/index/index.html">
                     <div class="layui-form-item">
                         <label class="layui-form-label">账号</label>
                         <div class="layui-input-block">
-                            <input type="text" name="username" lay-verify="required" placeholder="请输入账号" class="layui-input">
+                            <input type="text" name="username" lay-verify="required" placeholder="请输入账号" datatype="*6-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在6~15位之间！">
+                            <span class="Validform_checktip"></span>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">密码</label>
                         <div class="layui-input-block">
-                            <input type="text" name="password" lay-verify="required" placeholder="请输入密码" class="layui-input">
+                            <input  type="password" name="password" lay-verify="required" placeholder="请输入密码" datatype="*6-10" class="layui-input" sucmsg=" "  errormsg="* 密码范围在6~10位之间！">
+                        	<span  class="Validform_checktip"></span>
                         </div>
                     </div>
-                    <a href="" class="forgetPwd">忘记密码?</a>
+                    <a href="page/index/chengePwd.html" class="forgetPwd">忘记密码?</a>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button class="layui-btn" lay-submit=" " lay-filter="filter1">登录</button>
+                            <button  class="layui-btn" id="btn_submit">登录</button>
                         </div>
                     </div>
                 </form>
@@ -51,20 +55,30 @@
     </div>
     <!-- //wrap -->
     <script type="text/javascript" src="js/jquery-1.7.2.min.js"></script>
-    <script type="text/javascript" src="layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
+   
+    <script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
     <script type="text/javascript">
-        layui.use(['form'], function() {
-            var form = layui.form;
-            //自定义验证规则
-            form.verify({
-                username: function(value) {
-                    if (value.length < 5) {
-                        return '标题至少得5个字符啊';
-                    }
-                },
-                password: [/(.+){6,12}$/, '密码必须6到12位']
-            });
-        });
+        $(function () {
+		    if( $(".loginForm").length )
+		    {
+		        $(".loginForm").Validform({
+		            btnSubmit: '#btn_submit',
+		            //tiptype:1,
+		            postonce: true,
+		            showAllError: false,
+		            tiptype: function (msg, o, cssctl)
+		            {
+		                if ( !o.obj.is("form") )
+		                {
+		                    var objtip = o.obj.parents('.layui-input-block').find(".Validform_checktip");
+		                    objtip.removeClass('Validform_skate');
+		                    cssctl(objtip, o.type);
+		                    objtip.text(msg);
+		                }
+		            }
+		        });
+		    }
+		});
     </script>
 </body>
 

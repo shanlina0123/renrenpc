@@ -10,6 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>客户列表</title>
+    <link rel="icon" href="../../images/icon.png">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../css/normalize.css">
@@ -28,8 +29,8 @@
     <div class="wrap">
         <div class="layui-layout layui-layout-admin">
             <!--顶部-->
-            <div class="layui-header header">
-                <a href="index/html" class="logo fl"><img src="../../images/logo.png"></a>
+          <div class="layui-header header">
+                <a href="../index/index.html" class="logo fl"><img src="../../images/logo.png"></a>
                 <ul class="layui-nav handelUl">
                     <li class="layui-nav-item">
                         <a href="javascript:;">
@@ -37,9 +38,9 @@
                             <cite><span>管理员</span>，你好！</cite>
                             <span class="layui-nav-more"></span>
                         </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="javascript:;"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
-                            <dd><a href="../../login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+                       <dl class="layui-nav-child">
+                            <dd><a href="../index/cgLogin.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+                            <dd><a href="../index/login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
                         </dl>
                     </li>
                 </ul>
@@ -49,32 +50,33 @@
             <!--左侧导航-->
             <ul class="leftNav fl">
                 <li>
-                    <a href="javascript:;">角色管理</a>
-                    <!--<ul class="leftSubNav">
-                        <li><a href="javascript:;">添加角色</a></li>
-                        <li><a href="javascript:;">查看角色</a></li>
-                    </ul>-->
+                    <a href="../roles/roles.html"><i class="layui-icon">&#xe613;</i>角色管理</a>                 
                 </li>
                 <li>
-                    <a href="javascript:;" class="on">用户管理</a>
+                    <a href="../admin/admin.html"><i class="layui-icon">&#xe612;</i>用户管理</a>                 
                 </li>
                 <li>
-                    <a href="javascript:;">房源管理</a>
+                    <a href="../house/houseList.html"><i class="layui-icon">&#xe68e;</i>房源管理</a>
+                    <ul class="leftSubNav">
+                        <li><a href="../house/addHouseStep1.html"><i class="layui-icon">&#xe654;</i>添加房源</a></li>
+                        <li><a href="../house/houseList.html"><i class="layui-icon">&#xe60a;</i>房源列表</a></li>
+                    </ul>
                 </li>
                 <li>
-                    <a href="javascript:;">公司管理</a>
+                    <a href="../company/companylist.html"><i class="layui-icon">&#xe630;</i>公司管理</a>
                 </li>
                 <li>
-                    <a href="javascript:;">客户管理</a>
+                    <a href="javascript:;" class="on"><i class="layui-icon">&#xe6b2;</i>客户管理</a>
+                    
                 </li>
                 <li>
-                    <a href="javascript:;">经纪人管理</a>
+                    <a href="../user/user.html"><i class="layui-icon">&#xe6af;</i>经纪人管理</a>
                 </li>
                 <li>
-                    <a href="javascript:;">数据分析</a>
+                    <a href="../charts/charts.html"><i class="layui-icon">&#xe62a;</i>数据分析</a>
                 </li>
                 <li>
-                    <a href="javascript:;">系统配置</a>
+                    <a href="../datas/setting.html"><i class="layui-icon">&#xe620;</i>系统配置</a>
                 </li>
             </ul>
             <!--右侧主要内容-->
@@ -82,6 +84,7 @@
                 <!--顶部筛选条件-->
                 <div class="sortWrap">
                     <form class="layui-form">
+                    	
                         <div class="topSort">
                             <div class="layui-inline">
                                 <label class="layui-form-label">客户状态</label>
@@ -129,6 +132,7 @@
                 </div>
                 <div class="addClient"><button class="layui-btn changeClient">批量移交客户</button></div>
                 <form class="layui-form lockForm">
+                		<h2>客户列表</h2>
                     <table class="layui-table">
                         <thead>
                             <tr>
@@ -212,7 +216,7 @@
         </div>
         <!--//main-->
         <!--查看编辑页面弹窗-->
-        <div class="userPopWrap" style="display: none">
+      <div class="userPopWrap" style="display: none">
             <div class="userPopInner">
                 <form class="layui-form">
                     <table class="clientPopTable">
@@ -351,12 +355,11 @@
                     </div>
                 </form>
             </div>
-        </div>
-        <!--批量移交客户弹窗-->
+        </div>  <!--批量移交客户弹窗-->
         <div class="custormHandelPop" style="display: none">
             <div class="popFormWrap">
-                <form class="layui-form">
-                    <table class="clientHandlTable">
+                <form class="layui-form ">
+                    <table class="clientHandlTable size">
                         <tr>
                             <td>
                                 <div class="layui-inline ">
@@ -375,7 +378,7 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">移交人</label>
                                     <div class="layui-input-block">
-                                        <select name="interest" lay-filter="aihao" disabled="disabled">
+                                        <select name="interest" lay-filter="aihao" >
                                             <option value="0">张思</option>
                                         </select>
                                     </div>
@@ -414,6 +417,7 @@
                 layer.confirm('先筛选客户，再进行客户移交。每次只能移交同一个业务员的客户', {
                     btn: ['我知道了'], //按钮
                     title: "提示",
+                    area: ['600px', '167px']
                 }, function() {
                     layer.open({
                         type: 1,
@@ -421,7 +425,7 @@
                         shadeClose: true,
                         scrollbar: false,
                         skin: 'layui-layer-rim',
-                        area: ['400px', '250px'],
+                        area: ['500px', '400px'],
                         content: $(".custormHandelPop")
                     })
                 });

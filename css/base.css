@@ -103,8 +103,8 @@ a:focus {
 }
 /*头部*/
 .logo {
-  width: 180px;
-  padding: 0 10px;
+ /* width: 180px;*/
+ /* padding: 0 10px;*/
   display: block;
   line-height: 58px;
   text-align: center;
@@ -118,21 +118,27 @@ a:focus {
   background: none;
 }
 .leftNav {
-  width: 200px;
-  padding: 20px 0;
+/*	position: fixed;*/
+  width: 130px;
+  
+  height: 900px;
+ /* padding: 20px 0;*/
   background-color: #23262E;
 }
+
 .leftNav > li > a {
   display: block;
   color: #fff;
   height: 45px;
   line-height: 45px;
   padding-left: 10px;
-  border-left: 3px solid #23262E;
+  /*text-align: center;*/
+  /*border-left: 3px solid #23262E;*/
 }
 .leftNav > li > a.on {
-  border-color: #eb7221;
-  background-position: 95% -74px !important;
+  /*border-color: #eb7221;*/
+ background-color: #F37D0A;
+  background-position: 95% -74px !important;/*选中样式*/
 }
 .leftNav > li > a.hasBg {
   background: url(../images/down.png) 95% 18px no-repeat;
@@ -146,10 +152,14 @@ a:focus {
   color: #fff;
   height: 40px;
   line-height: 40px;
+  text-align: center;
 }
+
 .leftSubNav li a:hover,
 .leftSubNav li a.on {
-  background-color: #eb7221;
+  /*background-color: #eb7221;*/                     /*选中样式*/
+  background-color: #F37D0A;
+  background-position: 95% -74px !important;/*选中样式*/
 }
 .indexRightMain {
   width: 1703px;
@@ -214,4 +224,19 @@ a:focus {
 }
 .loginErweima .loginNotice .reload {
   color: #eb7221;
+}
+/*按钮颜色*/
+.layui-btn,.layui-laypage-em{
+	background-color:#eb7221 !important;
+}
+
+a.layui-laypage-prev:hover{
+				color:#eb7221 !important;
+}
+a.layui-laypage-next:hover{
+				color:#eb7221 !important;
+}
+/*后来加的改按钮颜色*/
+.layui-form-radio>i:hover, .layui-form-radioed>i {
+    color: #eb7221 !important;
 }
