@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>房源列表</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <script src="../../js/modernizr-2.6.2.min.js"></script>
+</head>
+<body>
+    <div class="wrap">
+        <div class="layui-layout layui-layout-admin" id="top"></div>
+        <div class="main clearfix">
+            <!--左侧导航-->
+            <ul class="leftNav fl" id="left"><!--左侧导航--></ul>
+            <!--右侧主要内容-->
+            <div class="rightMain fl">
+
+                <!--顶部筛选条件-->
+                <div class="sortWrap">
+                    <form class="layui-form">
+                        <div class="topSort">
+                            <div class="layui-inline">
+                                <label class="layui-form-label">房源类型</label>
+                                <div class="layui-input-inline">
+                                    <select name="modules" lay-verify="required" lay-search="">
+					          <option value="">全部</option>
+					          <option value="1">新房</option>
+					          <option value="2">二手房</option>
+					          <option value="3">商铺写字楼</option>
+					        </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">楼盘</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">展示佣金</label>
+                                <div class="layui-input-inline">
+                                    <select name="modules" lay-verify="required" lay-search="">
+					          <option value="">全部</option>
+					          <option value="1">是</option>
+					          <option value="2">否</option>
+					        </select>
+                                </div>
+                            </div>
+                            <div class="layui-inline">
+                                <label class="layui-form-label">发布时间</label>
+                                <div class="layui-input-inline">
+                                    <input class="layui-input timePadding" id="publishDate" type="text" placeholder="请选择时间">
+                                </div>
+                            </div>
+                            <button class="layui-btn sortBtn">查询</button>
+                        </div>
+                    </form>
+                </div>
+
+
+                <!--客户数据表格-->
+                <div class="houseListTableWrap">
+                    <div class="pageAddBtnWrap">
+                        <a href="addHouseStep1.html" class="layui-btn">添加新房源</a>
+                    </div>
+                    <form class="layui-form">
+                    		<h2>房源列表</h2>
+                        <table class="layui-table" lay-size="lg">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>图片</th>
+                                    <th>楼盘</th>
+                                    <th>房源类型</th>
+                                    <th>面积(m<sup>2</sup>)</th>
+                                    <th>佣金规则</th>
+                                    <th>展示佣金</th>
+                                    <th>首页推荐</th>
+                                    <th>在公众号显示</th>
+                                    <th>发布日期</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody id="houseList">
+                                <tr>
+                                    <td>1</td>
+                                    <td></td>
+                                    <td>罗马景福城</td>
+                                    <td>新房</td>
+                                    <td>95</td>
+                                    <td></td>
+                                    <td>否</td>
+                                    <td>
+                                        <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                    </td>
+                                    <td>是</td>
+                                    <td>2018-02-03</td>
+                                    <td>
+                                        <div class="layui-btn-group">
+                                            <a href="editHouseNew.html" class="layui-btn editHouseBtn">编辑</a>
+                                            <button type="button" class="layui-btn deleteHouseBtn">删除</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>2</td>
+                                    <td></td>
+                                    <td>龙首印象城</td>
+                                    <td>二手房</td>
+                                    <td>95</td>
+                                    <td></td>
+                                    <td>否</td>
+                                    <td>
+                                        <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                    </td>
+                                    <td>是</td>
+                                    <td>2018-02-03</td>
+                                    <td>
+                                        <div class="layui-btn-group">
+                                            <a href="editHouseOld.html" class="layui-btn editHouseBtn">编辑</a>
+                                            <button type="button" class="layui-btn deleteHouseBtn">删除</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>3</td>
+                                    <td></td>
+                                    <td>罗马景福城</td>
+                                    <td>商铺写字楼</td>
+                                    <td>95</td>
+                                    <td></td>
+                                    <td>否</td>
+                                    <td>
+                                        <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                    </td>
+                                    <td>是</td>
+                                    <td>2018-02-03</td>
+                                    <td>
+                                        <div class="layui-btn-group">
+                                            <a href="editHouseStore.html" class="layui-btn editHouseBtn">编辑</a>
+                                            <button type="button" class="layui-btn deleteHouseBtn">删除</button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </form>
+                </div>
+                <!--分页-->
+                <div class="pageWrap">
+                    <div id="pagerInner"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../config/configure.js"></script>
+    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <!--- vue -->
+    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+    <script type="text/javascript" src="../../js/page/house/list.js"></script>
+</body>
+</html>

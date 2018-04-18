@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>找回密码</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <script src="../../js/modernizr-2.6.2.min.js"></script>
+    <link rel="stylesheet" href="../../css/style2.css">
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="wrap">
+        <div class="layui-layout loginBg">
+            <div class="loginFormWrap">                            
+                <form class="layui-form loginForm" action="erweimaLogin.html">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">账号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" lay-verify="required" placeholder="请输入账号" datatype="*6-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在6~15位之间！">
+                            <span class="Validform_checktip"></span>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button  class="layui-btn" id="btn_submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- //wrap -->
+    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
+     <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript">
+        $(function () {
+		    if( $(".loginForm").length )
+		    {
+		        $(".loginForm").Validform({
+		            btnSubmit: '#btn_submit',
+		            //tiptype:1,
+		            postonce: true,
+		            showAllError: false,
+		            tiptype: function (msg, o, cssctl)
+		            {
+		                if ( !o.obj.is("form") )
+		                {
+		                    var objtip = o.obj.parents('.layui-input-block').find(".Validform_checktip");
+		                    objtip.removeClass('Validform_skate');
+		                    cssctl(objtip, o.type);
+		                    objtip.text(msg);
+		                }
+		            }
+		        });
+		    }
+		});
+    </script>
+</body>
+
+</html>

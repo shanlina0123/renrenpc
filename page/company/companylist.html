@@ -1,0 +1,312 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>公司管理</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../../layer-v3.1.1/layer/theme/default/layer.css">
+    <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <script src="../../js/modernizr-2.6.2.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="wrap">
+        <div class="layui-layout layui-layout-admin">
+            <!--顶部-->
+            <div class="layui-header header">
+                <a href="../index/index.html" class="logo fl"><img src="../../images/logo.png"></a>
+                <ul class="layui-nav handelUl">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <img src="../../images/uHead.jpg" class="layui-circle" width="35" height="35">
+                            <cite><span>管理员</span>，你好！</cite>
+                            <span class="layui-nav-more"></span>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="../index/cgpwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+                            <dd><a href="../../login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main clearfix">
+            <!--左侧导航-->
+           <ul class="leftNav fl">
+                <li>
+                    <a href="../roles/roles.html"><i class="layui-icon">&#xe613;</i>角色管理</a>                 
+                </li>
+                <li>
+                    <a href="../admin/admin.html"><i class="layui-icon">&#xe612;</i>用户管理</a>                 
+                </li>
+                <li>
+                    <a href="../house/houseList.html"><i class="layui-icon">&#xe68e;</i>房源管理</a>
+                    <ul class="leftSubNav">
+                        <li><a href="../house/addHouseStep1.html"><i class="layui-icon">&#xe654;</i>添加房源</a></li>
+                        <li><a href="../house/houseList.html"><i class="layui-icon">&#xe60a;</i>房源列表</a></li>
+                    </ul>
+                </li>
+                <li>
+                      <a href="javascript:;" class="on"><i class="layui-icon">&#xe630;</i>公司管理</a>
+                </li>
+                <li>
+                    <a href="../client/client.html"><i class="layui-icon">&#xe6b2;</i>客户管理</a>
+                    
+                </li>
+                <li>
+                    <a href="../user/user.html"><i class="layui-icon">&#xe6af;</i>经纪人管理</a>
+                </li>
+                <li>
+                    <a href="../charts/charts.html"><i class="layui-icon">&#xe62a;</i>数据分析</a>
+                </li>
+                <li>
+                    <a href="../datas/setting.html"><i class="layui-icon">&#xe620;</i>系统配置</a>
+                </li>
+            </ul>
+           
+            <!--右侧主要内容-->
+            <div class="rightMain fl">
+                <div class="addClient"><button class="layui-btn changeClient">添加合作客户</button></div>
+                <form class="layui-form lockForm">
+                    <h2>公司列表</h2>
+                    <table class="layui-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>公司</th>
+                                <th>联系人</th>
+                                <th>联系人电话</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tr>
+                            <td>1</td>
+                            <td>张三</td>
+                            <td>A类客户</td>
+                            <td>15965984578</td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn editBtn">编辑</button>
+                                    <button type="button" class="layui-btn deleteBtn">删除</button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>张四</td>
+                            <td>B类客户</td>
+                            <td>12345678910</td>
+                            <td>
+                                <div class="layui-btn-group">
+                                    <button type="button" class="layui-btn editBtn">编辑</button>
+                                    <button type="button" class="layui-btn deleteBtn">删除</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
+                <!--分页-->
+                <div class="pageWrap">
+                    <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-2">
+                        <a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0">上一页</a>
+                        <span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>
+                        <a href="javascript:;" data-page="2">2</a><a href="javascript:;" data-page="3">3</a>
+                        <a href="javascript:;" data-page="4">4</a><a href="javascript:;" data-page="5">5</a>
+                        <span class="layui-laypage-spr">…</span><a href="javascript:;" class="layui-laypage-last" title="尾页" data-page="7">7</a>
+                        <a href="javascript:;" class="layui-laypage-next" data-page="2">下一页</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--//main-->
+        <!--查看编辑页面弹窗-->
+        <div class="userPopWrap" style="display: none">
+            <div class="userPopInner">
+                <form class="layui-form2">
+                    <table class="clientPopTable">
+                        <tr>
+                            <td>
+                               <div class="layui-inline ">
+                                    <label class="layui-form-label ">公司</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userHouse" datatype="s3-30" class="layui-input" sucmsg=" "  errormsg="* 公司名称不符合规定！">
+                                         <span class="Validform_checktip"></span>
+                                    </div>
+                                </div>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">联系人</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userName" value="A类客户">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">联系人电话</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userPhone" value="15894689785" readonly>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="submitBtnWrap">
+                        <button class="layui-btn">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!--添加合作客户弹窗-->
+        <div class="custormHandelPop">
+            <div class="popFormWrap">
+                <form class="layui-form2">
+                    <table class="clientHandlTable" style="margin-left: 18px;">
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">公司</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userHouse" datatype="s3-30" class="layui-input" sucmsg=" "  errormsg="* 公司名称不符合规定！">
+                                         <span class="Validform_checktip"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                     
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">联系人</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userHouse" datatype="s1-5" class="layui-input" sucmsg=" "  errormsg="* 姓名不符合规定！">
+                                        <span class="Validform_checktip"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">联系人电话</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userPhone" datatype="m" class="layui-input" sucmsg=" "  errormsg="* 手机号码不符合规定！">
+                            			<span class="Validform_checktip"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                    <div class="submitBtnWrap">
+                        <button class="layui-btn add">提交</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- //wrap -->
+    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../layer-v3.1.1/layer/layer.js"></script>
+    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+     <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            //添加编辑用户
+            $(".editBtn").click(function() {
+                layer.open({
+                    type: 1,
+                    title: '查看编辑用户',
+                    shadeClose: true,
+                    scrollbar: false,
+                    skin: 'layui-layer-rim',
+                    area: ['330px', '330px'],
+                    content: $(".userPopWrap")
+                })
+            });
+            //添加合作客户
+            $(".changeClient").click(function() {
+                layer.open({
+                    type: 1,
+                    title: '添加合作客户',
+                    shadeClose: true,
+                    scrollbar: false,
+                    skin: 'layui-layer-rim',
+                    area: ['400px', '400px'],
+                    content: $(".custormHandelPop")
+                })
+            });
+            //删除用户
+            $(".deleteBtn").click(function() {
+                var $this = $(this);
+                layer.confirm('确定要删除吗？', {
+                    btn: ['确定', '取消']
+                }, function() {
+                    $this.parents("tr").remove();
+                    layer.msg('删除成功', {
+                        icon: 1
+                    });
+                });
+            });
+
+
+            //这个页面的分页用的是浏览器解析后的布局（其他页面使用的是解析前的，后期如果需要会统一修改）
+            layui.use(['laypage', 'layer', 'form'], function() {
+                var laypage = layui.laypage,
+                    layForm = layui.layform,
+                    layer = layui.layer;
+                //总页数大于页码总数
+                laypage.render({
+                    elem: 'pagerInner',
+                    count: 70, //数据总数
+                    jump: function(obj) {
+                        //console.log(obj)
+                    }
+                });
+            });
+        })
+        
+           //验证
+     if( $(".layui-form2").length ){
+    $(".layui-form2").Validform({
+        btnSubmit: '.layui-btn',
+        tiptype: 1,
+        postonce: true,
+        showAllError: false,
+        tiptype: function (msg, o, cssctl) {
+            if (!o.obj.is("form")) {
+                if (o.type != 2) {
+                    var objtip = o.obj.parents('.layui-form-item').find(".Validform_checktip");
+                    objtip.addClass('Validform_skate');
+                    cssctl(objtip, o.type);
+                    layer.msg(msg, {icon: 5, time: 2000, shift: 6});
+                }
+            }
+        }
+    });
+}
+    </script>
+</body>
+
+</html>

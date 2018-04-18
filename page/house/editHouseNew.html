@@ -1,0 +1,544 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>新房编辑</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <script src="../../js/modernizr-2.6.2.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="wrap">
+        <div class="layui-layout layui-layout-admin">
+            <!--顶部-->
+              <div class="layui-header header">
+                <a href="../index/index.html" class="logo fl"><img src="../../images/logo.png"></a>
+                <ul class="layui-nav handelUl">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <img src="../../images/uHead.jpg" class="layui-circle" width="35" height="35">
+                            <cite><span>管理员</span>，你好！</cite>
+                            <span class="layui-nav-more"></span>
+                        </a>
+                      <dl class="layui-nav-child">
+                            <dd><a href="../index/cgLogin.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+                            <dd><a href="../index/login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main clearfix">
+            <!--左侧导航-->
+            <ul class="leftNav fl">
+                <li>
+                    <a href="../roles/roles.html">角色管理</a>
+                    
+                </li>
+                <li>
+                    <a href="../admin/admin.html">用户管理</a>                 
+                </li>
+                <li>
+                    <a href="javascript:;" class="on">房源管理</a>
+                    <ul class="leftSubNav">
+                        <li><a href="../house/addHouseStep1.html">添加房源</a></li>
+                        <li><a href="../house/houseList.html">房源列表</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../company/companylist.html">公司管理</a>
+                </li>
+                <li>
+                    <a href="../client/client.html">客户管理</a>
+                    
+                </li>
+                <li>
+                    <a href="../user/user.html">经纪人管理</a>
+                </li>
+                <li>
+                    <a href="../charts/charts.html">数据分析</a>
+                </li>
+                <li>
+                    <a href="../datas/setting.html">系统配置</a>
+                </li>
+            </ul>
+            <!--客户数据表格-->
+            <div class="rightMain fl">
+                <div class="formWrap">
+                    <form class="layui-form" action="houseList.html">
+                        <table class="editHouseTable">
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">房源类型</label>
+                                        <div class="layui-input-inline ">
+                                            <input type="text" class="layui-input forSameWidth" name="" value="新房" readonly>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">楼盘</label>
+                                        <div class="layui-input-inline ">
+                                            <input type="text" class="layui-input forSameWidth" name="" value="龙首新天地">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">展示佣金</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">否</option>
+                                                    <option value="1">是</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">佣金规则</label>
+                                        <div class="layui-input-inline ">
+                                            <select name="modules " lay-verify="required " lay-search=" ">  
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">推荐房源</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">否</option>
+                                                    <option value="1">是</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">房型</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">一室0厅</option>
+                                                    <option value="1">一室一厅</option>
+                                                    <option value="2">两室一厅</option>
+                                                    <option value="3">两室两厅</option>
+                                                    <option value="4">三室一厅</option>
+                                                    <option value="5">三室两厅</option>
+                                                    <option value="6">四室一厅</option>
+                                                    <option value="7">四室两厅</option>
+                                                    <option value="8">五室一厅</option>
+                                                    <option value="9">五室两厅</option>
+                                                    <option value="10">其他</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">楼层位置</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">低</option>
+                                                    <option value="1">中</option>
+                                                    <option value="2">高</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">楼层</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" class="layui-input forSameWidth" name="houseFloor"  datatype="*1-2" class="layui-input" sucmsg=" " errormsg="* 楼层在1~50之间！">
+                                             <span class="Validform_checktip"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">朝向</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">东</option>
+                                                    <option value="1">南</option>
+                                                    <option value="2">西</option>
+                                                    <option value="3">北</option>
+                                                    <option value="4">南北</option>
+                                                    <option value="5">东西</option>
+                                                    <option value="6">东南</option>
+                                                    <option value="7">西南</option>
+                                                    <option value="8">东北</option>
+                                                    <option value="9">西北</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">用途</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">住宅</option>
+                                                    <option value="1">商业</option>
+                                                    <option value="2">办公</option>
+                                                    <option value="3">工业</option>
+                                                    <option value="4">综合</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-form-item">
+                                        <label class="layui-form-label">地址</label>
+                                        <div class="layui-input-inline forAddrSelect">
+                                            <select name="quiz1">
+                                                    <option value="陕西" selected="">陕西省</option>
+                                                </select>
+                                        </div>
+                                        <div class="layui-input-inline forAddrSelect">
+                                            <select name="quiz2">
+                                                    <option value="西安"  selected="">西安市</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">详细地址</label>
+                                        <div class="layui-input-inline ">
+                                            <select name="modules " lay-verify="required " lay-search="" name="addrName" aria-placeholder="请输入">
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">面积(m<sup>2</sup>)</label>
+                                      <div class="layui-input-inline ">
+                                            <input type="text" class="layui-input forSameWidth" name="houseFloor"  datatype="*1-5" class="layui-input" sucmsg=" " errormsg="* 面积大小在0~10000之间！">
+                                             <span class="Validform_checktip"></span>
+                                        </div>
+                                      
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">发布日期</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="date" id="pubDate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">电梯</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">有</option>
+                                                    <option value="1">无</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">年代</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="date" id="oldDate" lay-verify="date" placeholder="年" autocomplete="off" class="layui-input forSameWidth">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">装修</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">精装修</option>
+                                                    <option value="1">毛坯</option>
+                                                    <option value="2">简单装修</option>
+                                                    <option value="3">中等装修</option>
+                                                    <option value="4">精装修</option>
+                                                    <option value="5">豪华装修</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">权属</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">商品房</option>
+                                                    <option value="1">经济适用房</option>
+                                                    <option value="2">使用权</option>
+                                                    <option value="3">公房</option>
+                                                    <option value="4">其他</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">双气</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">有</option>
+                                                    <option value="1">无</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">物业费(元/m<sup>2</sup>.月)</label>
+                                        <div class="layui-input-inline ">
+                                            <input type="text" class="layui-input forSameWidth" name="houseMoney" datatype="*1-5" class="layui-input" sucmsg=" " errormsg="* 物业费在0~10000之间！">                                       
+                                             <span class="Validform_checktip"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">单价(元)</label>
+                                        <div class="layui-input-inline ">
+                                            <input type="text" class="layui-input forSameWidth" name="allMoney" datatype="*1-5" class="layui-input" sucmsg=" " errormsg="* 单价不在有效的范围！">
+                                            <span class="Validform_checktip"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="layui-inline">
+                                        <label class="layui-form-label">开盘日期</label>
+                                        <div class="layui-input-inline">
+                                            <input type="text" name="date" id="saleDate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth">
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">现状</label>
+                                        <div class="layui-input-block">
+                                            <select name="interest" lay-filter="aihao">
+                                                    <option value="0">在售</option>
+                                                    <option value="1">待售</option>
+                                                </select>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="2">
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">房源特色</label>
+                                        <div class="layui-input-inline">
+                                            <div class="chuiceTipWrasp">
+                                                <div class="tipWrap">
+                                                    <span class="on">配套齐全</span>
+                                                    <span>临地铁</span>
+                                                    <span>车位充足</span>
+                                                    <span>小户型</span>
+                                                    <span>学校周边</span>
+                                                    <span>绿化率高</span>
+                                                    <span>品牌公寓</span>
+                                                    <span>五证齐全</span>
+                                                    <span>南北通透</span>
+                                                    <span>带幼儿园</span>
+                                                    <span>购物中心</span>
+                                                    <span>轨交房</span>
+                                                    <span>品牌开发商</span>
+                                                    <span>满二唯一</span>
+                                                    <span>满两年</span>
+                                                    <span>满五年</span>
+                                                    <span>满五唯一</span>
+                                                    <span>精装修</span>
+                                                    <span>随时看房</span>
+                                                    <span>可短租</span>
+                                                    <span>首次出租</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">封面图片</label>
+                                        <div class="layui-input-inline">
+                                            <div class="layui-upload">
+                                                <button type="button" class="layui-btn" id="test1">上传图片</button>
+                                                <div class="layui-upload-list">
+                                                    <img class="layui-upload-img" id="demo1">
+                                                    <p id="demoText"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">房源图片</label>
+                                        <div class="layui-input-inline">
+                                            <div class="layui-upload">
+                                                <button type="button" class="layui-btn" id="test2">多图片上传</button>
+                                                <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                                    预览图：
+                                                    <div class="layui-upload-list" id="demo2"></div>
+                                                </blockquote>
+                                            </div>
+                                            <div>支持JPG、PNG、JPEG,最多可上传9张</div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="layui-inline ">
+                                        <label class="layui-form-label ">公众号显示</label>
+                                        <div class="layui-input-inline">
+                                            <div class="layui-form-item">
+                                                <div class="layui-input-block forEditLeftMargin">
+                                                    <input type="radio" name="isShow" value="是" title="是" checked="">
+                                                    <input type="radio" name="isShow" value="否" title="否">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                        <div class="nextBtnWrap">
+                            <button class="layui-btn nextBtn" lay-submit=" " lay-filter="filter1">提交</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+<!--            
+            <div class="layui-layout loginBg">
+            <div class="loginFormWrap">                            
+                <form class="layui-form loginForm" action="">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">账号</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="username" lay-verify="required" placeholder="请输入账号" datatype="*6-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在6~15位之间！">
+                            <span class="Validform_checktip"></span>
+                        </div>
+                    </div>                                   
+                    <div class="layui-form-item">
+                        <div class="layui-input-block">
+                            <button  class="layui-btn" id="btn_submit">提交</button>
+                        </div>
+                    </div>
+                </form>
+            </div>-->
+            
+        </div>
+        <!-- //wrap -->
+        <script type="text/javascript " src="../../js/jquery-3.3.1.min.js "></script>
+        <script type="text/javascript " src="../../layui-v2.2.6/layui/layui.js " charset="utf-8 "></script>
+        <script type="text/javascript " src="../../js/common.js "></script>
+         <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
+        <script type="text/javascript ">
+            $(function() {
+                //标签选择
+                $(".tipWrap span").click(function() {
+                    $(this).addClass("on");
+                    var hasOnNum = 0;
+                    $(".tipWrap span").each(function() {
+                        if ($(this).hasClass("on")) {
+                            hasOnNum++;
+                        }
+                    });
+                    if (hasOnNum > 6) {
+                        layer.msg('标签最多选择6个哦');
+                        $(this).removeClass("on");
+                    }
+                });
+                layui.use(['form', 'laydate'], function() {
+                    var form = layui.form,
+                        laydate = layui.laydate;
+                    //发布日期
+                    laydate.render({
+                        elem: '#pubDate'
+                    });
+                    //年代选择
+                    laydate.render({
+                        elem: '#oldDate'
+                    });
+                    //开盘日期
+                    laydate.render({
+                        elem: '#saleDate'
+                    });
+                });
+            });
+            
+
+if( $(".layui-form").length )
+{
+    $(".layui-form").Validform({
+        btnSubmit: '.layui-btn',
+        tiptype: 1,
+        postonce: true,
+        showAllError: false,
+        tiptype: function (msg, o, cssctl) {
+            if (!o.obj.is("form")) {
+                if (o.type != 2) {
+                    var objtip = o.obj.parents('.layui-form-item').find(".Validform_checktip");
+                    objtip.addClass('Validform_skate');
+                    cssctl(objtip, o.type);
+                    layer.msg(msg, {icon: 5, time: 2000, shift: 6});
+                }
+            }
+        }
+    });
+}
+        </script>
+</body>
+
+</html>

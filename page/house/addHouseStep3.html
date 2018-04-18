@@ -1,0 +1,183 @@
+﻿<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>添加房源第三步</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../../css/normalize.css">
+    <link rel="stylesheet" href="../../css/common.css">
+    <link rel="stylesheet" href="../../css/base.css">
+    <link rel="stylesheet" href="../../css/style1.css">
+    <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <script src="../../js/modernizr-2.6.2.min.js"></script>
+</head>
+
+<body>
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="wrap">
+        <div class="layui-layout layui-layout-admin">
+            <!--顶部-->
+               <div class="layui-header header">
+                <a href="../index/index.html" class="logo fl"><img src="../../images/logo.png"></a>
+                <ul class="layui-nav handelUl">
+                    <li class="layui-nav-item">
+                        <a href="javascript:;">
+                            <img src="../../images/uHead.jpg" class="layui-circle" width="35" height="35">
+                            <cite><span>管理员</span>，你好！</cite>
+                            <span class="layui-nav-more"></span>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd><a href="../index/cgLogin.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
+                            <dd><a href="../index/login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
+                        </dl>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="main clearfix">
+            <!--左侧导航-->
+            <ul class="leftNav fl">
+                <li>
+                    <a href="../roles/roles.html">角色管理</a>
+                    
+                </li>
+                <li>
+                    <a href="../admin/admin.html">用户管理</a>                 
+                </li>
+                <li>
+                    <a href="javascript:;" class="on">房源管理</a>
+                    <ul class="leftSubNav">
+                        <li><a href="../house/addHouseStep1.html">添加房源</a></li>
+                        <li><a href="../house/houseList.html">房源列表</a></li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="../company/companylist.html">公司管理</a>
+                </li>
+                <li>
+                    <a href="../client/client.html">客户管理</a>
+                   
+                </li>
+                <li>
+                    <a href="../user/user.html">经纪人管理</a>
+                </li>
+                <li>
+                    <a href="../charts/charts.html">数据分析</a>
+                </li>
+                <li>
+                    <a href="../datas/setting.html">系统配置</a>
+                </li>
+            </ul>
+            <!--客户数据表格-->
+            <div class="rightMain fl">
+                <!-- 添加房源流程-->
+                <div class="cartFlow clearfix">
+                    <!-- 第一步-->
+                    <div class="flow on">
+                        <div class="flowBgWrap">
+                            <div class="flowBg"></div>
+                            <span class="flowNum">1</span>
+                        </div>
+                        <div class="flowDes">1、选择房源</div>
+                    </div>
+                    <!-- 第二步-->
+                    <div class="flow on">
+                        <div class="flowBgWrap on">
+                            <div class="flowBg"></div>
+                            <span class="flowNum">2</span>
+                        </div>
+                        <div class="flowDes">2、填写房源信息</div>
+                    </div>
+                    <!-- 第三步-->
+                    <div class="flow on">
+                        <div class="flowBgWrap on">
+                            <div class="flowBg"></div>
+                            <span class="flowNum">3</span>
+                        </div>
+                        <div class="flowDes">3、添加房源特色</div>
+                    </div>
+                    <!-- 第四步-->
+                    <div class=" flow">
+                        <div class="flowBgWrap">
+                            <div class="flowBg"></div>
+                            <span class="flowNum">4</span>
+                        </div>
+                        <div class="flowDes">4、上传图片</div>
+                    </div>
+                    <!-- 第五步-->
+                    <div class=" flow">
+                        <div class="flowBgWrap">
+                            <div class="flowBg"></div>
+                            <span class="flowNum">5</span>
+                        </div>
+                        <div class="flowDes">5、添加成功</div>
+                    </div>
+                </div>
+                <!--选择房源标签-->
+                <div class="chuiceTips">
+                    <h2 class="notice">标签最多选择6个！</h2>
+                    <div class="tipWrap">
+                        <span class="on">配套齐全</span>
+                        <span class="on">临地铁</span>
+                        <span>车位充足</span>
+                        <span>小户型</span>
+                        <span>学校周边</span>
+                        <span>绿化率高</span>
+                        <span>品牌公寓</span>
+                        <span>五证齐全</span>
+                        <span>南北通透</span>
+                        <span>带幼儿园</span>
+                        <span>购物中心</span>
+                        <span>轨交房</span>
+                        <span>品牌开发商</span>
+                        <span>满二唯一</span>
+                        <span>满两年</span>
+                        <span>满五年</span>
+                        <span>满五唯一</span>
+                        <span>精装修</span>
+                        <span>随时看房</span>
+                        <span>可短租</span>
+                        <span>首次出租</span>
+                    </div>
+                    <div class="submitBtnWrap">
+                        <a href="addHouseStep4.html" class="layui-btn">选好了</a>
+                    </div>
+                </div>
+            </div>
+            <!-- //wrap -->
+            <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+            <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
+            <script type="text/javascript" src="../../js/common.js"></script>
+            <script type="text/javascript">
+                $(function() {
+                    $(".tipWrap span").click(function() {
+                        $(this).addClass("on");
+                        var hasOnNum = 0;
+                        $(".tipWrap span").each(function() {
+                            if ($(this).hasClass("on")) {
+                                hasOnNum++;
+                            }
+                        });
+                        if (hasOnNum > 6) {
+                            layer.msg('标签最多选择6个哦');
+                            $(this).removeClass("on");
+                        }
+                    });
+                });
+                layui.use(['form'], function() {
+                    var form = layui.form;
+                });
+            </script>
+</body>
+
+</html>
