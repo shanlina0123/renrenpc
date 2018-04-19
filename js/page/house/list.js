@@ -1,38 +1,40 @@
+
+
 $(function() {
-    //引用layer部分
-    layui.use('laydate', function() {
+    //引用lay`er部分
+    layui.use(['laydate'], function() {
         var laydate = layui.laydate;
+        //var form = layui.form;
         //发布时间筛选
         laydate.render({
             elem: '#publishDate',
             type: 'datetime',
             range: '-',
-            format: 'yyyy/M/d'
+            format: 'yyyy-M-d'
         });
     });
 
-    //删除房源
-    $(".deleteHouseBtn").click(function() {
-        var $this = $(this);
-        layer.confirm('确定要删除吗？', {
-            btn: ['确定', '取消']
-        }, function() {
-            $this.parents("tr").remove();
-            layer.msg('删除成功', {
-                icon: 1
-            });
+    layui.use(['form'], function() {
+        var form = layui.form;
+        form.on('select(filter)', function(data)
+        {
+            var value = data.value
+            console.log(value); //得到select原始DOM对象
         });
     });
 });
 
 
-new Vue({
+var vm = new Vue({
     el: '#houseList',
     data: {
         path_url:auth_conf.path_url,//图片地址
         tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token
         params:{ //地址参数
-            page:1
+            page:1,
+            typeid:'',
+            iscommission:'',
+            created_at:'',
         },
         houseList:[], //房源容器
         page_data:{ //分页数据
@@ -59,14 +61,20 @@ new Vue({
                         that.page_data.total = list.total;
                         that.page_data.to= list.to;
                         that.getPageData();
+                    }else
+                    {
+                        layer.msg(data.messages,{icon: 6});
                     }
             });
+
+
         },
         //lay分页
         getPageData:function () {
             var that = this;
             layui.use(['laypage', 'layer', 'form'], function() {
                 var laypage = layui.laypage;
+                var form = layui.form;
                 //总页数大于页码总数
                 laypage.render({
                     elem: 'pagerInner',
@@ -81,6 +89,7 @@ new Vue({
                         }
                     }
                 });
+                form.render();
             });
         },
         //分页加载数据
@@ -113,6 +122,16 @@ new Vue({
                     {
                        //房型
                        that.roomtype = data.data;
+                       var str = '';
+                        for(var x in data.data)
+                        {
+                            str+='<option value="'+data.data[x].id+'">'+data.data[x].name+'</option>';
+                        }
+                       $("#roomType").append( str );
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render('select');
+                        });
                     }
                 });
 
@@ -131,6 +150,28 @@ new Vue({
                     }
                 });
 
+        },
+        del:function ( uuid ) {
+            var that = this;
+            layer.confirm('确定要删除吗？', {
+                btn: ['确定', '取消']
+            }, function() {
+
+                var url = auth_conf.house_delete+uuid;
+                axios.delete(url,{headers: {"Authorization": that.tokenValue}})
+                    .then(function(response)
+                    {
+                        var data = response.data;
+                        if ( data.status == 1 )
+                        {
+                            layer.msg('删除成功',{icon: 1});
+                        }else
+                        {
+                            layer.msg(data.messages,{icon: 6});
+                        }
+                    });
+
+            });
         }
     },created: function () {
         var that = this;
@@ -139,3 +180,19 @@ new Vue({
         that.dataDefinition();//自定义数据
     }
 });
+
+
+/**
+ * 检索
+ */
+function search() {
+
+    var typeid = $("#roomType").val();
+    var name = $("input[name=name]").val();
+    var iscommission = $("#commission").val();
+    var created_at = $("#publishDate").val();
+    vm.$data.params.created_at = created_at;
+    vm.$data.params.typeid = typeid;
+    vm.$data.params.iscommission = iscommission;
+    vm.getHouseList();
+}

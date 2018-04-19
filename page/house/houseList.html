@@ -29,28 +29,25 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">房源类型</label>
                                 <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="">
-					          <option value="">全部</option>
-					          <option value="1">新房</option>
-					          <option value="2">二手房</option>
-					          <option value="3">商铺写字楼</option>
-					        </select>
+                                    <select  lay-verify="required" lay-filter="filter" id="roomType">
+                                      <option value="">全部</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">楼盘</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input">
+                                    <input type="text" class="layui-input" name="name">
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">展示佣金</label>
                                 <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="">
-					          <option value="">全部</option>
-					          <option value="1">是</option>
-					          <option value="2">否</option>
-					        </select>
+                                    <select id="commission">
+                                      <option value="">全部</option>
+                                      <option value="1">是</option>
+                                      <option value="2">否</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="layui-inline">
@@ -59,7 +56,7 @@
                                     <input class="layui-input timePadding" id="publishDate" type="text" placeholder="请选择时间">
                                 </div>
                             </div>
-                            <button class="layui-btn sortBtn">查询</button>
+                            <button type="button" class="layui-btn sortBtn" onclick="search()">查询</button>
                         </div>
                     </form>
                 </div>
@@ -88,7 +85,7 @@
                                     <th>操作</th>
                                 </tr>
                             </thead>
-                            <tbody id="houseList">
+                            <tbody id="houseList" v-cloak>
                                 <tr v-for="item in houseList">
                                     <td>{{item.id}}</td>
                                     <td><img :src="path_url + item.covermap"></td>
@@ -98,14 +95,15 @@
                                     <td>{{commission[item.commissionid]?commission[item.commissionid].name:''}}</td>
                                     <td>{{item.iscommission?'是':'否'}}</td>
                                     <td>
-                                        <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
+                                        <input type="checkbox" name="close" lay-skin="switch"   lay-text="ON|OFF" checked v-if="item.ishome == 1">
+                                        <input type="checkbox" name="close" lay-skin="switch"   lay-text="ON|OFF" v-else>
                                     </td>
                                     <td>{{item.status?'是':'否'}}</td>
                                     <td>{{item.created_at}}</td>
                                     <td>
                                         <div class="layui-btn-group">
                                             <a href="editHouseNew.html" class="layui-btn editHouseBtn">编辑</a>
-                                            <button type="button" class="layui-btn deleteHouseBtn">删除</button>
+                                            <button type="button" class="layui-btn deleteHouseBtn" @click="del(item.uuid)">删除</button>
                                         </div>
                                     </td>
                                 </tr>
@@ -120,7 +118,7 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../../config/configure.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
