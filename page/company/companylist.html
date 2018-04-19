@@ -47,12 +47,12 @@
         </div>
         <div class="main clearfix">
             <!--左侧导航-->
-           <ul class="leftNav fl">
+            <ul class="leftNav fl">
                 <li>
-                    <a href="../roles/roles.html"><i class="layui-icon">&#xe613;</i>角色管理</a>                 
+                    <a href="../roles/roles.html"><i class="layui-icon">&#xe613;</i>角色管理</a>
                 </li>
                 <li>
-                    <a href="../admin/admin.html"><i class="layui-icon">&#xe612;</i>用户管理</a>                 
+                    <a href="../admin/admin.html"><i class="layui-icon">&#xe612;</i>用户管理</a>
                 </li>
                 <li>
                     <a href="../house/houseList.html"><i class="layui-icon">&#xe68e;</i>房源管理</a>
@@ -62,11 +62,11 @@
                     </ul>
                 </li>
                 <li>
-                      <a href="javascript:;" class="on"><i class="layui-icon">&#xe630;</i>公司管理</a>
+                    <a href="javascript:;" class="on"><i class="layui-icon">&#xe630;</i>公司管理</a>
                 </li>
                 <li>
                     <a href="../client/client.html"><i class="layui-icon">&#xe6b2;</i>客户管理</a>
-                    
+
                 </li>
                 <li>
                     <a href="../user/user.html"><i class="layui-icon">&#xe6af;</i>经纪人管理</a>
@@ -78,7 +78,7 @@
                     <a href="../datas/setting.html"><i class="layui-icon">&#xe620;</i>系统配置</a>
                 </li>
             </ul>
-           
+
             <!--右侧主要内容-->
             <div class="rightMain fl">
                 <div class="addClient"><button class="layui-btn changeClient">添加合作客户</button></div>
@@ -141,11 +141,11 @@
                     <table class="clientPopTable">
                         <tr>
                             <td>
-                               <div class="layui-inline ">
+                                <div class="layui-inline ">
                                     <label class="layui-form-label ">公司</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse" datatype="s3-30" class="layui-input" sucmsg=" "  errormsg="* 公司名称不符合规定！">
-                                         <span class="Validform_checktip"></span>
+                                        <input type="text" class="layui-input" name="userHouse" datatype="s3-30" class="layui-input" sucmsg=" " errormsg="* 公司名称不符合规定！">
+                                        <span class="Validform_checktip"></span>
                                     </div>
                                 </div>
                             </td>
@@ -188,19 +188,19 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">公司</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse" datatype="s3-30" class="layui-input" sucmsg=" "  errormsg="* 公司名称不符合规定！">
-                                         <span class="Validform_checktip"></span>
+                                        <input type="text" class="layui-input" name="userHouse" datatype="s3-30" class="layui-input" sucmsg=" " errormsg="* 公司名称不符合规定！">
+                                        <span class="Validform_checktip"></span>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                     
+
                         <tr>
                             <td>
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">联系人</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse" datatype="s1-5" class="layui-input" sucmsg=" "  errormsg="* 姓名不符合规定！">
+                                        <input type="text" class="layui-input" name="userHouse" datatype="s1-5" class="layui-input" sucmsg=" " errormsg="* 姓名不符合规定！">
                                         <span class="Validform_checktip"></span>
                                     </div>
                                 </div>
@@ -211,8 +211,8 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">联系人电话</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userPhone" datatype="m" class="layui-input" sucmsg=" "  errormsg="* 手机号码不符合规定！">
-                            			<span class="Validform_checktip"></span>
+                                        <input type="text" class="layui-input" name="userPhone" datatype="m" class="layui-input" sucmsg=" " errormsg="* 手机号码不符合规定！">
+                                        <span class="Validform_checktip"></span>
                                     </div>
                                 </div>
                             </td>
@@ -226,11 +226,11 @@
         </div>
     </div>
     <!-- //wrap -->
-    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../../layer-v3.1.1/layer/layer.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
-     <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
     <script type="text/javascript">
         $(function() {
             //添加编辑用户
@@ -286,26 +286,30 @@
                 });
             });
         })
-        
-           //验证
-     if( $(".layui-form2").length ){
-    $(".layui-form2").Validform({
-        btnSubmit: '.layui-btn',
-        tiptype: 1,
-        postonce: true,
-        showAllError: false,
-        tiptype: function (msg, o, cssctl) {
-            if (!o.obj.is("form")) {
-                if (o.type != 2) {
-                    var objtip = o.obj.parents('.layui-form-item').find(".Validform_checktip");
-                    objtip.addClass('Validform_skate');
-                    cssctl(objtip, o.type);
-                    layer.msg(msg, {icon: 5, time: 2000, shift: 6});
+
+        //验证
+        if ($(".layui-form2").length) {
+            $(".layui-form2").Validform({
+                btnSubmit: '.layui-btn',
+                tiptype: 1,
+                postonce: true,
+                showAllError: false,
+                tiptype: function(msg, o, cssctl) {
+                    if (!o.obj.is("form")) {
+                        if (o.type != 2) {
+                            var objtip = o.obj.parents('.layui-form-item').find(".Validform_checktip");
+                            objtip.addClass('Validform_skate');
+                            cssctl(objtip, o.type);
+                            layer.msg(msg, {
+                                icon: 5,
+                                time: 2000,
+                                shift: 6
+                            });
+                        }
+                    }
                 }
-            }
+            });
         }
-    });
-}
     </script>
 </body>
 

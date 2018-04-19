@@ -1,4 +1,5 @@
 /*标签*/
+
 html,
 body,
 p,
@@ -26,14 +27,16 @@ th,
 td,
 pre,
 blockquote {
-  margin: 0;
-  padding: 0;
+    margin: 0;
+    padding: 0;
 }
+
 html {
-  color: #333;
-  background: #fff;
-  font-size: 62.5%;
+    color: #333;
+    background: #fff;
+    font-size: 62.5%;
 }
+
 body,
 button,
 input,
@@ -45,216 +48,288 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: 1.2em;
-  font-family: 'Microsoft YaHei', SimSun, Verdana, Arial, sans-serif;
+    font-size: 1.2em;
+    font-family: 'Microsoft YaHei', SimSun, Verdana, Arial, sans-serif;
 }
+
 img,
 fieldset {
-  border: 0;
-  vertical-align: middle;
+    border: 0;
+    vertical-align: middle;
 }
+
 textarea {
-  word-wrap: break-word;
-  word-break: break-all;
-  resize: none;
+    word-wrap: break-word;
+    word-break: break-all;
+    resize: none;
 }
+
 li {
-  list-style: none;
+    list-style: none;
 }
+
 img {
-  border: none;
+    border: none;
 }
+
 a {
-  text-decoration: none;
-  color: #000;
+    text-decoration: none;
+    color: #000;
 }
+
 a:hover {
-  color: #628828;
+    color: #628828;
 }
+
 a:focus {
-  outline: none;
+    outline: none;
 }
+
+
 /*位置*/
+
 .fl {
-  float: left;
+    float: left;
 }
+
 .fr {
-  float: right;
+    float: right;
 }
+
+
 /*分页样式*/
+
 .pageWrap {
-  text-align: center;
-  padding: 20px 0;
+    text-align: center;
+    padding: 20px 0;
 }
+
+
 /*筛选部分样式*/
+
 .sortWrap {
-  padding: 10px 0;
+    padding: 10px 0;
 }
+
 .sortWrap .layui-inline {
-  padding-bottom: 10px;
+    padding-bottom: 10px;
 }
+
 .sortBtn {
-  margin-top: -10px;
-  margin-left: 30px;
+    margin-top: -10px;
+    margin-left: 30px;
 }
+
 .pageAddBtnWrap {
-  text-align: right;
-  padding-right: 30px;
+    text-align: right;
+    padding-right: 30px;
 }
+
+
 /*头部*/
+
 .logo {
- /* width: 180px;*/
- /* padding: 0 10px;*/
-  display: block;
-  line-height: 58px;
-  text-align: center;
+    /* width: 180px;*/
+    /* padding: 0 10px;*/
+    display: block;
+    line-height: 58px;
+    text-align: center;
 }
+
 .logo img {
-  width: 130px;
+    width: 130px;
 }
+
 .handelUl {
-  position: absolute!important;
-  right: 0;
-  background: none;
+    position: absolute!important;
+    right: 0;
+    background: none;
 }
+
 .leftNav {
-  width: 130px;
- /* padding: 20px 0;*/
-  height:900px;
-  background-color: #23262E;
+    width: 130px;
+    height: 900px;
+    background-color: #23262E;
 }
-.leftNav > li > a {
-  display: block;
-  color: #fff;
-  height: 45px;
-  line-height: 45px;
-  padding-left: 10px;
-  /*text-align: center;*/
-  /*border-left: 3px solid #23262E;*/
+
+.leftNav>li>a {
+    display: block;
+    color: #fff;
+    height: 45px;
+    line-height: 45px;
+    padding-left: 10px;
 }
-.leftNav > li > a.on {
-  /*border-color: #eb7221;*/
- background-color: #F37D0A;
-  background-position: 95% -74px !important;/*选中样式*/
+
+.leftNav>li>a.on {
+    background-color: #F37D0A;
+    background-position: 95% -74px !important;
+    /*选中样式*/
 }
-.leftNav > li > a.hasBg {
-  background: url(../images/down.png) 95% 18px no-repeat;
+
+.leftNav>li>a.hasBg {
+    background: url(../images/down.png) 95% 18px no-repeat;
 }
+
 .leftSubNav {
-  display: none;
+    display: none;
 }
+
 .leftSubNav li a {
-  display: block;
-  padding-left: 30px;
-  color: #fff;
-  height: 40px;
-  line-height: 40px;
-  text-align: center;
+    display: block;
+    padding-left: 30px;
+    color: #fff;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
 }
 
 .leftSubNav li a:hover,
 .leftSubNav li a.on {
-  /*background-color: #eb7221;*/                     /*选中样式*/
-  background-color: #F37D0A;
-  background-position: 95% -74px !important;/*选中样式*/
+    /*background-color: #eb7221;*/
+    /*选中样式*/
+    background-color: #F37D0A;
+    background-position: 95% -74px !important;
+    /*选中样式*/
 }
+
 .indexRightMain {
-  width: 1703px;
-  background: url(../images/indexWelcom.jpg) left top no-repeat;
-  background-size: cover;
+    width: 1703px;
+    background: url(../images/indexWelcom.jpg) left top no-repeat;
+    background-size: cover;
 }
+
 .rightMain {
-  width: 1683px;
-  height: 100%;
-  min-height: 880px;
-  padding-left: 20px;
-  padding-top: 12px;
+    width: 1683px;
+    height: 100%;
+    min-height: 880px;
+    padding-left: 20px;
+    padding-top: 12px;
 }
+
+
 /*登录页面*/
+
 .loginBg {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 0;
-  top: 0;
-  background: url(../images/loginBg.jpg) no-repeat;
-  background-size: 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: url(../images/loginBg.jpg) no-repeat;
+    background-size: 100%;
 }
+
 .loginFormWrap {
-  position: absolute;
-  width: 300px;
-  left: 50%;
-  top: 30%;
-  margin-left: -150px;
+    position: absolute;
+    width: 300px;
+    left: 50%;
+    top: 30%;
+    margin-left: -150px;
 }
+
 .loginFormWrap .layui-form-label {
-  width: 30px;
+    width: 30px;
 }
+
 .loginFormWrap .layui-input-block {
-  margin-left: 60px;
+    margin-left: 60px;
 }
+
 .loginFormWrap .layui-btn {
-  width: 100%;
-  background-color: #eb7221;
+    width: 100%;
+    background-color: #eb7221;
 }
+
 .loginFormWrap .forgetPwd {
-  display: block;
-  color: #eb7221;
-  padding: 10px 0 20px 18px;
+    display: block;
+    color: #eb7221;
+    padding: 10px 0 20px 18px;
 }
+
+
 /*二维码登录页面*/
+
 .loginErweima {
-  position: absolute;
-  width: 400px;
-  left: 50%;
-  top: 15%;
-  margin-left: -200px;
+    position: absolute;
+    width: 400px;
+    left: 50%;
+    top: 15%;
+    margin-left: -200px;
 }
+
 .loginErweima .erweima {
-  width: 400px;
-  height: 300px;
-  border: 1px solid #ccc;
+    width: 400px;
+    height: 300px;
+    border: 1px solid #ccc;
 }
+
 .loginErweima .loginNotice {
-  text-align: center;
-  line-height: 25px;
+    text-align: center;
+    line-height: 25px;
 }
+
 .loginErweima .loginNotice .reload {
-  color: #eb7221;
+    color: #eb7221;
 }
 
-.layui-btn,.layui-laypage-em{
-	background-color:#eb7221 !important;
-}
-.layui-laypage a:hover{
-				color:#eb7221 !important;
+.layui-btn,
+.layui-laypage-em {
+    background-color: #eb7221 !important;
 }
 
-/*后来加的改按钮颜色*/
-.layui-form-radio>i:hover, .layui-form-radioed>i {
+.layui-laypage a:hover {
     color: #eb7221 !important;
 }
+
+
+/*后来加的改按钮颜色*/
+
+.layui-form-radio>i:hover,
+.layui-form-radioed>i {
+    color: #eb7221 !important;
+}
+
 .layui-form-onswitch {
     border-color: #eb7221 !important;
-    background-color:#eb7221 !important ;
+    background-color: #eb7221 !important;
 }
-.layui-form-checked, .layui-form-checked:hover {
-      border-color: #eb7221 !important;
-    }
-  .layui-form-checked span, .layui-form-checked:hover span {
-     background-color:#eb7221 !important ;
+
+.layui-form-checked,
+.layui-form-checked:hover {
+    border-color: #eb7221 !important;
 }
-.layui-form-checked i, .layui-form-checked:hover i {
-    color: #eb7221 !important ;
+
+.layui-form-checked span,
+.layui-form-checked:hover span {
+    background-color: #eb7221 !important;
 }
-.layui-this{
-	background-color:#eb7221 !important ;
+
+.layui-form-checked i,
+.layui-form-checked:hover i {
+    color: #eb7221 !important;
 }
+
+.layui-this {
+    background-color: #eb7221 !important;
+}
+
+
 /*日历改颜色*/
-.layui-laydate-footer :hover,.layui-laydate-header :hover{
-	color:#eb7221 !important;
+
+.layui-laydate-footer :hover,
+.layui-laydate-header :hover {
+    color: #eb7221 !important;
 }
-.layui-laydate .layui-this {
-    background-color:#eb7221 !important ;
+
+body .layui-laydate .layui-this {
+    background-color: #eb7221 !important;
     color: #fff!important;
+}
+
+body .layui-laydate-content td.laydate-selected {
+    background-color: #F7E1B5;
+}
+
+.layui-laydate-content tr td:hover {
+    background-color: #ddd !important;
 }

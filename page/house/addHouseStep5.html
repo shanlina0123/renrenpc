@@ -25,34 +25,17 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div class="wrap">
-        <div class="layui-layout layui-layout-admin">
-            <!--顶部-->
-             <div class="layui-header header">
-                <a href="../index/index.html" class="logo fl"><img src="../../images/logo.png"></a>
-                <ul class="layui-nav handelUl">
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <img src="../../images/uHead.jpg" class="layui-circle" width="35" height="35">
-                            <cite><span>管理员</span>，你好！</cite>
-                            <span class="layui-nav-more"></span>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="../index/cgLogin.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
-                            <dd><a href="../index/login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
-                        </dl>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <!--顶部导航-->
+        <div class="layui-layout layui-layout-admin" id="top"></div>
         <div class="main clearfix">
             <!--左侧导航-->
             <ul class="leftNav fl">
                 <li>
                     <a href="../roles/roles.html">角色管理</a>
-                   
+
                 </li>
                 <li>
-                    <a href="../admin/admin.html">用户管理</a>                 
+                    <a href="../admin/admin.html">用户管理</a>
                 </li>
                 <li>
                     <a href="javascript:;" class="on">房源管理</a>
@@ -66,7 +49,7 @@
                 </li>
                 <li>
                     <a href="../client/client.html">客户管理</a>
-                    
+
                 </li>
                 <li>
                     <a href="../user/user.html">经纪人管理</a>
@@ -132,7 +115,7 @@
                 </div>
             </div>
             <!-- //wrap -->
-            <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+            <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
             <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
             <script type="text/javascript" src="../../js/common.js"></script>
             <script type="text/javascript">

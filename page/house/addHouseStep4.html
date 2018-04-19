@@ -20,7 +20,7 @@
     <script src="../../js/modernizr-2.6.2.min.js"></script>
 </head>
 <style type="text/css">
-	
+
 </style>
 
 <body>
@@ -28,34 +28,17 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div class="wrap">
-        <div class="layui-layout layui-layout-admin">
-            <!--顶部-->
-               <div class="layui-header header">
-                <a href="../index/index.html" class="logo fl"><img src="../../images/logo.png"></a>
-                <ul class="layui-nav handelUl">
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <img src="../../images/uHead.jpg" class="layui-circle" width="35" height="35">
-                            <cite><span>管理员</span>，你好！</cite>
-                            <span class="layui-nav-more"></span>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="../index/cgLogin.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
-                            <dd><a href="../index/login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
-                        </dl>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <!--顶部导航-->
+        <div class="layui-layout layui-layout-admin" id="top"></div>
         <div class="main clearfix">
             <!--左侧导航-->
             <ul class="leftNav fl">
                 <li>
                     <a href="../roles/roles.html">角色管理</a>
-                   
+
                 </li>
                 <li>
-                    <a href="../admin/admin.html">用户管理</a>                 
+                    <a href="../admin/admin.html">用户管理</a>
                 </li>
                 <li>
                     <a href="javascript:;" class="on">房源管理</a>
@@ -69,7 +52,7 @@
                 </li>
                 <li>
                     <a href="../client/client.html">客户管理</a>
-                   
+
                 </li>
                 <li>
                     <a href="../user/user.html">经纪人管理</a>
@@ -80,7 +63,8 @@
                 <li>
                     <a href="../datas/setting.html">系统配置</a>
                 </li>
-            </ul>      <!--客户数据表格-->
+            </ul>
+            <!--客户数据表格-->
             <div class="rightMain fl">
                 <!-- 添加房源流程-->
                 <div class="cartFlow clearfix">
@@ -171,10 +155,10 @@
                         </div>
                     </form>
                 </div>
-           
+
             </div>
             <!-- //wrap -->
-            <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+            <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
             <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
             <script type="text/javascript" src="../../js/common.js"></script>
             <script type="text/javascript">
@@ -207,24 +191,24 @@
                             });
                         }
                     });
-//                  //设定文件大小限制
-//				  upload.render({
-//				    elem: '#test2'
-//				    ,url: '/upload/'
-//				    ,size: 60 //限制文件大小，单位 KB
-//				    ,done: function(res){
-//				      console.log(res)
-//				    }
-//				  });
-//				  upload.render({
-//				    elem: '#test1'
-//				    ,url: '/upload/'
-//				    ,size: 60 //限制文件大小，单位 KB
-//				    ,done: function(res){
-//				      console.log(res)
-//				    }
-//				  });
-                    
+                    //                  //设定文件大小限制
+                    //				  upload.render({
+                    //				    elem: '#test2'
+                    //				    ,url: '/upload/'
+                    //				    ,size: 60 //限制文件大小，单位 KB
+                    //				    ,done: function(res){
+                    //				      console.log(res)
+                    //				    }
+                    //				  });
+                    //				  upload.render({
+                    //				    elem: '#test1'
+                    //				    ,url: '/upload/'
+                    //				    ,size: 60 //限制文件大小，单位 KB
+                    //				    ,done: function(res){
+                    //				      console.log(res)
+                    //				    }
+                    //				  });
+
                     //多图片上传
                     upload.render({
                         elem: '#test2',
