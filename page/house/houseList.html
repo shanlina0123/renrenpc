@@ -93,15 +93,15 @@
                                     <td>{{item.id}}</td>
                                     <td><img :src="path_url + item.covermap"></td>
                                     <td>{{item.name}}</td>
-                                    <td>{{item.name}}</td>
+                                    <td>{{roomtype[item.typeid]?roomtype[item.typeid].name:''}}</td>
                                     <td>{{item.area}}</td>
-                                    <td></td>
-                                    <td>否</td>
+                                    <td>{{commission[item.commissionid]?commission[item.commissionid].name:''}}</td>
+                                    <td>{{item.iscommission?'是':'否'}}</td>
                                     <td>
                                         <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
                                     </td>
-                                    <td>是</td>
-                                    <td>2018-02-03</td>
+                                    <td>{{item.status?'是':'否'}}</td>
+                                    <td>{{item.created_at}}</td>
                                     <td>
                                         <div class="layui-btn-group">
                                             <a href="editHouseNew.html" class="layui-btn editHouseBtn">编辑</a>
