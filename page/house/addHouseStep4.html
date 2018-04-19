@@ -11,6 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>添加房源第四步</title>
     <meta name="description" content="">
+    <link rel="icon" href="../../images/icon.png">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../css/normalize.css">
     <link rel="stylesheet" href="../../css/common.css">
@@ -18,6 +19,7 @@
     <link rel="stylesheet" href="../../css/style1.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
     <script src="../../js/modernizr-2.6.2.min.js"></script>
+    <link rel="stylesheet" href="../../css/index.css">
 </head>
 <style type="text/css">
 	
@@ -129,7 +131,7 @@
                 <div class="formWrap">
                     <form class="layui-form" action="addHouseStep5.html">
                         <table class="uploadTable">
-                            <tr>
+                            <!--<tr>
                                 <td>封面图(单张)</td>
                                 <td>
                                     <div class="layui-upload">
@@ -140,8 +142,8 @@
                                         </div>
                                     </div>
                                 </td>
-                            </tr>
-                            <tr>
+                            </tr>-->
+                            <!--<tr>
                                 <td>详情图</td>
                                 <td>
                                     <div class="layui-upload">
@@ -153,8 +155,29 @@
                                     </div>
                                     <div>支持JPG、PNG、JPEG,最多可上传9张</div>
                                 </td>
-                            </tr>
+                            </tr>-->
                             <tr>
+                            <div class="img-box full">
+								<section class=" img-section">
+									<p class="up-p">多图片上传：<span class="up-span">最多可以上传5张图片，马上上传</span></p>
+									<div class="z_photo upimg-div clear" >			   
+											 <section class="z_file fl">
+												<img src="../../images/a11.png" class="add-img">
+												<input type="file" name="file" id="file" class="file" value="" accept="image/jpg,image/jpeg,image/png,image/bmp" multiple />
+											 </section>
+									 </div>
+								 </section>
+							</div>
+							</tr>
+							<aside class="mask works-mask">
+								<div class="mask-content">
+									<p class="del-p ">您确定要删除作品图片吗？</p>
+									<p class="check-p"><span class="del-com wsdel-ok">确定</span><span class="wsdel-no">取消</span></p>
+								</div>
+							</aside>
+            
+<!--
+							<tr>
                                 <td>公众号显示</td>
                                 <td>
                                     <div class="layui-form-item">
@@ -164,88 +187,135 @@
                                         </div>
                                     </div>
                                 </td>
-                            </tr>
+                            </tr>-->
                         </table>
                         <div class="nextBtnWrap">
                             <button class="layui-btn nextBtn" lay-submit=" " lay-filter="filter1">下一步</button>
                         </div>
                     </form>
                 </div>
-           
-            </div>
+          
+     </div>
             <!-- //wrap -->
             <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
             <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
             <script type="text/javascript" src="../../js/common.js"></script>
             <script type="text/javascript">
-                layui.use('upload', function() {
-                    var $ = layui.jquery,
-                        upload = layui.upload;
-                    //普通图片上传
-                    var uploadInst = upload.render({
-                        elem: '#test1',
-                        url: '/upload/',
-                        before: function(obj) {
-                            //预读本地文件示例，不支持ie8
-                            obj.preview(function(index, file, result) {
-                                $('#demo1').attr('src', result); //图片链接（base64）
-                            });
-                        },
-                        done: function(res) {
-                            //如果上传失败
-                            // if (res.code > 0) {
-                            //     return layer.msg('上传失败');
-                            // }
-                            //上传成功
-                        },
-                        error: function() {
-                            //演示失败状态，并实现重传
-                            var demoText = $('#demoText');
-                            demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-                            demoText.find('.demo-reload').on('click', function() {
-                                uploadInst.upload();
-                            });
-                        }
-                    });
-//                  //设定文件大小限制
-//				  upload.render({
-//				    elem: '#test2'
-//				    ,url: '/upload/'
-//				    ,size: 60 //限制文件大小，单位 KB
-//				    ,done: function(res){
-//				      console.log(res)
-//				    }
-//				  });
-//				  upload.render({
-//				    elem: '#test1'
-//				    ,url: '/upload/'
-//				    ,size: 60 //限制文件大小，单位 KB
-//				    ,done: function(res){
-//				      console.log(res)
-//				    }
-//				  });
-                    
-                    //多图片上传
-                    upload.render({
-                        elem: '#test2',
-                        url: '/upload/',
-                        multiple: true,
-                        before: function(obj) {
-                            //预读本地文件示例，不支持ie8
-                            obj.preview(function(index, file, result) {
-                                $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
-                            });
-                        },
-                        done: function(res) {
-                            //上传完毕
-                        }
-                    });
-                });
-            </script>
-            <script>
                 layui.use(['form'], function() {
                     var form = layui.form;
                 });
+            </script>
+            <script type="text/javascript">
+				$(function(){
+				var delParent;
+				var defaults = {
+					fileType         : ["jpg","png","bmp","jpeg"],   // 上传文件的类型
+					fileSize         : 1024 * 1024 * 10                  // 上传文件的大小 10M
+				};
+					/*点击图片的文本框*/
+				$(".file").change(function(){	 
+					var idFile = $(this).attr("id");
+					var file = document.getElementById(idFile);
+					var imgContainer = $(this).parents(".z_photo"); //存放图片的父亲元素
+					var fileList = file.files; //获取的图片文件
+					var input = $(this).parent();//文本框的父亲元素
+					var imgArr = [];
+					//遍历得到的图片文件
+					var numUp = imgContainer.find(".up-section").length;
+					var totalNum = numUp + fileList.length;  //总的数量
+					if(fileList.length > 5 || totalNum > 5 ){
+						alert("上传图片数目不可以超过5个，请重新选择");  //一次选择上传超过5个 或者是已经上传和这次上传的到的总数也不可以超过5个
+					}
+					else if(numUp < 5){
+						fileList = validateUp(fileList);
+						for(var i = 0;i<fileList.length;i++){
+						 var imgUrl = window.URL.createObjectURL(fileList[i]);
+						     imgArr.push(imgUrl);
+						 var $section = $("<section class='up-section fl loading'>");
+						     imgContainer.prepend($section);
+						 var $span = $("<span class='up-span'>");
+						     $span.appendTo($section);
+						
+					     var $img0 = $("<img class='close-upimg'>").on("click",function(event){
+							    event.preventDefault();
+								event.stopPropagation();
+								$(".works-mask").show();
+								delParent = $(this).parent();
+							});   
+							$img0.attr("src","../../images/a7.png").appendTo($section);
+					     var $img = $("<img class='up-img up-opcity'>");
+					         $img.attr("src",imgArr[i]);
+					         $img.appendTo($section);
+					     var $p = $("<p class='img-name-p'>");
+					         $p.html(fileList[i].name).appendTo($section);
+					     var $input = $("<input id='taglocation' name='taglocation' value='' type='hidden'>");
+					         $input.appendTo($section);
+					     var $input2 = $("<input id='tags' name='tags' value='' type='hidden'/>");
+					         $input2.appendTo($section);
+					      
+					   }
+					}
+					setTimeout(function(){
+			             $(".up-section").removeClass("loading");
+					 	 $(".up-img").removeClass("up-opcity");
+					 },450);
+					 numUp = imgContainer.find(".up-section").length;
+					if(numUp >= 5){
+						$(this).parent().hide();
+					}
+				});
+				
+				
+			   
+			    $(".z_photo").delegate(".close-upimg","click",function(){
+			     	  $(".works-mask").show();
+			     	  delParent = $(this).parent();
+				});
+					
+				$(".wsdel-ok").click(function(){
+					$(".works-mask").hide();
+					var numUp = delParent.siblings().length;
+					if(numUp < 6){
+						delParent.parent().find(".z_file").show();
+					}
+					 delParent.remove();
+				});
+				
+				$(".wsdel-no").click(function(){
+					$(".works-mask").hide();
+				});
+		
+		function validateUp(files){
+			var arrFiles = [];//替换的文件数组
+			for(var i = 0, file; file = files[i]; i++){
+				//获取文件上传的后缀名
+				var newStr = file.name.split("").reverse().join("");
+				if(newStr.split(".")[0] != null){
+						var type = newStr.split(".")[0].split("").reverse().join("");
+						console.log(type+"===type===");
+						if(jQuery.inArray(type, defaults.fileType) > -1){
+							// 类型符合，可以上传
+							if (file.size >= defaults.fileSize) {
+								alert(file.size);
+								alert('您这个"'+ file.name +'"文件大小过大');	
+							} else {
+								// 在这里需要判断当前所有文件中
+								arrFiles.push(file);	
+							}
+						}else{
+							alert('您这个"'+ file.name +'"上传类型不符合');	
+						}
+					}else{
+						alert('您这个"'+ file.name +'"没有类型, 无法识别');	
+					}
+			}
+			return arrFiles;
+		}
+		
+	
+	
+})
+           
             </script>
 </body>
 
