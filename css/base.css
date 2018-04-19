@@ -201,6 +201,7 @@ a:focus {
   display: block;
   color: #eb7221;
   padding: 10px 0 20px 18px;
+  float: left;
 }
 /*二维码登录页面*/
 .loginErweima {
@@ -241,11 +242,29 @@ a:focus {
 .layui-form-checked, .layui-form-checked:hover {
       border-color: #eb7221 !important;
     }
-  .layui-form-checked span, .layui-form-checked:hover span {
+/*.ckbox.layui-form-checked span, .layui-form-checked:hover span {
      background-color:#eb7221 !important ;
-}
-.layui-form-checked i, .layui-form-checked:hover i {
+}*/
+.ckbox.layui-form-checked i, .layui-form-checked:hover i {
     color: #eb7221 !important ;
+}
+.ckbox .layui-form-checked[lay-skin=primary] i {
+    border-color: #eb7221 !important;
+    background-color: #eb7221 !important;
+    color: #fff;
+}
+.ckbox2 .layui-form-checked i,.ckbox2 .layui-form-checked:hover i {
+    color: #eb7221 !important;
+}
+.ckbox2 .layui-form-checked span,.ckbox2 .layui-form-checked:hover span {
+    background-color: #eb7221 !important;
+}
+
+.layui-icon:hover{
+	border-color:#eb7221 !important;
+}
+.layui-icon:focus{
+	border-color:#eb7221 !important;
 }
 .layui-this{
 	background-color:#eb7221 !important ;

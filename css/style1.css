@@ -104,11 +104,11 @@
   margin: 0 auto;
 }
 .addHouseTable{
-	width:1200px;
+	width:900px;
 }
 .addHouseTable,
 .editHouseTable {
-  margin: 0 auto;
+  margin: 0 345px;
 }
 .addHouseTable tr td,
 .editHouseTable tr td {
