@@ -29,11 +29,11 @@ $(function() {
 new Vue({
     el: '#houseList',
     data: {
-        pathUrl: window.auth_conf.pathUrl,
         params:{},
         houseList:[],
         tokenValue:JSON.parse(localStorage.getItem("userinfo")).token,
         pages:'',
+        path_url:auth_conf.path_url
     },
     methods:{
         getHouseList:function ()
