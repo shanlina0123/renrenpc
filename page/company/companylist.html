@@ -29,55 +29,10 @@
     <div class="wrap">
         <div class="layui-layout layui-layout-admin">
             <!--顶部-->
-            <div class="layui-header header">
-                <a href="../index/index.html" class="logo fl"><img src="../../images/logo.png"></a>
-                <ul class="layui-nav handelUl">
-                    <li class="layui-nav-item">
-                        <a href="javascript:;">
-                            <img src="../../images/uHead.jpg" class="layui-circle" width="35" height="35">
-                            <cite><span>管理员</span>，你好！</cite>
-                            <span class="layui-nav-more"></span>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd><a href="../index/cgpwd.html"><i class="iconfont icon-shezhi1" data-icon="icon-shezhi1"></i><cite>修改密码</cite></a></dd>
-                            <dd><a href="../../login.html" class="signOut"><i class="iconfont icon-loginout"></i><cite>退出</cite></a></dd>
-                        </dl>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="main clearfix">
+            <div class="layui-header header" id="top"> </div>	 
+       		 <div class="main clearfix" >
             <!--左侧导航-->
-           <ul class="leftNav fl">
-                <li>
-                    <a href="../roles/roles.html"><i class="layui-icon">&#xe613;</i>角色管理</a>                 
-                </li>
-                <li>
-                    <a href="../admin/admin.html"><i class="layui-icon">&#xe612;</i>用户管理</a>                 
-                </li>
-                <li>
-                    <a href="../house/houseList.html"><i class="layui-icon">&#xe68e;</i>房源管理</a>
-                    <ul class="leftSubNav">
-                        <li><a href="../house/addHouseStep1.html"><i class="layui-icon">&#xe654;</i>添加房源</a></li>
-                        <li><a href="../house/houseList.html"><i class="layui-icon">&#xe60a;</i>房源列表</a></li>
-                    </ul>
-                </li>
-                <li>
-                      <a href="javascript:;" class="on"><i class="layui-icon">&#xe630;</i>公司管理</a>
-                </li>
-                <li>
-                    <a href="../client/client.html"><i class="layui-icon">&#xe6b2;</i>客户管理</a>
-                    
-                </li>
-                <li>
-                    <a href="../user/user.html"><i class="layui-icon">&#xe6af;</i>经纪人管理</a>
-                </li>
-                <li>
-                    <a href="../charts/charts.html"><i class="layui-icon">&#xe62a;</i>数据分析</a>
-                </li>
-                <li>
-                    <a href="../datas/setting.html"><i class="layui-icon">&#xe620;</i>系统配置</a>
-                </li>
+            <ul class="leftNav fl" id="left">               
             </ul>
            
             <!--右侧主要内容-->
@@ -95,30 +50,21 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tr>
-                            <td>1</td>
-                            <td>张三</td>
-                            <td>A类客户</td>
-                            <td>15965984578</td>
-                            <td>
-                                <div class="layui-btn-group">
-                                    <button type="button" class="layui-btn editBtn">编辑</button>
-                                    <button type="button" class="layui-btn deleteBtn">删除</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>张四</td>
-                            <td>B类客户</td>
-                            <td>12345678910</td>
-                            <td>
-                                <div class="layui-btn-group">
-                                    <button type="button" class="layui-btn editBtn">编辑</button>
-                                    <button type="button" class="layui-btn deleteBtn">删除</button>
-                                </div>
-                            </td>
-                        </tr>
+                        <tbody id="companylist">
+	                        <tr v-for="item in companylist">
+	                            <td>{{item.id}}</td>
+	                            <td>{{item.name}}</td>
+	                            <td>A类客户</td>
+	                            <td>15965984578</td>
+	                            <td>
+	                                <div class="layui-btn-group">
+	                                    <button type="button" class="layui-btn editBtn">编辑</button>
+	                                    <button type="button" class="layui-btn deleteBtn">删除</button>
+	                                </div>
+	                            </td>
+	                        </tr>
+	                      
+	                    </tbody>
                     </table>
                 </form>
                 <!--分页-->
@@ -232,82 +178,10 @@
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
      <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            //添加编辑用户
-            $(".editBtn").click(function() {
-                layer.open({
-                    type: 1,
-                    title: '查看编辑用户',
-                    shadeClose: true,
-                    scrollbar: false,
-                    skin: 'layui-layer-rim',
-                    area: ['330px', '330px'],
-                    content: $(".userPopWrap")
-                })
-            });
-            //添加合作客户
-            $(".changeClient").click(function() {
-                layer.open({
-                    type: 1,
-                    title: '添加合作客户',
-                    shadeClose: true,
-                    scrollbar: false,
-                    skin: 'layui-layer-rim',
-                    area: ['400px', '400px'],
-                    content: $(".custormHandelPop")
-                })
-            });
-            //删除用户
-            $(".deleteBtn").click(function() {
-                var $this = $(this);
-                layer.confirm('确定要删除吗？', {
-                    btn: ['确定', '取消']
-                }, function() {
-                    $this.parents("tr").remove();
-                    layer.msg('删除成功', {
-                        icon: 1
-                    });
-                });
-            });
-
-
-            //这个页面的分页用的是浏览器解析后的布局（其他页面使用的是解析前的，后期如果需要会统一修改）
-            layui.use(['laypage', 'layer', 'form'], function() {
-                var laypage = layui.laypage,
-                    layForm = layui.layform,
-                    layer = layui.layer;
-                //总页数大于页码总数
-                laypage.render({
-                    elem: 'pagerInner',
-                    count: 70, //数据总数
-                    jump: function(obj) {
-                        //console.log(obj)
-                    }
-                });
-            });
-        })
-        
-           //验证
-     if( $(".layui-form2").length ){
-    $(".layui-form2").Validform({
-        btnSubmit: '.layui-btn',
-        tiptype: 1,
-        postonce: true,
-        showAllError: false,
-        tiptype: function (msg, o, cssctl) {
-            if (!o.obj.is("form")) {
-                if (o.type != 2) {
-                    var objtip = o.obj.parents('.layui-form-item').find(".Validform_checktip");
-                    objtip.addClass('Validform_skate');
-                    cssctl(objtip, o.type);
-                    layer.msg(msg, {icon: 5, time: 2000, shift: 6});
-                }
-            }
-        }
-    });
-}
-    </script>
+    <!--- vue -->
+    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+    <script type="text/javascript" src="../../js/page/house/list.js"></script>
 </body>
 
 </html>

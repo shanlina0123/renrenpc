@@ -132,7 +132,7 @@ a:focus {
   /*text-align: center;*/
   /*border-left: 3px solid #23262E;*/
 }
-.leftNav > li > a.on {
+.leftNav > li > a:hover {
   /*border-color: #eb7221;*/
  background-color: #F37D0A;
   background-position: 95% -74px !important;/*选中样式*/
@@ -164,7 +164,7 @@ a:focus {
   background-size: cover;
 }
 .rightMain {
-  width: 1683px;
+  width: 1753px;
   height: 100%;
   min-height: 880px;
   padding-left: 20px;
@@ -206,9 +206,10 @@ a:focus {
 /*二维码登录页面*/
 .loginErweima {
   position: absolute;
-  width: 400px;
-  left: 50%;
-  top: 15%;
+  width: 500px;
+  height: 500px;
+  left: 54%;
+  top: 30%;
   margin-left: -200px;
 }
 .loginErweima .erweima {
@@ -270,10 +271,16 @@ a:focus {
 	background-color:#eb7221 !important ;
 }
 /*日历改颜色*/
-.layui-laydate-footer :hover,.layui-laydate-header :hover{
+body .layui-laydate-footer :hover,.layui-laydate-header :hover{
 	color:#eb7221 !important;
 }
-.layui-laydate .layui-this {
+body .layui-laydate .layui-this {
     background-color:#eb7221 !important ;
     color: #fff!important;
+}
+body .layui-laydate-content td.laydate-selected {
+    background-color: #F7E1B5 !important;
+}
+[v-cloak] {
+    display: none;
 }

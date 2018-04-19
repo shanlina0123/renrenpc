@@ -34,7 +34,7 @@
             <div class="rightMain fl">
                 <div class="addClient"><button class="layui-btn"><i class="layui-icon"></i></button></div>
                 <form class="layui-form lockForm ckbox2">
-                    <table class="layui-table">
+                    <table class="layui-table" id="admin">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -46,34 +46,23 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tr>
-                            <td>1</td>
-                            <td>张三</td>
-                            <td>zhangsan</td>
-                            <td>管理员</td>
-                            <td>15965984578</td>
-                            <td><input type="checkbox" name="like[write]" title="锁定"></td>
-                            <td>
-                                <div class="clientBtns">
-                                    <button type="button" class="layui-btn layui-btn-sm editUser"><i class="layui-icon"></i></button>
-                                    <button type="button" class="layui-btn layui-btn-sm deleteBtn"><i class="layui-icon"></i></button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>张四</td>
-                            <td>zhangsi</td>
-                            <td>用户</td>
-                            <td>15965984578</td>
-                            <td><input type="checkbox" name="like[write]" title="锁定"></td>
-                            <td>
-                                <div class="clientBtns">
-                                    <button type="button" class="layui-btn layui-btn-sm editUser"><i class="layui-icon"></i></button>
-                                    <button type="button"  class="layui-btn layui-btn-sm deleteBtn"><i class="layui-icon"></i></button>
-                                </div>
-                            </td>
-                        </tr>
+                        <tbody id="admin">
+	                        <tr v-for="item in admin">
+	                            <td>{{item.id}}</td>
+	                            <td>{{item.name}}</td>
+	                            <td>zhangsan</td>
+	                            <td>管理员</td>
+	                            <td>15965984578</td>
+	                            <td><input type="checkbox" name="like[write]" title="锁定"></td>
+	                            <td>
+	                                <div class="clientBtns">
+	                                    <button type="button" class="layui-btn layui-btn-sm editUser"><i class="layui-icon"></i></button>
+	                                    <button type="button" class="layui-btn layui-btn-sm deleteBtn"><i class="layui-icon"></i></button>
+	                                </div>
+	                            </td>
+	                        </tr>
+	                      
+                        </tbody>
                     </table>
                 </form>
                 <!--分页-->
@@ -166,69 +155,11 @@
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            //添加编辑用户
-            $(".editUser,.addClient").click(function() {
-                    layer.open({
-                        type: 1,
-                        title: '新增编辑用户',
-                        shadeClose: true,
-                        scrollbar: false,
-                        skin: 'layui-layer-rim',
-                        area: ['500px', '500px'],
-                        content: $(".userPopWrap    ")
-                    })
-                })
-                //删除用户
-            $(".deleteBtn").click(function() {
-                var $this = $(this);
-                layer.confirm('确定要删除吗？', {
-                    btn: ['确定', '取消'],
-                    area: ['300px', '167px']
-                }, function() {
-                    $this.parents("tr").remove();
-                    layer.msg('删除成功', {
-                        icon: 1
-                    });
-                });
-            });
-            //这个页面的分页用的是浏览器解析后的布局（其他页面使用的是解析前的，后期如果需要会统一修改）
-            layui.use(['laypage', 'layer', 'form'], function() {
-                var laypage = layui.laypage,
-                    layForm = layui.layform,
-                    layer = layui.layer;
-                //总页数大于页码总数
-                laypage.render({
-                    elem: 'pagerInner',
-                    count: 70, //数据总数
-                    jump: function(obj) {
-                        //console.log(obj)
-                    }
-                });
-            });
-                 
-        })
-        //验证
-     if( $(".layui-form2").length ){
-    $(".layui-form2").Validform({
-        btnSubmit: '.layui-btn',
-        tiptype: 1,
-        postonce: true,
-        showAllError: false,
-        tiptype: function (msg, o, cssctl) {
-            if (!o.obj.is("form")) {
-                if (o.type != 2) {
-                    var objtip = o.obj.parents('.layui-form-item').find(".Validform_checktip");
-                    objtip.addClass('Validform_skate');
-                    cssctl(objtip, o.type);
-                    layer.msg(msg, {icon: 5, time: 2000, shift: 6});
-                }
-            }
-        }
-    });
-}
-    </script>
+     <!--- vue -->
+    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+    <script type="text/javascript" src="../../js/page/house/admin.js"></script>
+ 
 </body>
 
 </html>

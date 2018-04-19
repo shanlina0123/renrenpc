@@ -253,7 +253,3 @@ ul.leftNav li i{
 /*限制图片大小*/
 .layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
 /*二维码*/
-.cgewm{
-	background: url(../images/ewmbg.jpg) no-repeat;
-	background-size: 2500px 1000px;
-}
