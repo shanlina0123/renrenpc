@@ -29,40 +29,40 @@ $(function() {
 new Vue({
     el: '#houseList',
     data: {
+        pathUrl: window.auth_conf.pathUrl,
         params:{},
         houseList:[],
         tokenValue:JSON.parse(localStorage.getItem("userinfo")).token,
+        pages:'',
     },
     methods:{
         getHouseList:function ()
         {
             var url = auth_conf.house_list;
             var that = this;
-            alert( that.tokenValue);
-            axios.get(url,{headers: {"Authorization": that.tokenValue} })
+            axios.get( url,{headers: {"Authorization": that.tokenValue}})
             .then(function(response)
             {
-                var data = response.data;
-                console.log( data );
-               /* if ( data.status == 1 )
-                {
-                    var list = data.data;
-                    console.log( list );
-                    that.houseList = list.data;
-                    that.pages = list.last_page;
-                    layui.use(['laypage', 'layer', 'form'], function() {
-                        var laypage = layui.laypage;
-                        //总页数大于页码总数
-                        laypage.render({
-                            elem: 'pagerInner',
-                            count: 70,
-                            jump: function(obj) {
-                                //console.log(obj)
-                            }
+                  var data = response.data;
+                  if ( data.status == 1 )
+                    {
+                        var list = data.data;
+                        console.log( list );
+                        that.houseList = list.data;
+                        that.pages = list.last_page;
+                        layui.use(['laypage', 'layer', 'form'], function() {
+                            var laypage = layui.laypage;
+                            //总页数大于页码总数
+                            laypage.render({
+                                elem: 'pagerInner',
+                                count: list.total,
+                                jump: function(obj) {
+                                    //console.log(obj)
+                                }
+                            });
                         });
-                    });
 
-                }*/
+                    }
             });
         }
     },created: function () {

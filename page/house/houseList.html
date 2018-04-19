@@ -89,12 +89,12 @@
                                 </tr>
                             </thead>
                             <tbody id="houseList">
-                                <tr>
-                                    <td>1</td>
-                                    <td></td>
-                                    <td>罗马景福城</td>
-                                    <td>新房</td>
-                                    <td>95</td>
+                                <tr v-for="item in houseList">
+                                    <td>{{item.id}}</td>
+                                    <td><img :src="pathUrl + item.covermap"></td>
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.name}}</td>
+                                    <td>{{item.area}}</td>
                                     <td></td>
                                     <td>否</td>
                                     <td>
@@ -105,46 +105,6 @@
                                     <td>
                                         <div class="layui-btn-group">
                                             <a href="editHouseNew.html" class="layui-btn editHouseBtn">编辑</a>
-                                            <button type="button" class="layui-btn deleteHouseBtn">删除</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td></td>
-                                    <td>龙首印象城</td>
-                                    <td>二手房</td>
-                                    <td>95</td>
-                                    <td></td>
-                                    <td>否</td>
-                                    <td>
-                                        <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
-                                    </td>
-                                    <td>是</td>
-                                    <td>2018-02-03</td>
-                                    <td>
-                                        <div class="layui-btn-group">
-                                            <a href="editHouseOld.html" class="layui-btn editHouseBtn">编辑</a>
-                                            <button type="button" class="layui-btn deleteHouseBtn">删除</button>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td></td>
-                                    <td>罗马景福城</td>
-                                    <td>商铺写字楼</td>
-                                    <td>95</td>
-                                    <td></td>
-                                    <td>否</td>
-                                    <td>
-                                        <input type="checkbox" name="close" lay-skin="switch" lay-text="ON|OFF">
-                                    </td>
-                                    <td>是</td>
-                                    <td>2018-02-03</td>
-                                    <td>
-                                        <div class="layui-btn-group">
-                                            <a href="editHouseStore.html" class="layui-btn editHouseBtn">编辑</a>
                                             <button type="button" class="layui-btn deleteHouseBtn">删除</button>
                                         </div>
                                     </td>

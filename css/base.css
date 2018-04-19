@@ -224,12 +224,37 @@ a:focus {
 }
 
 .layui-btn,.layui-laypage-em{
-  background-color:#eb7221 !important;
+	background-color:#eb7221 !important;
+}
+.layui-laypage a:hover{
+				color:#eb7221 !important;
 }
 
-a.layui-laypage-prev:hover{
-  color:#eb7221 !important;
+/*后来加的改按钮颜色*/
+.layui-form-radio>i:hover, .layui-form-radioed>i {
+    color: #eb7221 !important;
 }
-a.layui-laypage-next:hover{
-  color:#eb7221 !important;
+.layui-form-onswitch {
+    border-color: #eb7221 !important;
+    background-color:#eb7221 !important ;
+}
+.layui-form-checked, .layui-form-checked:hover {
+      border-color: #eb7221 !important;
+    }
+  .layui-form-checked span, .layui-form-checked:hover span {
+     background-color:#eb7221 !important ;
+}
+.layui-form-checked i, .layui-form-checked:hover i {
+    color: #eb7221 !important ;
+}
+.layui-this{
+	background-color:#eb7221 !important ;
+}
+/*日历改颜色*/
+.layui-laydate-footer :hover,.layui-laydate-header :hover{
+	color:#eb7221 !important;
+}
+.layui-laydate .layui-this {
+    background-color:#eb7221 !important ;
+    color: #fff!important;
 }
