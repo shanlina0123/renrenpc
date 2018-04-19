@@ -6,8 +6,12 @@
     },
     //带token的请求
     window.auth_conf = {
-        path_url:'http://api.rrzhaofang.com/upload/',
+        path_url:'http://api.rrzhaofang.com/upload/',//图片地址
         house_list:host+'admin/house/index', //房源列表
+        datas_default_one: host + 'admin/datas-default-one/',//默认属性数据
+        datas_one: host + 'admin/datas-one/',//自定义数据单个
+
+
     }
 
     /**
