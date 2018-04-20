@@ -128,9 +128,9 @@
                                 <th>成交时间</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
+                        <tbody id="charts">
+                            <tr v-for="item in chart">
+                                <td>{{item.companyid}</td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -156,72 +156,12 @@
         <script type="text/javascript" src="../../layer-v3.1.1/layer/layer.js"></script>
         <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
         <script type="text/javascript" src="../../js/common.js"></script>
-        <script type="text/javascript">
-            $(function() {
-                // 顶部导航右侧操作
-                $("body").on("click", ".layui-nav .layui-nav-item a", function() {
-                    $(this).siblings().addClass("layui-show");
-                });
-                //左侧导航效果
-                $(".leftNav > li > a").click(function() {
-                    if (!$(this).hasClass("on")) {
-                        $(this).siblings(".leftSubNav").slideDown();
-                        $(this).parents("li").siblings().find(".leftSubNav").slideUp();
-                        $(this).addClass("on").parents("li").siblings().find("a").removeClass("on");
-                    } else {
-                        $(this).removeClass("on");
-                        $(this).siblings(".leftSubNav").slideUp();
-                    }
-                })
-            });
-        </script>
-        <script>
-            layui.use('laydate', function() {
-                var laydate = layui.laydate;
-                //自定义格式		
-                laydate.render({
-                    elem: '#test16',
-                    type: 'datetime',
-                    range: '-',
-                    format: 'yyyy/M/d'
-                });
-            });
-            layui.use('laydate', function() {
-                var laydate = layui.laydate;
-                //自定义格式		
-                laydate.render({
-                    elem: '#test17',
-                    type: 'datetime',
-                    range: '-',
-                    format: 'yyyy/M/d'
-                });
-            });
-            layui.use('laydate', function() {
-                var laydate = layui.laydate;
-                //自定义格式		
-                laydate.render({
-                    elem: '#test18',
-                    type: 'datetime',
-                    range: '-',
-                    format: 'yyyy/M/d'
-                });
-            });
-
-            // 分页,表单
-            layui.use(['laypage', 'layer', 'form'], function() {
-                var laypage = layui.laypage,
-                    layer = layui.layer;
-                //总页数大于页码总数
-                laypage.render({
-                    elem: 'pagerInner',
-                    count: 70, //数据总数
-                    jump: function(obj) {
-                        //console.log(obj)
-                    }
-                });
-            });
-        </script>
-
+        
+         <script type="text/javascript" src="../../config/configure.js"></script>
+        <!--- vue -->
+	    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+	    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+	    <script type="text/javascript" src="../../js/page/chart/chart.js"></script>
 </body>
 
 </html>

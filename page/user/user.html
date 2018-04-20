@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="../../css/normalize.css">
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/base.css">    
-    <link rel="stylesheet" href="../../layer-v3.1.1/layer/theme/default/layer.css">
+   
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
     <script src="../../js/modernizr-2.6.2.min.js"></script>
     <link rel="stylesheet" href="../../css/style1.css">
@@ -33,8 +33,7 @@
             <div class="layui-header header" id="top"> </div>	 
        		 <div class="main clearfix" >
             <!--左侧导航-->
-            <ul class="leftNav fl" id="left">               
-            </ul>
+            <ul class="leftNav fl" id="left"></ul>
             <!--右侧主要内容-->
             <div class="rightMain fl">
                 <!--客户状态等-->
@@ -44,31 +43,30 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">类型</label>
                             <div class="layui-input-inline">
-                                <select name="modules" lay-verify="required" lay-search="">
+                                <select name="modules" lay-verify="required" lay-search="" id="userstype">
                                 <option value="">全部</option>
-                                <option value="1">独立经纪人</option>
-                                <option value="2">房产经纪人</option>					     
+                                <!--<option value="1">独立经纪人</option>
+                                <option value="2">房产经纪人</option>					     -->
                             </select>
                             </div>
                         </div>
-                        <div class="layui-inline">
+                        <div class="layui-inline" id="select">
                             <label class="layui-form-label">公司</label>
                             <div class="layui-input-inline">
-                                <select name="modules" lay-verify="required" lay-search="">
+                                <select name="modules" lay-verify="required" lay-search="" id="company">
                                 <option value="">全部</option>
-                                <option value="1">万科</option>
+                              <!--<!--<option value="1">万科</option>
                                 <option value="2">万达</option>
-                                <option value="3">其他</option>
+                                <option value="3">其他</option>-->-->
                             </select>
                             </div>
                         </div>
-                        <button class="layui-btn sortBtn">查询</button>
+                        <button class="layui-btn sortBtn" onclick="search()">查询</button>
                     </div>
                     <!--表格及分页-->
                     <div class="table1 ckbox2">
-                        <table class="layui-table" lay-size="lg">
+                        <table class="layui-table" lay-size="lg"  id="users">
                          <h2>经纪人列表</h2>
-            
                             <thead>
                                 <tr>
                                     <th>ID</th>
@@ -81,18 +79,20 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>张三</td>
+                                <tr v-for="item in users">
+                                    <td>{{item.id}}</td>
+                                    <td>{{item.nickname}}</td>
+                                    <td>{{userstype[item.economictid]?userstype[item.economictid].name:''}}</td></td>  
+                                    <td></td>   
+                                                                                                                  
+                                    <td>{{item.mobile}}</td>
+                                  
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td>20174-02-18 13:43</td>
                                     <td>
                                     	<input type="checkbox" name="like[write]" title="锁定">
                                     </td>
                                 </tr>
-                                <tr>
+                                <!--<tr>
                                     <td>2</td>
                                     <td></td>
                                     <td></td>
@@ -100,7 +100,7 @@
                                     <td></td>
                                     <td></td>
                                     <td><input type="checkbox" name="like[write]" title="锁定"></td>
-                                </tr>
+                                </tr>-->
                             </tbody>
                         </table>
                     </div>
@@ -111,28 +111,17 @@
                 </div>
             </div>
         </div>
+        </div>
         <!-- //wrap -->
-        <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="../../layer-v3.1.1/layer/layer.js"></script>
+        <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
+  <script type="text/javascript" src="../../config/configure.js"></script>
         <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
         <script type="text/javascript" src="../../js/common.js"></script>
-        <script type="text/javascript">
-            $(function() {
-                //分页
-                layui.use(['laypage', 'layer', 'form'], function() {
-                    var laypage = layui.laypage,
-                        layer = layui.layer;
-                    //总页数大于页码总数
-                    laypage.render({
-                        elem: 'pagerInner',
-                        count: 70, //数据总数
-                        jump: function(obj) {
-                            //console.log(obj)
-                        }
-                    });
-                });
-            });
-        </script>
+         <!--- vue -->
+	    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+	    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+	    <script type="text/javascript" src="../../js/page/user/user.js"></script>
+     
 </body>
 
 </html>
