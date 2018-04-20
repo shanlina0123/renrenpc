@@ -72,12 +72,10 @@
                 <div class="chuiceTips">
                     <h2 class="notice">标签最多选择6个！</h2>
                     <div class="tipWrap" id="tags">
-                        <template v-for="tag in tags">
-                            <span  data-id="tag.id" @click="addSelect(this)">{{tag.name}}</span>
-                        </template>
+
                     </div>
                     <div class="submitBtnWrap">
-                        <a href="addHouseStep4.html" class="layui-btn">选好了</a>
+                        <button class="layui-btn" type="button" onclick="saveTages()">选好了</button>
                     </div>
                 </div>
             </div>
@@ -88,32 +86,11 @@
 <!-- //wrap -->
 <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="../../config/configure.js"></script>
+<script type="text/javascript" src="../../config/bese64.js"></script>
 <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 
-<!--- vue -->
-<script type="text/javascript" src="../../plugin/js/vue.js"></script>
-<script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+<!--- js -->
 <script type="text/javascript" src="../../js/page/house/tags.js"></script>
-<script type="text/javascript" src="../../config/bese64.js"></script>
-<script type="text/javascript">
-    $(function() {
-        $(".tipWrap span").click(function() {
-            $(this).addClass("on");
-            var hasOnNum = 0;
-            $(".tipWrap span").each(function() {
-                if ($(this).hasClass("on")) {
-                    hasOnNum++;
-                }
-            });
-            if (hasOnNum > 6) {
-                layer.msg('标签最多选择6个哦');
-                $(this).removeClass("on");
-            }
-        });
-    });
-    layui.use(['form'], function() {
-        var form = layui.form;
-    });
-</script>
+
 </html>

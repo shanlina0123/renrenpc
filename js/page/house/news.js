@@ -89,9 +89,7 @@ if( $(".layui-form").length )
                 success: function(result) {
                     if ( result.status == 1 )
                     {
-                        var base = new Base64();
-                        var id = base.encode(result.data);
-                        window.location.href = 'addHouseTag.html?id='+id;
+                        window.location.href = 'addHouseTag.html?id='+result.data;
                     } else
                     {
                         layui.use(['layer'], function() {

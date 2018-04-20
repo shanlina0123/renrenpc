@@ -13,6 +13,8 @@
         house_delete:host+'admin/house/delete/',//房源删除
         house_form_data:host+'admin/house/create',//添加房源数据
         house_add:host+'admin/house/store',//添加房源数据
+        house_add_tag:host+'admin/house/tag',//添加房源数据
+        add_imag:host+'admin/img/upload',//添加房源数据
         datas_default_one: host + 'admin/datas-default-one/',//默认属性数据
         datas_one: host + 'admin/datas-one/',//自定义数据单个
 
