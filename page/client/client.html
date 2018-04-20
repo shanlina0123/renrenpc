@@ -17,7 +17,6 @@
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/style1.css">
-    <link rel="stylesheet" href="../../layer-v3.1.1/layer/theme/default/layer.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
     <script src="../../js/modernizr-2.6.2.min.js"></script>
 </head>
@@ -26,63 +25,54 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="wrap">
+    <div class="wrap" id="vue_client_list" v-cloak>
         <div class="layui-layout layui-layout-admin">
    		 <!--顶部-->
          <div class="layui-header header" id="top"> </div>
- 
+
         <div class="main clearfix" >
             <!--左侧导航-->
-            <ul class="leftNav fl" id="left">               
+            <ul class="leftNav fl" id="left">
             </ul>
             <!--右侧主要内容-->
             <div class="rightMain fl">
                 <!--顶部筛选条件-->
                 <div class="sortWrap">
                     <form class="layui-form">
-                    	
+
                         <div class="topSort">
                             <div class="layui-inline">
-                                <label class="layui-form-label">客户状态</label>
-                                <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="">
-                                        <option value="">全部</option>
-                                        <option value="1">有效</option>
-                                        <option value="2">无效</option>
-                                        <option value="3">未跟进</option>
-                                        <option value="3">跟进中</option>
-                                        <option value="3">已上门</option>
-                                        <option value="3">已成交</option>
+                                <label class="layui-form-label" >客户状态</label>
+                                <div class="layui-input-inline" >
+                                    <select name="modules" lay-verify="required" lay-search=""   id="showSearchStatus">
+                                        <option >全部</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">楼盘</label>
                                 <div class="layui-input-inline">
-                                    <input type="text" class="layui-input">
+                                    <input type="text" class="layui-input" ref="housename">
                                 </div>
                             </div>
                             <div class="layui-inline">
-                                <label class="layui-form-label">客户等级</label>
-                                <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="">
-                                        <option value="">全部</option>
-                                        <option value="1">A类客户</option>
-                                        <option value="2">B类客户</option>
+                                <label class="layui-form-label" >客户等级</label>
+                                <div class="layui-input-inline " >
+                                    <select name="modules" lay-verify="required" lay-search="" id="showSearchLevel">
+                                        <option >全部</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="layui-inline">
-                                <label class="layui-form-label">业务员</label>
-                                <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="">
-                                        <option value="">全部</option>
-                                        <option value="1">张三</option>
-                                        <option value="2">张思</option>
+                                <label class="layui-form-label" >业务员</label>
+                                <div class="layui-input-inline " >
+                                    <select name="modules" lay-verify="required" lay-search="" id="showSearchUser">
+                                        <option >全部</option>
                                     </select>
                                 </div>
                             </div>
-                            <button class="layui-btn sortBtn">查询</button>
+
+                            <button class="layui-btn sortBtn" @click="searchClick()">查询</button>
                         </div>
                     </form>
                 </div>
@@ -109,47 +99,24 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tr>
-                            <td>1</td>
-                            <td>张三</td>
-                            <td>A类客户</td>
-                            <td>管理员</td>
-                            <td>龙首新天地</td>
-                            <td>15965984578</td>
-                            <td>2018-01-03</td>
-                            <td>已上门</td>
-                            <td>万达地产</td>
-                            <td>张三</td>
-                            <td>张思</td>
-                            <td>2</td>
-                            <td>2018-02-03</td>
-                            <td>2018-05-04</td>
+                        <tr v-for="(item,index) in client_list">
+                            <td>{{index+1}}</td>
+                            <td>{{item.dynamic_to_client.name}}</td>
+                            <td>{{item.levelid}}</td>
+                            <td>{{item.housename}}</td>
+                            <td>{{item.dynamic_to_client.mobile}}</td>
+                            <td>{{item.makedate}}</td>
+                            <td>{{item.comedate}}</td>
+                            <td>{{item.followstatusid}}</td>
+                            <td>{{item.companyid}}</td>
+                            <td>{{item.refereeuserid}}</td>
+                            <td>{{item.followadminid}}</td>
+                            <td>{{item.followcount}}</td>
+                            <td>{{item.followdate}}</td>
+                            <td>{{item.dealdate}}</td>
                             <td>
                                 <div class="layui-btn-group">
                                     <a href="clientFollow.html" type="button" class="layui-btn">跟进</a>
-                                    <button type="button" class="layui-btn editBtn">查看编辑</button>
-                                    <button type="button" class="layui-btn deleteBtn">删除</button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>张四</td>
-                            <td>B类客户</td>
-                            <td>管理员</td>
-                            <td>龙首新天地</td>
-                            <td>15965984578</td>
-                            <td>2018-01-03</td>
-                            <td>已上门</td>
-                            <td>万达地产</td>
-                            <td>张三</td>
-                            <td>张思</td>
-                            <td>2</td>
-                            <td>2018-02-03</td>
-                            <td>2018-05-04</td>
-                            <td>
-                                <div class="layui-btn-group">
-                                    <button type="button" class="layui-btn">跟进</button>
                                     <button type="button" class="layui-btn editBtn">查看编辑</button>
                                     <button type="button" class="layui-btn deleteBtn">删除</button>
                                 </div>
@@ -349,11 +316,16 @@
             </div>
         </div>
     </div>
+    </div>
     <!-- //wrap -->
     <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../../layer-v3.1.1/layer/layer.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
+    <!--- vue -->
+    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+    <script type="text/javascript" src="../../config/configure.js"></script>
+    <script type="text/javascript" src="../../js/page/client/list.js"></script>
     <script type="text/javascript">
         $(function() {
             //添加编辑用户
