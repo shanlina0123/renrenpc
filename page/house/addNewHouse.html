@@ -124,23 +124,29 @@
                                             <div class="layui-form-item">
                                                 <label class="layui-form-label">地址</label>
                                                 <div class="layui-input-inline forAddrSelect">
-                                                    <select name="quiz1">
-                                                        <option value="陕西" selected="">陕西省</option>
+                                                    <select name="provinceid">
+                                                        <option value="1" selected="">陕西省</option>
                                                     </select>
                                                 </div>
                                                 <div class="layui-input-inline forAddrSelect">
-                                                    <select name="quiz2">
-                                                        <option value="西安"  selected="">西安市</option>
+                                                    <select name="cityid">
+                                                        <option value="1"  selected="">西安市</option>
                                                     </select>
                                                 </div>
                                             </div>
                                         </td>
                                         <td>
                                             <div class="layui-inline ">
-                                                <label class="layui-form-label ">详细地址</label>
-                                                <div class="layui-input-inline ">
-                                                    <select name="modules" lay-verify="required " lay-search="" name="addrName" aria-placeholder="请输入">
-                                                    </select>
+                                                <label class="layui-form-label">详细地址</label>
+                                                <div class="layui-input-inline">
+                                                    <div class="layui-unselect layui-form-select layui-form-selected">
+                                                        <div class="layui-select-title">
+                                                            <input type="text"   id="searchAddress" class="layui-input layui-unselect">
+                                                        </div>
+                                                        <dl id="addressList" style="display: none">
+
+                                                        </dl>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </td>
@@ -219,7 +225,7 @@
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">电梯</label>
                                                 <div class="layui-input-block">
-                                                    <select name="interest" lay-filter="aihao">
+                                                    <select name="iselevator" lay-filter="aihao">
                                                         <option value="1">有</option>
                                                         <option value="0">无</option>
                                                     </select>
@@ -331,8 +337,13 @@
                                     </tr>
                                 </table>
                                 <input type="hidden" name="typeid" value="1">
+                                <input type="hidden" name="addr" value="">
+                                <input type="hidden" name="street" value="">
+                                <input type="hidden" name="fulladdr" value="">
+                                <input type="hidden" name="lng" value="">
+                                <input type="hidden" name="lat" value="">
                                 <div class="nextBtnWrap">
-                                    <button class="layui-btn nextBtn" id="submit">下一步</button>
+                                    <button class="layui-btn nextBtn" type="button" id="submit">下一步</button>
                                 </div>
                             </form>
                         </div>
@@ -355,24 +366,4 @@
 <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
 <script type="text/javascript" src="../../js/page/house/news.js"></script>
 
-
-<script type="text/javascript">
-   /* layui.use(['form', 'laydate'], function() {
-        var form = layui.form,
-            laydate = layui.laydate;
-        //发布日期
-        laydate.render({
-            elem: '#pubDate'
-        });
-        //年代选择
-        laydate.render({
-            elem: '#oldDate'
-        });
-        //开盘日期
-        laydate.render({
-            elem: '#saleDate'
-        });
-    });*/
-    //          验证
-</script>
 </html>

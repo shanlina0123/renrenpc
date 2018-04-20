@@ -1,4 +1,4 @@
-(function () {
+(function() {
     var host = "http://api.rrzhaofang.com/";
     //未带toke请求
     window.conf = {
@@ -13,32 +13,26 @@
         house_form_data:host+'admin/house/create',//添加房源数据
         house_add:host+'admin/house/store',//添加房源数据
         datas_default_one: host + 'admin/datas-default-one/',//默认属性数据
-        datas_one: host + 'admin/datas-one/',//自定义数据单个
-        
+        datas_one: host + 'admin/datas-one/',//自定义数据单个  
         users_list:host+'admin/user/broker', //经纪人列表
         chart_list:host+'admin/chart', //数据列表
         company_list:host+"admin/company/index"//公司列表
-
-
     }
 
     /**
      * 检查token 过期时间
      */
     var userinfo = localStorage.getItem("userinfo");
-    if( userinfo == 'undefined' )
-    {
-        window.location.href='/login.html';
+    if (userinfo == 'undefined') {
+        window.location.href = '/login.html';
 
-    }else
-    {
+    } else {
         var timestamp = Date.parse(new Date());
         timestamp = timestamp / 1000;
         userinfo = JSON.parse(userinfo);
-        if( timestamp > userinfo.expiration )
-        {
+        if (timestamp > userinfo.expiration) {
             localStorage.removeItem("userinfo");
-            window.location.href='/login.html';
+            window.location.href = '/login.html';
         }
     }
     /**
@@ -46,4 +40,4 @@
      */
     $("#top").load('/page/public/top.html');
     $("#left").load('/page/public/left.html');
-})();
+}());

@@ -1,11 +1,5 @@
 ﻿<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
-
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -22,18 +16,13 @@
 </head>
 
 <body>
-    <!--[if lt IE 7]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
     <div class="wrap">
         <div class="layui-layout layui-layout-admin">
-            <!--顶部-->
-               <!--顶部-->
-            <div class="layui-header header" id="top"> </div>	 
-       		 <div class="main clearfix" >
-            <!--左侧导航-->
-            <ul class="leftNav fl" id="left">               
-            </ul>
+            <div class="layui-header header" id="top"></div>
+       		 <div class="main clearfix">
+                <!--左侧导航-->
+                <ul class="leftNav fl" id="left">
+                </ul>
             <!--客户数据表格-->
             <div class="rightMain fl">
                 <!-- 添加房源流程-->
@@ -82,58 +71,49 @@
                 <!--选择房源标签-->
                 <div class="chuiceTips">
                     <h2 class="notice">标签最多选择6个！</h2>
-                    <div class="tipWrap">
-                        <span class="on">配套齐全</span>
-                        <span class="on">临地铁</span>
-                        <span>车位充足</span>
-                        <span>小户型</span>
-                        <span>学校周边</span>
-                        <span>绿化率高</span>
-                        <span>品牌公寓</span>
-                        <span>五证齐全</span>
-                        <span>南北通透</span>
-                        <span>带幼儿园</span>
-                        <span>购物中心</span>
-                        <span>轨交房</span>
-                        <span>品牌开发商</span>
-                        <span>满二唯一</span>
-                        <span>满两年</span>
-                        <span>满五年</span>
-                        <span>满五唯一</span>
-                        <span>精装修</span>
-                        <span>随时看房</span>
-                        <span>可短租</span>
-                        <span>首次出租</span>
+                    <div class="tipWrap" id="tags">
+                        <template v-for="tag in tags">
+                            <span  data-id="tag.id" @click="addSelect(this)">{{tag.name}}</span>
+                        </template>
                     </div>
                     <div class="submitBtnWrap">
                         <a href="addHouseStep4.html" class="layui-btn">选好了</a>
                     </div>
                 </div>
             </div>
-            <!-- //wrap -->
-            <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
-            <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
-            <script type="text/javascript" src="../../js/common.js"></script>
-            <script type="text/javascript">
-                $(function() {
-                    $(".tipWrap span").click(function() {
-                        $(this).addClass("on");
-                        var hasOnNum = 0;
-                        $(".tipWrap span").each(function() {
-                            if ($(this).hasClass("on")) {
-                                hasOnNum++;
-                            }
-                        });
-                        if (hasOnNum > 6) {
-                            layer.msg('标签最多选择6个哦');
-                            $(this).removeClass("on");
-                        }
-                    });
-                });
-                layui.use(['form'], function() {
-                    var form = layui.form;
-                });
-            </script>
+            </div>
+        </div>
+    </div>
 </body>
+<!-- //wrap -->
+<script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../../config/configure.js"></script>
+<script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
 
+<!--- vue -->
+<script type="text/javascript" src="../../plugin/js/vue.js"></script>
+<script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+<script type="text/javascript" src="../../js/page/house/tags.js"></script>
+<script type="text/javascript" src="../../config/bese64.js"></script>
+<script type="text/javascript">
+    $(function() {
+        $(".tipWrap span").click(function() {
+            $(this).addClass("on");
+            var hasOnNum = 0;
+            $(".tipWrap span").each(function() {
+                if ($(this).hasClass("on")) {
+                    hasOnNum++;
+                }
+            });
+            if (hasOnNum > 6) {
+                layer.msg('标签最多选择6个哦');
+                $(this).removeClass("on");
+            }
+        });
+    });
+    layui.use(['form'], function() {
+        var form = layui.form;
+    });
+</script>
 </html>
