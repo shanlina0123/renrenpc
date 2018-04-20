@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>用户管理</title>
-     <link rel="icon" href="../../images/icon.ico">
+    <link rel="icon" href="../../images/icon.ico">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../css/normalize.css">
@@ -26,138 +26,126 @@
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     <div class="wrap">
-        <div class="layui-layout layui-layout-admin" id="top"><!--顶部--></div>
+        <!--顶部-->
+        <div class="layui-layout layui-layout-admin" id="top"></div>
         <div class="main clearfix">
-            <ul class="leftNav fl" id="left"><!--左侧导航--></ul>
+            <!--左侧导航-->
+            <ul class="leftNav fl" id="left"></ul>
             <!--右侧主要内容-->
-            <div class="rightMain fl">
+            <div class="rightMain fl" id="adminTable">
                 <div class="addClient"><button class="layui-btn"><i class="layui-icon"></i></button></div>
                 <form class="layui-form lockForm ckbox2">
-                    <table class="layui-table" id="admin">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>姓名</th>
-                                <th>账号</th>
-                                <th>角色</th>
-                                <th>手机号</th>
-                                <th>状态</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody id="admin">
-	                        <tr v-for="item in admin">
-	                            <td>{{item.id}}</td>
-	                            <td>{{item.name}}</td>
-	                            <td>zhangsan</td>
-	                            <td>管理员</td>
-	                            <td>15965984578</td>
-	                            <td><input type="checkbox" name="like[write]" title="锁定"></td>
-	                            <td>
-	                                <div class="clientBtns">
-	                                    <button type="button" class="layui-btn layui-btn-sm editUser"><i class="layui-icon"></i></button>
-	                                    <button type="button" class="layui-btn layui-btn-sm deleteBtn"><i class="layui-icon"></i></button>
-	                                </div>
-	                            </td>
-	                        </tr>
-	                      
-                        </tbody>
+                    <table class="layui-table">
+                        <tr>
+                            <th>ID</th>
+                            <th>姓名</th>
+                            <th>账号</th>
+                            <th>角色</th>
+                            <th>手机号</th>
+                            <th>状态</th>
+                            <th>操作</th>
+                        </tr>
+                        <tr v-for="item in adminList">
+                            <td>{{item.roleid}}</td>
+                            <td>{{item.nickname}}</td>
+                            <td>{{item.name}}</td>
+                            <td>{{item.roleid}}</td>
+                            <td>{{item.mobile}}</td>
+                            <td>
+                                <input type="checkbox" title="锁定" checked v-if="item.status == 0">
+                                <input type="checkbox" title="锁定" v-else>
+                            </td>
+                            <td>
+                                <div class="clientBtns">
+                                    <button type="button" class="layui-btn layui-btn-sm editUser" @click="getEditAdmin(item.uuid)"><i class="layui-icon"></i></button>
+                                    <!--<button type="button" class="layui-btn layui-btn-sm deleteBtn"">删除<i class="layui-icon"></i></button>-->
+                                </div>
+                            </td>
+                        </tr>
                     </table>
                 </form>
-                <!--分页-->
-                <div class="pageWrap">
-                    <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-2">
-                        <a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0">上一页</a>
-                        <span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>
-                        <a href="javascript:;" data-page="2">2</a><a href="javascript:;" data-page="3">3</a>
-                        <a href="javascript:;" data-page="4">4</a><a href="javascript:;" data-page="5">5</a>
-                        <span class="layui-laypage-spr">…</span><a href="javascript:;" class="layui-laypage-last" title="尾页" data-page="7">7</a>
-                        <a href="javascript:;" class="layui-laypage-next" data-page="2">下一页</a>
+                <!--编辑和新增用户弹窗-->
+                <div class="userPopWrap" style="display: none">
+                    <div class="userPopInner">
+                        <form class="layui-form layui-form2">
+                            <table class="userPopTable">
+                                <tr>
+                                    <td>姓名</td>
+                                    <td>
+                                        <input type="text" v-model="adminEdit.nickname" class="layui-input" name="userName" datatype="s1-5" class="layui-input" nullmsg="请填写姓名" sucmsg=" " errormsg="* 姓名不符合规定！">
+                                        <span class="Validform_checktip"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>角色</td>
+                                    <td>
+                                        <div class="layui-inline">
+                                            <div class="layui-input-inline">
+                                                <select name="modules" lay-verify="required" lay-search="">
+                                            <option value="1">业务员</option>
+                                            <option value="2">操作员</option>
+                                            <option value="3">管理员</option>
+                                        </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>手机号</td>
+                                    <td>
+                                        <input type="text" v-model="adminEdit.mobile" class="layui-input" name="userPhone" datatype="m" class="layui-input" nullmsg="请填写手机号" sucmsg=" " errormsg="* 手机号码不符合规定！">
+                                        <span class="Validform_checktip"></span>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td>账号</td>
+                                    <td>
+                                        <input type="text" v-model="adminEdit.name" name="username" lay-verify="required" placeholder="请输入账号" datatype="*6-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在6~15位之间！">
+                                        <span class="Validform_checktip"></span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>密码</td>
+                                    <td>
+                                        <input type="password" name="password" class="layui-input" readonly>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>状态</td>
+                                    <td>
+                                        <div class="layui-inline">
+                                            <div class="layui-input-inline">
+                                                <select name="modules" lay-verify="required" lay-search="">
+                                                    <option>启用</option>
+                                                    <option>锁定</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div class="submitBtnWrap">
+                                <button class="layui-btn">立即添加</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
         <!--//main-->
-        <div class="userPopWrap" style="display: none">
-            <div class="userPopInner">
-                <form class="layui-form layui-form2">
-                	<h2>用户列表</h2>
-                    <table class="userPopTable">
-                        <tr>
-                            <td>姓名</td>
-                            <td>
-                            	<input type="text" class="layui-input" name="userName" datatype="s1-5" class="layui-input" nullmsg="请填写姓名"  sucmsg=" "  errormsg="* 姓名不符合规定！">
-                            	<span class="Validform_checktip"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>角色</td>
-                            <td>
-                                <div class="layui-inline">
-                                    <div class="layui-input-inline">
-                                        <select name="modules" lay-verify="required" lay-search="">
-                                            <option value="">业务员</option>
-                                            <option value="1">操作员</option>
-                                            <option value="2">管理员</option>
-                                            </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>手机号</td>
-                            <td>
-                            	<input type="text" class="layui-input" name="userPhone" datatype="m" class="layui-input" nullmsg="请填写手机号" sucmsg=" "  errormsg="* 手机号码不符合规定！">
-                            	<span class="Validform_checktip"></span>
-                            </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>账号</td>
-                            <td>
-                            	 <input type="text" name="username" lay-verify="required" placeholder="请输入账号" datatype="*6-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在6~15位之间！">
-                            	<span class="Validform_checktip"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>密码</td>
-                            <td>
-                            	<input  type="password" name="password" lay-verify="required" placeholder="请输入密码" datatype="*6-10" class="layui-input" sucmsg=" "  errormsg="* 密码范围在6~10位之间！">
-                            	<span class="Validform_checktip"></span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>状态</td>
-                            <td>
-                                <div class="layui-inline">
-                                    <div class="layui-input-inline">
-                                        <select name="modules" lay-verify="required" lay-search="">
-                                            <option value="">启用</option>
-                                            <option value="1">锁定</option>
-                                            </select>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                    <div class="submitBtnWrap">
-                        <button class="layui-btn">立即添加</button>
-                    </div>
-                </form>
-            </div>
-        </div>
     </div>
     <!-- //wrap -->
     <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../../config/configure.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
-    <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
-     <!--- vue -->
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <!--- vue -->
     <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+    <script type="text/javascript" src="../../config/configure.js"></script>
     <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
-    <script type="text/javascript" src="../../js/page/house/admin.js"></script>
- 
+    <script type="text/javascript" src="../../js/page/admin/admin.js"></script>
+
 </body>
 
 </html>
