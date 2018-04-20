@@ -16,13 +16,13 @@
             datas_one: host + 'admin/datas-one/', //自定义数据单个
             admin_list: host + 'admin/admin', //用户列表
             admin_edit: host + 'admin/admin/' //用户编辑
+            login: host + 'admin/login', //首页推荐
+        },
 
-        }
-
-    /**
-     * 检查token 过期时间
-     */
-    var userinfo = localStorage.getItem("userinfo");
+        /**
+         * 检查token 过期时间
+         */
+        var userinfo = localStorage.getItem("userinfo");
     if (userinfo == 'undefined') {
         window.location.href = '/login.html';
 

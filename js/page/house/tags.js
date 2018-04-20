@@ -1,17 +1,16 @@
 
 var vm = new Vue({
-    el: '#house',
+    el: '#tags',
     data: {
-        path_url:auth_conf.path_url,//图片地址
+        select:false,
         tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token
-        define:'',
-        system:'',
+        tags:[]
     },
     methods:{
         //第一次加载数据
         getFromData:function ()
         {
-            var url = auth_conf.house_form_data;
+            var url = auth_conf.datas_one+5;
             var that = this;
             axios.get( url,{headers: {"Authorization": that.tokenValue}})
             .then(function(response)
@@ -19,26 +18,8 @@ var vm = new Vue({
                   var data = response.data;
                   if ( data.status == 1 )
                     {
-                       that.define = data.data.define;
-                       that.system = data.data.system;
-                        layui.use(['form','laydate'], function() {
-                            var form = layui.form;
-                            var laydate = layui.laydate;
-                            //发布日期
-                            laydate.render({
-                                elem: '#pubDate',
-                                type: 'datetime'
-                            });
-                            //年代选择
-                            laydate.render({
-                                elem: '#oldDate'
-                            });
-                            //开盘日期
-                            laydate.render({
-                                elem: '#saleDate'
-                            });
-                            form.render('select');
-                        });
+                        that.tags = data.data;
+                        console.log(data);
                     }else
                     {
                         layui.use(['layer'], function() {
@@ -47,6 +28,8 @@ var vm = new Vue({
                         });
                     }
             });
+        },addSelect:function ( index ) {
+alert($(index).data('id') );
         }
     },created: function () {
         var that = this;
