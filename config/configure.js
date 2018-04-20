@@ -7,6 +7,7 @@
     //带token的请求
     window.auth_conf = {
         path_url:'http://api.rrzhaofang.com/upload/',//图片地址
+        map_address:host+'admin/get/map/address',//图片地址
         house_list:host+'admin/house/index', //房源列表
         house_recommend:host+'admin/house/recommend',//房源推荐
         house_delete:host+'admin/house/delete/',//房源删除
