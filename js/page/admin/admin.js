@@ -1,43 +1,25 @@
 $(function() {
-    //这个页面的分页用的是浏览器解析后的布局（其他页面使用的是解析前的，后期如果需要会统一修改）
-    //          layui.use(['laypage', 'layer', 'form'], function() {
-    //              var laypage = layui.laypage,
-    //                  layForm = layui.layform,
-    //                  layer = layui.layer;
-    //              //总页数大于页码总数
-    //              laypage.render({
-    //                  elem: 'pagerInner',
-    //                  count: 70, //数据总数
-    //                  jump: function(obj) {
-    //                      //console.log(obj)
-    //                  }
-    //              });
-    //          });
-    //注册layer
-    // layui.use('form', function() {
-    //     var form = layui.form;
-    // })
-
-});
-//验证
-if ($(".layui-form2").length) {
-    $(".layui-form2").Validform({
-        btnSubmit: '.layui-btn',
-        tiptype: 1,
-        postonce: true,
-        showAllError: false,
-        tiptype: function(msg, o, cssctl) {
-            if (!o.obj.is("form")) {
-                if (o.type != 2) {
-                    var objtip = o.obj.parents('.layui-form-item').find(".Validform_checktip");
-                    objtip.addClass('Validform_skate');
-                    cssctl(objtip, o.type);
-                    layer.msg(msg, { icon: 5, time: 2000, shift: 6 });
+    //验证
+    if ($(".layui-form2").length) {
+        $(".layui-form2").Validform({
+            btnSubmit: '.layui-btn',
+            tiptype: 1,
+            postonce: true,
+            showAllError: false,
+            tiptype: function(msg, o, cssctl) {
+                if (!o.obj.is("form")) {
+                    if (o.type != 2) {
+                        var objtip = o.obj.parents('.layui-form-item').find(".Validform_checktip");
+                        objtip.addClass('Validform_skate');
+                        cssctl(objtip, o.type);
+                        layer.msg(msg, { icon: 5, time: 2000, shift: 6 });
+                    }
                 }
             }
-        }
-    });
-}
+        })
+    }
+})
+
 var vm = new Vue({
     el: '#adminTable',
     data: {
@@ -55,7 +37,7 @@ var vm = new Vue({
                 var data = response.data;
                 if (data.status == 1) {
                     that.adminList = data.data;
-                    console.log(data);
+                    //console.log(data);
                     layui.use(['form'], function() {
                         var form = layui.form;
                         form.render('checkbox');
@@ -88,7 +70,6 @@ var vm = new Vue({
                 }
             })
         },
-        //删除用户
 
     },
     created: function() {

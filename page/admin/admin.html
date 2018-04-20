@@ -48,7 +48,7 @@
                         <tr v-for="item in adminList">
                             <td>{{item.roleid}}</td>
                             <td>{{item.nickname}}</td>
-                            <td>{{item.uuid}}</td>
+                            <td>{{item.name}}</td>
                             <td>{{item.roleid}}</td>
                             <td>{{item.mobile}}</td>
                             <td>
@@ -117,9 +117,9 @@
                                         <div class="layui-inline">
                                             <div class="layui-input-inline">
                                                 <select name="modules" lay-verify="required" lay-search="">
-                                            <option value="1">启用</option>
-                                            <option value="2">锁定</option>
-                                        </select>
+                                                    <option>启用</option>
+                                                    <option>锁定</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </td>
