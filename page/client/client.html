@@ -18,6 +18,16 @@
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/style1.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <style>
+        .layui-table td, .layui-table th {
+            position: relative;
+            padding: 9px 5px;
+            min-height: 20px;
+            line-height: 20px;
+            font-size: 14px;
+            text-align: center;
+        }
+    </style>
     <script src="../../js/modernizr-2.6.2.min.js"></script>
 </head>
 
@@ -44,8 +54,8 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label" >客户状态</label>
                                 <div class="layui-input-inline" >
-                                    <select name="modules" lay-verify="required" lay-search=""   id="showSearchStatus">
-                                        <option >全部</option>
+                                    <select name="showSearchStatus" lay-verify="required" lay-search=""   id="showSearchStatus">
+                                        <option value="" >全部</option>
                                     </select>
                                 </div>
                             </div>
@@ -58,21 +68,20 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label" >客户等级</label>
                                 <div class="layui-input-inline " >
-                                    <select name="modules" lay-verify="required" lay-search="" id="showSearchLevel">
-                                        <option >全部</option>
+                                    <select name="showSearchLevel" lay-verify="required" lay-search="" id="showSearchLevel">
+                                        <option  value="">全部</option>
                                     </select>
                                 </div>
                             </div>
-                            <div class="layui-inline">
+                            <div class="layui-inline" v-if="tokenUserInfo.isadmin==1">
                                 <label class="layui-form-label" >业务员</label>
                                 <div class="layui-input-inline " >
-                                    <select name="modules" lay-verify="required" lay-search="" id="showSearchUser">
-                                        <option >全部</option>
+                                    <select name="showSearchAdmin" lay-verify="required" lay-search="" id="showSearchAdmin">
+                                        <option  value="">全部</option>
                                     </select>
                                 </div>
                             </div>
-
-                            <button class="layui-btn sortBtn" @click="searchClick()">查询</button>
+                            <button class="layui-btn sortBtn" type="button" @click="searchClick()">查询</button>
                         </div>
                     </form>
                 </div>
@@ -108,9 +117,9 @@
                             <td>{{item.makedate}}</td>
                             <td>{{item.comedate}}</td>
                             <td v-if="default_followstatus_datas[item.followstatusid]">{{default_followstatus_datas[item.followstatusid]["name"]}}</td><td v-else></td>
-                            <td v-if="company_datas[item.companyid]">{{company_datas[item.companyid]["name"]}}</td><td v-else></td>
-                            <td>{{item.refereeuserid}}</td>
-                            <td v-if="users_show_datas[item.followadminid]">{{users_show_datas[item.followadminid]["nickname"]}}</td><td v-else></td>
+                            <td v-if="item.dynamic_to_company">{{item.dynamic_to_company.name}}</td><td v-else></td>
+                            <td v-if="item.dynamic_to_user">{{item.dynamic_to_user.nickname}}</td><td v-else></td>
+                            <td v-if="admin_show_datas[item.followadminid]">{{admin_show_datas[item.ownadminid]["nickname"]}}</td><td v-else></td>
                             <td>{{item.followcount}}</td>
                             <td>{{item.followdate}}</td>
                             <td>{{item.dealdate}}</td>
@@ -126,14 +135,7 @@
                 </form>
                 <!--分页-->
                 <div class="pageWrap">
-                    <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-2">
-                        <a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0">上一页</a>
-                        <span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>
-                        <a href="javascript:;" data-page="2">2</a><a href="javascript:;" data-page="3">3</a>
-                        <a href="javascript:;" data-page="4">4</a><a href="javascript:;" data-page="5">5</a>
-                        <span class="layui-laypage-spr">…</span><a href="javascript:;" class="layui-laypage-last" title="尾页" data-page="7">7</a>
-                        <a href="javascript:;" class="layui-laypage-next" data-page="2">下一页</a>
-                    </div>
+                    <div id="pagerInner"></div>
                 </div>
             </div>
         </div>
