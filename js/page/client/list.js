@@ -124,7 +124,7 @@ var vm = new Vue({
         },
         //获取业务员- 下拉框值
         getAdmins: function () {
-            var url = auth_conf.admin_list;
+            var url = auth_conf.admin_datas;
             var that = this;
             axios.get(url, {headers: {"Authorization": that.tokenValue}})
                 .then(function (response) {
