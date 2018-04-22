@@ -1,5 +1,5 @@
 (function () {
-    var host = "http://192.168.15.13:8081/";
+    var host = "http://api.rrzhaofang.com/";
     //未带toke请求
     window.conf = {
         login: host + 'admin/login',//首页推荐
@@ -16,6 +16,7 @@
         house_add:host+'admin/house/store',//添加房源数据
         house_add_tag:host+'admin/house/tag',//添加房源数据
         add_imag:host+'admin/img/upload',//添加房源数据
+        house_img_save:host+'admin/house/img',//添加图片
         datas_default_one: host + 'admin/datas-default-one/',//默认属性数据
         datas_one: host + 'admin/datas-one/',//自定义数据单个
 
@@ -27,8 +28,9 @@
     }
 
 })();
-new Vue({
-    el: 'body',
+
+/*new Vue({
+    el: '.wrap',
     data: {
         tokenData: localStorage.getItem("userinfo")
     },
@@ -68,9 +70,9 @@ new Vue({
                         that.tokenData=null;
                         window.location="/login.html";
                     }
-                    /**
+                    /!**
                      * 引入top和right
-                     */
+                     *!/
                     $("#top").load('/page/public/top.html');
                     $("#left").load('/page/public/left.html');
 
@@ -85,4 +87,4 @@ new Vue({
         var that = this;
         that.filterToken();//过滤token
     }
-});
+});*/
