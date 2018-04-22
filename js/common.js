@@ -72,7 +72,7 @@ function arrayIndexToValue(data,key)
     {
         var list=[];
        $.each(data,function(i,n){
-           list[n[key]]=data[n[key]];
+           list[n[key]]=n;
        })
     }
    return list;
