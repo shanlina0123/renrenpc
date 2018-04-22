@@ -9,6 +9,8 @@ var vm = new Vue({
             users_datas:[],//搜索-业务员列表
             housename:null,//搜索-楼盘
             default_followstatus_datas: [],//状态列表
+            company_show_datas:[],//列表取值 - 公司信息
+            users_show_datas:[],//业务员
             tokenUserInfo: JSON.parse(localStorage.getItem("userinfo")),
             tokenValue: JSON.parse(localStorage.getItem("userinfo")).token,
             pages: 0,
@@ -83,7 +85,23 @@ var vm = new Vue({
                         if (data.status == 1) {
                             //业务员
                             that.users_datas = data.data;
+                            that.users_show_datas=arrayIndexToValue(data.data,"id");
                             selectAppendDd($("#showSearchUser"),that.users_datas,"id","nickname");
+                        }
+                    })
+                    .catch(function(error) {
+                        //console.log(error);
+                    });
+            },
+            //获取公司
+            getCompany:function(){
+                var url = auth_conf.company_list;
+                var that = this;
+                axios.get(url, { headers: { "Authorization": that.tokenValue } })
+                    .then(function(response) {
+                        var data = response.data;
+                        if (data.status == 1) {
+                            that.company_datas =arrayIndexToValue(data.data.data,"id");
                         }
                     })
                     .catch(function(error) {
@@ -97,6 +115,7 @@ var vm = new Vue({
              that.getDataOne();
              that.getDefaultDataOne();
             that.getUsers();
+            that.getCompany();
         }
 
 

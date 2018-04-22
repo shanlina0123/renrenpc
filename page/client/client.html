@@ -102,15 +102,15 @@
                         <tr v-for="(item,index) in client_list">
                             <td>{{index+1}}</td>
                             <td>{{item.dynamic_to_client.name}}</td>
-                            <td>{{item.levelid}}</td>
+                            <td v-if="level_datas[item.levelid]">{{level_datas[item.levelid]["name"]}}</td><td v-else></td>
                             <td>{{item.housename}}</td>
                             <td>{{item.dynamic_to_client.mobile}}</td>
                             <td>{{item.makedate}}</td>
                             <td>{{item.comedate}}</td>
-                            <td>{{item.followstatusid}}</td>
-                            <td>{{item.companyid}}</td>
+                            <td v-if="default_followstatus_datas[item.followstatusid]">{{default_followstatus_datas[item.followstatusid]["name"]}}</td><td v-else></td>
+                            <td v-if="company_datas[item.companyid]">{{company_datas[item.companyid]["name"]}}</td><td v-else></td>
                             <td>{{item.refereeuserid}}</td>
-                            <td>{{item.followadminid}}</td>
+                            <td v-if="users_show_datas[item.followadminid]">{{users_show_datas[item.followadminid]["nickname"]}}</td><td v-else></td>
                             <td>{{item.followcount}}</td>
                             <td>{{item.followdate}}</td>
                             <td>{{item.dealdate}}</td>

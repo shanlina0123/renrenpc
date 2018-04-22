@@ -56,5 +56,24 @@ function selectAppendDd(tag,data,key,value)
         var form = layui.form;
         form.render('select');
     });
+}
 
+
+/****
+ * 数组索引转为数据值作为索引
+ * @param tag
+ * @param data
+ * @param key
+ * @param value
+ */
+function arrayIndexToValue(data,key)
+{
+    if(data)
+    {
+        var list=[];
+       $.each(data,function(i,n){
+           list[n[key]]=data[n[key]];
+       })
+    }
+   return list;
 }
