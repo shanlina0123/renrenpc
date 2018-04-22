@@ -33,7 +33,7 @@
             <ul class="leftNav fl" id="left"></ul>
             <!--右侧主要内容-->
             <div class="rightMain fl" id="adminTable">
-                <div class="addClient"><button class="layui-btn"><i class="layui-icon"></i></button></div>
+                <div class="addClient"><button class="layui-btn" @click="addAdmin()"><i class="layui-icon"></i></button></div>
                 <form class="layui-form lockForm ckbox2">
                     <table class="layui-table">
                         <tr>
@@ -46,14 +46,14 @@
                             <th>操作</th>
                         </tr>
                         <tr v-for="item in adminList">
-                            <td>{{item.roleid}}</td>
+                            <td>{{item.id}}</td>
                             <td>{{item.nickname}}</td>
                             <td>{{item.name}}</td>
-                            <td>{{item.roleid}}</td>
+                            <td>{{item.dynamic_to_role.name}}</td>
                             <td>{{item.mobile}}</td>
                             <td>
-                                <input type="checkbox" title="锁定" checked v-if="item.status == 0">
-                                <input type="checkbox" title="锁定" v-else>
+                                <input type="checkbox" title="锁定" @click="lockAdmin(item.uuid)" checked v-if="item.status == 0">
+                                <input type="checkbox" title="锁定" @click="lockAdmin(item.uuid)" v-else>
                             </td>
                             <td>
                                 <div class="clientBtns">
@@ -81,11 +81,9 @@
                                     <td>
                                         <div class="layui-inline">
                                             <div class="layui-input-inline">
-                                                <select name="modules" lay-verify="required" lay-search="">
-                                            <option value="1">业务员</option>
-                                            <option value="2">操作员</option>
-                                            <option value="3">管理员</option>
-                                        </select>
+                                                <select name="modules" lay-verify="required" lay-search="" id="popRoleList">
+                                                    <option value="" >请选择</option>
+                                                </select>
                                             </div>
                                         </div>
                                     </td>
@@ -105,20 +103,20 @@
                                         <span class="Validform_checktip"></span>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!--<tr>
                                     <td>密码</td>
                                     <td>
-                                        <input type="password" name="password" class="layui-input" readonly>
+                                        <input type="password" name="password" class="layui-input" value="xhongxiansheng111111" readonly>
                                     </td>
-                                </tr>
+                                </tr>-->
                                 <tr>
                                     <td>状态</td>
                                     <td>
                                         <div class="layui-inline">
                                             <div class="layui-input-inline">
-                                                <select name="modules" lay-verify="required" lay-search="">
-                                                    <option>启用</option>
-                                                    <option>锁定</option>
+                                                <select name="modules" lay-verify="required">
+                                                    <option :selected="adminEdit.status == 0?'selected':''">锁定</option> 
+                                                    <option :selected="adminEdit.status == 1?'selected':''">启用</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -126,7 +124,7 @@
                                 </tr>
                             </table>
                             <div class="submitBtnWrap">
-                                <button class="layui-btn">确定</button>
+                                <button class="layui-btn" @click="submitUser(uuid)">确定</button>
                             </div>
                         </form>
                     </div>
@@ -139,13 +137,12 @@
     <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
     <!--- vue -->
     <script type="text/javascript" src="../../plugin/js/vue.js"></script>
     <script type="text/javascript" src="../../config/configure.js"></script>
     <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
     <script type="text/javascript" src="../../js/page/admin/admin.js"></script>
-    <script type="text/javascript" src="../../js/common.js"></script>
-
 </body>
 
 </html>

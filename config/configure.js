@@ -24,60 +24,62 @@
             company_list: host + "admin/company/index", //公司列表
             client_list: host + 'admin/client/index', //客户列表
             admin_list: host + 'admin/admin', //后台用户列表
-            admin_edit: host + 'admin/admin/' //编辑查看用户
+            admin_edit: host + 'admin/admin/', //编辑查看用户
+            admin_lock: host + 'admin/admin-setting/', //锁定用户
+            role_list: host + 'admin/roles' //角色列表
         }
 
 })();
-new Vue({
-    el: 'body',
-    data: {
-        tokenData: localStorage.getItem("userinfo")
-    },
-    methods: {
-        filterToken: function() {
-            var that = this;
-            if (!that.tokenData) {
-                window.location = "/login.html";
-            } else {
-                if (!JSON.parse(that.tokenData).token) {
-                    window.location = "/login.html";
-                }
-                //检查token是否失效
-                that.checkToken();
-            }
-        },
-        checkToken: function() {
-            var url = auth_conf.token;
-            var that = this;
-            axios.get(url, { headers: { "Authorization": JSON.parse(that.tokenData).token } })
-                .then(function(response) {
-                    var data = response.data;
-                    if (data.status != 1) {
-                        if (data.messages) {
-                            //alert(data.messages);
-                            // layui.use('layer', function(id) {
-                            //     var layer = layui.layer;
-                            //     layer.msg(data.messages);
-                            // });
-                        }
-                        localStorage.removeItem("userinfo");
-                        that.tokenData = null;
-                        window.location = "/login.html";
-                    }
-                    /**
-                     * 引入top和right
-                     */
-                    $("#top").load('/page/public/top.html');
-                    $("#left").load('/page/public/left.html');
+// new Vue({
+//     el: 'body',
+//     data: {
+//         tokenData: localStorage.getItem("userinfo")
+//     },
+//     methods: {
+//         filterToken: function() {
+//             var that = this;
+//             if (!that.tokenData) {
+//                 window.location = "/login.html";
+//             } else {
+//                 if (!JSON.parse(that.tokenData).token) {
+//                     window.location = "/login.html";
+//                 }
+//                 //检查token是否失效
+//                 that.checkToken();
+//             }
+//         },
+//         checkToken: function() {
+//             var url = auth_conf.token;
+//             var that = this;
+//             axios.get(url, { headers: { "Authorization": JSON.parse(that.tokenData).token } })
+//                 .then(function(response) {
+//                     var data = response.data;
+//                     if (data.status != 1) {
+//                         if (data.messages) {
+//                             //alert(data.messages);
+//                             // layui.use('layer', function(id) {
+//                             //     var layer = layui.layer;
+//                             //     layer.msg(data.messages);
+//                             // });
+//                         }
+//                         localStorage.removeItem("userinfo");
+//                         that.tokenData = null;
+//                         window.location = "/login.html";
+//                     }
+//                     /**
+//                      * 引入top和right
+//                      */
+//                     $("#top").load('/page/public/top.html');
+//                     $("#left").load('/page/public/left.html');
 
-                })
-                .catch(function(error) {
-                    alert("Token验证异常");
-                });
-        }
-    },
-    created: function() {
-        var that = this;
-        that.filterToken(); //过滤token
-    }
-});
+//                 })
+//                 .catch(function(error) {
+//                     alert("Token验证异常");
+//                 });
+//         }
+//     },
+//     created: function() {
+//         var that = this;
+//         that.filterToken(); //过滤token
+//     }
+// });
