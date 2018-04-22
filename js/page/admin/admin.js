@@ -37,7 +37,7 @@ var vm = new Vue({
                 var data = response.data;
                 if (data.status == 1) {
                     that.adminList = data.data;
-                    //console.log(data);
+                    //console.log(that.adminList);
                     layui.use(['form'], function() {
                         var form = layui.form;
                         form.render('checkbox');
@@ -48,29 +48,29 @@ var vm = new Vue({
             })
         },
         //编辑用户
-        getEditAdmin: function(uuid) {
-            console.log(uuid);
+        getEditAdmin: function(uuid) { //判断一下uuid
             var that = this;
-            var url = auth_conf.admin_edit + uuid;
-            axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
-                var data = response.data;
-                if (data.status == 1) {
-                    that.adminEdit = data.data;
-                    layer.open({
-                        type: 1,
-                        title: '新增编辑用户',
-                        shadeClose: true,
-                        scrollbar: false,
-                        skin: 'layui-layer-rim',
-                        area: ['500px', '500px'],
-                        content: $(".userPopWrap")
-                    })
-                } else if (data.status == 10) {
-                    layer.msg("抱歉，您不能查看管理员信息！");
-                }
-            })
+            if (uuid) {
+                var url = auth_conf.admin_edit + uuid;
+                axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        that.adminEdit = data.data;
+                        layer.open({
+                            type: 1,
+                            title: '新增编辑用户',
+                            shadeClose: true,
+                            scrollbar: false,
+                            skin: 'layui-layer-rim',
+                            area: ['500px', '500px'],
+                            content: $(".userPopWrap")
+                        })
+                    } else if (data.status == 10) {
+                        layer.msg("抱歉，您不能查看管理员信息！");
+                    }
+                })
+            }
         },
-
     },
     created: function() {
         var that = this;

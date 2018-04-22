@@ -101,7 +101,7 @@
                                 <tr>
                                     <td>账号</td>
                                     <td>
-                                        <input type="text" v-model="adminEdit.name" name="username" lay-verify="required" placeholder="请输入账号" datatype="*6-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在6~15位之间！">
+                                        <input type="text" v-model="adminEdit.name" name="username" lay-verify="required" placeholder="请输入账号" datatype="*3-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在3~15位之间！">
                                         <span class="Validform_checktip"></span>
                                     </td>
                                 </tr>
@@ -126,7 +126,7 @@
                                 </tr>
                             </table>
                             <div class="submitBtnWrap">
-                                <button class="layui-btn">立即添加</button>
+                                <button class="layui-btn">确定</button>
                             </div>
                         </form>
                     </div>
@@ -139,12 +139,12 @@
     <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
-    <script type="text/javascript" src="../../js/common.js"></script>
     <!--- vue -->
     <script type="text/javascript" src="../../plugin/js/vue.js"></script>
     <script type="text/javascript" src="../../config/configure.js"></script>
     <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
     <script type="text/javascript" src="../../js/page/admin/admin.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
 
 </body>
 
