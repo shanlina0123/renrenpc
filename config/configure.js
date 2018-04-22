@@ -23,7 +23,7 @@
         chart_list:host+'admin/chart', //数据列表
         company_list:host+"admin/company/index",//公司列表
         client_list: host + 'admin/client/index',//客户列表
-        admin_list: host + 'admin/admin',//后台用户列表
+        admin_list: host + 'admin/chart-admin',//后台用户列表
     }
 
 })();
@@ -78,6 +78,7 @@ new Vue({
                 .catch(function (error)
                 {
                     alert("Token验证异常");
+                    window.location="/login.html";
                 });
         }
     }
