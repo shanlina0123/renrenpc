@@ -56,7 +56,6 @@ var vm = new Vue({
                   var data = response.data;
                   if ( data.status == 1 )
                     {
-                       // console.log( data );
                         var list = data.data;
                         that.houseList = list.data;
                         that.page_data.total = list.total;
@@ -83,6 +82,7 @@ var vm = new Vue({
                     limit: that.page_data.to,//每页显示
                     jump: function(obj,first)
                     {
+                        console.log( that.page_data.total );
                         if(!first)
                         {
                             that.params.page = obj.curr;
