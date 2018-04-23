@@ -28,122 +28,74 @@
     <div class="wrap">
         <div class="layui-layout layui-layout-admin">
             <!--顶部-->
-            <!--顶部-->
             <div class="layui-header header" id="top"> </div>
             <div class="main clearfix">
                 <!--左侧导航-->
-                <ul class="leftNav fl" id="left">
-                </ul>
+                <ul class="leftNav fl" id="left"></ul>
                 <!--右侧主要内容-->
                 <div class="rightMain fl" id="roleId">
-                    <div class="addClient"><button class="layui-btn changeClient">添加角色</button></div>
+                    <div class="addClient"><button type="button" @click="addRole()" class="layui-btn changeClient">添加角色</button></div>
                     <form class="layui-form lockForm">
                         <h2>角色列表</h2>
                         <table class="layui-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>角色名称</th>
-                                    <th>操作</th>
-                                    <th>是否锁定</th>
-                                </tr>
-                            </thead>
                             <tr>
-                                <td>1</td>
-                                <td>张三</td>
-                                <td>
-                                    <div class="layui-btn-group">
-                                        <a href="editPower.html" class="layui-btn layui-btn-sm editBtn ">编辑权限</a>
-                                        <button type="button" class="layui-btn layui-btn-sm deleteBtn">删除</button>
-                                    </div>
-                                </td>
-                                <td class="ckbox2">
-                                    <div><input type="checkbox" name="like[write]" title="锁定"></div>
-                                </td>
+                                <th>ID</th>
+                                <th>角色名称</th>
+                                <th>操作</th>
+                                <th>是否锁定</th>
                             </tr>
                             <tr v-for="item in roleList">
                                 <td>{{item.id}}</td>
                                 <td>{{item.name}}</td>
                                 <td>
                                     <div class="layui-btn-group">
-                                        <a href="editPower.html" class="layui-btn layui-btn-sm editBtn ">编辑权限</a>
-                                        <button type="button" class="layui-btn layui-btn-sm deleteBtn">删除</button>
+                                        <a type="button" @click="editRole(item.uuid)" class="layui-btn layui-btn-sm editBtn">编辑权限</a>
+                                        <button type="button" @click="deleteRole(item.uuid)" class="layui-btn layui-btn-sm deleteBtn">删除</button>
                                     </div>
                                 </td>
                                 <td class="ckbox2">
-                                    <div><input type="checkbox" name="like[write]" title="锁定"></div>
+                                    <input type="checkbox" name="like[write]" title="锁定">
                                 </td>
                             </tr>
                         </table>
                     </form>
-                </div>
-                <!--批量移交客户弹窗-->
-                <div class="custormHandelPop" style="display: none">
-                    <div class="popFormWrap">
-                        <form class="layui-form">
-                            <table class="clientHandlTable">
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline " style="margin-top: 20%;">
-                                            <label class="layui-form-label ">角色名称</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input" name="userHouse">
+                    <!--添加角色弹窗-->
+                    <div class="custormHandelPop" style="display: none">
+                        <div class="popFormWrap">
+                            <form class="layui-form">
+                                <table class="clientHandlTable">
+                                    <tr>
+                                        <td>
+                                            <div class="layui-inline " style="margin-top: 20%;">
+                                                <label class="layui-form-label ">角色名称</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input" v-model="name" name="userHouse">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <div class="submitBtnWrap">
-                                <button class="layui-btn">添加</button>
-                            </div>
-                        </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="submitBtnWrap">
+                                    <button type="button" @click="submitAddRole()" class="layui-btn">添加</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
             <!--//main-->
         </div>
-        <!-- //wrap -->
-        <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
-        <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
-        <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
-        <!--- vue -->
-        <script type="text/javascript" src="../../plugin/js/vue.js"></script>
-        <script type="text/javascript" src="../../config/configure.js"></script>
-        <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
-        <script type="text/javascript" src="../../js/common.js"></script>
-        <script type="text/javascript" src="../../js/page/role/role.js"></script>
-        <script type="text/javascript">
-            $(function() {
-                //添加角色
-                $(".changeClient").click(function() {
-                    layer.open({
-                        type: 1,
-                        title: '添加角色',
-                        shadeClose: true,
-                        scrollbar: false,
-                        skin: 'layui-layer-rim',
-                        area: ['500px', '300px'],
-                        content: $(".custormHandelPop")
-                    })
-                });
-                //删除用户
-                $(".deleteBtn").click(function() {
-                    var $this = $(this);
-                    layer.confirm('确定要删除吗？', {
-                        btn: ['确定', '取消']
-                    }, function() {
-                        $this.parents("tr").remove();
-                        layer.msg('删除成功', {
-                            icon: 1
-                        });
-                    });
-                });
-                //分页
-                layui.use(['form'], function() {
-
-                });
-            })
-        </script>
+    </div>
+    <!-- //wrap -->
+    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
+    <!--- vue -->
+    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+    <script type="text/javascript" src="../../config/configure.js"></script>
+    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+    <script type="text/javascript" src="../../js/page/role/role.js"></script>
 </body>
 
 </html>

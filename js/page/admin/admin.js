@@ -1,45 +1,38 @@
 $(function() {
-    //验证
-    // if ($(".layui-form2").length) {
-    //     $(".layui-form2").Validform({
-    //         btnSubmit: '.layui-btn',
-    //         tiptype: 1,
-    //         postonce: true,
-    //         showAllError: false,
-    //         tiptype: function(msg, o, cssctl) {
-    //             if (!o.obj.is("form")) {
-    //                 if (o.type != 2) {
-    //                     var objtip = o.obj.parents('.layui-form-item').find(".Validform_checktip");
-    //                     objtip.addClass('Validform_skate');
-    //                     cssctl(objtip, o.type);
-    //                     layer.msg(msg, { icon: 5, time: 2000, shift: 6 });
-    //                 }
-    //             }
-    //         }
-    //     })
-    // }
-
-})
-
+    layui.use(['form'], function() {
+        var form = layui.form;
+        form.on('select(filter)', function(data) {
+            var value = data.value
+            console.log(value); //得到select原始DOM对象
+        });
+    });
+});
 var vm = new Vue({
     el: '#adminTable',
     data: {
         tokenValue: JSON.parse(localStorage.getItem("userinfo")).token, //token
         adminList: [], //用户列表
-        //adminEdit: '', //编辑用户nickname是姓名，name是账号
         roleList: [],
         uuid: "",
-        addParams: {
+        params: { //编辑和修改的参数
             name: "",
             nickname: "",
             mobile: "",
-            password: "xxs111111",
-            status: ""
-        }
+            roleid: "",
+            password: "",
+            status: "",
+            uuid: "",
+            page: 1
+        },
+        pages: 0,
+        page_data: { //分页数据
+            total: 0,
+            to: 0,
+        },
     },
     methods: {
         //获取用户列表
-        getAdminList: function() {
+        getAdminList: function(loading) {
             var that = this;
             var url = auth_conf.admin_list;
             axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
@@ -47,19 +40,39 @@ var vm = new Vue({
                 if (data.status == 1) {
                     that.adminList = data.data.data;
                     //console.log(that.adminList);
-                    layui.use(['form'], function() {
-                        var form = layui.form;
-                        form.render('checkbox');
-                    });
+                    if (loading != "loadingPageData") {
+                        that.getPageData();
+                    }
                 } else {
-
+                    layer.msg(data.messages, { icon: 6 });
                 }
-            })
+            }).catch(function(error) {});
+        },
+        //分页
+        getPageData: function() {
+            var that = this;
+            layui.use(['laypage', 'layer', 'form'], function() {
+                var laypage = layui.laypage;
+                var form = layui.form;
+                //总页数大于页码总数
+                laypage.render({
+                    elem: 'pagerInner',
+                    count: that.page_data.total, //总页
+                    limit: that.page_data.to, //每页显示
+                    jump: function(obj, first) {
+                        if (!first) {
+                            that.params.page = obj.curr;
+                            that.getAdminList("loadingPageData");
+                        }
+                    }
+                });
+                form.render();
+            });
         },
         //查看用户
         getEditAdmin: function(uuid) {
             var that = this;
-            that.getRole();
+            that.getRole(); //获取角色列表
             if (uuid) {
                 var url = auth_conf.admin_edit + uuid;
                 axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
@@ -67,11 +80,11 @@ var vm = new Vue({
                     if (data.status == 1) {
                         that.adminEdit = data.data;
                         $("#popRoleList").val(data.data.roleid);
-
-                        that.addParams.name = data.data.name;
-                        that.addParams.nickname = data.data.nickname;
-                        that.addParams.mobile = data.data.mobile;
-                        that.addParams.status = data.data.status;
+                        that.params.name = data.data.name;
+                        that.params.nickname = data.data.nickname;
+                        that.params.mobile = data.data.mobile;
+                        that.params.uuid = data.data.uuid;
+                        that.params.status = data.data.status;
                         layer.open({
                             type: 1,
                             title: '查看编辑用户',
@@ -90,6 +103,12 @@ var vm = new Vue({
                     }
                 })
             } else {
+                that.params.name = "";
+                that.params.nickname = "";
+                that.params.mobile = "";
+                that.params.uuid = "";
+                that.params.status = "";
+                that.params.roleid = $("#popRoleList").val("");
                 layer.open({
                     type: 1,
                     title: '新增用户',
@@ -133,34 +152,104 @@ var vm = new Vue({
         },
         //提交客户修改、新增
         submitUser: function(uuid) {
-            //console.log(uuid);
             var that = this;
+            var roleidVal = $("#popRoleList").val();
+            var statusVal = $("#roleIdID").val();
+            that.params.roleid = roleidVal;
+            if (statusVal == "锁定") {
+                that.params.status = "0";
+            } else {
+                that.params.status = "1";
+            }
             if (uuid) {
-                //编辑或者查看
+                //编辑查看用户
                 var url = auth_conf.admin_edit + uuid;
-                axios.put(url, { params: that.search_params, headers: { "Authorization": that.tokenValue } })
-                    .then(function(response) {
-                        if (response.status == 1) {
-                            layer.msg("修改成功");
-                            //that.getAdminList();
-                            layer.close(layer.index);
-                        }
+                console.log(url);
+                if (that.params.nickname == "") {
+                    layui.use("layer", function() {
+                        layer.msg("请填写用户姓名");
                     })
+                } else if (that.params.roleid == "") {
+                    layui.use("layer", function() {
+                        layer.msg("请选择用户角色");
+                    })
+                } else if (that.params.mobile == "") {
+                    layui.use("layer", function() {
+                        layer.msg("请填写用户手机号码");
+                    })
+                } else if (that.params.name == "") {
+                    layui.use("layer", function() {
+                        layer.msg("请填写用户账号");
+                    })
+                } else {
+                    axios.put(url, that.params, { headers: { "Authorization": that.tokenValue } })
+                        .then(function(response) {
+                            //console.log(that.params);
+                            //console.log(response);
+                            if (response.status == 1) {
+                                layui.use(['layer'], function() {
+                                    var layer = layui.layer;
+                                    layer.msg("编辑用户成功", function() {
+                                        layer.closeAll();
+                                    });
+                                });
+                                that.getAdminList();
+                            } else {
+                                layui.use(['layer'], function() {
+                                    var layer = layui.layer;
+                                    layer.msg("编辑用户失败", function() {
+                                        layer.closeAll();
+                                    });
+                                });
+                            }
+                        })
+                }
+
             } else {
                 //新增用户
                 var url = auth_conf.admin_list;
-                axios.post(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
-                    if (response.status == 1) {
-                        layer.close(layer.index);
-                        layer.msg("新增用户成功");
-                    }
-                })
+                if (that.params.nickname == "") {
+                    layui.use("layer", function() {
+                        layer.msg("请填写用户姓名");
+                    })
+                } else if (that.params.roleid == "") {
+                    layui.use("layer", function() {
+                        layer.msg("请选择用户角色");
+                    })
+                } else if (that.params.mobile == "") {
+                    layui.use("layer", function() {
+                        layer.msg("请填写用户手机号码");
+                    })
+                } else if (that.params.name == "") {
+                    layui.use("layer", function() {
+                        layer.msg("请填写用户账号");
+                    })
+                } else {
+                    axios.post(url, that.params, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
+                        //console.log(response);
+                        if (response.data.status == 1) {
+                            layui.use(['layer'], function() {
+                                var layer = layui.layer;
+                                layer.msg("新增用户成功", function() {
+                                    layer.closeAll();
+                                });
+                            });
+                            that.getAdminList();
+                        } else {
+                            layui.use(['layer'], function() {
+                                var layer = layui.layer;
+                                layer.msg("新增用户失败", function() {
+                                    layer.closeAll();
+                                });
+                            });
+                        }
+                    })
+                }
             }
         }
     },
     created: function() {
         var that = this;
-        that.getAdminList(); //用户列表
-
+        that.getAdminList() //用户列表
     }
 })
