@@ -31,8 +31,10 @@
             client_follow:host + 'admin/client-follow/store', //跟进客户
             client_detail:host + 'admin/client/edit/', //客户详情
             client_houses:host + 'admin/client-houses', //客户房源列表检索
+            client_admin:host + 'admin/client-admin/', //客户业务员列表
             client_update:host + 'admin/client/update/', //修改客户
             client_delete:host + 'admin/client/delete/', //删除客户
+            client_trans:host + 'admin/client-transfer/update', //移交客户
             role_delete: host + 'admin/roles/', //删除角色
 
         }
