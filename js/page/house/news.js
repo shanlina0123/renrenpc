@@ -25,17 +25,22 @@ var vm = new Vue({
                             var form = layui.form;
                             var laydate = layui.laydate;
                             //发布日期
+                            var timestamp = Date.parse(new Date());
                             laydate.render({
                                 elem: '#pubDate',
-                                type: 'datetime'
+                                type: 'datetime',
+                                value: new Date(timestamp)
+
                             });
                             //年代选择
                             laydate.render({
-                                elem: '#oldDate'
+                                elem: '#oldDate',
+                                type:'year'
                             });
                             //开盘日期
                             laydate.render({
-                                elem: '#saleDate'
+                                elem: '#saleDate',
+                                type:'date'
                             });
                             form.render('select');
                         });
@@ -66,8 +71,8 @@ if( $(".layui-form").length )
             if (!o.obj.is("form")) {
                 if (o.type != 2)
                 {
-                    var objtip = o.obj.parents('.layui-form-item').find(".Validform_checktip");
-                    objtip.addClass('Validform_skate');
+                    var objtip = o.obj.parents('.layui-input-inline').find("input");
+                    objtip.addClass('layui-form-danger');
                     cssctl(objtip, o.type);
                     layui.use(['layer'], function() {
                         var layer = layui.layer;
@@ -89,7 +94,9 @@ if( $(".layui-form").length )
                 success: function(result) {
                     if ( result.status == 1 )
                     {
+                        $('#house')[0].reset();
                         window.location.href = 'addHouseTag.html?id='+result.data;
+
                     } else
                     {
                         layui.use(['layer'], function() {
