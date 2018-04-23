@@ -33,7 +33,7 @@
             <ul class="leftNav fl" id="left"></ul>
             <!--右侧主要内容-->
             <div class="rightMain fl" id="adminTable">
-                <div class="addClient"><button class="layui-btn" @click="addAdmin()"><i class="layui-icon"></i></button></div>
+                <div class="addClient"><button class="layui-btn" @click="getEditAdmin()"><i class="layui-icon"></i></button></div>
                 <form class="layui-form lockForm ckbox2">
                     <table class="layui-table">
                         <tr>
@@ -72,7 +72,7 @@
                                 <tr>
                                     <td>姓名</td>
                                     <td>
-                                        <input type="text" v-model="adminEdit.nickname" class="layui-input" name="userName" datatype="s1-5" class="layui-input" nullmsg="请填写姓名" sucmsg=" " errormsg="* 姓名不符合规定！">
+                                        <input type="text" v-model="addParams.nickname" class="layui-input" datatype="s1-5" class="layui-input" nullmsg="请填写姓名" sucmsg=" " errormsg="* 姓名不符合规定！">
                                         <span class="Validform_checktip"></span>
                                     </td>
                                 </tr>
@@ -81,7 +81,7 @@
                                     <td>
                                         <div class="layui-inline">
                                             <div class="layui-input-inline">
-                                                <select name="modules" lay-verify="required" lay-search="" id="popRoleList">
+                                                <select lay-verify="required" lay-search="" id="popRoleList">
                                                     <option value="" >请选择</option>
                                                 </select>
                                             </div>
@@ -91,7 +91,7 @@
                                 <tr>
                                     <td>手机号</td>
                                     <td>
-                                        <input type="text" v-model="adminEdit.mobile" class="layui-input" name="userPhone" datatype="m" class="layui-input" nullmsg="请填写手机号" sucmsg=" " errormsg="* 手机号码不符合规定！">
+                                        <input type="text" v-model="addParams.mobile" class="layui-input" datatype="m" class="layui-input" nullmsg="请填写手机号" sucmsg=" " errormsg="* 手机号码不符合规定！">
                                         <span class="Validform_checktip"></span>
                                     </td>
 
@@ -99,24 +99,24 @@
                                 <tr>
                                     <td>账号</td>
                                     <td>
-                                        <input type="text" v-model="adminEdit.name" name="username" lay-verify="required" placeholder="请输入账号" datatype="*3-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在3~15位之间！">
+                                        <input type="text" v-model="addParams.name" lay-verify="required" placeholder="请输入账号" datatype="*3-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在3~15位之间！">
                                         <span class="Validform_checktip"></span>
                                     </td>
                                 </tr>
-                                <!--<tr>
+                                <tr>
                                     <td>密码</td>
                                     <td>
-                                        <input type="password" name="password" class="layui-input" value="xhongxiansheng111111" readonly>
+                                        <input type="password" class="layui-input" value="xhongxiansheng111111" v-model="addParams.password" readonly>
                                     </td>
-                                </tr>-->
+                                </tr>
                                 <tr>
                                     <td>状态</td>
                                     <td>
                                         <div class="layui-inline">
                                             <div class="layui-input-inline">
-                                                <select name="modules" lay-verify="required">
-                                                    <option :selected="adminEdit.status == 0?'selected':''">锁定</option> 
-                                                    <option :selected="adminEdit.status == 1?'selected':''">启用</option>
+                                                <select lay-verify="required">
+                                                    <option :selected="addParams.status == 0?'selected':''">锁定</option> 
+                                                    <option :selected="addParams.status == 1?'selected':''">启用</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -124,7 +124,7 @@
                                 </tr>
                             </table>
                             <div class="submitBtnWrap">
-                                <button class="layui-btn" @click="submitUser(uuid)">确定</button>
+                                <button type="button" class="layui-btn" @click="submitUser(adminEdit.uuid)">确定</button>
                             </div>
                         </form>
                     </div>
