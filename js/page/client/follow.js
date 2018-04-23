@@ -60,6 +60,10 @@ var vm = new Vue({
         },
         //跟进
         submitClick: function() {
+
+            if($("#showSearchStatus").val()==""){
+                return;
+            }
             $("#followButton").addClass("hidden");
             var url = auth_conf.client_follow;
             var that = this;

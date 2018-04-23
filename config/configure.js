@@ -28,62 +28,65 @@
             admin_lock: host + 'admin/admin-setting/', //锁定用户
             role_list: host + 'admin/roles', //角色列表
             client_follow_list:host + 'admin/client-follow/edit/', //客户跟进列表
-            client_follow:host + 'admin/client-follow/store' //跟进客户
+            client_follow:host + 'admin/client-follow/store', //跟进客户
+            client_detail:host + 'admin/client/edit/', //客户详情
+            client_houses:host + 'admin/client-houses', //客户房源列表检索
+            client_update:host + 'admin/client/update/' //修改客户
 
         }
     $("#top").load('/page/public/top.html');
    $("#left").load('/page/public/left.html');
 })();
-new Vue({
-    el: '.wrap',
-    data: {
-        tokenData: localStorage.getItem("userinfo")
-    },
-    methods: {
-        filterToken: function() {
-            var that = this;
-            if (!that.tokenData) {
-                window.location = "/login.html";
-            } else {
-                if (!JSON.parse(that.tokenData).token) {
-                    window.location = "/login.html";
-                }
-                //检查token是否失效
-                that.checkToken();
-            }
-        },
-        checkToken: function() {
-            var url = auth_conf.token;
-            var that = this;
-            axios.get(url, { headers: { "Authorization": JSON.parse(that.tokenData).token } })
-                .then(function(response) {
-                    var data = response.data;
-                    if (data.status != 1) {
-                        if (data.messages) {
-                            //alert(data.messages);
-                            // layui.use('layer', function(id) {
-                            //     var layer = layui.layer;
-                            //     layer.msg(data.messages);
-                            // });
-                        }
-                        localStorage.removeItem("userinfo");
-                        that.tokenData = null;
-                        window.location = "/login.html";
-                    }
-
-                    $("#top").load('/page/public/top.html');
-                    $("#left").load('/page/public/left.html');
-
-                })
-                .catch(function(error) {
-                    alert("Token验证异常");
-                    window.location = "/login.html";
-                });
-        }
-    },
-    created: function() {
-        var that = this;
-        that.filterToken(); //过滤token
-    }
-
-});
+// new Vue({
+//     el: '.wrap',
+//     data: {
+//         tokenData: localStorage.getItem("userinfo")
+//     },
+//     methods: {
+//         filterToken: function() {
+//             var that = this;
+//             if (!that.tokenData) {
+//                 window.location = "/login.html";
+//             } else {
+//                 if (!JSON.parse(that.tokenData).token) {
+//                     window.location = "/login.html";
+//                 }
+//                 //检查token是否失效
+//                 that.checkToken();
+//             }
+//         },
+//         checkToken: function() {
+//             var url = auth_conf.token;
+//             var that = this;
+//             axios.get(url, { headers: { "Authorization": JSON.parse(that.tokenData).token } })
+//                 .then(function(response) {
+//                     var data = response.data;
+//                     if (data.status != 1) {
+//                         if (data.messages) {
+//                             //alert(data.messages);
+//                             // layui.use('layer', function(id) {
+//                             //     var layer = layui.layer;
+//                             //     layer.msg(data.messages);
+//                             // });
+//                         }
+//                         localStorage.removeItem("userinfo");
+//                         that.tokenData = null;
+//                         window.location = "/login.html";
+//                     }
+//
+//                     $("#top").load('/page/public/top.html');
+//                     $("#left").load('/page/public/left.html');
+//
+//                 })
+//                 .catch(function(error) {
+//                     alert("Token验证异常");
+//                     window.location = "/login.html";
+//                 });
+//         }
+//     },
+//     created: function() {
+//         var that = this;
+//         that.filterToken(); //过滤token
+//     }
+//
+// });
