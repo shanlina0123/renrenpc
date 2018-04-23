@@ -107,12 +107,24 @@
                 <div class="formWrap">
                     <form class="layui-form" id="image">
                         <table class="uploadTable">
-                            <tr>
+                            <!--<tr>
                                 <td>封面图(单张)</td>
                                 <td>
                                     <div class="layui-upload-drag" id="covermap">
                                         <i class="layui-icon"></i>
                                         <p>点击上传，或将文件拖拽到此处</p>
+                                    </div>
+                                </td>
+                            </tr>-->
+                            <tr>
+                                <td>封面图(单张)</td>
+                                <td>
+                                    <div class="layui-upload">
+                                        <button type="button" class="layui-btn" id="covermap">上传图片</button>
+                                        <div class="layui-upload-list">
+                                            <img class="layui-upload-img" id="covermapUrl">
+                                            <p id="demoText"></p>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
