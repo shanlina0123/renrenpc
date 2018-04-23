@@ -38,7 +38,7 @@
                
             </ul>
             <!--右侧主要内容-->
-            <div class="rightMain fl">
+            <div class="rightMain fl" >
                 <!--顶部筛选条件-->
                 <div class="sortWrap">
                     <form class="layui-form">
@@ -46,40 +46,31 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">客户状态</label>
                                 <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="">
-					          <option value="">全部</option>
-					          <option value="1">有效</option>
-					          <option value="2">无效</option>
-					          <option value="3">未跟进</option>
-					          <option value="4">跟进中</option>
-					          <option value="5">已上门</option>
-					          <option value="6">已提交</option>
-					        </select>
+                                    <select name="modules" lay-verify="required" lay-search="" id="state">
+							          <option value="">全部</option>							          
+							        </select>
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">公司</label>
                                 <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="">
-					          <option value="">全部</option>
-					          <option value="1">万科</option>
-					          <option value="2">万达</option>
-					          <option value="3">公司名称</option>					
+                                    <select name="modules" lay-verify="required" lay-search="" id="firm">
+					          		<option value="">全部</option>					          				
 					        </select>
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">经纪人</label>
                                 <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="">
-					          <option value="">全部</option>					        
-					        </select>
+                                    <select name="modules" lay-verify="required" lay-search="" id="manager">
+					          		<option value="">全部</option>					        
+					      			  </select>
                                 </div>
                             </div>
                             <div class="layui-inline">
                                 <label class="layui-form-label">业务员</label>
                                 <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="">
+                                    <select name="modules" lay-verify="required" lay-search="" id="workp">
 					          <option value="">全部</option>					     
 					        </select>
                                 </div>
@@ -104,12 +95,12 @@
                                     <input class="layui-input timePadding" id="test18" type="text" placeholder="请选择时间">
                                 </div>
                             </div>
-                            <button class="layui-btn sortBtn">查询</button>
+                            <button class="layui-btn sortBtn" ionclick="search()">查询</button>
                         </div>
                     </form>
                 </div>
                 <!--客户数据表格-->
-                <div class="table1">
+                <div class="table1" id="charts">
                     <h2>数据列表</h2>
                     <table class="layui-table" lay-size="lg">
                         <thead>
@@ -127,19 +118,19 @@
                                 <th>成交时间</th>
                             </tr>
                         </thead>
-                        <tbody id="charts">
-                            <tr v-for="item in chart">
-                                <td>{{item.companyid}</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                        <tbody >
+                            <tr v-for="item in charts">
+                                <td>{{item.clientid}}</td>
+                                <td>{{item.dynamic_to_client.name}}</td>
+                                <td>{{item.followstatusid}}</td>
+                                <td>{{item.companyid}}</td>
+                                 <td>{{item.ownadminid}}</td>
+                                <td>{{item.refereeuserid}}</td>
+                                <td>{{item.housename}}</td>                               
+                                <td>{{item.commissionid}}</td>
+                                <td>{{item.makedate}}</td>
+                                <td>{{item.comedate}}</td>
+                                <td>{{item.dealdate}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -150,6 +141,8 @@
                 </div>
             </div>
         </div>
+        </div>
+    </div>
         <!-- //wrap -->
         <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
         <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
