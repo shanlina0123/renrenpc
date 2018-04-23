@@ -28,6 +28,8 @@
             admin_lock: host + 'admin/admin-setting/', //锁定用户
             role_list: host + 'admin/roles', //角色列表
             role_delete: host + 'admin/roles/', //删除角色
+            role_power: host + 'admin/auth', //系统权限设置
+            role_HadPower: host + 'admin/auth/', //已经拥有的权限列表
             client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
             client_follow: host + 'admin/client-follow/store' //跟进客户
 
