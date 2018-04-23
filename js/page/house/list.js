@@ -164,7 +164,11 @@ var vm = new Vue({
                         var data = response.data;
                         if ( data.status == 1 )
                         {
-                            layer.msg('删除成功',{icon: 1});
+
+                            layer.msg('删除成功',{icon: 1},function () {
+                                location.href = location.href;
+                            });
+
                         }else
                         {
                             layer.msg(data.messages,{icon: 6});

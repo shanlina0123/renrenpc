@@ -29,7 +29,6 @@ var vm = new Vue({
             axios.post( url,{ covermap:that.covermap,images:that.images,status:that.status,houseid:id},{headers: {"Authorization": that.tokenValue}})
                 .then(function(response)
                 {
-                    console.log(response.data() );
                     var data = response.data;
                     if ( data.status == 1 )
                     {
@@ -69,7 +68,9 @@ layui.use(['upload','form','layer'], function() {
         url: auth_conf.add_imag,
         before: function(obj)
         {
-            layer.load(); //上传loading
+            obj.preview(function(index, file, result) {
+                $('#covermapUrl').attr('src',result);
+            });
         }
         ,done: function(res)
         {
@@ -77,7 +78,6 @@ layui.use(['upload','form','layer'], function() {
             if( res.status == 1 )
             {
                 $("#covermapName").val(res.data.name);
-                $("#covermap").css("background","url("+res.data.src+")");
                 vm.$data.covermap = res.data.name;
             }
         },
