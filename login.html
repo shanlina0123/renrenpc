@@ -89,7 +89,7 @@
                         var base = new Base64();
                         var password64 = base.encode(password);
                         var data = {name:name,password:password64};
-                        $.post('http://192.1668.15.222:8081/admin/login',data,function ( data )
+                        $.post('http://api.rrzhaofang.com/admin/login',data,function ( data )
                         {
                             if( data.status == 1 )
                             {
