@@ -253,3 +253,26 @@ ul.leftNav li i{
 /*限制图片大小*/
 .layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
 /*二维码*/
+
+.forInset .forShowSearch {
+  display: none;
+  position: absolute;
+  top: .8rem;
+  left: 0;
+  width: 84%;
+  line-height: 30px;
+  border: 1px solid #ccc;
+  padding: 0 10px;
+  background-color: #fff;
+  z-index: 20;
+}
+
+.forInset .forShowSearch li {
+  font-size: .3rem;
+  padding: .05rem 0;
+  border-top: 1px solid #ccc;
+}
+
+.forInset .forShowSearch li:first-child {
+  border-top: none;
+}

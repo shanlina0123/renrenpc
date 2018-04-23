@@ -28,7 +28,8 @@
     <div class="wrap">
         <div class="layui-layout layui-layout-admin">
             <!--顶部-->
-            <div class="layui-header header" id="top"></div>	 
+             <!--顶部-->
+            <div class="layui-header header" id="top"> </div>	 
        		 <div class="main clearfix" >
             <!--左侧导航-->
             <ul class="leftNav fl" id="left"></ul>
@@ -38,7 +39,7 @@
                 <form class="layui-form">
                 
                     <div class="sortWrap">
-                        <div class="layui-inline" id="select">
+                        <div class="layui-inline">
                             <label class="layui-form-label">类型</label>
                             <div class="layui-input-inline">
                                 <select name="modules" lay-verify="required" lay-search="" id="userstype">
@@ -55,7 +56,7 @@
                                 <option value="">全部</option>
                               <!--<!--<option value="1">万科</option>
                                 <option value="2">万达</option>
-                                <option value="3">其他</option>-->
+                                <option value="3">其他</option>-->-->
                             </select>
                             </div>
                         </div>
@@ -85,7 +86,8 @@
                                    <!--<td>{{item.name}}</td> -->
                                  	<td>{{company[item.name]?company[item.companyid].name:''}}</td>                                                                                                                  
                                     <td>{{item.mobile}}</td>                                  
-                                    <td></td>
+                                    <td>{{userstype[item.economictid]?userstype[item.economictid].name:''}}</td></td>                                                                                                                                                   
+                                                                                                  
                                     <td>
                                     	<input type="checkbox" name="like[write]" title="锁定" v-if="item.ishome !== 1">                                    
                                     </td>

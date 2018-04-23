@@ -27,6 +27,16 @@
             font-size: 14px;
             text-align: center;
         }
+        .layui-form-select dl {
+            text-align: left;
+        }
+        .clientPopTable .layui-form-label {
+            width: 100px;
+        }
+        .userPopTable, .clientPopTable {
+            margin: 20px auto 0 20px;
+        }
+
     </style>
     <script src="../../js/modernizr-2.6.2.min.js"></script>
 </head>
@@ -73,14 +83,16 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="layui-inline" v-if="tokenUserInfo.isadmin==1">
-                                <label class="layui-form-label" >业务员</label>
-                                <div class="layui-input-inline " >
-                                    <select name="showSearchAdmin" lay-verify="required" lay-search="" id="showSearchAdmin">
-                                        <option  value="">全部</option>
-                                    </select>
+                            <template v-if="tokenUserInfo">
+                                <div class="layui-inline" v-if="tokenUserInfo.isadmin==1">
+                                    <label class="layui-form-label" >业务员</label>
+                                    <div class="layui-input-inline " >
+                                        <select name="showSearchAdmin" lay-verify="required" lay-search="" id="showSearchAdmin">
+                                            <option  value="">全部</option>
+                                        </select>
+                                    </div>
                                 </div>
-                            </div>
+                            </template>
                             <button class="layui-btn sortBtn" type="button" @click="searchClick()">查询</button>
                         </div>
                     </form>
@@ -108,7 +120,7 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tr v-for="(item,index) in client_list">
+                        <tr v-for="(item,index) in client_list" :id="'clientList_'+item.uuid">
                             <td>{{index+1}}</td>
                             <td>{{item.dynamic_to_client.name}}</td>
                             <td v-if="level_datas[item.levelid]">{{level_datas[item.levelid]["name"]}}</td><td v-else></td>
@@ -125,9 +137,9 @@
                             <td>{{item.dealdate}}</td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a href="clientFollow.html" type="button" class="layui-btn" @click="linkFollow(item.uuid)">跟进</a>
-                                    <button type="button" class="layui-btn editBtn">查看编辑</button>
-                                    <button type="button" class="layui-btn deleteBtn">删除</button>
+                                    <a type="button" class="layui-btn" @click="linkFollow(item.uuid,item.clientid)">跟进</a>
+                                    <button type="button" class="layui-btn editBtn" @click="clientDetail(item.clientid)">查看编辑</button>
+                                    <button type="button" class="layui-btn deleteBtn" @click="clientDelete(item.uuid)">删除</button>
                                 </div>
                             </td>
                         </tr>
@@ -141,7 +153,7 @@
         </div>
         <!--//main-->
         <!--查看编辑页面弹窗-->
-      <div class="userPopWrap" style="display: none">
+      <div class="userPopWrap hidden" >
             <div class="userPopInner">
                 <form class="layui-form">
                     <table class="clientPopTable">
@@ -150,7 +162,7 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">姓名</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userName">
+                                        <input type="text" class="layui-input" name="userName" :value="client_datas.name" ref="clientname">
                                     </div>
                                 </div>
                             </td>
@@ -158,7 +170,7 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">客户电话</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userPhone" value="15894689785" readonly>
+                                        <input type="text" class="layui-input" name="userPhone" :value="client_datas.mobile" readonly style=" background-color:#f2f2f2;">
                                     </div>
                                 </div>
                             </td>
@@ -167,8 +179,10 @@
                             <td>
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">楼盘</label>
-                                    <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse">
+                                    <div class="layui-input-inline forInset ">
+                                        <select name="showSearchHouse" lay-verify="required" lay-search  id="showSearchHouse" >
+                                            <option value="" >请选择</option>
+                                        </select>
                                     </div>
                                 </div>
                             </td>
@@ -176,7 +190,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">上门时间</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="date" id="saleDate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth">
+                                        <input type="text" name="date" id="comedate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth" :value="client_datas.comedate" ref="comedate">
                                     </div>
                                 </div>
                             </td>
@@ -186,7 +200,7 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">预约时间</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="date" id="saleDate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth">
+                                        <input type="text" name="date" id="makedate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth" :value="client_datas.makedate" readonly style=" background-color:#f2f2f2;">
                                     </div>
                                 </div>
                             </td>
@@ -194,7 +208,7 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">合作公司</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse" value="万达地产" readonly>
+                                        <input type="text" class="layui-input" name="userHouse" :value="client_datas.company" readonly style=" background-color:#f2f2f2;">
                                     </div>
                                 </div>
                             </td>
@@ -204,13 +218,8 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">客户状态</label>
                                     <div class="layui-input-block">
-                                        <select name="interest" lay-filter="aihao">
-                                            <option value="0">有效</option>
-                                            <option value="1">无效</option>
-                                            <option value="2">未跟进</option>
-                                            <option value="3">跟进中</option>
-                                            <option value="4">已上门</option>
-                                            <option value="5">已成交</option>
+                                        <select name="interest" lay-filter="aihao" id="showEditStatus" :value="client_datas.followstatusid" ref="followstatusid">
+                                            <option value="">请选择</option>
                                         </select>
                                     </div>
                                 </div>
@@ -219,47 +228,46 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">跟进次数</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse" value="3" readonly>
+                                        <input type="text" class="layui-input" name="userHouse" :value="client_datas.followcount" readonly style=" background-color:#f2f2f2;">
                                     </div>
                                 </div>
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <div class="layui-inline">
-                                    <label class="layui-form-label">最后跟进时间</label>
-                                    <div class="layui-input-inline">
-                                        <input type="text" name="date" id="saleDate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth">
-                                    </div>
-                                </div>
-                            </td>
                             <td>
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">经纪人</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse" value="张三" readonly>
+                                        <input type="text" class="layui-input" name="userHouse" :value="client_datas.refereeusername" readonly  style=" background-color:#f2f2f2;">
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label">最后跟进时间</label>
+                                    <div class="layui-input-inline">
+                                        <input type="text" name="date" id="followdate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth" :value="client_datas.followdate" readonly style=" background-color:#f2f2f2;">
                                     </div>
                                 </div>
                             </td>
                         </tr>
                         <tr>
+
                             <td>
                                 <div class="layui-inline">
-                                    <label class="layui-form-label">客户等级</label>
-                                    <div class="layui-input-block">
-                                        <select name="interest" lay-filter="aihao">
-                                            <option value=""></option>
-                                            <option value="0">A类客户</option>
-                                            <option value="1">B类客户</option>
-                                        </select>
+                                    <label class="layui-form-label ">跟进业务员</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userHouse" :value="client_datas.followname" readonly  style=" background-color:#f2f2f2;">
                                     </div>
                                 </div>
                             </td>
                             <td>
                                 <div class="layui-inline">
-                                    <label class="layui-form-label ">跟进业务员</label>
-                                    <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse" value="张三" readonly>
+                                    <label class="layui-form-label">客户等级</label>
+                                    <div class="layui-input-block">
+                                        <select name="interest" lay-filter="aihao" id="showEditLevel" :value="client_datas.levelid" ref="levelid">
+                                            <option value="">请选择</option>
+                                        </select>
                                     </div>
                                 </div>
                             </td>
@@ -269,14 +277,14 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">成交时间</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="date" id="saleDate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth">
+                                        <input type="text" name="date" id="dealdate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth" :value="client_datas.dealdate" ref="dealdate">
                                     </div>
                                 </div>
                             </td>
                         </tr>
                     </table>
                     <div class="submitBtnWrap">
-                        <button class="layui-btn">提交</button>
+                        <button type="button" class="layui-btn" @click="editSubmit(client_datas.uuid)">提交</button>
                     </div>
                 </form>
             </div>
@@ -320,9 +328,10 @@
     </div>
     </div>
     <!-- //wrap -->
-    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
+
     <!--- vue -->
     <script type="text/javascript" src="../../plugin/js/vue.js"></script>
     <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>

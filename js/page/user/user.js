@@ -1,4 +1,4 @@
- var us=new Vue({
+    var us=new Vue({
 	el: '#users',
 	data:{
 //		 tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token
