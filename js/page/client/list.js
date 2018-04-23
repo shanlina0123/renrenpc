@@ -1,13 +1,46 @@
-$(function () {
-
-    // layui.use(['form'], function() {
-    //     var form = layui.form;
-    //     form.on('select(filter)', function(data)
-    //     {
-    //         var value = data.value
-    //         console.log(value); //得到select原始DOM对象
-    //     });
-    // });
+$(function() {
+    //添加编辑用户
+    $(".editBtn").click(function() {
+        layer.open({
+            type: 1,
+            title: '查看编辑用户',
+            shadeClose: true,
+            scrollbar: false,
+            skin: 'layui-layer-rim',
+            area: ['650px', '500px'],
+            content: $(".userPopWrap")
+        })
+    });
+    //批量移交客户
+    $(".changeClient").click(function() {
+        layer.confirm('先筛选客户，再进行客户移交。每次只能移交同一个业务员的客户', {
+            btn: ['我知道了'], //按钮
+            title: "提示",
+            area: ['600px', '167px']
+        }, function() {
+            layer.open({
+                type: 1,
+                title: '批量移交客户',
+                shadeClose: true,
+                scrollbar: false,
+                skin: 'layui-layer-rim',
+                area: ['500px', '400px'],
+                content: $(".custormHandelPop")
+            })
+        });
+    });
+    //删除用户
+    $(".deleteBtn").click(function() {
+        var $this = $(this);
+        layer.confirm('确定要删除吗？', {
+            btn: ['确定', '取消']
+        }, function() {
+            $this.parents("tr").remove();
+            layer.msg('删除成功', {
+                icon: 1
+            });
+        });
+    });
 });
 var vm = new Vue({
     el: '#vue_client_list',
@@ -28,6 +61,16 @@ var vm = new Vue({
         },
     },
     methods: {
+        //进入跟进页面
+        linkFollow:function(uuid){
+            var target_url="";
+            if (uuid) {
+                target_url += "uuid=" + uuid;
+            }else{
+                layer.msg("连接错误", {icon: 6});
+            }
+            window.location.href = "../page/client/clientFollow.html?" + encodeURIComponent(target_url);
+        },
         //点击搜索按钮
         searchClick: function () {
             var status = $("#showSearchStatus").val();
@@ -41,8 +84,6 @@ var vm = new Vue({
             this.params.housename = house;
             this.params.page = 1;
             this.getClientList();
-
-
         },
         //获取客户列表
         getClientList: function (loading) {

@@ -125,7 +125,7 @@
                             <td>{{item.dealdate}}</td>
                             <td>
                                 <div class="layui-btn-group">
-                                    <a href="clientFollow.html" type="button" class="layui-btn">跟进</a>
+                                    <a href="clientFollow.html" type="button" class="layui-btn" @click="linkFollow(item.uuid)">跟进</a>
                                     <button type="button" class="layui-btn editBtn">查看编辑</button>
                                     <button type="button" class="layui-btn deleteBtn">删除</button>
                                 </div>
@@ -328,66 +328,7 @@
     <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
     <script type="text/javascript" src="../../config/configure.js"></script>
     <script type="text/javascript" src="../../js/page/client/list.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            //添加编辑用户
-            $(".editBtn").click(function() {
-                layer.open({
-                    type: 1,
-                    title: '查看编辑用户',
-                    shadeClose: true,
-                    scrollbar: false,
-                    skin: 'layui-layer-rim',
-                    area: ['650px', '500px'],
-                    content: $(".userPopWrap")
-                })
-            });
-            //批量移交客户
-            $(".changeClient").click(function() {
-                layer.confirm('先筛选客户，再进行客户移交。每次只能移交同一个业务员的客户', {
-                    btn: ['我知道了'], //按钮
-                    title: "提示",
-                    area: ['600px', '167px']
-                }, function() {
-                    layer.open({
-                        type: 1,
-                        title: '批量移交客户',
-                        shadeClose: true,
-                        scrollbar: false,
-                        skin: 'layui-layer-rim',
-                        area: ['500px', '400px'],
-                        content: $(".custormHandelPop")
-                    })
-                });
-            });
-            //删除用户
-            $(".deleteBtn").click(function() {
-                var $this = $(this);
-                layer.confirm('确定要删除吗？', {
-                    btn: ['确定', '取消']
-                }, function() {
-                    $this.parents("tr").remove();
-                    layer.msg('删除成功', {
-                        icon: 1
-                    });
-                });
-            });
-            //这个页面的分页用的是浏览器解析后的布局（其他页面使用的是解析前的，后期如果需要会统一修改）
-            layui.use(['laypage', 'layer', 'form'], function() {
-                var laypage = layui.laypage,
-                    layForm = layui.layform,
-                    layer = layui.layer;
-                //总页数大于页码总数
-                laypage.render({
-                    elem: 'pagerInner',
-                    count: 70, //数据总数
-                    jump: function(obj) {
-                        //console.log(obj)
-                    }
-                });
-            });
-        })
-    </script>
+
 </body>
 
 </html>

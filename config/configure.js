@@ -1,5 +1,5 @@
 (function() {
-    var host = "http://192.168.15.13:8081/";
+    var host = "http://192.168.15.222:8081/";
     //未带toke请求
     window.conf = {
         login: host + 'admin/login', //首页推荐
@@ -26,7 +26,8 @@
             admin_list: host + 'admin/admin', //后台用户列表
             admin_edit: host + 'admin/admin/', //编辑查看用户
             admin_lock: host + 'admin/admin-setting/', //锁定用户
-            role_list: host + 'admin/roles' //角色列表
+            role_list: host + 'admin/roles', //角色列表
+            client_follow_list:host + 'admin/client-follow/edit/' //客户跟进列表
         }
 
 })();
