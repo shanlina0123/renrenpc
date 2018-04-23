@@ -64,6 +64,10 @@
                         </tr>
                     </table>
                 </form>
+                <!--分页-->
+                <div class="pageWrap">
+                    <div id="pagerInner"></div>
+                </div>
                 <!--编辑和新增用户弹窗-->
                 <div class="userPopWrap" style="display: none">
                     <div class="userPopInner">
@@ -72,7 +76,7 @@
                                 <tr>
                                     <td>姓名</td>
                                     <td>
-                                        <input type="text" v-model="addParams.nickname" class="layui-input" datatype="s1-5" class="layui-input" nullmsg="请填写姓名" sucmsg=" " errormsg="* 姓名不符合规定！">
+                                        <input type="text" v-model="params.nickname" class="layui-input" datatype="s1-5" class="layui-input" nullmsg="请填写姓名" sucmsg=" " errormsg="* 姓名不符合规定！">
                                         <span class="Validform_checktip"></span>
                                     </td>
                                 </tr>
@@ -91,7 +95,7 @@
                                 <tr>
                                     <td>手机号</td>
                                     <td>
-                                        <input type="text" v-model="addParams.mobile" class="layui-input" datatype="m" class="layui-input" nullmsg="请填写手机号" sucmsg=" " errormsg="* 手机号码不符合规定！">
+                                        <input type="text" v-model="params.mobile" class="layui-input" datatype="m" class="layui-input" nullmsg="请填写手机号" sucmsg=" " errormsg="* 手机号码不符合规定！">
                                         <span class="Validform_checktip"></span>
                                     </td>
 
@@ -99,24 +103,24 @@
                                 <tr>
                                     <td>账号</td>
                                     <td>
-                                        <input type="text" v-model="addParams.name" lay-verify="required" placeholder="请输入账号" datatype="*3-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在3~15位之间！">
+                                        <input type="text" v-model="params.name" lay-verify="required" placeholder="请输入账号" datatype="*3-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在3~15位之间！">
                                         <span class="Validform_checktip"></span>
                                     </td>
                                 </tr>
-                                <tr>
+                                <!--<tr>
                                     <td>密码</td>
                                     <td>
-                                        <input type="password" class="layui-input" value="xhongxiansheng111111" v-model="addParams.password" readonly>
+                                        <input type="password" class="layui-input" value="xhongxiansheng111111" v-model="params.password" readonly>
                                     </td>
-                                </tr>
+                                </tr>-->
                                 <tr>
                                     <td>状态</td>
                                     <td>
                                         <div class="layui-inline">
                                             <div class="layui-input-inline">
-                                                <select lay-verify="required">
-                                                    <option :selected="addParams.status == 0?'selected':''">锁定</option> 
-                                                    <option :selected="addParams.status == 1?'selected':''">启用</option>
+                                                <select lay-verify="required" id="roleIdID">
+                                                    <option :selected="params.status == 0?'selected':''">锁定</option> 
+                                                    <option :selected="params.status == 1?'selected':''">启用</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -124,9 +128,10 @@
                                 </tr>
                             </table>
                             <div class="submitBtnWrap">
-                                <button type="button" class="layui-btn" @click="submitUser(adminEdit.uuid)">确定</button>
+                                <button type="button" class="layui-btn" id="submitBtn" @click="submitUser(params.uuid)">确定</button>
                             </div>
                         </form>
+
                     </div>
                 </div>
             </div>
@@ -143,6 +148,7 @@
     <script type="text/javascript" src="../../config/configure.js"></script>
     <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
     <script type="text/javascript" src="../../js/page/admin/admin.js"></script>
+
 </body>
 
 </html>
