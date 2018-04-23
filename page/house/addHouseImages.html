@@ -13,6 +13,9 @@
     <link rel="stylesheet" href="../../css/style1.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
     <script src="../../js/modernizr-2.6.2.min.js"></script>
+    <!--- vue -->
+    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
 </head>
 <body>
     <div class="wrap">
@@ -67,16 +70,14 @@
                 </div>
                      <!--上传图片表单-->
                 <div class="formWrap">
-                    <form class="layui-form" action="addHouseStep5.html">
+                    <form class="layui-form" id="image">
                         <table class="uploadTable">
                             <tr>
                                 <td>封面图(单张)</td>
                                 <td>
-                                    <div class="layui-upload">
-                                        <div class="layui-upload-drag" id="covermap">
-                                            <i class="layui-icon"></i>
-                                            <p>点击上传，或将文件拖拽到此处</p>
-                                        </div>
+                                    <div class="layui-upload-drag" id="covermap">
+                                        <i class="layui-icon"></i>
+                                        <p>点击上传，或将文件拖拽到此处</p>
                                     </div>
                                 </td>
                             </tr>
@@ -84,10 +85,11 @@
                                 <td>详情图</td>
                                 <td>
                                     <div class="layui-upload">
-                                        <div class="layui-upload-drag" id="infoImg">
-                                            <i class="layui-icon"></i>
-                                            <p>点击上传，或将文件拖拽到此处</p>
-                                        </div>
+                                        <button type="button" class="layui-btn" id="infoImg">多图片上传</button>
+                                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
+                                            预览图：
+                                            <div class="layui-upload-list" id="demo2"></div>
+                                        </blockquote>
                                     </div>
                                     <div>支持JPG、PNG、JPEG,最多可上传9张</div>
                                 </td>
@@ -97,17 +99,15 @@
                                 <td>
                                     <div class="layui-form-item">
                                         <div class="layui-input-block forEditLeftMargin">
-                                            <input type="radio" name="isShow" value="是" title="是" checked="">
-                                            <input type="radio" name="isShow" value="否" title="否">
+                                            <input type="radio" name="isShow" value="1" title="是" checked=""  lay-filter="business">
+                                            <input type="radio" name="isShow" value="0" title="否"  lay-filter="business" >
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                         </table>
-                        <input type="hidden" name="covermap" id="covermapName">
-                        <input type="hidden" name="images">
                         <div class="nextBtnWrap">
-                            <button class="layui-btn nextBtn" lay-submit=" " lay-filter="filter1">下一步</button>
+                            <button class="layui-btn nextBtn" type="button" @click="saveImage()" >下一步</button>
                         </div>
                     </form>
                 </div>
@@ -123,52 +123,6 @@
 <script type="text/javascript" src="../../config/bese64.js"></script>
 <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
+<script type="text/javascript" src="../../js/page/house/images.js"></script>
 
-<script type="text/javascript">
-    var tokenValue = JSON.parse(localStorage.getItem("userinfo")).token;
-    layui.use(['upload','form','layer'], function() {
-        var form = layui.form;
-        var $ = layui.jquery;
-        var layer = layui.layer;
-            upload = layui.upload;
-           //普通图片上传
-            upload.render({
-                headers:{ Authorization: tokenValue },
-                elem: '#covermap',
-                exts:"jpg|png|jpeg",
-                size:5120,
-                url: auth_conf.add_imag,
-                before: function(obj)
-                {
-                    layer.load(); //上传loading
-                }
-                ,done: function(res)
-                {
-                    layer.closeAll('loading'); //关闭loading
-                    //$("#src").attr('src',res.data.src);
-                    $("#covermapName").val(res.data.name);
-                    $("#covermap").css("background","url("+res.data.src+")");
-                    console.log(res)
-                },
-                error: function(index, upload){
-                    layer.closeAll('loading'); //关闭loading
-                }
-            });
-            //多图片上传
-            upload.render({
-                elem: '#infoImg',
-                url: '/upload/',
-                multiple: true,
-                before: function(obj) {
-                    //预读本地文件示例，不支持ie8
-                    obj.preview(function(index, file, result) {
-                        $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
-                    });
-                },
-                done: function(res) {
-                    //上传完毕
-                }
-            });
-    });
-</script>
 </html>

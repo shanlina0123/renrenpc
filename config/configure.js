@@ -18,9 +18,11 @@
             add_imag: host + 'admin/img/upload', //添加房源数据
             datas_default_one: host + 'admin/datas-default-one/', //默认属性数据
             datas_one: host + 'admin/datas-one/', //自定义数据单个
+            
             admin_datas: host + 'admin/chart-admin',//后台用户列表
             users_list: host + 'admin/user/broker', //经纪人列表
             chart_list: host + 'admin/chart', //数据列表
+            chart_drop:host+'admin/chart-user',//数据分析 - 经纪人/业务员列表 - 下拉框
             company_list: host + "admin/company/index", //公司列表
             client_list: host + 'admin/client/index', //客户列表
             admin_list: host + 'admin/admin', //后台用户列表
@@ -31,8 +33,9 @@
         }
 
 })();
-new Vue({
-    el: 'body',
+
+/*new Vue({
+    el: '.wrap',
     data: {
         tokenData: localStorage.getItem("userinfo")
     },
@@ -67,9 +70,9 @@ new Vue({
                         that.tokenData = null;
                         window.location = "/login.html";
                     }
-                    /**
+                    /!**
                      * 引入top和right
-                     */
+                     *!/
                     $("#top").load('/page/public/top.html');
                     $("#left").load('/page/public/left.html');
 
@@ -85,4 +88,7 @@ new Vue({
         var that = this;
         that.filterToken();//过滤token
     }
-});
+<<<<<<< HEAD
+});*/
+
+
