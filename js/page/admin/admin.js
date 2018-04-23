@@ -1,12 +1,3 @@
-$(function() {
-    layui.use(['form'], function() {
-        var form = layui.form;
-        form.on('select(filter)', function(data) {
-            var value = data.value
-            console.log(value); //得到select原始DOM对象
-        });
-    });
-});
 var vm = new Vue({
     el: '#adminTable',
     data: {
@@ -135,7 +126,7 @@ var vm = new Vue({
         },
         //锁定用户(未成功，Vue中监听layui的复选框事件)
         lockAdmin: function(uuid) {
-            //console.log(uuid);
+            console.log(uuid);
             if (uuid) {
                 var url = auth_conf.admin_lock + uuid;
                 axios.post(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
@@ -184,8 +175,8 @@ var vm = new Vue({
                 } else {
                     axios.put(url, that.params, { headers: { "Authorization": that.tokenValue } })
                         .then(function(response) {
-                            //console.log(that.params);
-                            //console.log(response);
+                            console.log(that.params);
+                            console.log(response);
                             if (response.status == 1) {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
@@ -252,4 +243,19 @@ var vm = new Vue({
         var that = this;
         that.getAdminList() //用户列表
     }
+});
+layui.use(["form", "layer"], function() {
+    var form = layui.form;
+    var layer = layui.layer;
+    form.on('checkbox()', function(data) {
+        if (data.elem.checked) {
+            console.log("选中了");
+        } else {
+            console.log("没选中");
+        }
+        console.log(data.elem); //得到checkbox原始DOM对象
+        console.log(data.elem.checked); //是否被选中，true或者false
+        console.log(data.value); //复选框value值，也可以通过data.elem.value得到
+        console.log(data.othis); //得到美化后的DOM对象
+    });
 })

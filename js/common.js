@@ -77,3 +77,14 @@ function arrayIndexToValue(data,key)
     }
    return list;
 }
+
+
+/**
+ * 退出
+ *
+ */
+function signOut()
+{
+    localStorage.removeItem("userinfo");
+    window.location.href = '/login.html';
+}

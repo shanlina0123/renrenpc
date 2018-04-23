@@ -22,33 +22,36 @@
 </head>
 
 <body>
-    <!--[if lt IE 7]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
     <div class="wrap">
         <div class="layui-layout loginBg">
-            <div class="loginFormWrap">                            
-                <form class="layui-form loginForm" action="erweimaLogin.html">
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">账号</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="username" lay-verify="required" placeholder="请输入账号" datatype="*6-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在6~15位之间！">
-                            <span class="Validform_checktip"></span>
+            <div class="loginFormWrap">
+                <div class="layui-layout layui-layout-admin" id="top"></div>
+                <div class="main clearfix">
+                    <ul class="leftNav fl" id="left"></ul>
+                    <form class="layui-form loginForm" action="erweimaLogin.html">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">账号</label>
+                            <div class="layui-input-block">
+                                <input type="text" name="username" lay-verify="required" placeholder="请输入账号" datatype="*6-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在6~15位之间！">
+                                <span class="Validform_checktip"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <button  class="layui-btn" id="btn_submit">提交</button>
+                        <div class="layui-form-item">
+                            <div class="layui-input-block">
+                                <button  class="layui-btn" id="btn_submit">提交</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
     <!-- //wrap -->
-    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
-     <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="../../config/configure.js?v=1"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript">
         $(function () {
 		    if( $(".loginForm").length )
