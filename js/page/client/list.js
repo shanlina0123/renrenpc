@@ -1,23 +1,3 @@
-$(function() {
-    //批量移交客户
-    $(".changeClient").click(function() {
-        layer.confirm('先筛选客户，再进行客户移交。每次只能移交同一个业务员的客户', {
-            btn: ['我知道了'], //按钮
-            title: "提示",
-            area: ['600px', '167px']
-        }, function() {
-            layer.open({
-                type: 1,
-                title: '批量移交客户',
-                shadeClose: true,
-                scrollbar: false,
-                skin: 'layui-layer-rim',
-                area: ['500px', '400px'],
-                content: $(".custormHandelPop")
-            })
-        });
-    });
-});
 var vm = new Vue({
     el: '#vue_client_list',
     data: {
@@ -31,7 +11,9 @@ var vm = new Vue({
         client_datas:[],//客户详情
         search_params: { "name": null},//客户房源搜索
         house_list:[],//房源list
+        client_admin_list:[],//业务员的所有客户列表
         add_params:{name:null,followstatusid:null,levelid:null,houseid:null,comedate:null,dealdate:null},//修改客户
+        trans_params:{uuid:[],accept:null,transfer:null},//移交客户参数
         tokenUserInfo: JSON.parse(localStorage.getItem("userinfo")),
         tokenValue: JSON.parse(localStorage.getItem("userinfo")).token,
         pages: 0,
@@ -160,6 +142,70 @@ var vm = new Vue({
 
             });
         },
+        //进入移交客户
+        transferClient:function(){
+            //成交时间
+            layui.use(["form",'jquery'], function() {
+                var form = layui.form,
+                    $ = layui.jquery;
+            });
+            layer.open({
+                type: 1,
+                title: '批量移交客户',
+                shadeClose: true,
+                scrollbar: false,
+                skin: 'layui-layer-rim',
+                area: ['900px', '500px'],
+                content: $(".custormHandelPop")
+            })
+        },
+        //获取移交人的所有客户
+        changeAdmin:function(adminid,token){
+            var url = auth_conf.client_admin+adminid;
+            var that = this;
+            axios.get(url,{ headers: { "Authorization": token} })
+                .then(function(response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        var newDataList=[];
+                       $.each(data.data,function(i,n){
+                          var newData=[];
+                          newData["uuid"]=n.uuid;
+                           newData["name"]=n.dynamic_to_client.name+" - "+n.dynamic_to_client.mobile;
+                           newDataList.push(newData);
+                       });
+                        that.client_admin_list=newDataList;
+                        selectAppendDd($("#transClient"), that.client_admin_list, "uuid", "name");
+
+                    } else {
+                        layer.msg(data.messages, {icon: 6});
+                    }
+                })
+                .catch(function(error) {
+                    //console.log(error);
+                });
+        },
+        //执行移交客户
+        transSubmit:function(){
+            var url = auth_conf.client_trans;
+            var that = this;
+            that.trans_params.uuid.push($("#transClient").val());
+            that.trans_params.accept =$("#acceptAdmin").val();
+            that.trans_params.transfer = $("#transAdmin").val();
+            axios.post(url, that.trans_params, { headers: { "Authorization": that.tokenValue } })
+                .then(function(response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        layer.msg(data.messages, {icon: 1});
+                         window.location.href = "../client/client.html";
+                    } else {
+                        layer.msg(data.messages, {icon: 6});
+                    }
+                })
+                .catch(function(error) {
+                    //console.log(error);
+                });
+        },
         //被调用-执行删除客户
         doDeleteClient:function(uuid){
             var url = auth_conf.client_delete+uuid;
@@ -281,6 +327,8 @@ var vm = new Vue({
                         that.admin_datas = data.data;
                         that.admin_show_datas = arrayIndexToValue(data.data, "id");
                         selectAppendDd($("#showSearchAdmin"), that.admin_datas, "id", "nickname");
+                        selectAppendDd($("#transAdmin"), that.admin_datas, "id", "nickname");
+                        selectAppendDd($("#acceptAdmin"), that.admin_datas, "id", "nickname");
                     }
                 })
                 .catch(function (error) {
@@ -296,3 +344,15 @@ var vm = new Vue({
         that.getAdmins();//所有业务员
     }
 });
+$(function(){
+    //点击选择移交人
+    layui.use(["form"], function() {
+        var form=layui.form;
+        form.on('select(transAdmin)', function(data){
+            var transAdminid=$("#transAdmin").val();
+            var token=vm.$data.tokenValue;
+            vm.$options.methods.changeAdmin(transAdminid,token);
+        });
+    });
+
+})
