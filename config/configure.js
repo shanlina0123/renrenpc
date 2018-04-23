@@ -99,8 +99,6 @@ function checkToken()
                 }else{
                     alert(result.messages);
                 }
-            }else{
-                alert(result.messages);
             }
         }
     });
