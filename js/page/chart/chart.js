@@ -30,7 +30,7 @@ $(function() {
                 })
             });          
 })
- 
+
 var ch = new Vue({
     el: '#charts',
   data: {
@@ -149,7 +149,6 @@ var ch = new Vue({
          },
        //公司
        companylist:function (){  
-    
         	var url = auth_conf.company_list;       
             var that = this;
             axios.get(url,{headers: {"Authorization": that.tokenValue}})
@@ -205,6 +204,24 @@ var ch = new Vue({
                     }
                 });
           },
+          //业务员
+           getAdmins: function () {
+            var url = auth_conf.admin_datas;
+            var that = this;
+            axios.get(url, {headers: {"Authorization": that.tokenValue}})
+                .then(function (response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        //业务员
+                        that.admin_datas = data.data;
+                       // that.admin_show_datas = arrayIndexToValue(data.data, "id");
+                        selectAppendDd($("#workp"), that.admin_datas, "id", "nickname");
+                    }
+                })
+                .catch(function (error) {
+                    //console.log(error);
+                });
+        },
        
        
     },
@@ -214,6 +231,7 @@ var ch = new Vue({
    		that.statelist();
    		that.companylist();
         that.managerlist();
+        that.getAdmins();
     }
 });
 /**
@@ -221,13 +239,23 @@ var ch = new Vue({
  */
 
 function search() {
-	var followstatusid=$("#state").val();
-    var refereeuserid = $("#manager").val();   
-    var ownadminid = $("#workp").val(); 
-     var companyid = $("#firm").val();
-    ch.$data.params.followstatusid = followstatusid;//客户状态
-    ch.$data.params.refereeuserid = refereeuserid;//经纪人
-    ch.$data.params.ownuserid = ownuserid;//业务员
+	var followstatusid=$("#state").val();//客户状态
+    var companyid = $("#firm").val();    //公司
+   var refereeuserid = $("#manager").val();//经纪人
+   var ownadminid = $("#workp").val();//业务员
+    //日期
+    var makedate = $("#test16").val();
+    var comedate = $("#test17").val();
+    var dealdate = $("#test18").val();
+    
+    ch.$data.params.followstatusid = followstatusid;//客户状态    
     ch.$data.params.companyid = companyid;//公司
+   //经纪人，业务员
+   ch.$data.params.refereeuserid = refereeuserid;
+   ch.$data.params.ownadminid = ownadminid;
+   //日期
+    ch.$data.params.makedate = makedate;
+	ch.$data.params.comedate = comedate;
+	ch.$data.params.dealdate = dealdate;
     ch.getChartsList();
 }

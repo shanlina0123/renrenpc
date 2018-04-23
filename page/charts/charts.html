@@ -46,7 +46,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">客户状态</label>
                                 <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="" id="state">
+                                    <select name="state" lay-verify="required" lay-search="" id="state">
 							          <option value="">全部</option>							          
 							        </select>
                                 </div>
@@ -54,7 +54,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">公司</label>
                                 <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="" id="firm">
+                                    <select name="firm" lay-verify="required" lay-search="" id="firm">
 					          		<option value="">全部</option>					          				
 					        </select>
                                 </div>
@@ -62,7 +62,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">经纪人</label>
                                 <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="" id="manager">
+                                    <select name="manager" lay-verify="required" lay-search="" id="manager">
 					          		<option value="">全部</option>					        
 					      			  </select>
                                 </div>
@@ -70,7 +70,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">业务员</label>
                                 <div class="layui-input-inline">
-                                    <select name="modules" lay-verify="required" lay-search="" id="workp">
+                                    <select name="workp" lay-verify="required" lay-search="" id="workp">
 					          <option value="">全部</option>					     
 					        </select>
                                 </div>
@@ -95,7 +95,7 @@
                                     <input class="layui-input timePadding" id="test18" type="text" placeholder="请选择时间">
                                 </div>
                             </div>
-                            <button class="layui-btn sortBtn" ionclick="search()">查询</button>
+                            <button class="layui-btn sortBtn" onclick="search()">查询</button>
                         </div>
                     </form>
                 </div>
@@ -121,9 +121,11 @@
                         <tbody >
                             <tr v-for="item in charts">
                                 <td>{{item.clientid}}</td>
-                                <td>{{item.dynamic_to_client.name}}</td>
-                                <td>{{item.followstatusid}}</td>
-                                <td>{{item.companyid}}</td>
+                                <td>{{item.dynamic_to_client.name}}</td> 
+                                <td>{{item.followstatusid}}</td>                             
+                  <!--客户状态--><!--<td v-if="default_followstatus_datas[item.followstatusid]">{{default_followstatus_datas[item.followstatusid]["name"]}}</td><td v-else></td>-->
+                  <!--合作公司--><!--<td v-if="default_firm_datas[item.companyid]">{{default_firm_datas[item.companyid]["name"]}}</td><td v-else></td>-->
+                  					<td>{{item.companyid}}</td>
                                  <td>{{item.ownadminid}}</td>
                                 <td>{{item.refereeuserid}}</td>
                                 <td>{{item.housename}}</td>                               

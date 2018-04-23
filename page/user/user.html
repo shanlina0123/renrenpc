@@ -80,26 +80,17 @@
                                 <tr v-for="item in users">
                                     <td>{{item.id}}</td>
                                     <td>{{item.nickname}}</td>
-                                    <!--<td>{{userstype[item.economictid]?userstype[item.economictid].name:''}}</td>-->
-                                     <td>{{item.economictid}}</td>    
-                                    <td>{{item.name}}</td>   
-                                                                                                                  
-                                    <td>{{item.mobile}}</td>
-                                  
+                                    <td>{{userstype[item.economictid]?userstype[item.economictid].name:''}}</td>
+                                    <!--<td>{{item.economictid}}</td>  -->
+                                   <!--<td>{{item.name}}</td> -->
+                                 	<td>{{company[item.name]?company[item.companyid].name:''}}</td>                                                                                                                  
+                                    <td>{{item.mobile}}</td>                                  
                                     <td></td>
                                     <td>
-                                    	<input type="checkbox" name="like[write]" title="锁定">
+                                    	<input type="checkbox" name="like[write]" title="锁定" v-if="item.ishome !== 1">                                    
                                     </td>
                                 </tr>
-                                <!--<tr>
-                                    <td>2</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td><input type="checkbox" name="like[write]" title="锁定"></td>
-                                </tr>-->
+                                
                             </tbody>
                         </table>
                     </div>

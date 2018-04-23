@@ -16,7 +16,42 @@
     <!--- vue -->
     <script type="text/javascript" src="../../plugin/js/vue.js"></script>
     <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+   
 </head>
+ <style type="text/css">
+    	.uploadTable{
+    		height: 500px;
+    		margin-left: 30%;
+    	}
+    	blockquote{
+    	margin-top: 10px;
+    	margin-bottom:20px;
+    	height: 310px;width: 310px;	
+    	border: 1px dashed#ddd;
+    	background: url(../../images/a11.png.png);
+    	}
+    	.layui-form-item{
+    		margin-top: 15px;
+    	}
+    	#covermap i.layui-icon{
+    		color: #eb7221;
+    	}
+    	.layui-upload{
+    		margin-top: 30px;
+    	}
+    	tbody{
+    		margin-left: 30% !important;
+    	}
+    
+    	
+    	.hid {
+            display:none;
+        }
+		.xx {
+            width:12px;
+            height:12px;
+        }
+   </style>
 <body>
     <div class="wrap">
         <div class="layui-layout layui-layout-admin">
@@ -82,14 +117,15 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>详情图</td>
+                                <td>详情图(预览图)</td>
                                 <td>
                                     <div class="layui-upload">
                                         <button type="button" class="layui-btn" id="infoImg">多图片上传</button>
-                                        <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                                            预览图：
-                                            <div class="layui-upload-list" id="demo2"></div>
+                                  
+                                       <blockquote id="imgs">
+                                                
                                         </blockquote>
+                                      
                                     </div>
                                     <div>支持JPG、PNG、JPEG,最多可上传9张</div>
                                 </td>
@@ -124,5 +160,26 @@
 <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../js/page/house/images.js"></script>
-
+<script type="text/javascript">
+	$("img").mouseenter(function () {
+                var myself = $(this);
+                var xx = $("<img src='a7.png' class='xx' />");
+                var top = $(this).offset().top;
+                var left = $(this).offset().left + $(this).width() - 12;
+                xx.css({ "position": "absolute", "top": top, "left": left, "display": "" });
+                $(document.body).append(xx);
+ 
+                $(".xx").click(function () {
+                    myself.hide();
+                    $("img").each(function () {
+                        if ($(this).hasClass("hid")) {
+                            $(this).removeClass("hid");
+                            return false;
+                        }
+                    });
+                });
+            }).mouseleave(function () {
+                $(".xx").hide();
+            });
+</script>
 </html>
