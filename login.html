@@ -24,6 +24,7 @@
     <script src="js/modernizr-2.6.2.min.js"></script>
     <link rel="stylesheet" href="css/style2.css">
     <link rel="icon" href="images/icon.png">
+
 </head>
 <body>
     <!--[if lt IE 7]>
@@ -61,7 +62,6 @@
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="layui-v2.2.6/layui/layui.all.js"></script>
     <script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
-    <script type="text/javascript" src="config/configure.js"></script>
     <script type="text/javascript" src="config/bese64.js"></script>
     <script type="text/javascript">
         $(function () {
@@ -89,7 +89,7 @@
                         var base = new Base64();
                         var password64 = base.encode(password);
                         var data = {name:name,password:password64};
-                        $.post(window.conf.login,data,function ( data )
+                        $.post('http://api.rrzhaofang.com/admin/login',data,function ( data )
                         {
                             if( data.status == 1 )
                             {
