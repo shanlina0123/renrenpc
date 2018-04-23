@@ -4,11 +4,11 @@
     //未带toke请求
     window.conf = {
             login: host + 'admin/login', //首页推荐
-        },
+        }
         //带token的请求
         window.auth_conf = {
             token: host + "admin/token", //检查而已有token
-            path_url: 'http://api.rrzhaofang.com/upload/', //图片地址
+            path_url:'http://api.rrzhaofang.com/upload/', //图片地址
             map_address: host + 'admin/get/map/address', //图片地址
             house_list: host + 'admin/house/index', //房源列表
             house_recommend: host + 'admin/house/recommend', //房源推荐
@@ -41,11 +41,11 @@
             role_power: host + 'admin/auth', //系统权限设置
             role_HadPower: host + 'admin/auth/', //已经拥有的权限列表
             client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
-            client_follow: host + 'admin/client-follow/store' //跟进客户
+            client_follow: host + 'admin/client-follow/store', //跟进客户
             chart_drop: host + 'admin/chart-user', //经纪人
         }
-    $("#top").load('/page/public/top.html');
-    $("#left").load('/page/public/left.html');
+        $("#top").load('/page/public/top.html');
+        $("#left").load('/page/public/left.html');
 })();
 
 /**
