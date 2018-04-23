@@ -42,56 +42,55 @@
     $("#top").load('/page/public/top.html');
     $("#left").load('/page/public/left.html');
 })();
-// new Vue({
-//     el: '.wrap',
-//     data: {
-//         tokenData: localStorage.getItem("userinfo")
-//     },
-//     methods: {
-//         filterToken: function() {
-//             var that = this;
-//             if (!that.tokenData) {
-//                 window.location = "/login.html";
-//             } else {
-//                 if (!JSON.parse(that.tokenData).token) {
-//                     window.location = "/login.html";
-//                 }
-//                 //检查token是否失效
-//                 that.checkToken();
-//             }
-//         },
-//         checkToken: function() {
-//             var url = auth_conf.token;
-//             var that = this;
-//             axios.get(url, { headers: { "Authorization": JSON.parse(that.tokenData).token } })
-//                 .then(function(response) {
-//                     var data = response.data;
-//                     if (data.status != 1) {
-//                         if (data.messages) {
-//                             //alert(data.messages);
-//                             // layui.use('layer', function(id) {
-//                             //     var layer = layui.layer;
-//                             //     layer.msg(data.messages);
-//                             // });
-//                         }
-//                         localStorage.removeItem("userinfo");
-//                         that.tokenData = null;
-//                         window.location = "/login.html";
-//                     }
 
-//                     $("#top").load('/page/public/top.html');
-//                     $("#left").load('/page/public/left.html');
+/**
+ * 排除登陆页
+ * @type {string}
+ */
+var url = window.location.href;
+if( url.indexOf("login.html") == -1 )
+{
+    filterToken();
+}
 
-//                 })
-//                 .catch(function(error) {
-//                     alert("Token验证异常");
-//                     window.location = "/login.html";
-//                 });
-//         }
-//     },
-//     created: function() {
-//         var that = this;
-//         that.filterToken(); //过滤token
-//     }
+/**
+ * 判断session存在不
+ */
+function filterToken() {
 
-// });
+      var tokenData = localStorage.getItem("userinfo");
+      if ( !tokenData )
+      {
+         window.location = "/login.html";
+      }
+      else
+      {
+          checkToken()
+      }
+}
+
+/**
+ * 检测token
+ */
+function checkToken()
+{
+    var tokenData = localStorage.getItem("userinfo");
+    $.ajax({
+        headers: {
+            Authorization:JSON.parse(tokenData).token,
+        },
+        type: "GET", //方法类型
+        dataType: "json", //预期服务器返回的数据类型
+        url: auth_conf.token, //url
+        success: function(result) {
+            if ( result.status != 1  )
+            {
+                if( result.status != 15)
+                {
+                    localStorage.removeItem("userinfo");
+                    window.location.href = '/login.html';
+                }
+            }
+        }
+    });
+}
