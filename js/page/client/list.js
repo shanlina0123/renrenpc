@@ -62,14 +62,17 @@ var vm = new Vue({
     },
     methods: {
         //进入跟进页面
-        linkFollow:function(uuid){
-            var target_url="";
-            if (uuid) {
-                target_url += "uuid=" + uuid;
-            }else{
+        linkFollow:function(uuid,clientid){
+            if(!uuid)
+            {
                 layer.msg("连接错误", {icon: 6});
             }
-            window.location.href = "../page/client/clientFollow.html?" + encodeURIComponent(target_url);
+            var  target_url = "uuid=" + uuid;
+            if(clientid)
+            {
+                target_url += "&clientid=" + clientid;
+            }
+            window.location.href = "../client/clientFollow.html?" + encodeURIComponent(target_url);
         },
         //点击搜索按钮
         searchClick: function () {

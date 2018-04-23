@@ -18,7 +18,7 @@
             add_imag: host + 'admin/img/upload', //添加房源数据
             datas_default_one: host + 'admin/datas-default-one/', //默认属性数据
             datas_one: host + 'admin/datas-one/', //自定义数据单个
-
+            admin_datas: host + 'admin/chart-admin',//后台用户列表
             users_list: host + 'admin/user/broker', //经纪人列表
             chart_list: host + 'admin/chart', //数据列表
             company_list: host + "admin/company/index", //公司列表
@@ -27,11 +27,13 @@
             admin_edit: host + 'admin/admin/', //编辑查看用户
             admin_lock: host + 'admin/admin-setting/', //锁定用户
             role_list: host + 'admin/roles', //角色列表
-            client_follow_list: host + 'admin/client-follow/edit/' //客户跟进列表
+            client_follow_list:host + 'admin/client-follow/edit/', //客户跟进列表
+            client_follow:host + 'admin/client-follow/store' //跟进客户
+
         }
-
+    $("#top").load('/page/public/top.html');
+   $("#left").load('/page/public/left.html');
 })();
-
 new Vue({
     el: '.wrap',
     data: {
@@ -68,10 +70,7 @@ new Vue({
                         that.tokenData = null;
                         window.location = "/login.html";
                     }
-                    /!** *
-                    引入top和right
-                        *
-                        !/
+
                     $("#top").load('/page/public/top.html');
                     $("#left").load('/page/public/left.html');
 
