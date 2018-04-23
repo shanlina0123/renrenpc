@@ -91,7 +91,7 @@
                             <tbody id="houseList" v-cloak>
                                 <tr v-for="item in houseList">
                                     <td>{{item.id}}</td>
-                                    <td><img :src="path_url + item.covermap"></td>
+                                    <td><img width="100" height="50" :src="path_url + item.covermap"></td>
                                     <td>{{item.name}}</td>
                                     <td>{{roomtype[item.typeid]?roomtype[item.typeid].name:''}}</td>
                                     <td>{{item.area}}</td>
