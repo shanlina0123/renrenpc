@@ -52,8 +52,7 @@
                             <td>{{item.dynamic_to_role.name}}</td>
                             <td>{{item.mobile}}</td>
                             <td>
-                                <input type="checkbox" title="锁定" @click="lockAdmin(item.uuid)" checked v-if="item.status == 0">
-                                <input type="checkbox" title="锁定" @click="lockAdmin(item.uuid)" v-else>
+                                <input type="checkbox" title="锁定" v-model="item.status" @click="lockAdmin(item.uuid)" checked="">
                             </td>
                             <td>
                                 <div class="clientBtns">

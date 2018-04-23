@@ -19,7 +19,7 @@ $(function() {
         form.on('select(filter)', function(data)
         {
             var value = data.value
-            console.log(value); //得到select原始DOM对象
+            //console.log(value); //得到select原始DOM对象
         });
     });
 });
@@ -56,6 +56,7 @@ var vm = new Vue({
                   var data = response.data;
                   if ( data.status == 1 )
                     {
+                       // console.log( data );
                         var list = data.data;
                         that.houseList = list.data;
                         that.page_data.total = list.total;
@@ -102,6 +103,7 @@ var vm = new Vue({
                     var data = response.data;
                     if ( data.status == 1 )
                     {
+                        //console.log( data,1 );
                         var list = data.data;
                         that.houseList = list.data;
                         that.page_data.total = list.total;
@@ -165,7 +167,6 @@ var vm = new Vue({
                         var data = response.data;
                         if ( data.status == 1 )
                         {
-
                             layer.msg('删除成功',{icon: 1},function () {
                                 location.href = location.href;
                             });
