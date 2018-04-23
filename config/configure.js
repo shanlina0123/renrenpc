@@ -36,6 +36,7 @@
             client_follow: host + 'admin/client-follow/store',//跟进客户
             
             chart_drop:host+'admin/chart-user',//经纪人
+            company_delete:host+'admin/company/delete/'//公司删除
 
         }
     $("#top").load('/page/public/top.html');

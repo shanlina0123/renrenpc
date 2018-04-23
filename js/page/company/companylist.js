@@ -1,4 +1,4 @@
- $(function() {
+$(function() {
             //添加编辑用户
             $(".editBtn").click(function() {
                 layer.open({
@@ -23,36 +23,7 @@
                     content: $(".custormHandelPop")
                 })
             });
-            //删除用户
-            $(".deleteBtn").click(function() {
-                var $this = $(this);
-                layer.confirm('确定要删除吗？', {
-                    btn: ['确定', '取消']
-                }, function() {
-                    $this.parents("tr").remove();
-                    layer.msg('删除成功', {
-                        icon: 1
-                    });
-                });
-            });
-
-
-            //这个页面的分页用的是浏览器解析后的布局（其他页面使用的是解析前的，后期如果需要会统一修改）
-            layui.use(['laypage', 'layer', 'form'], function() {
-                var laypage = layui.laypage,
-                    layForm = layui.layform,
-                    layer = layui.layer;
-                //总页数大于页码总数
-                laypage.render({
-                    elem: 'pagerInner',
-                    count: 70, //数据总数
-                    jump: function(obj) {
-                        //console.log(obj)
-                    }
-                });
-            });
-        })
-        
+              
            //验证
      if( $(".layui-form2").length ){
     $(".layui-form2").Validform({
@@ -71,7 +42,119 @@
             }
         }
     });
-}
- 
- 
+     }
 
+ })
+ 
+ 
+var com = new Vue({
+	 el: '#companylist',
+	 data:{
+	 	tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token
+	 	 params:{ //地址参数
+            page:1,
+            typeid:'',           
+       },      
+        page_data:{ //分页数据
+            total:0,
+            to:0,
+        },
+        companylist:[], 
+	 },
+	 methods:{
+        //第一次加载数据
+		getcompanylist:function (){		 
+		 	var url = auth_conf.company_list;
+            var that = this;
+			
+          axios.get( url,{headers: {"Authorization": that.tokenValue}})
+            .then(function(response)
+            {
+                  var data = response.data;				
+                  if ( data.status == 1 )
+                    {
+                        that.companylist = data.data.data;
+						console.log(that.companylist);
+                    }else
+                    {
+                        layer.msg(data.messages,{icon: 6});
+                    }
+            });
+		 },
+      
+        //分页
+         getPageData:function () {
+            var that = this;
+            layui.use(['laypage', 'layer', 'form'], function() {
+                var laypage = layui.laypage;
+                var form = layui.form;
+                //总页数大于页码总数
+                laypage.render({
+                    elem: 'pagerInner',
+                    count: that.page_data.total,//总页
+                    limit: that.page_data.to,//每页显示
+                    jump: function(obj,first)
+                    {
+                        if(!first)
+                        {
+                            that.params.page = obj.curr;
+                            that.getDataList();
+                        }
+                    }
+                });
+                form.render();
+            });
+        },
+        //分页加载数据
+        getDataList:function () {
+            var url = auth_conf.company_list;
+            var that = this;
+            axios.get( url,{headers: {"Authorization": that.tokenValue}})
+                .then(function(response)
+                {
+                    var data = response.data;
+                    if ( data.status == 1 )
+                    {
+                        var list = data.data;
+                        that.charts = list.data;
+                        that.page_data.total = list.total;
+                        that.page_data.to= list.to;
+                    }
+                });
+        },
+        //删除
+	  del:function ( uuid ) {
+            var that = this;
+            layer.confirm('确定要删除吗？', {
+                btn: ['确定', '取消']
+            }, function() {
+
+                var url = auth_conf.companylist_delete+uuid;
+                axios.delete(url,{headers: {"Authorization": that.tokenValue}})
+                    .then(function(response)
+                    {
+                        var data = response.data;
+                        if ( data.status == 1 )
+                        {
+
+                            layer.msg('删除成功',{icon: 1},function () {
+                                location.href = location.href;
+                            });
+
+                        }else
+                        {
+                            layer.msg(data.messages,{icon: 6});
+                        }
+                    });
+
+            });
+        }
+         
+       
+    },
+    created:function () {
+        var that = this;     
+        that.getcompanylist();
+   		
+    }
+});
