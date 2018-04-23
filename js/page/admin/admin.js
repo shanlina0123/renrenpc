@@ -1,4 +1,12 @@
-$(function() {});
+$(function() {
+    layui.use(['form'], function() {
+        var form = layui.form;
+        form.on('select(filter)', function(data) {
+            var value = data.value
+            console.log(value); //得到select原始DOM对象
+        });
+    });
+});
 var vm = new Vue({
     el: '#adminTable',
     data: {
@@ -31,7 +39,7 @@ var vm = new Vue({
                 var data = response.data;
                 if (data.status == 1) {
                     that.adminList = data.data.data;
-                    console.log(that.adminList);
+                    //console.log(that.adminList);
                     if (loading != "loadingPageData") {
                         that.getPageData();
                     }
@@ -242,7 +250,6 @@ var vm = new Vue({
     },
     created: function() {
         var that = this;
-        that.getAdminList(); //用户列表
-        that.getPageData()
+        that.getAdminList() //用户列表
     }
 })
