@@ -31,13 +31,12 @@
             admin_edit: host + 'admin/admin/', //编辑查看用户
             admin_lock: host + 'admin/admin-setting/', //锁定用户
             role_list: host + 'admin/roles', //角色列表
-            client_follow_list:host + 'admin/client-follow/edit/', //客户跟进列表
-            client_follow:host + 'admin/client-follow/store', //跟进客户
-            client_detail:host + 'admin/client/edit/', //客户详情
-            client_houses:host + 'admin/client-houses', //客户房源列表检索
-            client_update:host + 'admin/client/update/', //修改客户
-            client_delete:host + 'admin/client/delete/', //删除客户
             role_delete: host + 'admin/roles/', //删除角色
+            role_power: host + 'admin/auth', //系统权限设置
+            client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
+            client_follow: host + 'admin/client-follow/store',//跟进客户
+            
+            chart_drop:host+'admin/chart-user',//经纪人
 
         }
     $("#top").load('/page/public/top.html');
@@ -79,10 +78,10 @@
 //                         that.tokenData = null;
 //                         window.location = "/login.html";
 //                     }
-//
+
 //                     $("#top").load('/page/public/top.html');
 //                     $("#left").load('/page/public/left.html');
-//
+
 //                 })
 //                 .catch(function(error) {
 //                     alert("Token验证异常");
@@ -94,5 +93,5 @@
 //         var that = this;
 //         that.filterToken(); //过滤token
 //     }
-//
+
 // });

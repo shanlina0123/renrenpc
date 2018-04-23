@@ -6,8 +6,9 @@
         tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token   
        params:{ //地址参数
             page:1,
-//          economictid:'',
-          name:'',
+			typeid:'',
+         	// name:'',
+         	 companyid:'',
         },
       
         users:[],
@@ -15,8 +16,8 @@
             total:0,
             to:0,
         },
-        userstype:[],
-        company:[],       
+        userstype:[],//经纪人类型
+        company:[],   //房源类型    
 	},
 	methods:{
 		//第一次加载数据
@@ -30,7 +31,11 @@
 
                   if ( data.status == 1 )
                     {
+                    	 var list = data.data;
                         that.users = data.data.data;
+                        that.page_data.total = list.total;
+                        that.page_data.to= list.to;
+                        that.getPageData();
 						
                     }else
                     {
@@ -109,15 +114,46 @@
                        
                     }
                 });
+       },
+        //经纪人类型
+        userstypeList:function ()
+        {
+   
+        	 var url = auth_conf.datas_default_one+9;
+            var that = this;
+            axios.get( url,{headers: {"Authorization": that.tokenValue}})
+                .then(function(response)
+                {
+                	
+                    var data = response.data;
+                    if ( data.status == 1 )
+                    {
+                       
+                        that.userstype = data.data;
+                        var str = '';
+                        var listData = data.data;
+                        console.log(listData)
+                        that.userstype= listData;
+                        for(var x in listData)
+                        {
+                            str+='<option value="'+listData[x].id+'">'+listData[x].name+'</option>';
+                        }
+                        $("#userstype").append( str );
+                      
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render('select');
+                        });
+                       
+                    }
+                });
        }
 	},
 	created: function () {
         var that = this;
         that.getusers();//列表数据
         that.dataCompayList();//公司列表
-  
-       // that.dataDefault();//默认数据
-      //  that.dataDefinition();//自定义数据
+        that.userstypeList();//经纪人类型
     }
 })
 /**
@@ -125,10 +161,8 @@
  */
 
 function search() {
-
     var typeid = $("#userstype").val();   
-    var companyid = $("#company").val();
-  
+    var companyid = $("#company").val(); 
     us.$data.params.typeid = typeid;
     us.$data.params.companyid = companyid;
     us.getHouseList();

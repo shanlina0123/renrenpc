@@ -44,59 +44,235 @@
                     type: 'datetime',
                     range: '-',
                     format: 'yyyy/M/d'
-                });
-            });
+                })
+            });          
+})
 
-            // 分页,表单
-            layui.use(['laypage', 'layer', 'form'], function() {
-                var laypage = layui.laypage,
-                    layer = layui.layer;
-                //总页数大于页码总数
-                laypage.render({
-                    elem: 'pagerInner',
-                    count: 70, //数据总数
-                    jump: function(obj) {
-                        //console.log(obj)
-                    }
-                });
-            });  });
-         
- var ch=new Vue({
-	el: '#charts',
-	data:{
-//		 tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token
-//		 users:[],
-        tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token       
-        chart:[]  
-	},
-	methods:{
-		//第一次加载数据
-		 getchart:function (){
+var ch = new Vue({
+    el: '#charts',
+  data: {
+       
+        tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token
+         params:{ //地址参数
+            page:1,
+            typeid:'',
+            followstatusid:'',//客户状态
+            refereeuserid:'',//经纪人
+            ownadminid:'',//业务员
+            companyid:'',
+            makedate:'',
+            comedate:'',
+            dealdate:'',
+        },
+       
+        page_data:{ //分页数据
+            total:0,
+            to:0,
+        },
+        charts:[], 
+        state:[],
+    },
+    methods:{
+        //第一次加载数据
+		getChartsList:function (){		 
 		 	var url = auth_conf.chart_list;
             var that = this;
-            axios.get( url,{headers: {"Authorization": that.tokenValue}})
+			
+           axios.post(url,that.params,{headers: {"Authorization": that.tokenValue}})
             .then(function(response)
             {
-                  var data = response.data;
-
+                  var data = response.data;				
                   if ( data.status == 1 )
                     {
-                        that.chart = data.data.data;
-						
+                        that.charts = data.data.data;
+						//console.log(that.charts);
                     }else
                     {
                         layer.msg(data.messages,{icon: 6});
                     }
             });
-		 },		
-		  //默认数据
-     
-	},
-	created: function () {
-        var that = this;
-        that.getchart();//列表数据
-        // that.getusers();//列表数据
-        //that.dataDefault();//默认数据
-       // that.dataDefinition();//自定义数据
+		 },
+      
+        //分页
+         getPageData:function () {
+            var that = this;
+            layui.use(['laypage', 'layer', 'form'], function() {
+                var laypage = layui.laypage;
+                var form = layui.form;
+                //总页数大于页码总数
+                laypage.render({
+                    elem: 'pagerInner',
+                    count: that.page_data.total,//总页
+                    limit: that.page_data.to,//每页显示
+                    jump: function(obj,first)
+                    {
+                        if(!first)
+                        {
+                            that.params.page = obj.curr;
+                            that.getDataList();
+                        }
+                    }
+                });
+                form.render();
+            });
+        },
+        //分页加载数据
+        getDataList:function () {
+            var url = auth_conf.chart_list;
+            var that = this;
+            axios.post(url,{headers: {"Authorization": that.tokenValue}})
+                .then(function(response)
+                {
+                    var data = response.data;
+                    if ( data.status == 1 )
+                    {
+                        var list = data.data;
+                        that.charts = list.data;
+                        that.page_data.total = list.total;
+                        that.page_data.to= list.to;
+                    }
+                });
+        },
+		 //客户状态
+		statelist:function ()
+        {
+   
+        	var url = auth_conf.datas_default_one+8;
+       
+            var that = this;
+            axios.get( url,{headers: {"Authorization": that.tokenValue}})
+               .then(function(response)
+                {
+                    var data = response.data;                 
+                    if ( data.status == 1 )
+                    {
+                       
+                        that.state = data.data;
+                        var str = '';
+                        var listData = data.data;
+                        that.state = listData;
+                        for(var x in listData)
+                        {
+                            str+='<option value="'+listData[x].id+'">'+listData[x].name+'</option>';
+                        }
+                        $("#state").append( str );
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render('select');
+                        });
+                       
+                    }
+                });
+         },
+       //公司
+       companylist:function (){  
+        	var url = auth_conf.company_list;       
+            var that = this;
+            axios.get(url,{headers: {"Authorization": that.tokenValue}})
+               .then(function(response)
+                {
+                    var data = response.data;                 
+                    if ( data.status == 1 )
+                    {
+                       
+                        that.firm = data.data;
+                        var str = '';
+                        var listData = data.data.data;
+                        that.firm = listData;
+                        for(var x in listData)
+                        {
+                            str+='<option value="'+listData[x].id+'">'+listData[x].name+'</option>';
+                        }
+                        $("#firm").append( str );
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render('select');
+                        });
+                       
+                    }
+                });
+          },
+          //经纪人
+           managerlist:function (){  
+    
+        	var url = auth_conf.chart_drop;       
+            var that = this;
+            axios.get(url,{headers: {"Authorization": that.tokenValue}})
+               .then(function(response)
+                {
+                    var data = response.data;                 
+                    if ( data.status == 1 )
+                    {
+                        var str = '';
+                        var listData = data.data;
+                        console.log(listData);
+                        
+                        for(var x in listData)
+                        {
+                            str+='<option value="'+listData[x].id+'">'+listData[x].nickname+'</option>';
+                        }
+                        console.log(str)
+                        $("#manager").append( str );
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render('select');
+                        });
+                       
+                    }
+                });
+          },
+          //业务员
+           getAdmins: function () {
+            var url = auth_conf.admin_datas;
+            var that = this;
+            axios.get(url, {headers: {"Authorization": that.tokenValue}})
+                .then(function (response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        //业务员
+                        that.admin_datas = data.data;
+                       // that.admin_show_datas = arrayIndexToValue(data.data, "id");
+                        selectAppendDd($("#workp"), that.admin_datas, "id", "nickname");
+                    }
+                })
+                .catch(function (error) {
+                    //console.log(error);
+                });
+        },
+       
+       
+    },
+    created:function () {
+        var that = this;     
+        that.getChartsList();
+   		that.statelist();
+   		that.companylist();
+        that.managerlist();
+        that.getAdmins();
     }
-})
+});
+/**
+ * 检索
+ */
+
+function search() {
+	var followstatusid=$("#state").val();//客户状态
+    var companyid = $("#firm").val();    //公司
+   var refereeuserid = $("#manager").val();//经纪人
+   var ownadminid = $("#workp").val();//业务员
+    //日期
+    var makedate = $("#test16").val();
+    var comedate = $("#test17").val();
+    var dealdate = $("#test18").val();
+    
+    ch.$data.params.followstatusid = followstatusid;//客户状态    
+    ch.$data.params.companyid = companyid;//公司
+   //经纪人，业务员
+   ch.$data.params.refereeuserid = refereeuserid;
+   ch.$data.params.ownadminid = ownadminid;
+   //日期
+    ch.$data.params.makedate = makedate;
+	ch.$data.params.comedate = comedate;
+	ch.$data.params.dealdate = dealdate;
+    ch.getChartsList();
+}
