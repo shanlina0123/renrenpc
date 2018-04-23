@@ -46,11 +46,11 @@ var vm = new Vue({
     },
     methods:{
         //第一次加载数据
-        getHouseList:function ()
+        getHouseList:function ( loading )
         {
             var url = auth_conf.house_list;
             var that = this;
-            axios.get( url,{headers: {"Authorization": that.tokenValue}})
+            axios.get( url,{ params: that.params,headers: {"Authorization": that.tokenValue}})
             .then(function(response)
             {
                   var data = response.data;
@@ -60,10 +60,20 @@ var vm = new Vue({
                         that.houseList = list.data;
                         that.page_data.total = list.total;
                         that.page_data.to= list.to;
-                        that.getPageData();
+                        if( loading!="loadingPageData")
+                        {
+                            that.getPageData();
+                        }
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render();
+                        });
                     }else
                     {
-                        layer.msg(data.messages,{icon: 6});
+                        layui.use(['layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg(data.messages,{icon: 6});
+                        });
                     }
             });
 
@@ -82,34 +92,19 @@ var vm = new Vue({
                     limit: that.page_data.to,//每页显示
                     jump: function(obj,first)
                     {
-                        console.log( that.page_data.total );
                         if(!first)
                         {
                             that.params.page = obj.curr;
-                            that.getDataList();
+                            that.getHouseList('loadingPageData');
                         }
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render();
+                        });
                     }
                 });
                 form.render();
             });
-        },
-        //分页加载数据
-        getDataList:function () {
-            var url = auth_conf.house_list;
-            var that = this;
-            axios.get( url,{ params: that.params,headers: {"Authorization": that.tokenValue}})
-                .then(function(response)
-                {
-                    var data = response.data;
-                    if ( data.status == 1 )
-                    {
-                        //console.log( data,1 );
-                        var list = data.data;
-                        that.houseList = list.data;
-                        that.page_data.total = list.total;
-                        that.page_data.to= list.to;
-                    }
-                });
         },
         //默认数据
         dataDefault:function ()
@@ -132,7 +127,7 @@ var vm = new Vue({
                        $("#roomType").append( str );
                         layui.use(['form'], function() {
                             var form = layui.form;
-                            form.render('select');
+                            form.render();
                         });
                     }
                 });
@@ -199,5 +194,6 @@ function search() {
     vm.$data.params.created_at = created_at;
     vm.$data.params.typeid = typeid;
     vm.$data.params.iscommission = iscommission;
+    vm.$data.params.page = 1;
     vm.getHouseList();
 }
