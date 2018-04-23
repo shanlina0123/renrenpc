@@ -43,8 +43,8 @@
             role_power: host + 'admin/auth', //系统权限设置
             role_HadPower: host + 'admin/auth/', //已经拥有的权限列表
             client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
-            client_follow: host + 'admin/client-follow/store', //跟进客户
-            chart_drop: host + 'admin/chart-user', //经纪人
+            chart_drop:host+'admin/chart-user',//经纪人
+            company_delete:host+'admin/company/delete/'//公司删除
         }
         $("#top").load('/page/public/top.html');
         $("#left").load('/page/public/left.html');
