@@ -1,9 +1,10 @@
-﻿<!DOCTYPE html>
-<html>
+﻿
+<html class="no-js">
+<!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>修改密码</title>
+    <title>首页</title>
      <link rel="icon" href="../../images/icon.ico">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -12,11 +13,21 @@
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
     <script src="../../js/modernizr-2.6.2.min.js"></script>
-    <link rel="stylesheet" href="../../css/style2.css">
+    <link rel="stylesheet" href="../../css/style1.css">
+     <link rel="stylesheet" href="../../css/style2.css">
+     
 </head>
 <body>
-      <div class="wrap">
-        <div class="layui-layout loginBg">
+    <!--[if lt IE 7]>
+        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="wrap">
+        <div class="layui-layout layui-layout-admin" id="top"></div>
+        <div class="main clearfix">
+            <!--左侧导航-->
+            <ul class="leftNav fl" id="left"><!--左侧导航--></ul>
+            <!--右侧主要内容-->
+             <div>
             <div class="loginFormWrap">
                 <form class="layui-form loginForm" action="index.html">                   
                     <div class="layui-form-item">
@@ -40,14 +51,16 @@
                         </div>
                     </div>
                 </form>
-                
+              </div>  
             </div>
         </div>
+       
     </div>
     <!-- //wrap -->
     <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
-     <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
+    <script type="text/javascript" src="../../config/configure.js?v=1"></script>
+    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript">
         $(function () {
 		    if( $(".loginForm").length )
@@ -72,5 +85,4 @@
 		});
     </script>
 </body>
-
 </html>

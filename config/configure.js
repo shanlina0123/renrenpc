@@ -41,6 +41,7 @@
             role_HadPower: host + 'admin/auth/', //已经拥有的权限列表
             client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
             client_follow: host + 'admin/client-follow/store' //跟进客户
+            chart_drop: host + 'admin/chart-user', //经纪人
         }
     $("#top").load('/page/public/top.html');
     $("#left").load('/page/public/left.html');
@@ -81,10 +82,10 @@
 //                         that.tokenData = null;
 //                         window.location = "/login.html";
 //                     }
-//
+
 //                     $("#top").load('/page/public/top.html');
 //                     $("#left").load('/page/public/left.html');
-//
+
 //                 })
 //                 .catch(function(error) {
 //                     alert("Token验证异常");
