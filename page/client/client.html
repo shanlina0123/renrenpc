@@ -120,7 +120,7 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tr v-for="(item,index) in client_list">
+                        <tr v-for="(item,index) in client_list" :id="'clientList_'+item.uuid">
                             <td>{{index+1}}</td>
                             <td>{{item.dynamic_to_client.name}}</td>
                             <td v-if="level_datas[item.levelid]">{{level_datas[item.levelid]["name"]}}</td><td v-else></td>

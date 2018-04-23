@@ -17,18 +17,6 @@ $(function() {
             })
         });
     });
-    //删除用户
-    $(".deleteBtn").click(function() {
-        var $this = $(this);
-        layer.confirm('确定要删除吗？', {
-            btn: ['确定', '取消']
-        }, function() {
-            $this.parents("tr").remove();
-            layer.msg('删除成功', {
-                icon: 1
-            });
-        });
-    });
 });
 var vm = new Vue({
     el: '#vue_client_list',
@@ -102,8 +90,7 @@ var vm = new Vue({
                     } else {
                         layer.msg(data.messages, {icon: 6});
                     }
-                }).catch(function (error) {
-            });
+                }).catch(function (error) { });
             //显示出房源列表
             that.showHouseList();
             layer.open({
@@ -148,6 +135,7 @@ var vm = new Vue({
                 .then(function(response) {
                     var data = response.data;
                     if (data.status == 1) {
+                        layer.msg(data.messages, {icon: 7});
                         window.location.href = "../client/client.html";
                     } else {
                         layer.msg(data.messages, {icon: 6});
@@ -156,6 +144,37 @@ var vm = new Vue({
                 .catch(function(error) {
                     //console.log(error);
                 });
+        },
+        //删除客户
+        clientDelete:function(uuid){
+            var that=this;
+            if(!uuid){
+                layer.msg("请求错误", {icon: 6});
+            }
+            layer.confirm('确定要删除吗？', {
+                btn: ['确定', '取消']
+            }, function() {
+                $(".layui-layer-shade").remove();
+                $(".layui-layer-dialog").remove();
+                that.doDeleteClient(uuid);
+
+            });
+        },
+        //被调用-执行删除客户
+        doDeleteClient:function(uuid){
+            var url = auth_conf.client_delete+uuid;
+            var that = this;
+            //token
+            axios.delete(url, {headers: {"Authorization": that.tokenValue}})
+                .then(function (response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        layer.msg(data.messages, {icon: 1});
+                        $("#clientList_"+uuid).remove();
+                    } else {
+                        layer.msg(data.messages, {icon: 6});
+                    }
+                }).catch(function (error) { });
         },
         //点击搜索按钮
         searchClick: function () {
