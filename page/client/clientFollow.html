@@ -1,7 +1,10 @@
 ﻿<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js">
 <!--<![endif]-->
@@ -10,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>客户跟进</title>
-     <link rel="icon" href="../../images/icon.ico">
+    <link rel="icon" href="../../images/icon.ico">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../css/normalize.css">
@@ -22,37 +25,32 @@
 </head>
 
 <body>
-    <!--[if lt IE 7]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <div class="wrap">
-        <div class="layui-layout layui-layout-admin">
-            <!--顶部-->
-             <div class="layui-header header" id="top"> </div>
- 
-        <div class="main clearfix" >
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="wrap" id="vue_client_follow" v-cloak>
+    <div class="layui-layout layui-layout-admin">
+        <!--顶部-->
+        <div class="layui-header header" id="top"></div>
+
+        <div class="main clearfix">
             <!--左侧导航-->
-            <ul class="leftNav fl" id="left">               
+            <ul class="leftNav fl" id="left">
             </ul>
             <!--右侧主要内容-->
             <div class="rightMain fl">
                 <div class="formWrap">
-                    <form class="layui-form" action="client.html">
+                    <form class="layui-form" id="followForm" method="post">
                         <table class="followTable">
                             <tr>
                                 <td>
                                     <div class="layui-inline ">
                                         <label class="layui-form-label ">客户状态</label>
                                         <div class="layui-input-block">
-                                            <select name="interest" lay-filter="aihao">
-                                                    <option value="0">未跟进</option>
-                                                    <option value="1">有效</option>
-                                                    <option value="2">无效</option>
-                                                    <option value="3">未跟进</option>
-                                                    <option value="4">跟进中</option>
-                                                    <option value="5">已上门</option>
-                                                    <option value="5">已成交</option>
-                                                </select>
+                                            <select name="showSearchStatus" lay-verify="required" lay-search=""  id="showSearchStatus" >
+                                                <option value="">全部</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </td>
@@ -62,40 +60,46 @@
                                     <div class="layui-inline ">
                                         <label class="layui-form-label ">跟进内容</label>
                                         <div class="layui-input-block">
-                                            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                                            <textarea placeholder="请输入内容" class="layui-textarea" id="followContent"></textarea>
+                                            <input type="hidden" id="clientid" :value="clientid"/>
                                         </div>
                                     </div>
                                 </td>
                             </tr>
                         </table>
                         <div class="nextBtnWrap">
-                            <button class="layui-btn nextBtn" lay-submit=" " lay-filter="filter1">提交</button>
+                            <button id="followButton" type="button" class="layui-btn nextBtn" lay-submit=" " lay-filter="filter1" @click="submitClick()">提交</button>
                         </div>
                     </form>
                 </div>
                 <h2 class="followText">跟进日志</h2>
                 <ul class="followUl">
-                    <li>
-                        <p>客户状态：<span>无效</span></p>
-                        <p class="followLog">客户说她已经买了，暂时不需要了客户说她已经买了，暂时不需要了客户说她已经买了，暂时不需要了。</p>
+                    <li id="ajaxNewFollowList"class="hidden">
+                        <p>客户状态： <span v-if="show_followstatus_datas[newFollowData.followstatusid]"> {{show_followstatus_datas[newFollowData.followstatusid]["name"]}}</span></p>
+                        <p class="followLog">{{newFollowData.content}}</p>
                         <div class="clearfix">
                             <div class="fl">
-                                业务员:<span>张三</span>
+                                业务员:<span>{{newFollowData.username}}</span>
                             </div>
                             <div class="fr">
-                                跟进时间:<span>2017-05-05</span>
+                                跟进时间:<span >{{newFollowData.time}}</span>
                             </div>
                         </div>
                     </li>
-                    <li>
-                        <p>客户状态：<span>无效</span></p>
-                        <p class="followLog">客户说她已经买了，暂时不需要了客户说她已经买了，暂时不需要了客户说她已经买了，暂时不需要了。</p>
+
+                    <li v-for="item in follow_list">
+                        <p>客户状态：
+                            <span v-if="show_followstatus_datas[item.followstatusid]">
+                                {{show_followstatus_datas[item.followstatusid]["name"]}}
+                            </span>
+                        </p>
+                        <p class="followLog">{{item.content}}</p>
                         <div class="clearfix">
                             <div class="fl">
-                                业务员:<span>张三</span>
+                                业务员:<span >{{item.username}}</span>
                             </div>
                             <div class="fr">
-                                跟进时间:<span>2017-02-05</span>
+                                跟进时间:<span>{{item.time}}</span>
                             </div>
                         </div>
                     </li>
@@ -104,52 +108,16 @@
         </div>
         <!--//main-->
     </div>
+</div>
     <!-- //wrap -->
     <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            //添加编辑用户
-            $(".editBtn").click(function() {
-                    layer.open({
-                        type: 1,
-                        title: '查看编辑用户',
-                        shadeClose: true,
-                        scrollbar: false,
-                        skin: 'layui-layer-rim',
-                        area: ['650px', '500px'],
-                        content: $(".userPopWrap")
-                    })
-                })
-                //删除用户
-            $(".deleteBtn").click(function() {
-                var $this = $(this);
-                layer.confirm('确定要删除吗？', {
-                    btn: ['确定', '取消']
-                }, function() {
-                    $this.parents("tr").remove();
-                    layer.msg('删除成功', {
-                        icon: 1
-                    });
-                });
-            });
-            //这个页面的分页用的是浏览器解析后的布局（其他页面使用的是解析前的，后期如果需要会统一修改）
-            layui.use(['laypage', 'layer', 'form'], function() {
-                var laypage = layui.laypage,
-                    layForm = layui.layform,
-                    layer = layui.layer;
-                //总页数大于页码总数
-                laypage.render({
-                    elem: 'pagerInner',
-                    count: 70, //数据总数
-                    jump: function(obj) {
-                        //console.log(obj)
-                    }
-                });
-            });
-        })
-    </script>
+    <!--- vue -->
+    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+    <script type="text/javascript" src="../../config/configure.js"></script>
+    <script type="text/javascript" src="../../js/page/client/follow.js"></script>
 </body>
 
 </html>

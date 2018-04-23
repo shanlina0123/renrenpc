@@ -1,13 +1,22 @@
-$(function () {
-
-    // layui.use(['form'], function() {
-    //     var form = layui.form;
-    //     form.on('select(filter)', function(data)
-    //     {
-    //         var value = data.value
-    //         console.log(value); //得到select原始DOM对象
-    //     });
-    // });
+$(function() {
+    //批量移交客户
+    $(".changeClient").click(function() {
+        layer.confirm('先筛选客户，再进行客户移交。每次只能移交同一个业务员的客户', {
+            btn: ['我知道了'], //按钮
+            title: "提示",
+            area: ['600px', '167px']
+        }, function() {
+            layer.open({
+                type: 1,
+                title: '批量移交客户',
+                shadeClose: true,
+                scrollbar: false,
+                skin: 'layui-layer-rim',
+                area: ['500px', '400px'],
+                content: $(".custormHandelPop")
+            })
+        });
+    });
 });
 var vm = new Vue({
     el: '#vue_client_list',
@@ -19,6 +28,10 @@ var vm = new Vue({
         housename: null,//搜索-楼盘
         default_followstatus_datas: [],//状态列表
         admin_show_datas: [],//业务员
+        client_datas:[],//客户详情
+        search_params: { "name": null},//客户房源搜索
+        house_list:[],//房源list
+        add_params:{name:null,followstatusid:null,levelid:null,houseid:null,comedate:null,dealdate:null},//修改客户
         tokenUserInfo: JSON.parse(localStorage.getItem("userinfo")),
         tokenValue: JSON.parse(localStorage.getItem("userinfo")).token,
         pages: 0,
@@ -28,6 +41,141 @@ var vm = new Vue({
         },
     },
     methods: {
+        //进入跟进页面
+        linkFollow:function(uuid,clientid){
+            if(!uuid)
+            {
+                layer.msg("连接错误", {icon: 6});
+            }
+            var  target_url = "uuid=" + uuid;
+            if(clientid)
+            {
+                target_url += "&clientid=" + clientid;
+            }
+            window.location.href = "../client/clientFollow.html?" + encodeURIComponent(target_url);
+        },
+        //进入详情页面
+        clientDetail:function(clientid){
+            if(!clientid){
+                layer.msg("请求错误", {icon: 6});
+            }
+            var url = auth_conf.client_detail+clientid;
+            var that = this;
+            //token
+            axios.get(url, {headers: {"Authorization": that.tokenValue}})
+                .then(function (response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        that.client_datas = data.data;
+                        $("#showEditStatus").val(data.data.followstatusid);
+                        $("#showEditLevel").val(data.data.levelid);
+                        $("#showSearchHouse").val(data.data.houseid);
+
+                        //成交时间
+                        layui.use(["form",'laydate'], function() {
+                            var laydate=layui.laydate;
+                            var form=layui.form;
+                            //上门时间
+                            laydate.render({
+                                elem: '#comedate'
+                            });
+                            //成交日期
+                            laydate.render({
+                                elem: '#dealdate'
+                            });
+                            form.render('select');
+                        });
+
+
+                    } else {
+                        layer.msg(data.messages, {icon: 6});
+                    }
+                }).catch(function (error) { });
+            //显示出房源列表
+            that.showHouseList();
+            layer.open({
+                type: 1,
+                title: '查看编辑用户',
+                shadeClose: true,
+                scrollbar: false,
+                skin: 'layui-layer-rim',
+                area: ['765px', '500px'],
+                content: $(".userPopWrap")
+            });
+            $(".userPopWrap").removeClass("hidden");
+
+        },
+        //详情-显示房源-模糊搜索
+        showHouseList: function() {
+            var url = auth_conf.client_houses;
+            var that = this;
+            axios.get(url,{ headers: { "Authorization": that.tokenValue } })
+                .then(function(response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        that.house_list = data.data;
+                        selectAppendDd($("#showSearchHouse"), that.house_list, "id", "name");
+                    }
+                })
+                .catch(function(error) {
+                    //console.log(error);
+                });
+        },
+        //修改客户信息
+        editSubmit:function (uuid) {
+            var url = auth_conf.client_update+uuid;
+            var that = this;
+            that.add_params.name = that.$refs.clientname.value;//客户名称
+            that.add_params.followstatusid = that.$refs.followstatusid.value;//客户状态
+            that.add_params.levelid = that.$refs.levelid.value;//级别
+            that.add_params.houseid = $("#showSearchHouse").val()//楼盘id
+            that.add_params.comedate = that.$refs.comedate.value;//上门时间
+            that.add_params.dealdate = that.$refs.dealdate.value;//成交时间
+            axios.put(url, that.add_params, { headers: { "Authorization": that.tokenValue } })
+                .then(function(response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        layer.msg(data.messages, {icon: 7});
+                        window.location.href = "../client/client.html";
+                    } else {
+                        layer.msg(data.messages, {icon: 6});
+                    }
+                })
+                .catch(function(error) {
+                    //console.log(error);
+                });
+        },
+        //删除客户
+        clientDelete:function(uuid){
+            var that=this;
+            if(!uuid){
+                layer.msg("请求错误", {icon: 6});
+            }
+            layer.confirm('确定要删除吗？', {
+                btn: ['确定', '取消']
+            }, function() {
+                $(".layui-layer-shade").remove();
+                $(".layui-layer-dialog").remove();
+                that.doDeleteClient(uuid);
+
+            });
+        },
+        //被调用-执行删除客户
+        doDeleteClient:function(uuid){
+            var url = auth_conf.client_delete+uuid;
+            var that = this;
+            //token
+            axios.delete(url, {headers: {"Authorization": that.tokenValue}})
+                .then(function (response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        layer.msg(data.messages, {icon: 1});
+                        $("#clientList_"+uuid).remove();
+                    } else {
+                        layer.msg(data.messages, {icon: 6});
+                    }
+                }).catch(function (error) { });
+        },
         //点击搜索按钮
         searchClick: function () {
             var status = $("#showSearchStatus").val();
@@ -41,8 +189,6 @@ var vm = new Vue({
             this.params.housename = house;
             this.params.page = 1;
             this.getClientList();
-
-
         },
         //获取客户列表
         getClientList: function (loading) {
@@ -98,6 +244,7 @@ var vm = new Vue({
                         //客户状态
                         that.default_followstatus_datas = data.data;
                         selectAppendDd($("#showSearchStatus"), that.default_followstatus_datas, "id", "name");
+                        selectAppendDd($("#showEditStatus"), that.default_followstatus_datas, "id", "name");
                     }
                 })
                 .catch(function (error) {
@@ -115,7 +262,7 @@ var vm = new Vue({
                         //客户等级
                         that.level_datas = data.data;
                         selectAppendDd($("#showSearchLevel"), that.level_datas, "id", "name");
-
+                        selectAppendDd($("#showEditLevel"), that.level_datas, "id", "name");
                     }
                 })
                 .catch(function (error) {
