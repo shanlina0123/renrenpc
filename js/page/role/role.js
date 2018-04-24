@@ -13,13 +13,14 @@ var vm = new Vue({
             axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
                 var data = response.data;
                 layui.use('form', function() {
-                    var form = layui.form;
+                    var form = layui.form
+                    if (data.status == 1) {
+                        that.roleList = data.data;
+                        console.log(that.roleList);
+                    } else {
+                        //layer.msg("错误");
+                    }
                 });
-                if (data.status == 1) {
-                    that.roleList = data.data
-                } else {
-                    //layer.msg("错误");
-                }
             })
         },
         //添加角色弹窗
@@ -89,13 +90,16 @@ var vm = new Vue({
             });
         },
         //编辑权限跳转页面
-        editRole: function(uuid, roleName) {
+        editRole: function(uuid, roleName, islook) {
             if (!uuid) {
                 layer.msg("连接错误", { icon: 6 });
             }
             var targetUrl = "uuid=" + uuid;
             if (roleName) {
                 targetUrl += "&name=" + roleName;
+            }
+            if (islook) {
+                targetUrl += "islook=" + islook;
             }
             window.location.href = "../roles/editPower.html?" + encodeURIComponent(targetUrl);
         },
