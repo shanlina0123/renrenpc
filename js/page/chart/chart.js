@@ -1,21 +1,5 @@
  $(function() {
-                // 顶部导航右侧操作
-                $("body").on("click", ".layui-nav .layui-nav-item a", function() {
-                    $(this).siblings().addClass("layui-show");
-                });
-                //左侧导航效果
-                $(".leftNav > li > a").click(function() {
-                    if (!$(this).hasClass("on")) {
-                        $(this).siblings(".leftSubNav").slideDown();
-                        $(this).parents("li").siblings().find(".leftSubNav").slideUp();
-                        $(this).addClass("on").parents("li").siblings().find("a").removeClass("on");
-                    } else {
-                        $(this).removeClass("on");
-                        $(this).siblings(".leftSubNav").slideUp();
-                    }
-                })
-          
-   
+                
             layui.use('laydate', function() {
                 var laydate = layui.laydate;
                 //自定义格式		
@@ -74,27 +58,41 @@ var ch = new Vue({
     },
     methods:{
         //第一次加载数据
-		getChartsList:function (){		 
+		getChartsList:function (loading){		 
 		 	var url = auth_conf.chart_list;
             var that = this;
-			
+			console.log(that.params)
            axios.post(url,that.params,{headers: {"Authorization": that.tokenValue}})
             .then(function(response)
             {
                   var data = response.data;				
                   if ( data.status == 1 )
                     {
+                       // that.charts = data.data.data;
                         that.charts = data.data.data;
+                        that.page_data.total = data.data.total;
+                        that.page_data.to= data.data.to;
 						//console.log(that.charts);
+						  if( loading!="loadingPageData")
+                        {
+                            that.getPageData();
+                        }
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render();
+                        });
                     }else
                     {
-                        layer.msg(data.messages,{icon: 6});
+                       layui.use(['layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg(data.messages,{icon: 6});
+                        });
                     }
             });
 		 },
       
-        //分页
-         getPageData:function () {
+         //lay分页
+        getPageData:function () {
             var that = this;
             layui.use(['laypage', 'layer', 'form'], function() {
                 var laypage = layui.laypage;
@@ -109,30 +107,18 @@ var ch = new Vue({
                         if(!first)
                         {
                             that.params.page = obj.curr;
-                            that.getDataList();
+                            that.getChartsList('loadingPageData');
                         }
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render();
+                        });
                     }
                 });
                 form.render();
             });
         },
-        //分页加载数据
-        getDataList:function () {
-            var url = auth_conf.chart_list;
-            var that = this;
-            axios.post(url,{headers: {"Authorization": that.tokenValue}})
-                .then(function(response)
-                {
-                    var data = response.data;
-                    if ( data.status == 1 )
-                    {
-                        var list = data.data;
-                        that.charts = list.data;
-                        that.page_data.total = list.total;
-                        that.page_data.to= list.to;
-                    }
-                });
-        },
+       
 		 //客户状态
 		statelist:function ()
         {
@@ -165,7 +151,7 @@ var ch = new Vue({
                 });
          },
        //公司
-       companylist:function (){  
+      		 companylist:function (){  
         	var url = auth_conf.company_list;       
             var that = this;
             axios.get(url,{headers: {"Authorization": that.tokenValue}})
@@ -205,13 +191,13 @@ var ch = new Vue({
                     {
                         var str = '';
                         var listData = data.data;
-                        console.log(listData);
+                       // console.log(listData);
                         
                         for(var x in listData)
                         {
                             str+='<option value="'+listData[x].id+'">'+listData[x].nickname+'</option>';
                         }
-                        console.log(str)
+                        //console.log(str)
                         $("#manager").append( str );
                         layui.use(['form'], function() {
                             var form = layui.form;
@@ -274,5 +260,6 @@ function search() {
     ch.$data.params.makedate = makedate;
 	ch.$data.params.comedate = comedate;
 	ch.$data.params.dealdate = dealdate;
+	ch.$data.params.page = 1;
     ch.getChartsList();
 }
