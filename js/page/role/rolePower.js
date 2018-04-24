@@ -4,8 +4,9 @@ var vm = new Vue({
         tokenValue: JSON.parse(localStorage.getItem("userinfo")).token, //token
         powerList: [],
         hadPowerList: [],
-        name: "",
-        radioid: ""
+        name: "", //浏览器传过来的角色名称
+        radioid: "", //单选val
+        islook: "" //视野权限
     },
     methods: {
         //角色列表
@@ -32,9 +33,9 @@ var vm = new Vue({
         },
         //其他链接进去的参数获取
         enterParam: function() {
-            this.getHadPowerList(this.GetQueryString("uuid"));
-            // this.submitPowers(this.GetQueryString("uuid"));
-            this.name = this.GetQueryString("name");
+            this.getHadPowerList(this.GetQueryString("uuid"))
+            this.name = this.GetQueryString("name")
+            this.islook = this.GetQueryString("islook")
         },
         //获得这个角色已经存在的权限列表
         getHadPowerList: function(role_uuid) {
