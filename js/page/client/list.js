@@ -117,8 +117,9 @@ var vm = new Vue({
                 .then(function(response) {
                     var data = response.data;
                     if (data.status == 1) {
-                        layer.msg(data.messages, {icon: 7});
-                        window.location.href = "../client/client.html";
+                        layer.msg(data.messages, {icon: 7},function () {
+                            window.location.href = "../client/client.html";
+                        });
                     } else {
                         layer.msg(data.messages, {icon: 6});
                     }
@@ -196,8 +197,9 @@ var vm = new Vue({
                 .then(function(response) {
                     var data = response.data;
                     if (data.status == 1) {
-                        layer.msg(data.messages, {icon: 1});
-                         window.location.href = "../client/client.html";
+                        layer.msg(data.messages, {icon: 1},function () {
+                            window.location.href = "../client/client.html";
+                        });
                     } else {
                         layer.msg(data.messages, {icon: 6});
                     }
@@ -343,8 +345,8 @@ var vm = new Vue({
         that.getDefaultDataOne();//所有客户状态
         that.getAdmins();//所有业务员
     },mounted:function(){
-        $("#top").load('/page/public/top.html');
-        $("#left").load('/page/public/left.html');
+        // $("#top").load('/page/public/top.html');
+        // $("#left").load('/page/public/left.html');
     }
 });
 $(function(){

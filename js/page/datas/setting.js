@@ -257,11 +257,8 @@ var vm = new Vue({
         that.getCateList();//属性分类列表
 
     }, mounted: function () {
-        $("#top").load('/page/public/top.html');
-        $("#left").load('/page/public/left.html');
-
-
-
+        // $("#top").load('/page/public/top.html');
+        // $("#left").load('/page/public/left.html');
     }
 });
 
