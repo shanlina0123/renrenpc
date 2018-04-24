@@ -36,10 +36,10 @@
            
             <!--右侧主要内容-->
             <div class="rightMain fl">
-                <div class="addClient"><button class="layui-btn changeClient">添加合作客户</button></div>
+                <div class="addClient"><button class="layui-btn changeClient"  @click="add()">添加合作客户</button></div>
                 <form class="layui-form lockForm">
                     <h2>公司列表</h2>
-                    <table class="layui-table">
+                    <table class="layui-table" id="companylist">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -49,16 +49,16 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody id="companylist">
-	                        <tr v-for="item in companylist">
+                        <tbody>
+	                        <tr v-for="item in companylist">	                            
 	                            <td>{{item.id}}</td>
 	                            <td>{{item.name}}</td>
-	                            <td>A类客户</td>
-	                            <td>15965984578</td>
+	                            <td></td>
+	                            <td>{{item.mobile}}</td>
 	                            <td>
 	                                <div class="layui-btn-group">
-	                                    <button type="button" class="layui-btn editBtn">编辑</button>
-	                                    <button type="button" class="layui-btn deleteBtn">删除</button>
+	                                   <button type="button" class="layui-btn editBtn" @click="edit(item.uuid)">编辑</button>
+                                       <button type="button" class="layui-btn deleteHouseBtn" @click="del(item.uuid)">删除</button>
 	                                </div>
 	                            </td>
 	                        </tr>
@@ -67,15 +67,8 @@
                     </table>
                 </form>
                 <!--分页-->
-                <div class="pageWrap">
-                    <div class="layui-box layui-laypage layui-laypage-default" id="layui-laypage-2">
-                        <a href="javascript:;" class="layui-laypage-prev layui-disabled" data-page="0">上一页</a>
-                        <span class="layui-laypage-curr"><em class="layui-laypage-em"></em><em>1</em></span>
-                        <a href="javascript:;" data-page="2">2</a><a href="javascript:;" data-page="3">3</a>
-                        <a href="javascript:;" data-page="4">4</a><a href="javascript:;" data-page="5">5</a>
-                        <span class="layui-laypage-spr">…</span><a href="javascript:;" class="layui-laypage-last" title="尾页" data-page="7">7</a>
-                        <a href="javascript:;" class="layui-laypage-next" data-page="2">下一页</a>
-                    </div>
+                  <div class="pageWrap">
+                    <div id="pagerInner"></div>
                 </div>
             </div>
         </div>
@@ -165,7 +158,7 @@
                         </tr>
                     </table>
                     <div class="submitBtnWrap">
-                        <button class="layui-btn add">提交</button>
+                        <button class="layui-btn add" @click="submitUser(params.uuid)">提交</button>
                     </div>
                 </form>
             </div>
@@ -176,10 +169,11 @@
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
      <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
+       <script type="text/javascript" src="../../config/configure.js"></script>
     <!--- vue -->
-    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
-    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
-    <script type="text/javascript" src="../../js/page/house/list.js"></script>
+     <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+	    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+    <script type="text/javascript" src="../../js/page/company/companylist.js"></script>
 </body>
 
 </html>

@@ -9,16 +9,14 @@ var vm = new Vue({
         //获取角色列表
         getRoleList: function() {
             var that = this;
-            var url = auth_conf.role_list;
-
+            var url = auth_conf.role_list
             axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
                 var data = response.data;
                 layui.use('form', function() {
                     var form = layui.form;
                 });
                 if (data.status == 1) {
-                    that.roleList = data.data;
-                    //console.log(that.roleList)
+                    that.roleList = data.data
                 } else {
                     //layer.msg("错误");
                 }
@@ -26,6 +24,7 @@ var vm = new Vue({
         },
         //添加角色弹窗
         addRole: function() {
+            var that = "";
             layer.open({
                 type: 1,
                 title: '添加角色',
@@ -45,17 +44,16 @@ var vm = new Vue({
                     layer.msg("请填写要添加的角色名称");
                 })
             } else {
-                //console.log(that.name);
-                axios.post(url, that.name, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
+                axios.post(url, { name: that.name }, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
                     var data = response.data;
                     if (data.status == 1) {
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
-                            layer.msg("添加角色成功", function() {
+                            layer.msg("添加角色成功", { time: 500 }, function() {
                                 layer.closeAll();
-                            });
-                        });
-                        that.getRoleList();
+                            })
+                            that.getRoleList()
+                        })
                     } else {
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
@@ -91,11 +89,15 @@ var vm = new Vue({
             });
         },
         //编辑权限跳转页面
-        editRole: function(uuid) {
+        editRole: function(uuid, roleName) {
             if (!uuid) {
                 layer.msg("连接错误", { icon: 6 });
             }
-            window.location.href = "../roles/editPower.html?uuid=" + uuid;
+            var targetUrl = "uuid=" + uuid;
+            if (roleName) {
+                targetUrl += "&name=" + roleName;
+            }
+            window.location.href = "../roles/editPower.html?" + encodeURIComponent(targetUrl);
         },
     },
     created: function() {

@@ -49,7 +49,7 @@
                                 <td>{{item.name}}</td>
                                 <td>
                                     <div class="layui-btn-group">
-                                        <a type="button" @click="editRole(item.uuid)" class="layui-btn layui-btn-sm editBtn">编辑权限</a>
+                                        <a type="button" @click="editRole(item.uuid,item.name)" class="layui-btn layui-btn-sm editBtn">编辑权限</a>
                                         <button type="button" @click="deleteRole(item.uuid)" class="layui-btn layui-btn-sm deleteBtn">删除</button>
                                     </div>
                                 </td>

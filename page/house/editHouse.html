@@ -385,60 +385,7 @@
                                         </div>
                                     </td>
                                 </tr>
-                                <!-- 房源特色 -->
-                                <tr>
-                                    <td colspan="2">
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">房源特色</label>
-                                            <div class="layui-input-inline">
-                                                <div class="chuiceTipWrasp">
-                                                    <div class="tipWrap">
-                                                        <template v-for="tag of tags">
-                                                            <span v-if="house_tag[tag.id]" class="on" :class="{'on':tag.chencked}" @click="addChencked(tag)">{{tag.name}}</span>
-                                                            <span v-else :class="{'on':tag.chencked}" @click="addChencked(tag)" >{{tag.name}}</span>
-                                                        </template>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
 
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">封面图片</label>
-                                            <div class="layui-input-inline">
-                                                <div class="layui-upload">
-                                                    <button type="button" class="layui-btn" id="covermap">上传图片</button>
-                                                    <div class="layui-upload-list">
-                                                        <img class="layui-upload-img" id="covermapUrl" :src="path_url+houseInfo.covermap">
-                                                        <p id="demoText"></p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">房源图片</label>
-                                            <div class="layui-input-inline">
-                                                <div class="layui-upload">
-                                                    <button type="button" class="layui-btn" id="infoImg">多图片上传</button>
-                                                    <blockquote class="layui-elem-quote layui-quote-nm" style="margin-top: 10px;">
-                                                        预览图：
-                                                        <div class="layui-upload-list" id="demo2">
-                                                            <img v-for="img in houseInfo.images" :src="path_url+img.url" class="layui-upload-img">
-                                                        </div>
-                                                    </blockquote>
-                                                </div>
-                                                <div>支持JPG、PNG、JPEG,最多可上传9张</div>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td>
                                         <div class="layui-inline ">
@@ -463,8 +410,6 @@
                             <input type="hidden" name="fulladdr" :value="houseInfo.fulladdr">
                             <input type="hidden" name="lng" :value="houseInfo.lng">
                             <input type="hidden" name="lat" :value="houseInfo.lat">
-                            <input type="hidden" name="images" v-model="images" >
-                            <input type="hidden" name="covermap" id="covermapName" >
                             <div class="nextBtnWrap">
                                 <button class="layui-btn nextBtn" type="button" id="submit">下一步</button>
                             </div>

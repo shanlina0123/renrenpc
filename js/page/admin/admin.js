@@ -12,25 +12,27 @@ var vm = new Vue({
             roleid: "",
             password: "",
             status: "",
-            uuid: "",
-            page: 1
+            uuid: ""
         },
         pages: 0,
         page_data: { //分页数据
             total: 0,
             to: 0,
         },
+        page: 1,
     },
     methods: {
         //获取用户列表
         getAdminList: function(loading) {
             var that = this;
             var url = auth_conf.admin_list;
-            axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
+            axios.get(url, { params: { page: that.page }, headers: { "Authorization": that.tokenValue } }).then(function(response) {
                 var data = response.data;
                 if (data.status == 1) {
                     that.adminList = data.data.data;
                     //console.log(that.adminList);
+                    that.page_data.total = data.data.total;
+                    that.page_data.to = data.data.to;
                     if (loading != "loadingPageData") {
                         that.getPageData();
                     }
@@ -52,7 +54,7 @@ var vm = new Vue({
                     limit: that.page_data.to, //每页显示
                     jump: function(obj, first) {
                         if (!first) {
-                            that.params.page = obj.curr;
+                            that.page = obj.curr;
                             that.getAdminList("loadingPageData");
                         }
                     }
@@ -119,27 +121,28 @@ var vm = new Vue({
                 var data = response.data;
                 if (data.status == 1) {
                     that.roleList = data.data;
-                    //console.log(that.roleList);
-                    selectAppendDd($("#popRoleList"), that.roleList, "id", "name");
+                    selectAppendDd($("#popRoleList"), that.roleList, "id", "name")
                 }
             })
         },
-        //锁定用户(未成功，Vue中监听layui的复选框事件)
-        lockAdmin: function(uuid) {
-            console.log(uuid);
+        //锁定和解锁用户
+        lockAdmin: function(thischecked, uuid) {
+            var that = this;
             if (uuid) {
                 var url = auth_conf.admin_lock + uuid;
-                axios.post(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
+                axios.put(url, {}, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
                     var data = response.data;
-                    if (data.status == 1) {
-                        layer.msg("设置成功");
-                    } else {
-                        layer.msg("抱歉，您不能修改管理员信息")
-                    }
-                })
-            } else {
-                layer.msg("抱歉，您不能查看管理员信息！");
+                    //console.log(response);
+                    // if (data.status == 1) {
+                    //     layer.msg("编辑成功");
+                    // } else if (data.status == 10) {
+                    //     layer.msg("您不能编辑管理员信息");
+                    // } else {
+                    //     layer.msg("编辑失败");
+                    // }
+                });
             }
+            //that.getAdminList();
         },
         //提交客户修改、新增
         submitUser: function(uuid) {
@@ -155,7 +158,7 @@ var vm = new Vue({
             if (uuid) {
                 //编辑查看用户
                 var url = auth_conf.admin_edit + uuid;
-                console.log(url);
+                //console.log(url);
                 if (that.params.nickname == "") {
                     layui.use("layer", function() {
                         layer.msg("请填写用户姓名");
@@ -175,6 +178,7 @@ var vm = new Vue({
                 } else {
                     axios.put(url, that.params, { headers: { "Authorization": that.tokenValue } })
                         .then(function(response) {
+                            console.log(url);
                             console.log(that.params);
                             console.log(response);
                             if (response.status == 1) {
@@ -244,18 +248,18 @@ var vm = new Vue({
         that.getAdminList() //用户列表
     }
 });
-layui.use(["form", "layer"], function() {
-    var form = layui.form;
-    var layer = layui.layer;
-    form.on('checkbox()', function(data) {
-        if (data.elem.checked) {
-            console.log("选中了");
-        } else {
-            console.log("没选中");
-        }
-        console.log(data.elem); //得到checkbox原始DOM对象
-        console.log(data.elem.checked); //是否被选中，true或者false
-        console.log(data.value); //复选框value值，也可以通过data.elem.value得到
-        console.log(data.othis); //得到美化后的DOM对象
-    });
+$(function() {
+    layui.use(["form", "layer"], function() {
+        var form = layui.form;
+        var layer = layui.layer;
+        // console.log(data.elem); //得到checkbox原始DOM对象
+        // console.log(data.elem.checked); //是否被选中，true或者false
+        // console.log(data.value); //复选框value值，也可以通过data.elem.value得到
+        // console.log(data.othis); //得到美化后的DOM对象
+        form.on('checkbox()', function(data) {
+            var thisuuid = data.elem.id;
+            var thischecked = data.elem.checked;
+            vm.lockAdmin(thischecked, thisuuid);
+        })
+    })
 })

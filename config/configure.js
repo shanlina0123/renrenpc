@@ -1,6 +1,7 @@
 (function() {
-   // var host = "http://192.168.15.222:8081/";
     var host = "http://192.168.15.222:8081/";
+    //  var host = "http://api.rrzhaofang.com/
+    // var host = "http://192.168.15.222:8081/"
     //未带toke请求
     window.conf = {
             login: host + 'admin/login', //首页推荐
@@ -8,7 +9,7 @@
         //带token的请求
         window.auth_conf = {
             token: host + "admin/token", //检查而已有token
-            path_url:'http://api.rrzhaofang.com/upload/', //图片地址
+            path_url:host+'upload/', //图片地址
             map_address: host + 'admin/get/map/address', //图片地址
             house_list: host + 'admin/house/index', //房源列表
             house_recommend: host + 'admin/house/recommend', //房源推荐
@@ -20,6 +21,10 @@
             house_img_save: host + 'admin/house/img', //添加房源数据
             house_edit_info: host + 'admin/house/edit/', //修改房源数据
             house_edit_save: host + 'admin/house/update/', //修改房源数据
+            house_edit_tag: host + 'admin/house/tag/edit/', //修改房源标签
+            house_edit_tag_save: host + 'admin/house/tag/edit/save', //修改房源标签保存
+            house_edit_img: host + 'admin/house/img/edit/', //修改房源图片信息
+            house_edit_img_save: host + 'admin/house/img/edit/save', //修改房源图片信息
             datas_default_one: host + 'admin/datas-default-one/', //默认属性数据
             datas_one: host + 'admin/datas-one/', //自定义数据单个
             datas_cate_list: host + 'admin/datas-catelist', //自定义分类列表
@@ -43,12 +48,14 @@
             role_delete: host + 'admin/roles/', //删除角色
             role_power: host + 'admin/auth', //系统权限设置
             role_HadPower: host + 'admin/auth/', //已经拥有的权限列表
-            client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
-            client_follow: host + 'admin/client-follow/store', //跟进客户
             chart_drop: host + 'admin/chart-user', //经纪人
             datas_add:host+'admin/datas',//添加属性
             datas_update:host+'admin/datas/',//修改属性
-            datas_delete:host+'admin/datas-delete/'//修改属性
+            datas_delete:host+'admin/datas-delete/',//修改属性
+            company_delete: host + 'admin/company/delete/', //公司删除
+            company_update: host + 'admin/company/update/', //公司修改
+            // company_detail:host+'admin/company/edit/' //公司详情
+            company_add: host + ' admin/company/store', //公司添加
         }
         $("#top").load('/page/public/top.html');
         $("#left").load('/page/public/left.html');
@@ -59,9 +66,8 @@
  * @type {string}
  */
 var url = window.location.href;
-if( url.indexOf("login.html") == -1 )
-{
-    filterToken();
+if (url.indexOf("login.html") == -1) {
+    //filterToken();
 }
 
 /**
@@ -69,38 +75,32 @@ if( url.indexOf("login.html") == -1 )
  */
 function filterToken() {
 
-      var tokenData = localStorage.getItem("userinfo");
-      if ( !tokenData )
-      {
-         window.location = "/login.html";
-      }
-      else
-      {
-          checkToken()
-      }
+    var tokenData = localStorage.getItem("userinfo");
+    if (!tokenData) {
+        window.location = "/login.html";
+    } else {
+        checkToken()
+    }
 }
 
 /**
  * 检测token
  */
-function checkToken()
-{
+function checkToken() {
     var tokenData = localStorage.getItem("userinfo");
     $.ajax({
         headers: {
-            Authorization:JSON.parse(tokenData).token,
+            Authorization: JSON.parse(tokenData).token,
         },
         type: "GET", //方法类型
         dataType: "json", //预期服务器返回的数据类型
         url: auth_conf.token, //url
         success: function(result) {
-            if ( result.status != 1  )
-            {
-                if( result.status != 15)
-                {
+            if (result.status != 1) {
+                if (result.status != 15) {
                     localStorage.removeItem("userinfo");
                     window.location.href = '/login.html';
-                }else{
+                } else {
                     alert(result.messages);
                 }
             }
