@@ -5,6 +5,7 @@ var vm = new Vue({
         powerList: [],
         hadPowerList: [],
         name: "",
+        radioid: ""
     },
     methods: {
         //角色列表
@@ -12,7 +13,7 @@ var vm = new Vue({
             var that = this;
             var url = auth_conf.role_power;
             axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
-                var data = response.data
+                var data = response.data;
                 if (data.status == 1) {
                     that.powerList = data.data;
                     console.log(that.powerList);
@@ -54,20 +55,27 @@ var vm = new Vue({
             }).catch(function(error) {});
         },
         //提交选中的权限
-        submitPowers: function(radioId, role_uuid) {
-            var that = this;
-            console.log(radioId);
+        submitPowers: function(role_uuid) {
+            var that = this; //再生成一个Id以为数组做参数即可
             var url = auth_conf.role_HadPower + role_uuid;
-            axios.put(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
-                var data = response.data;
+            //var checkedList = $("#powerFrom input:checked");
+            //console.log(checkedList);
+            var selectedData = [];
+            $("#powerFrom input:checked").each(function() {
+                var $this = $(this);
+                var ids = $this.title;
+                selectedData.push({ id: ids });
+            });
+            console.log(selectedData);
+            // axios.put(url, { islook: that.radioid }, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
+            //     var data = response.data
+            //     if (data.status == 1) {
 
-                if (data.status == 1) {
-
-                } else {
-                    layer.msg(data.messages, { icon: 6 });
-                }
-            }).catch(function(error) {});
-        }
+            //     } else {
+            //         layer.msg(data.messages, { icon: 6 })
+            //     }
+            // }).catch(function(error) {})
+        },
     },
     created: function() {
         var that = this;
@@ -76,21 +84,32 @@ var vm = new Vue({
     },
 })
 
-// $(function() {
-//     layui.use(['form'], function() {
-//         var form = layui.form;
-//         //全选全不选
-//         form.on('checkbox(allChoose)', function(data) {
-//             var childCheck = $(data.elem).parents(".topCheck").siblings(".powerInnerUl").find("input");
-//             childCheck.each(function(index, item) {
-//                 item.checked = data.elem.checked;
-//             });
-//             form.render('checkbox');
-//         });
-//         //监听视野权限的单选按钮
-//         form.on('radio()', function(data) {
-//             var radioId = data.value;
-//             vm.$options.methods.submitPowers(radioId);
-//         });
-//     });
-// });
+$(function() {
+    layui.use(['form', 'layer', 'jquery'], function() {
+        var form = layui.form;
+        var layer = layui.form;
+        var $ = layui.jquery;
+        //全选全不选
+        form.on('checkbox(allChoose)', function(data) {
+            var childCheck = $(data.elem).parents(".topCheck").siblings(".powerInnerUl").find("input");
+            childCheck.each(function(index, item) {
+                item.checked = data.elem.checked;
+            });
+            form.render('checkbox');
+        });
+        //监听视野权限的单选按钮
+        form.on('radio()', function(data) {
+            var radioId = data.value;
+            vm.radioid = radioId;
+        });
+    });
+    //网代
+    // var selectedData = [];
+    // $(":checkbox:checked").each(function() {
+    //     var tablerow = $(this).parent("tr");
+    //     var code = tablerow.find("[name='p_code']").val();
+    //     var name = tablerow.find("[name='p_name']").val();
+    //     var price = tablerow.find("[name='p_price']").val();
+    //     selectedData.push({ Code: code, Name: name, Price: price });
+    // });
+});
