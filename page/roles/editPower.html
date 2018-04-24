@@ -42,7 +42,7 @@
                                     <div class="layui-inline ">
                                         <label class="layui-form-label ">角色</label>
                                         <div class="layui-input-inline ">
-                                            <input type="text" class="layui-input forSameWidth" name="houseName" value="业务员" readonly>
+                                            <input type="text" class="layui-input forSameWidth" name="houseName" v-model="name" readonly>
                                         </div>
                                     </div>
                                 </td>
@@ -55,10 +55,10 @@
                                             <ul class="powerUl">
                                                 <li v-for="item in powerList">
                                                     <div class="topCheck">
-                                                        <input type="checkbox" name="" lay-skin="primary" lay-filter="allChoose" class="checkAll" :title="item.name" checked="">
+                                                        <input type="checkbox" lay-skin="primary" lay-filter="allChoose" class="checkAll" :title="item.name" :checked="hadPowerList.functionid">
                                                     </div>
                                                     <ul class="powerInnerUl clearfix">
-                                                        <li v-for="innerItem in item._child"><input type="checkbox" name="" lay-skin="primary" :title="innerItem.name" checked=""></li>
+                                                        <li v-for="innerItem in item._child"><input type="checkbox" lay-skin="primary" :title="innerItem.name" :checked="hadPowerList.functionid"></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -83,7 +83,7 @@
                             </tr>
                         </table>
                         <div class="nextBtnWrap">
-                            <button class="layui-btn nextBtn" lay-submit=" " lay-filter="filter1 ">提交</button>
+                            <button type="button" class="layui-btn nextBtn" @click="submitPowers()">提交</button>
                         </div>
                     </form>
                 </div>
