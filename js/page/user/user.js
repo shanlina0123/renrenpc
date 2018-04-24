@@ -6,13 +6,11 @@
         tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token   
        params:{ //地址参数
             page:1,
-			typeid:'',
-         	// name:'',
-         	 companyid:'',
-        },
-      
+			economictid:'',
+         	companyid:'',
+       },
         users:[],
-         page_data:{ //分页数据
+        page_data:{ //分页数据
             total:0,
             to:0,
         },
@@ -24,7 +22,7 @@
 		 getusers:function (loading){		 
 		 	var url = auth_conf.users_list;
             var that = this;
-           //console.log(that.params);
+            //console.log(that.params);
             axios.get( url,{ params: that.params,headers: {"Authorization": that.tokenValue}})
             .then(function(response)
             {
@@ -34,10 +32,11 @@
                     {                    	                                                
                     	 var list = data.data;
                         that.users = data.data.data;
+                       
                         that.page_data.total = list.total;
                         that.page_data.to= list.to;
                          if( loading!="loadingPageData")
-                        {
+                        { 
                             that.getPageData();
                         }
                         layui.use(['form'], function() {
@@ -162,9 +161,8 @@
 function search() {
     var typeid = $("#userstype").val();   
     var companyid = $("#company").val(); 
-    console.log(typeid);
-    us.$data.params.typeid = typeid;
+    us.$data.params.economictid = typeid;
     us.$data.params.companyid = companyid;
     us.$data.params.page = 1;
-    //us.getusers();
+    us.getusers();
 }
