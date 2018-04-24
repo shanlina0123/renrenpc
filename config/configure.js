@@ -1,6 +1,7 @@
 (function() {
     var host = "http://192.168.15.222:8081/";
-//  var host = "http://api.rrzhaofang.com/";
+//  var host = "http://api.rrzhaofang.com/
+    // var host = "http://192.168.15.222:8081/"
     //未带toke请求
     window.conf = {
             login: host + 'admin/login', //首页推荐
@@ -20,6 +21,11 @@
             house_img_save: host + 'admin/house/img', //添加房源数据
             house_edit_info: host + 'admin/house/edit/', //修改房源数据
             house_edit_save: host + 'admin/house/update/', //修改房源数据
+            house_edit_tag: host + 'admin/house/tag/edit/', //修改房源标签
+            house_edit_tag_save: host + 'admin/house/tag/edit/save', //修改房源标签保存
+            house_edit_img: host + 'admin/house/img/edit/', //修改房源图片信息
+            house_edit_img_save: host + 'admin/house/img/edit/save', //修改房源图片信息
+
             datas_default_one: host + 'admin/datas-default-one/', //默认属性数据
             datas_one: host + 'admin/datas-one/', //自定义数据单个
             admin_datas: host + 'admin/chart-admin', //后台用户列表
@@ -60,8 +66,7 @@
  * @type {string}
  */
 var url = window.location.href;
-if( url.indexOf("login.html") == -1 )
-{
+if (url.indexOf("login.html") == -1) {
     filterToken();
 }
 
@@ -70,38 +75,32 @@ if( url.indexOf("login.html") == -1 )
  */
 function filterToken() {
 
-      var tokenData = localStorage.getItem("userinfo");
-      if ( !tokenData )
-      {
-         window.location = "/login.html";
-      }
-      else
-      {
-          checkToken()
-      }
+    var tokenData = localStorage.getItem("userinfo");
+    if (!tokenData) {
+        window.location = "/login.html";
+    } else {
+        checkToken()
+    }
 }
 
 /**
  * 检测token
  */
-function checkToken()
-{
+function checkToken() {
     var tokenData = localStorage.getItem("userinfo");
     $.ajax({
         headers: {
-            Authorization:JSON.parse(tokenData).token,
+            Authorization: JSON.parse(tokenData).token,
         },
         type: "GET", //方法类型
         dataType: "json", //预期服务器返回的数据类型
         url: auth_conf.token, //url
         success: function(result) {
-            if ( result.status != 1  )
-            {
-                if( result.status != 15)
-                {
+            if (result.status != 1) {
+                if (result.status != 15) {
                     localStorage.removeItem("userinfo");
                     window.location.href = '/login.html';
-                }else{
+                } else {
                     alert(result.messages);
                 }
             }
