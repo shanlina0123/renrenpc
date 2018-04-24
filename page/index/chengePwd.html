@@ -25,20 +25,18 @@
     <div class="wrap">
         <div class="layui-layout loginBg">
             <div class="loginFormWrap">
-                <div class="layui-layout layui-layout-admin" id="top"></div>
                 <div class="main clearfix">
-                    <ul class="leftNav fl" id="left"></ul>
-                    <form class="layui-form loginForm" action="erweimaLogin.html">
+                    <form class="layui-form loginForm">
                         <div class="layui-form-item">
                             <label class="layui-form-label">账号</label>
                             <div class="layui-input-block">
-                                <input type="text" name="username" lay-verify="required" placeholder="请输入账号" datatype="*6-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在6~15位之间！">
+                                <input type="text" name="name" lay-verify="required" placeholder="请输入账号" datatype="*1-15" class="layui-input" sucmsg=" " errormsg="* 账号范围在1~15位之间！">
                                 <span class="Validform_checktip"></span>
                             </div>
                         </div>
                         <div class="layui-form-item">
                             <div class="layui-input-block">
-                                <button  class="layui-btn" id="btn_submit">提交</button>
+                                <button  type="button" class="layui-btn" id="btn_submit">提交</button>
                             </div>
                         </div>
                     </form>
@@ -50,17 +48,17 @@
     <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
-    <script type="text/javascript" src="../../config/configure.js?v=1"></script>
-    <script type="text/javascript" src="../../js/common.js"></script>
+    <script type="text/javascript" src="../../config/configure.js?v=2"></script>
+
     <script type="text/javascript">
         $(function () {
 		    if( $(".loginForm").length )
 		    {
 		        $(".loginForm").Validform({
-		            btnSubmit: '#btn_submit',
-		            //tiptype:1,
-		            postonce: true,
-		            showAllError: false,
+                    btnSubmit: '#btn_submit',
+                    postonce: true,
+                    showAllError: false,
+                    ajaxPost:true,
 		            tiptype: function (msg, o, cssctl)
 		            {
 		                if ( !o.obj.is("form") )
@@ -70,7 +68,37 @@
 		                    cssctl(objtip, o.type);
 		                    objtip.text(msg);
 		                }
-		            }
+		            },beforeSubmit:function(curform)
+                    {
+                        var name = $("input[name='name']").val();
+                        $.ajax({
+                            type: "POST", //方法类型
+                            dataType: "json", //预期服务器返回的数据类型
+                            url: auth_conf.check_user_name, //url
+                            data:{name:name},
+                            success: function(result) {
+                                if( result.status == 1 )
+                                {
+
+                                    window.location.href='erweimaLogin.html?uuid='+result.data;
+
+                                }else
+                                {
+                                    layui.use(['layer'], function() {
+                                        var layer = layui.layer;
+                                        layer.msg( result.messages, {icon: 5, time: 2000, shift: 6});
+                                    });
+
+                                }
+                            },error:function()
+                            {
+                                layui.use(['layer'], function() {
+                                    var layer = layui.layer;
+                                    layer.msg( '请求数据异常', {icon: 5, time: 2000, shift: 6});
+                                });
+                            }
+                        });
+                    }
 		        });
 		    }
 		});

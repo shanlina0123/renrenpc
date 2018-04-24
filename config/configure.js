@@ -49,13 +49,18 @@
             role_power: host + 'admin/auth', //系统权限设置
             role_HadPower: host + 'admin/auth/', //已经拥有的权限列表
             chart_drop: host + 'admin/chart-user', //经纪人
+            company_delete: host + 'admin/company/delete/', //公司删除
+            company_update: host + 'admin/company/update/', //公司修改
+           // company_detail:host+'admin/company/edit/' //公司详情
+            company_add: host + ' admin/company/store', //公司添加
+            edit_pass: host+'admin/user/update-pass',//用户登陆状态修改密码
+            check_user_name: host+'admin/get/user',//检测用户名
+            edit_modify_pass: host+'admin/user/modify-pass',//忘记密码修改
+
             datas_add:host+'admin/datas',//添加属性
             datas_update:host+'admin/datas/',//修改属性
             datas_delete:host+'admin/datas-delete/',//修改属性
-            company_delete: host + 'admin/company/delete/', //公司删除
-            company_update: host + 'admin/company/update/', //公司修改
-            // company_detail:host+'admin/company/edit/' //公司详情
-            company_add: host + ' admin/company/store', //公司添加
+
         }
         $("#top").load('/page/public/top.html');
         $("#left").load('/page/public/left.html');
@@ -66,8 +71,15 @@
  * @type {string}
  */
 var url = window.location.href;
-if (url.indexOf("login.html") == -1) {
-    //filterToken();
+//跳过登陆页
+if ( url.indexOf("login.html") == -1  ) {
+    //跳过忘记密码页
+    if (url.indexOf('chengePwd.html') == -1) {
+        //跳过忘记密码修修改
+        if (url.indexOf('wpwd.html') == -1) {
+            filterToken();
+        }
+    }
 }
 
 /**
