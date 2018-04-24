@@ -1,6 +1,6 @@
 (function() {
-   // var host = "http://192.168.15.222:8081/";
-    var host = "http://api.rrzhaofang.com/";
+    var host = "http://192.168.15.222:8081/";
+//  var host = "http://api.rrzhaofang.com/";
     //未带toke请求
     window.conf = {
             login: host + 'admin/login', //首页推荐
@@ -44,7 +44,12 @@
             role_HadPower: host + 'admin/auth/', //已经拥有的权限列表
             client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
             chart_drop:host+'admin/chart-user',//经纪人
-            company_delete:host+'admin/company/delete/'//公司删除
+            
+           company_delete:host+'admin/company/delete/',//公司删除
+          company_update:host+'admin/company/update/',//公司修改 
+          // company_detail:host+'admin/company/edit/' //公司详情
+          company_add:host+' admin/company/store',//公司添加
+         
         }
         $("#top").load('/page/public/top.html');
         $("#left").load('/page/public/left.html');
