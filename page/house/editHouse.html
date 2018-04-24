@@ -47,9 +47,11 @@
                                         <div class="layui-inline ">
                                             <label class="layui-form-label ">推荐房源</label>
                                             <div class="layui-input-block">
-                                                <select name="ishome" v-model="ishome">
-                                                    <option value="0" >否</option>
-                                                    <option value="1">是</option>
+                                                <select name="ishome">
+                                                    <option value="1" v-if="houseInfo.ishome==1" selected>推荐</option>
+                                                    <option value="1" v-else>推荐</option>
+                                                    <option value="0" v-if="houseInfo.ishome==0" selected>不推荐</option>
+                                                    <option value="0" v-else>不推荐</option>
                                                 </select>
                                             </div>
                                         </div>
@@ -191,8 +193,10 @@
                                             <label class="layui-form-label ">电梯</label>
                                             <div class="layui-input-block">
                                                 <select name="iselevator" lay-filter="aihao">
-                                                    <option value="1">有</option>
-                                                    <option value="0">无</option>
+                                                    <option value="1" v-if="houseInfo.iselevator==1" selected>有</option>
+                                                    <option value="1" v-else>有</option>
+                                                    <option value="0" v-if="houseInfo.iselevator==0" selected>无</option>
+                                                    <option value="0" v-else>无</option>
                                                 </select>
                                             </div>
                                         </div>

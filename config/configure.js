@@ -103,7 +103,7 @@ function checkToken() {
     var openid = JSON.parse(tokenData).wechatopenid;
     if( !openid )
     {
-        window.location = "/page/index/bgopenid.html";
+        //window.location = "/page/index/bgopenid.html";
     }
     $.ajax({
         headers: {
