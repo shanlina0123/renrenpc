@@ -102,37 +102,33 @@ function filterToken() {
 function checkToken() {
     var tokenData = localStorage.getItem("userinfo");
     var openid = JSON.parse(tokenData).wechatopenid; <<
-    <<
-    <<
-    <
-    HEAD
+
+    //window.location = "/page/index/bgopenid.html";
     if (!openid) {
-        //window.location = "/page/index/bgopenid.html";
-        if (!openid) {
-            window.location = "/page/index/bgopenid.html";
-        }
-        $.ajax({
-            headers: {
-                Authorization: JSON.parse(tokenData).token,
-            },
-            type: "GET", //方法类型
-            dataType: "json", //预期服务器返回的数据类型
-            url: auth_conf.token, //url
-            success: function(result) {
-                if (result.status != 1) {
-                    if (result.status != 15) {
-                        localStorage.removeItem("userinfo");
-                        window.location.href = '/login.html';
-                    } else {
-                        alert(result.messages);
-                    }
-                } else {
-                    //获取菜单
-                    getMune();
-                }
-            }
-        });
+        window.location = "/page/index/bgopenid.html";
     }
+    $.ajax({
+        headers: {
+            Authorization: JSON.parse(tokenData).token,
+        },
+        type: "GET", //方法类型
+        dataType: "json", //预期服务器返回的数据类型
+        url: auth_conf.token, //url
+        success: function(result) {
+            if (result.status != 1) {
+                if (result.status != 15) {
+                    localStorage.removeItem("userinfo");
+                    window.location.href = '/login.html';
+                } else {
+                    alert(result.messages);
+                }
+            } else {
+                //获取菜单
+                getMune();
+            }
+        }
+    });
+
     //获取权限菜单
     function getMune() {
         var userInfo = $.parseJSON(localStorage.getItem("userinfo"));
