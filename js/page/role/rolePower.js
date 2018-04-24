@@ -3,8 +3,8 @@ var vm = new Vue({
     data: {
         tokenValue: JSON.parse(localStorage.getItem("userinfo")).token, //token
         powerList: [],
-        roleId: "",
         hadPowerList: [],
+        name: "",
     },
     methods: {
         //角色列表
@@ -33,8 +33,9 @@ var vm = new Vue({
         },
         //其他链接进去的参数获取
         enterParam: function() {
-            this.roleId = this.GetQueryString("roleId");
             this.getHadPowerList(this.GetQueryString("uuid"));
+            this.submitPowers(this.GetQueryString("uuid"));
+            this.name = this.GetQueryString("name");
         },
         //获得这个角色已经存在的权限列表
         getHadPowerList: function(role_uuid) {
@@ -47,6 +48,21 @@ var vm = new Vue({
                 });
                 if (data.status == 1) {
                     that.hadPowerList = data.data;
+                    //console.log(that.hadPowerList.functionid);
+                } else {
+                    layer.msg(data.messages, { icon: 6 });
+                }
+            }).catch(function(error) {});
+        },
+        //提交选中的权限
+        submitPowers: function(role_uuid) {
+            var that = this;
+            var url = auth_conf.role_HadPower + role_uuid;
+            axios.put(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
+                var data = response.data;
+
+                if (data.status == 1) {
+
                 } else {
                     layer.msg(data.messages, { icon: 6 });
                 }
@@ -57,6 +73,19 @@ var vm = new Vue({
         var that = this;
         that.enterParam(); //获得浏览器传来的参数
         that.getPowerList(); //获得角色列表
-        that.getHadPowerList(); //获得这个角色已经有的权限列表
-    }
+    },
 })
+
+$(function() {
+    layui.use(['form'], function() {
+        var form = layui.form;
+        //全选全不选
+        form.on('checkbox(allChoose)', function(data) {
+            var childCheck = $(data.elem).parents(".topCheck").siblings(".powerInnerUl").find("input");
+            childCheck.each(function(index, item) {
+                item.checked = data.elem.checked;
+            });
+            form.render('checkbox');
+        });
+    });
+});

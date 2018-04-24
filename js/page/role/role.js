@@ -91,11 +91,15 @@ var vm = new Vue({
             });
         },
         //编辑权限跳转页面
-        editRole: function(uuid) {
+        editRole: function(uuid, roleName) {
             if (!uuid) {
                 layer.msg("连接错误", { icon: 6 });
             }
-            window.location.href = "../roles/editPower.html?uuid=" + uuid;
+            var targetUrl = "uuid=" + uuid;
+            if (roleName) {
+                targetUrl += "&name=" + roleName;
+            }
+            window.location.href = "../roles/rolePower.html?" + encodeURIComponent(targetUrl);
         },
     },
     created: function() {
