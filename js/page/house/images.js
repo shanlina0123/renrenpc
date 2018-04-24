@@ -103,7 +103,7 @@ layui.use(['upload','form','layer'], function() {
             if( vm.$data.images.length < 9 )
             {
                 obj.preview(function(index, file, result) {
-                    $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                    $('#imgs').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
                 });
             }
         },

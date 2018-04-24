@@ -101,9 +101,7 @@ function filterToken() {
  */
 function checkToken() {
     var tokenData = localStorage.getItem("userinfo");
-    var openid = JSON.parse(tokenData).wechatopenid; <<
-
-    //window.location = "/page/index/bgopenid.html";
+    var openid = JSON.parse(tokenData).wechatopenid;
     if (!openid) {
         window.location = "/page/index/bgopenid.html";
     }
