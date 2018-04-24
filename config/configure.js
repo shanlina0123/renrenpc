@@ -1,6 +1,7 @@
 (function() {
-    //var host = "http://192.168.15.222:8081/";
-    var host = "http://api.rrzhaofang.com/";
+    var host = "http://192.168.15.222:8081/";
+    //  var host = "http://api.rrzhaofang.com/
+    // var host = "http://192.168.15.222:8081/"
     //未带toke请求
     window.conf = {
             login: host + 'admin/login', //首页推荐
@@ -20,6 +21,11 @@
         house_img_save: host + 'admin/house/img', //添加房源数据
         house_edit_info: host + 'admin/house/edit/', //修改房源数据
         house_edit_save: host + 'admin/house/update/', //修改房源数据
+        house_edit_tag: host + 'admin/house/tag/edit/', //修改房源标签
+        house_edit_tag_save: host + 'admin/house/tag/edit/save', //修改房源标签保存
+        house_edit_img: host + 'admin/house/img/edit/', //修改房源图片信息
+        house_edit_img_save: host + 'admin/house/img/edit/save', //修改房源图片信息
+
         datas_default_one: host + 'admin/datas-default-one/', //默认属性数据
         datas_one: host + 'admin/datas-one/', //自定义数据单个
         admin_datas: host + 'admin/chart-admin', //后台用户列表
@@ -44,7 +50,12 @@
         role_HadPower: host + 'admin/auth/', //已经拥有的权限列表
         client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
         chart_drop: host + 'admin/chart-user', //经纪人
-        company_delete: host + 'admin/company/delete/' //公司删除
+
+        company_delete: host + 'admin/company/delete/', //公司删除
+        company_update: host + 'admin/company/update/', //公司修改 
+        // company_detail:host+'admin/company/edit/' //公司详情
+        company_add: host + ' admin/company/store', //公司添加
+
     }
     $("#top").load('/page/public/top.html');
     $("#left").load('/page/public/left.html');

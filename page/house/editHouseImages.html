@@ -107,22 +107,13 @@
                 <div class="formWrap">
                     <form class="layui-form" id="image">
                         <table class="uploadTable">
-                            <!--<tr>
-                                <td>封面图(单张)</td>
-                                <td>
-                                    <div class="layui-upload-drag" id="covermap">
-                                        <i class="layui-icon"></i>
-                                        <p>点击上传，或将文件拖拽到此处</p>
-                                    </div>
-                                </td>
-                            </tr>-->
                             <tr>
                                 <td>封面图(单张)</td>
                                 <td>
                                     <div class="layui-upload">
                                         <button type="button" class="layui-btn" id="covermap">上传图片</button>
                                         <div class="layui-upload-list">
-                                            <img class="layui-upload-img" id="covermapUrl">
+                                            <img class="layui-upload-img" id="covermapUrl" :src="path_url+covermap">
                                             <p id="demoText"></p>
                                         </div>
                                     </div>
@@ -133,23 +124,13 @@
                                 <td>
                                     <div class="layui-upload">
                                         <button type="button" class="layui-btn" id="infoImg">多图片上传</button>
-                                  
                                         <blockquote id="imgs">
-                                                
+                                            <template v-for="img in res">
+                                                <div><img :src="path_url+img.url" class="layui-upload-img" /><img  @click="removeImg(img.url)" src="/images/a7.png"/></div>
+                                            </template>
                                         </blockquote>
                                     </div>
                                     <div>支持JPG、PNG、JPEG,最多可上传9张</div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>公众号显示</td>
-                                <td>
-                                    <div class="layui-form-item">
-                                        <div class="layui-input-block forEditLeftMargin">
-                                            <input type="radio" name="isShow" value="1" title="是" checked=""  lay-filter="business">
-                                            <input type="radio" name="isShow" value="0" title="否"  lay-filter="business" >
-                                        </div>
-                                    </div>
                                 </td>
                             </tr>
                         </table>
@@ -170,27 +151,5 @@
 <script type="text/javascript" src="../../config/bese64.js"></script>
 <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
-<script type="text/javascript" src="../../js/page/house/images.js"></script>
-<script type="text/javascript">
-	$("img").mouseenter(function () {
-                var myself = $(this);
-                var xx = $("<img src='a7.png' class='xx' />");
-                var top = $(this).offset().top;
-                var left = $(this).offset().left + $(this).width() - 12;
-                xx.css({ "position": "absolute", "top": top, "left": left, "display": "" });
-                $(document.body).append(xx);
- 
-                $(".xx").click(function () {
-                    myself.hide();
-                    $("img").each(function () {
-                        if ($(this).hasClass("hid")) {
-                            $(this).removeClass("hid");
-                            return false;
-                        }
-                    });
-                });
-            }).mouseleave(function () {
-                $(".xx").hide();
-            });
-</script>
+<script type="text/javascript" src="../../js/page/house/edit_images.js"></script>
 </html>
