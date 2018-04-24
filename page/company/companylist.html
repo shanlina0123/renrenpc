@@ -36,10 +36,10 @@
            
             <!--右侧主要内容-->
             <div class="rightMain fl">
-                <div class="addClient"><button class="layui-btn changeClient">添加合作客户</button></div>
+                <div class="addClient"><button class="layui-btn changeClient"  @click="add()">添加合作客户</button></div>
                 <form class="layui-form lockForm">
                     <h2>公司列表</h2>
-                    <table class="layui-table">
+                    <table class="layui-table" id="companylist">
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -49,7 +49,7 @@
                                 <th>操作</th>
                             </tr>
                         </thead>
-                        <tbody id="companylist">
+                        <tbody>
 	                        <tr v-for="item in companylist">	                            
 	                            <td>{{item.id}}</td>
 	                            <td>{{item.name}}</td>
@@ -57,7 +57,7 @@
 	                            <td>{{item.mobile}}</td>
 	                            <td>
 	                                <div class="layui-btn-group">
-	                                   <a :href="'editHouse.html?uuid='+item.uuid" class="layui-btn editHouseBtn">编辑</a>
+	                                   <button type="button" class="layui-btn editBtn" @click="edit(item.uuid)">编辑</button>
                                        <button type="button" class="layui-btn deleteHouseBtn" @click="del(item.uuid)">删除</button>
 	                                </div>
 	                            </td>
@@ -158,7 +158,7 @@
                         </tr>
                     </table>
                     <div class="submitBtnWrap">
-                        <button class="layui-btn add">提交</button>
+                        <button class="layui-btn add" @click="submitUser(params.uuid)">提交</button>
                     </div>
                 </form>
             </div>

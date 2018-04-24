@@ -1,6 +1,7 @@
 (function() {
-    // var host = "http://192.168.15.222:8081/";
-    var host = "http://api.rrzhaofang.com/";
+    var host = "http://192.168.15.222:8081/";
+    //  var host = "http://api.rrzhaofang.com/
+    // var host = "http://192.168.15.222:8081/"
     //未带toke请求
     window.conf = {
             login: host + 'admin/login', //首页推荐
@@ -8,7 +9,7 @@
         //带token的请求
         window.auth_conf = {
             token: host + "admin/token", //检查而已有token
-            path_url:'http://api.rrzhaofang.com/upload/', //图片地址
+            path_url:host+'upload/', //图片地址
             map_address: host + 'admin/get/map/address', //图片地址
             house_list: host + 'admin/house/index', //房源列表
             house_recommend: host + 'admin/house/recommend', //房源推荐
@@ -24,9 +25,9 @@
             house_edit_tag_save: host + 'admin/house/tag/edit/save', //修改房源标签保存
             house_edit_img: host + 'admin/house/img/edit/', //修改房源图片信息
             house_edit_img_save: host + 'admin/house/img/edit/save', //修改房源图片信息
-
             datas_default_one: host + 'admin/datas-default-one/', //默认属性数据
             datas_one: host + 'admin/datas-one/', //自定义数据单个
+            datas_cate_list: host + 'admin/datas-catelist', //自定义分类列表
             admin_datas: host + 'admin/chart-admin', //后台用户列表
             users_list: host + 'admin/user/broker', //经纪人列表
             chart_list: host + 'admin/chart', //数据列表
@@ -47,13 +48,18 @@
             role_delete: host + 'admin/roles/', //删除角色
             role_power: host + 'admin/auth', //系统权限设置
             role_HadPower: host + 'admin/auth/', //已经拥有的权限列表
-            client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
-            chart_drop:host+'admin/chart-user',//经纪人
-            company_delete:host+'admin/company/delete/',//公司删除
-
+            chart_drop: host + 'admin/chart-user', //经纪人
+            company_delete: host + 'admin/company/delete/', //公司删除
+            company_update: host + 'admin/company/update/', //公司修改
+           // company_detail:host+'admin/company/edit/' //公司详情
+            company_add: host + ' admin/company/store', //公司添加
             edit_pass: host+'admin/user/update-pass',//用户登陆状态修改密码
             check_user_name: host+'admin/get/user',//检测用户名
             edit_modify_pass: host+'admin/user/modify-pass',//忘记密码修改
+
+            datas_add:host+'admin/datas',//添加属性
+            datas_update:host+'admin/datas/',//修改属性
+            datas_delete:host+'admin/datas-delete/',//修改属性
 
         }
         $("#top").load('/page/public/top.html');
@@ -66,14 +72,11 @@
  */
 var url = window.location.href;
 //跳过登陆页
-if ( url.indexOf("login.html") == -1  )
-{
+if ( url.indexOf("login.html") == -1  ) {
     //跳过忘记密码页
-    if(  url.indexOf('chengePwd.html') == -1 )
-    {
+    if (url.indexOf('chengePwd.html') == -1) {
         //跳过忘记密码修修改
-        if( url.indexOf('wpwd.html') == -1 )
-        {
+        if (url.indexOf('wpwd.html') == -1) {
             filterToken();
         }
     }

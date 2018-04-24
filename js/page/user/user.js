@@ -21,30 +21,41 @@
 	},
 	methods:{
 		//第一次加载数据
-		 getusers:function (){		 
+		 getusers:function (loading){		 
 		 	var url = auth_conf.users_list;
             var that = this;
-            axios.get( url,{headers: {"Authorization": that.tokenValue}})
+           //console.log(that.params);
+            axios.get( url,{ params: that.params,headers: {"Authorization": that.tokenValue}})
             .then(function(response)
             {
                   var data = response.data;
 
                   if ( data.status == 1 )
-                    {
+                    {                    	                                                
                     	 var list = data.data;
                         that.users = data.data.data;
                         that.page_data.total = list.total;
                         that.page_data.to= list.to;
-                        that.getPageData();
-						
+                         if( loading!="loadingPageData")
+                        {
+                            that.getPageData();
+                        }
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render();
+                        });
                     }else
                     {
-                        layer.msg(data.messages,{icon: 6});
+                        layui.use(['layer'], function() {
+                            var layer = layui.layer;
+                            layer.msg(data.messages,{icon: 6});
+                        });
                     }
             });
 		 },
 
-		  getPageData:function () {
+		  //lay分页
+        getPageData:function () {
             var that = this;
             layui.use(['laypage', 'layer', 'form'], function() {
                 var laypage = layui.laypage;
@@ -59,30 +70,18 @@
                         if(!first)
                         {
                             that.params.page = obj.curr;
-                            that.getDataList();
+                            that.getusers('loadingPageData');
                         }
+                        layui.use(['form'], function() {
+                            var form = layui.form;
+                            form.render();
+                        });
                     }
                 });
                 form.render();
             });
         },
-        //分页加载数据
-        getDataList:function () {
-            var url = auth_conf.users_list;
-            var that = this;
-            axios.get( url,{ params: that.params,headers: {"Authorization": that.tokenValue}})
-                .then(function(response)
-                {
-                    var data = response.data;
-                    if ( data.status == 1 )
-                    {
-                        var list = data.data;
-                        that.users = list.data;
-                        that.page_data.total = list.total;
-                        that.page_data.to= list.to;
-                    }
-                });
-        },
+
        //公司列表
         dataCompayList:function ()
         {
@@ -132,7 +131,7 @@
                         that.userstype = data.data;
                         var str = '';
                         var listData = data.data;
-                        console.log(listData)
+                        //console.log(listData)
                         that.userstype= listData;
                         for(var x in listData)
                         {
@@ -163,7 +162,9 @@
 function search() {
     var typeid = $("#userstype").val();   
     var companyid = $("#company").val(); 
+    console.log(typeid);
     us.$data.params.typeid = typeid;
     us.$data.params.companyid = companyid;
-    us.getHouseList();
+    us.$data.params.page = 1;
+    //us.getusers();
 }
