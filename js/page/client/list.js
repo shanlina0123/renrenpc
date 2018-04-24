@@ -343,8 +343,8 @@ var vm = new Vue({
         that.getDefaultDataOne();//所有客户状态
         that.getAdmins();//所有业务员
     },mounted:function(){
-        $("#top").load('/page/public/top.html');
-        $("#left").load('/page/public/left.html');
+        // $("#top").load('/page/public/top.html');
+        // $("#left").load('/page/public/left.html');
     }
 });
 $(function(){

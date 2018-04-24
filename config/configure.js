@@ -1,7 +1,7 @@
 (function() {
-    var host = "http://192.168.15.222:8081/";
+    //  var host = "http://192.168.15.222:8081/";
     //  var host = "http://api.rrzhaofang.com/
-    // var host = "http://192.168.15.222:8081/"
+     var host = "http://192.168.15.222:8081/"
     //未带toke请求
     window.conf = {
             login: host + 'admin/login', //首页推荐
@@ -9,6 +9,7 @@
         //带token的请求
         window.auth_conf = {
             token: host + "admin/token", //检查而已有token
+            menue_list:host+"admin/auth-menu",//菜单列表
             path_url:host+'upload/', //图片地址
             map_address: host + 'admin/get/map/address', //图片地址
             house_list: host + 'admin/house/index', //房源列表
@@ -58,7 +59,6 @@
             company_add: host + ' admin/company/store', //公司添加
         }
         $("#top").load('/page/public/top.html');
-        $("#left").load('/page/public/left.html');
 })();
 
 /**
@@ -67,19 +67,18 @@
  */
 var url = window.location.href;
 if (url.indexOf("login.html") == -1) {
-    //filterToken();
+   filterToken();
 }
 
 /**
  * 判断session存在不
  */
 function filterToken() {
-
     var tokenData = localStorage.getItem("userinfo");
     if (!tokenData) {
         window.location = "/login.html";
     } else {
-        checkToken()
+        checkToken();
     }
 }
 
@@ -103,7 +102,37 @@ function checkToken() {
                 } else {
                     alert(result.messages);
                 }
+            }else{
+                getMune();
             }
         }
     });
 }
+//获取权限菜单
+function  getMune() {
+    var userInfo=$.parseJSON(localStorage.getItem("userinfo"));
+    var menueList=userInfo.menuList;
+    if(userInfo.isadmin==11)
+    {
+        $("#top").load('/page/public/top.html');
+        $("#left").load('/page/public/left.html');
+    }else{
+        //权限菜单(现在页面只显示一级，接口和数据库设计支持多级)
+        var leftHtml='';
+        if(menueList)
+        {
+            $.each(menueList,function(i,n){
+                leftHtml+='<li><a href="../'+n.url+'"><i class="layui-icon">'+n.menuicon+'</i>'+n.menuname+'</a></li>'+'\r\n';
+            });
+            $("#left").html(leftHtml);
+            $("#top").load('/page/public/top.html');
+        }else{
+           // alert("您暂时无任何权限，请联系管理员设置您的权限");
+            $("#left").html(leftHtml);
+            leftHtml="<img src='/images/lock.jpg' style='margin:100px auto;display: block;'/>";
+            $(".main").html(leftHtml);
+        }
+    }
+
+}
+

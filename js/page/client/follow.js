@@ -148,7 +148,7 @@ var vm = new Vue({
         that.enterParam();//进入参数
         that.getDefaultDataOne();//所有客户状态
     },mounted:function(){
-        $("#top").load('/page/public/top.html');
-        $("#left").load('/page/public/left.html');
+        // $("#top").load('/page/public/top.html');
+        // $("#left").load('/page/public/left.html');
     }
 });
