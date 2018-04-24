@@ -9,10 +9,6 @@ var vm = new Vue({
         uuid:'',
         houseInfo:'',
         ishome:0,
-        tags:[],
-        house_tag:[],
-        tsgsData:[],
-        images:[],
     },
     methods:{
         getFromData:function ()
@@ -68,15 +64,6 @@ var vm = new Vue({
                         console.log( data.data );
                         that.houseInfo = data.data;
                         that.ishome = data.data.ishome;
-                        that.house_tag = data.data.house_tag;
-                        var tsgsData = data.data.house_tag;
-                        for(var x in tsgsData)
-                        {
-                            if( tsgsData[x] )
-                            {
-                                that.tsgsData.push(tsgsData[x].tagid);
-                            }
-                        }
                         layui.use(['form'], function() {
                             var form = layui.form;
                                 form.render();
@@ -190,7 +177,7 @@ if( $(".layui-form").length )
                 success: function(result) {
                     if ( result.status == 1 )
                     {
-                        window.location.href = 'houseList.html';
+                        window.location.href = 'editHouseTag.html?id='+result.data;
 
                     } else
                     {
@@ -267,80 +254,3 @@ function getItem( index )
    $("#searchAddress").val(address);
     $("#addressList").hide();
 }
-
-
-
-
-var tokenValue = JSON.parse(localStorage.getItem("userinfo")).token;
-layui.use(['upload','form','layer'], function() {
-    var form = layui.form;
-    var $ = layui.jquery;
-    var layer = layui.layer;
-    upload = layui.upload;
-    //普通图片上传
-    upload.render({
-        headers:{ Authorization: tokenValue },
-        elem: '#covermap',
-        exts:"jpg|png|jpeg",
-        size:5120,
-        number:1,
-        url: auth_conf.add_imag,
-        before: function(obj)
-        {
-            obj.preview(function(index, file, result) {
-                $('#covermapUrl').attr('src',result);
-            });
-        }
-        ,done: function(res)
-        {
-            layer.closeAll('loading'); //关闭loading
-            if( res.status == 1 )
-            {
-                $("#covermapName").val(res.data.name);
-            }
-        },
-        error: function(index, upload){
-            layer.closeAll('loading'); //关闭loading
-        }
-    });
-    //监听redio
-    /*form.on('radio(business)',function ( data ) {
-        vm.$data.status = data.value;
-    });*/
-    //多图片上传
-    upload.render({
-        headers:{ Authorization: tokenValue },
-        elem: '#infoImg',
-        exts:"jpg|png|jpeg",
-        size:5120,
-        number:9,
-        url: auth_conf.add_imag,
-        multiple: true,
-        before: function(obj) {
-            //预读本地文件示例，不支持ie8
-            var len = $("#demo2").find('img').length;
-            if( len < 9 )
-            {
-                obj.preview(function(index, file, result) {
-                    $('#demo2').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
-                });
-            }
-        },
-        done: function(res)
-        {
-            if( res.status == 1 )
-            {
-                if( vm.$data.images.length < 9 )
-                {
-                    vm.$data.images.push( res.data.name );
-                }else
-                {
-                    layui.use(['layer'], function() {
-                        var layer = layui.layer;
-                        layer.msg('最多可上传9个哦');
-                    });
-                }
-            }
-        },
-    });
-});
