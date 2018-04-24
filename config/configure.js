@@ -1,7 +1,6 @@
 (function() {
+    var host = "http://api.rrzhaofang.com/";
    // var host = "http://192.168.15.222:8081/";
-   //  var host = "http://api.rrzhaofang.com/";
-    var host = "http://192.168.15.222:8081/";
     //未带toke请求
     window.conf = {
             login: host + 'admin/login', //首页推荐
