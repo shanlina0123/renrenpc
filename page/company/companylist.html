@@ -18,6 +18,17 @@
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/style1.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <style>
+        .popFormWrap {
+            width: 500px;
+            margin: 0 auto;
+        }
+        .layui-input-inline {
+            display: inline-block;
+            vertical-align: middle;
+            width: 300px;
+        }
+    </style>
     <script src="../../js/modernizr-2.6.2.min.js"></script>
 </head>
 
@@ -25,7 +36,7 @@
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
-    <div class="wrap">
+    <div class="wrap" id="vue_company_list" v-cloak>
         <div class="layui-layout layui-layout-admin">
             <!--顶部-->
             <div class="layui-header header" id="top"> </div>	 
@@ -36,10 +47,10 @@
            
             <!--右侧主要内容-->
             <div class="rightMain fl">
-                <div class="addClient"><button class="layui-btn changeClient"  @click="add()">添加合作客户</button></div>
+                <div class="addClient"><button class="layui-btn changeClient"  @click="showAdd()">添加合作公司</button></div>
                 <form class="layui-form lockForm">
                     <h2>公司列表</h2>
-                    <table class="layui-table" id="companylist">
+                    <table class="layui-table" >
                         <thead>
                             <tr>
                                 <th>ID</th>
@@ -50,15 +61,15 @@
                             </tr>
                         </thead>
                         <tbody>
-	                        <tr v-for="item in companylist">	                            
-	                            <td>{{item.id}}</td>
+	                        <tr v-for="(item,index) in client_list" :id="'company_'+item.uuid">
+	                            <td>{{index+1}}</td>
 	                            <td>{{item.name}}</td>
-	                            <td></td>
+	                            <td>{{item.conncat}}</td>
 	                            <td>{{item.mobile}}</td>
 	                            <td>
 	                                <div class="layui-btn-group">
-	                                   <button type="button" class="layui-btn editBtn" @click="edit(item.uuid)">编辑</button>
-                                       <button type="button" class="layui-btn deleteHouseBtn" @click="del(item.uuid)">删除</button>
+	                                   <button type="button" class="layui-btn editBtn"   type="button" @click="showEdit(item.uuid)">编辑</button>
+                                       <button type="button" class="layui-btn deleteHouseBtn" type="button" @click="showDelete(item.uuid)">删除</button>
 	                                </div>
 	                            </td>
 	                        </tr>
@@ -83,7 +94,7 @@
                                <div class="layui-inline ">
                                     <label class="layui-form-label ">公司</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse" datatype="s3-30" class="layui-input" sucmsg=" "  errormsg="* 公司名称不符合规定！">
+                                        <input type="text" class="layui-input" name="userHouse" datatype="s3-30" class="layui-input" sucmsg=" " :value="compnayData.name"  ref="edit_name" >
                                          <span class="Validform_checktip"></span>
                                     </div>
                                 </div>
@@ -95,7 +106,7 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">联系人</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userName" value="A类客户">
+                                        <input type="text" class="layui-input" name="userName"  :value="compnayData.conncat"  ref="edit_conncat">
                                     </div>
                                 </div>
                             </td>
@@ -105,14 +116,25 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">联系人电话</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userPhone" value="15894689785" readonly>
+                                        <input type="text" class="layui-input" name="userPhone" :value="compnayData.mobile"   ref="edit_mobile">
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">地址</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userPhone" datatype="m" class="layui-input" sucmsg=" "  :value="compnayData.addr"  ref="edit_addr">
+                                        <span class="Validform_checktip"></span>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                     </table>
                     <div class="submitBtnWrap">
-                        <button class="layui-btn">提交</button>
+                        <button class="layui-btn" type="button" @click="update(compnayData.uuid)">提交</button>
                     </div>
                 </form>
             </div>
@@ -127,19 +149,19 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">公司</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse" datatype="s3-30" class="layui-input" sucmsg=" "  errormsg="* 公司名称不符合规定！">
+                                        <input type="text" class="layui-input" name="userHouse" datatype="s3-30" class="layui-input" sucmsg=" " ref="name" >
                                          <span class="Validform_checktip"></span>
                                     </div>
                                 </div>
                             </td>
                         </tr>
-                     
+
                         <tr>
                             <td>
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">联系人</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userHouse" datatype="s1-5" class="layui-input" sucmsg=" "  errormsg="* 姓名不符合规定！">
+                                        <input type="text" class="layui-input" name="userHouse" datatype="s1-5" class="layui-input" sucmsg=" " ref="conncat">
                                         <span class="Validform_checktip"></span>
                                     </div>
                                 </div>
@@ -150,19 +172,31 @@
                                 <div class="layui-inline ">
                                     <label class="layui-form-label ">联系人电话</label>
                                     <div class="layui-input-inline ">
-                                        <input type="text" class="layui-input" name="userPhone" datatype="m" class="layui-input" sucmsg=" "  errormsg="* 手机号码不符合规定！">
+                                        <input type="text" class="layui-input" name="userPhone" datatype="m" class="layui-input" sucmsg=" " ref="mobile" >
                             			<span class="Validform_checktip"></span>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="layui-inline ">
+                                    <label class="layui-form-label ">地址</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userPhone" datatype="m" class="layui-input" sucmsg=" "  ref="addr">
+                                        <span class="Validform_checktip"></span>
                                     </div>
                                 </div>
                             </td>
                         </tr>
                     </table>
                     <div class="submitBtnWrap">
-                        <button class="layui-btn add" @click="submitUser(params.uuid)">提交</button>
+                        <button class="layui-btn add" type="button" @click="add()">提交</button>
                     </div>
                 </form>
             </div>
         </div>
+    </div>
     </div>
     <!-- //wrap -->
     <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>

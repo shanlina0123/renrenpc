@@ -51,8 +51,8 @@
             chart_drop: host + 'admin/chart-user', //经纪人
             company_delete: host + 'admin/company/delete/', //公司删除
             company_update: host + 'admin/company/update/', //公司修改
-           // company_detail:host+'admin/company/edit/' //公司详情
-            company_add: host + ' admin/company/store', //公司添加
+            company_detail:host+'admin/company/edit/', //公司详情
+            company_add: host + 'admin/company/store', //公司添加
             edit_pass: host+'admin/user/update-pass',//用户登陆状态修改密码
             check_user_name: host+'admin/get/user',//检测用户名
             edit_modify_pass: host+'admin/user/modify-pass',//忘记密码修改
