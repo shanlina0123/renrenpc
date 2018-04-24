@@ -42,11 +42,10 @@
     <script type="text/javascript" src="../../js/jquery.qrcode.min.js"></script>
     <script>
         $(function(){
-            var id = JSON.parse(localStorage.getItem("userinfo")).uuid;
-            var back = 'http://wx.rrzhaofang.com/authorization.html?uuid='+id+"&type=1";
+            var id = JSON.parse(localStorage.getItem("userinfo")).token;
+            var back = 'http://wx.rrzhaofang.com/authorization.html?uuid='+id+"&type=2";
                 back = encodeURIComponent(back);
             var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbe1cdb19d2290193&redirect_uri="+back+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
-            console.log(str);
             $('#code').qrcode(str);
         })
         var tokenData = localStorage.getItem("userinfo");
@@ -60,7 +59,13 @@
                 {
                     if( res.status == 1 )
                     {
-                        window.location.href='cgpwd.html';
+                        var openid = res.data.wechatopenid;
+                        var tokenData = localStorage.getItem("userinfo");
+                        var data = JSON.parse(tokenData);
+                            data.wechatopenid = openid;
+                        var data = JSON.stringify( data );
+                            localStorage.setItem('userinfo',data);
+                            window.location.href='cgpwd.html';
                     }
                 }
             },'json');

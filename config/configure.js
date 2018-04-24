@@ -1,6 +1,6 @@
 (function() {
-    var host = "http://192.168.15.222:8081/";
-    //  var host = "http://api.rrzhaofang.com/
+   // var host = "http://192.168.15.222:8081/";
+     var host = "http://api.rrzhaofang.com/"
     // var host = "http://192.168.15.222:8081/"
     //未带toke请求
     window.conf = {
@@ -77,6 +77,7 @@ if ( url.indexOf("login.html") == -1  ) {
     if (url.indexOf('chengePwd.html') == -1) {
         //跳过忘记密码修修改
         if (url.indexOf('wpwd.html') == -1) {
+
             filterToken();
         }
     }
@@ -100,6 +101,11 @@ function filterToken() {
  */
 function checkToken() {
     var tokenData = localStorage.getItem("userinfo");
+    var openid = JSON.parse(tokenData).wechatopenid;
+    if( !openid )
+    {
+        window.location = "/page/index/bgopenid.html";
+    }
     $.ajax({
         headers: {
             Authorization: JSON.parse(tokenData).token,
