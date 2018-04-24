@@ -1,5 +1,5 @@
 (function() {
-    // var host = "http://192.168.15.222:8081/";
+    //var host = "http://192.168.15.222:8081/";
     var host = "http://api.rrzhaofang.com/";
     //未带toke请求
     window.conf = {
@@ -56,7 +56,7 @@
  */
 var url = window.location.href;
 if (url.indexOf("login.html") == -1) {
-    filterToken();
+    //filterToken();
 }
 
 /**

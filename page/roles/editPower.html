@@ -55,10 +55,10 @@
                                             <ul class="powerUl">
                                                 <li v-for="item in powerList">
                                                     <div class="topCheck">
-                                                        <input type="checkbox" lay-skin="primary" lay-filter="allChoose" class="checkAll" :title="item.name" :checked="hadPowerList.functionid">
+                                                        <input type="checkbox" lay-skin="primary" lay-filter="allChoose" :id="item.id" class="checkAll" :title="item.name">
                                                     </div>
                                                     <ul class="powerInnerUl clearfix">
-                                                        <li v-for="innerItem in item._child"><input type="checkbox" lay-skin="primary" :title="innerItem.name" :checked="hadPowerList.functionid"></li>
+                                                        <li v-for="innerItem in item._child"><input type="checkbox" lay-skin="primary" :id="innerItem.id" :title="innerItem.name"></li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -73,8 +73,8 @@
                                         <div class="layui-input-inline ">
                                             <div class="layui-form-item">
                                                 <div class="layui-input-block forEditLeftMargin">
-                                                    <input type="radio" name="isShow" value="全部" title="全部" checked="">
-                                                    <input type="radio" name="isShow" value="仅个人" title="仅个人">
+                                                    <input type="radio" name="isShow" value="0" title="全部">
+                                                    <input type="radio" name="isShow" value="1" title="仅个人">
                                                 </div>
                                             </div>
                                         </div>
