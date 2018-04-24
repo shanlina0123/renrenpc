@@ -1,8 +1,8 @@
 (function() {
     var host = "http://api.rrzhaofang.com/";
     window.conf = {
-            login: host + 'admin/login', //首页推荐
-        }
+            login: host + 'admin/login' //首页推荐
+        },
         //带token的请求
     window.auth_conf = {
         token: host + "admin/token", //检查而已有token
@@ -96,7 +96,8 @@ function filterToken() {
 /**
  * 检测token
  */
-function checkToken() {
+function checkToken()
+{
     var tokenData = localStorage.getItem("userinfo");
     var openid = JSON.parse(tokenData).wechatopenid;
     if (!openid) {
@@ -123,6 +124,7 @@ function checkToken() {
             }
         }
     });
+}
 
     //获取权限菜单
     function getMune() {
