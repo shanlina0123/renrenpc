@@ -1,6 +1,6 @@
 (function() {
    // var host = "http://192.168.15.222:8081/";
-    var host = "http://api.rrzhaofang.com/";
+    var host = "http://192.168.15.222:8081/";
     //未带toke请求
     window.conf = {
             login: host + 'admin/login', //首页推荐
@@ -22,6 +22,7 @@
             house_edit_save: host + 'admin/house/update/', //修改房源数据
             datas_default_one: host + 'admin/datas-default-one/', //默认属性数据
             datas_one: host + 'admin/datas-one/', //自定义数据单个
+            datas_cate_list: host + 'admin/datas-catelist', //自定义分类列表
             admin_datas: host + 'admin/chart-admin', //后台用户列表
             users_list: host + 'admin/user/broker', //经纪人列表
             chart_list: host + 'admin/chart', //数据列表
@@ -45,6 +46,9 @@
             client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
             client_follow: host + 'admin/client-follow/store', //跟进客户
             chart_drop: host + 'admin/chart-user', //经纪人
+            datas_add:host+'admin/datas',//添加属性
+            datas_update:host+'admin/datas/',//修改属性
+            datas_delete:host+'admin/datas-delete/'//修改属性
         }
         $("#top").load('/page/public/top.html');
         $("#left").load('/page/public/left.html');
