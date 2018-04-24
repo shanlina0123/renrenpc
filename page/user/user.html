@@ -42,7 +42,7 @@
                         <div class="layui-inline">
                             <label class="layui-form-label">类型</label>
                             <div class="layui-input-inline">
-                                <select name="modules" lay-verify="required" lay-search="" id="userstype">
+                                <select name="userstype" lay-verify="required" lay-search="" id="userstype">
                                 <option value="">全部</option>
                                 <!--<option value="1">独立经纪人</option>
                                 <option value="2">房产经纪人</option>					     -->
@@ -52,11 +52,11 @@
                         <div class="layui-inline" id="select">
                             <label class="layui-form-label">公司</label>
                             <div class="layui-input-inline">
-                                <select name="modules" lay-verify="required" lay-search="" id="company">
+                                <select name="company" lay-verify="required" lay-search="" id="company">
                                 <option value="">全部</option>
                               <!--<!--<option value="1">万科</option>
                                 <option value="2">万达</option>
-                                <option value="3">其他</option>-->-->
+                                <option value="3">其他</option>-->
                             </select>
                             </div>
                         </div>
@@ -81,12 +81,18 @@
                                 <tr v-for="item in users">
                                     <td>{{item.id}}</td>
                                     <td>{{item.nickname}}</td>
-                                    <td>{{userstype[item.economictid]?userstype[item.economictid].name:''}}</td>
-                                    <!--<td>{{item.economictid}}</td>  -->
+                                    <td>{{userstype[item.economictid]?userstype[item.economictid].name:''}}</td>                                 	
+                                 	<td>{{company[item.companyid]?company[item.companyid].name:''}}</td>
+                                    <!--<td v-if="userstype[item.economictid]">
+                                	{{userstype[item.economictid]["name"]}}
+                            		</td><td v-else></td>                            		
+                            		 <td v-if="company[item.companyid]">
+                                	{{company[item.company]["name"]}}
+                            		</td><td v-else></td>-->
                                    <!--<td>{{item.name}}</td> -->
-                                 	<td>{{company[item.name]?company[item.companyid].name:''}}</td>                                                                                                                  
+                                 	<!--<td>{{company[item.name]?company[item.companyid].name:''}}</td>  -->                                                                                                                
                                     <td>{{item.mobile}}</td>                                  
-                                    <td>{{userstype[item.economictid]?userstype[item.economictid].name:''}}</td></td>                                                                                                                                                   
+                                    <td>{{item.created_at}}</td></td>                                                                                                                                                   
                                                                                                   
                                     <td>
                                     	<input type="checkbox" name="like[write]" title="锁定" v-if="item.ishome !== 1">                                    
