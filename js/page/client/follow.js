@@ -101,45 +101,6 @@ var vm = new Vue({
                 //console.log(error);
                 // console.log(this);
             });
-            // $(".followForm").validate({
-            //     errorLabelContainer: $(".errorLabel"),
-            //     rules: {
-            //         showSearchStatus: {
-            //             required: true
-            //         }
-            //     },
-            //     messages: {
-            //         showSearchStatus: {
-            //             required: "请选择客户状态"
-            //         }
-            //     },
-            //     submitHandler: function(form) {
-            //         //token
-            //         axios.post(url, that.add_params, { headers: { "Authorization": that.tokenValue } })
-            //             .then(function(response) {
-            //                 var data = response.data;
-            //                 if (data.status == 1) {
-            //                     window.location.href = "../client/client.html";
-            //                 } else {
-            //                     //  alert(data.messages)
-            //                     layui.use('layer',  function(id)  {
-            //                         var  layer  =  layui.layer;
-            //                         layer.msg(data.messages);
-            //                     });
-            //                 }
-            //                 // console.log(response.data.status);
-            //             }).catch(function(error) {
-            //             layui.use('layer',  function(id)  {
-            //                 var  layer  =  layui.layer;
-            //                 layer.msg("系统错误");
-            //             });
-            //             //console.log(error);
-            //             // console.log(this);
-            //         });
-            //
-            //     }
-            // })
-
         }
 
     },
