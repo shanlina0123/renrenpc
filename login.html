@@ -94,10 +94,17 @@
                         {
                             if( data.status == 1 )
                             {
+                                var res =  data.data;
                                 var data = JSON.stringify( data.data );
-                                localStorage.setItem("userinfo", data );
-                                window.location.href='page/index/index.html';
+                                   localStorage.setItem('userinfo',data);
+                                if( res.wechatopenid )
+                                {
+                                    window.location.href='page/index/index.html';
+                                }else
+                                {
+                                    window.location.href='page/index/bgopenid.html';
 
+                                }
                             }else
                             {
                                 layer.msg( data.messages, {icon: 5, time: 2000, shift: 6});
