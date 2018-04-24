@@ -1,15 +1,9 @@
 ﻿<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js">
-<!--<![endif]-->
-
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>二维码登录</title>
+    <title>二维码</title>
      <link rel="icon" href="../../images/icon.ico">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -17,27 +11,65 @@
     <link rel="stylesheet" href="../../css/common.css">
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
-    <script src="../../js/modernizr-2.6.2.min.js"></script>
 </head>
-
 <body>
-    <!--[if lt IE 7]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
     <div class="wrap">
         <div class="layui-layout loginBg">
             <div class="loginErweima">
-                <div class="erweima"></div>
+                <div class="erweima" id="code"></div>
                 <p class="loginNotice">
-                    <span>二维码两分钟之内有效</span>
+                    <span>二维三分钟之内有效</span>
                     <a href="#" class="reload">刷新二维码</a>
                 </p>
             </div>
         </div>
     </div>
     <!-- //wrap -->
-    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
-</body>
+    <script type="text/javascript" src="../../js/jquery.qrcode.min.js"></script>
+    <script>
+        $(function(){
+            var uuid = getQueryString('uuid');
+            var back = 'http://wx.rrzhaofang.com/authorization.html?uuid='+uuid+"&type=1";
+            back = encodeURI(back);
+            var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbe1cdb19d2290193&redirect_uri="+back+"&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+            $('#code').qrcode(str);
+        })
 
+        var uuid = getQueryString('uuid');
+        var num = 0;
+        var i = setInterval(function()
+        {
+            num++;
+            $.post('http://api.rrzhaofang.com/admin/wechat/testing',{uuid:uuid},function ( res ) {
+                if( res )
+                {
+                    if( res.status == 1 )
+                    {
+                        window.location.href='wpwd.html?uuid='+uuid+'&openid='+res.data.wechatopenid;
+                    }
+                }
+            },'json');
+            if ( num > 90 )
+            {
+                $('#code').html('');
+                clearInterval(i);
+            }
+        }, 3000);
+
+        function getQueryString( name )
+        {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 匹配目标参数
+            var result = window.location.search.substr(1).match(reg); // 对querystring匹配目标参数
+            if (result != null)
+            {
+                return decodeURIComponent(result[2]);
+            }else
+            {
+                return null;
+            }
+        }
+    </script>
+</body>
 </html>

@@ -49,7 +49,12 @@
             role_HadPower: host + 'admin/auth/', //已经拥有的权限列表
             client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
             chart_drop:host+'admin/chart-user',//经纪人
-            company_delete:host+'admin/company/delete/'//公司删除
+            company_delete:host+'admin/company/delete/',//公司删除
+
+            edit_pass: host+'admin/user/update-pass',//用户登陆状态修改密码
+            check_user_name: host+'admin/get/user',//检测用户名
+            edit_modify_pass: host+'admin/user/modify-pass',//忘记密码修改
+
         }
         $("#top").load('/page/public/top.html');
         $("#left").load('/page/public/left.html');
@@ -60,8 +65,18 @@
  * @type {string}
  */
 var url = window.location.href;
-if (url.indexOf("login.html") == -1) {
-    filterToken();
+//跳过登陆页
+if ( url.indexOf("login.html") == -1  )
+{
+    //跳过忘记密码页
+    if(  url.indexOf('chengePwd.html') == -1 )
+    {
+        //跳过忘记密码修修改
+        if( url.indexOf('wpwd.html') == -1 )
+        {
+            filterToken();
+        }
+    }
 }
 
 /**

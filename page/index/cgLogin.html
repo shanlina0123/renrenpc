@@ -43,9 +43,35 @@
     <script type="text/javascript" src="../../js/jquery.qrcode.min.js"></script>
     <script>
         $(function(){
-            var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbe1cdb19d2290193&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect";
+            var id = JSON.parse(localStorage.getItem("userinfo")).uuid;
+            var back = 'http://wx.rrzhaofang.com/authorization.html?uuid='+id+"&type=1";
+                back = encodeURIComponent(back);
+            var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbe1cdb19d2290193&redirect_uri="+back+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+            console.log(str);
             $('#code').qrcode(str);
         })
+        var tokenData = localStorage.getItem("userinfo");
+        var uuid = JSON.parse(tokenData).uuid;
+        var num = 0;
+        var i = setInterval(function()
+        {
+            num++;
+            $.post('http://api.rrzhaofang.com/admin/wechat/testing',{uuid:uuid},function ( res ) {
+                if( res )
+                {
+                    if( res.status == 1 )
+                    {
+                        window.location.href='cgpwd.html';
+                    }
+                }
+            },'json');
+            if ( num > 90 )
+            {
+                $('#code').html('');
+                clearInterval(i);
+            }
+        }, 3000);
+
     </script>
 </body>
 </html>
