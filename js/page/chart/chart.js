@@ -54,25 +54,26 @@ var ch = new Vue({
             to:0,
         },
         charts:[], 
-        state:[],
+        state:[],//客户状态
+        firm:[],//公司
+        manager:[],//经纪人
+       admin_datas:[],//业务员
     },
     methods:{
         //第一次加载数据
 		getChartsList:function (loading){		 
 		 	var url = auth_conf.chart_list;
             var that = this;
-			console.log(that.params)
+			
            axios.post(url,that.params,{headers: {"Authorization": that.tokenValue}})
             .then(function(response)
             {
                   var data = response.data;				
                   if ( data.status == 1 )
-                    {
-                       // that.charts = data.data.data;
+                    {                       
                         that.charts = data.data.data;
                         that.page_data.total = data.data.total;
-                        that.page_data.to= data.data.to;
-						//console.log(that.charts);
+                        that.page_data.to= data.data.to;						
 						  if( loading!="loadingPageData")
                         {
                             that.getPageData();
@@ -191,13 +192,11 @@ var ch = new Vue({
                     {
                         var str = '';
                         var listData = data.data;
-                       // console.log(listData);
-                        
+
                         for(var x in listData)
                         {
                             str+='<option value="'+listData[x].id+'">'+listData[x].nickname+'</option>';
-                        }
-                        //console.log(str)
+                        }                     
                         $("#manager").append( str );
                         layui.use(['form'], function() {
                             var form = layui.form;
@@ -216,17 +215,15 @@ var ch = new Vue({
                     var data = response.data;
                     if (data.status == 1) {
                         //业务员
-                        that.admin_datas = data.data;
+                        that.admin_datas = data.data;                 
                        // that.admin_show_datas = arrayIndexToValue(data.data, "id");
                         selectAppendDd($("#workp"), that.admin_datas, "id", "nickname");
                     }
                 })
                 .catch(function (error) {
-                    //console.log(error);
+               
                 });
-        },
-       
-       
+        },             
     },
     created:function () {
         var that = this;     
