@@ -1,7 +1,10 @@
 ﻿<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!-->
 <html class="no-js">
 <!--<![endif]-->
@@ -10,7 +13,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>系统配置</title>
-     <link rel="icon" href="../../images/icon.ico">
+    <link rel="icon" href="../../images/icon.ico">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../css/normalize.css">
@@ -18,156 +21,125 @@
     <link rel="stylesheet" href="../../css/base.css">
     <link rel="stylesheet" href="../../css/style1.css">
     <link rel="stylesheet" href="../../layui-v2.2.6/layui/css/layui.css">
+    <style>
+        .addBtnWrap {
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+    </style>
     <script src="../../js/modernizr-2.6.2.min.js"></script>
 </head>
 
 <body>
-    <!--[if lt IE 7]>
-        <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <div class="wrap">
-        <div class="layui-layout layui-layout-admin">
-            <!--顶部-->
-             <!--顶部-->
-            <div class="layui-header header" id="top"> </div>	 
-       		 <div class="main clearfix" >
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
+    your browser</a> to improve your experience.</p>
+<![endif]-->
+<div class="wrap" id="vue_datas_setting" v-cloak>
+    <div class="layui-layout layui-layout-admin">
+        <!--顶部-->
+        <!--顶部-->
+        <div class="layui-header header" id="top"></div>
+        <div class="main clearfix">
             <!--左侧导航-->
-            <ul class="leftNav fl" id="left">               
-            </ul>                                                    
+            <ul class="leftNav fl" id="left">
+            </ul>
             <!--右侧主要内容-->
             <div class="rightMain fl">
-                <table class="layui-table">
-                	<h2>系统配置列表</h2>
-                    <thead>
+                <form class="layui-form lockForm ckbox2">
+                    <table class="layui-table">
+                        <h2>系统配置列表</h2>
+                        <thead>
                         <tr>
                             <th>ID</th>
                             <th>属性</th>
                             <th>操作</th>
                         </tr>
-                    </thead>
-                    <tr>
-                        <td>1</td>
-                        <td>房型</td>
-                        <td><button class="layui-btn layui-btn-sm editBtn">查看编辑</button></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>装修类型</td>
-                        <td><button class="layui-btn layui-btn-sm editBtn">查看编辑</button></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>用途</td>
-                        <td><button class="layui-btn layui-btn-sm editBtn">查看编辑</button></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>权属</td>
-                        <td><button class="layui-btn layui-btn-sm editBtn">查看编辑</button></td>
-                    </tr>
-                </table>
+                        </thead>
+                        <tr v-for="(item,index) in cateList">
+                            <td>{{index+1}}</td>
+                            <td>{{item.name}}</td>
+                            <td>
+                                <button class="layui-btn layui-btn-sm editBtn" type="button"
+                                        @click="showDatasList(item.id)">编辑查看
+                                </button>
+                            </td>
+                        </tr>
+                    </table>
+                </form>
             </div>
         </div>
         <!--//main-->
         <!--系统设置弹窗-->
-        <div class="settingPop" style="display: none">
-            <div class="setttingPopInner">
-                <table class="layui-table popSettingTable">
-                	<h2>设置列表</h2>
-                    <thead>
+        <form class="layui-form lockForm ckbox2">
+            <div class="settingPop ">
+                <div class="setttingPopInner">
+                    <table class="layui-table popSettingTable">
+                        <thead>
                         <tr>
                             <th>ID</th>
                             <th>值</th>
                             <th>操作</th>
                         </tr>
-                    </thead>
-                    <tr>
-                        <td>1</td>
-                        <td><input type="text" class="layui-input" name="settingName" value="一室一厅" readonly></td>
-                        <td>
-                            <div class="settingBtns">
-                                <button class="layui-btn layui-btn-sm popEditBtn"><i class="layui-icon"></i></button>
-                                <button class="layui-btn layui-btn-sm popDelateBtn"><i class="layui-icon"></i></button>
-                            </div>
-                            <div class="settingBtn" style="display: none">
-                                <button class="layui-btn layui-btn-sm popSaveBtn">保存</button>
-                            </div>
-                        </td>
-                    </tr>
-                    <!--<tr>
-                        <td>2</td>
-                        <td><input type="text" class="layui-input" name="settingName"></td>
-                        <td>
-                            <div class="settingBtns" style="display: none">
-                                <button class="layui-btn layui-btn-sm popEditBtn"><i class="layui-icon"></i></button>
-                                <button class="layui-btn layui-btn-sm popDelateBtn"><i class="layui-icon"></i></button>
-                            </div>
-                            <div class="settingBtn">
-                                <button class="layui-btn layui-btn-sm popSaveBtn">保存</button>
-                            </div>
-                        </td>
-                    </tr>-->
-                </table>
+                        </thead>
+                        <tr v-for="(item,index) in datasList" :index="index" class="dateOneTr" :uuid="item.uuid" :id="'existList_'+item.uuid">
+                            <td>{{index+1}}</td>
+                            <td><input type="text" :class="'layui-input  settingAllName settingName_'+item.uuid"
+                                       name="settingName" id="settingName" :value="item.name" readonly
+                                       style="background-color:#f2f2f2;"></td>
+                            <td>
+                                <div :class="'settingBtns editAllDataBtn  editDatasBtn_'+item.uuid" >
+                                    <!--编辑-->
+                                    <button class="layui-btn layui-btn-sm popEditBtn"
+                                            type="button" @click="enableInupt(item.uuid)"><i class="layui-icon"></i>
+                                    </button>
+                                    <!--删除-->
+                                    <button class="layui-btn layui-btn-sm popDelateBtn" type="button" @click="removeDatas(item.uuid)"><i class="layui-icon"></i></button>
+                                </div>
+                                <div :class="'settingBtn hidden saveAllBtn saveBtn_'+item.uuid">
+                                    <!--新增-->
+                                    <button class="layui-btn layui-btn-sm popSaveBtn" type="button"
+                                            @click="updateData(item.uuid)">保存
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class=" hidden dateOneTrHide" :index="newIndex">
+                            <td v-if="newIndex">{{newIndex}}</td><td v-else></td>
+                            <td><input type="text" class="layui-input settingAllName hieName"></td>
+                            <td>
+                                <div class="settingBtns editAllDataBtn hidden hideEdit">
+                                    <!--编辑-->
+                                    <button class="layui-btn layui-btn-sm popEditBtn  newEditDatasBtn " type="button" ><i class="layui-icon"></i></button>
+                                    <!--删除-->
+                                    <button class="layui-btn layui-btn-sm  popDelateBtn " type="button"><i class="layui-icon"></i></button>
+                                </div>
+                                <div class="settingBtn  saveAllBtn hideSave">
+                                    <!--新增-->
+                                    <button class="layui-btn layui-btn-sm popSaveBtn newSaveDatasBtn" type="button">保存</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="addBtnWrap">
+                    <button class="layui-btn addBtn" type="button" @click="addNewRow()"><i class="layui-icon"></i></button>
+                </div>
             </div>
-            <div class="addBtnWrap">
-                <button class="layui-btn addBtn"><i class="layui-icon"></i></button>
-            </div>
-        </div>
+        </form>
     </div>
-    <!-- //wrap -->
-    <script type="text/javascript" src="../../js/jquery-3.3.1.min.js"></script>
-    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
-    <script type="text/javascript" src="../../js/common.js"></script>
-    <script type="text/javascript">
-        $(function() {
-            //系统设置弹窗
-            $(".editBtn").click(function() {
-                layer.open({
-                    type: 1,
-                    title: '系统设置',
-                    shadeClose: true,
-                    scrollbar: false,
-                    skin: 'layui-layer-rim',
-                    area: ['700px', '400px'],
-                    content: $(".settingPop")
-                })
-            });
-            //添加一行数据
-            $(".addBtn").click(function() {
-                    var tsble = $(".popSettingTable");
-                    var addTr = $("<tr>" +
-                        "<td>2</td>" +
-                        "<td><input type='text' class='layui-input' name='settingName'></td>" +
-                        "<td><div class='settingBtns' style='display: none'><button class='layui-btn layui-btn-sm popEditBtn'>" +
-                        "<i class='layui-icon'></i></button><button class='layui-btn layui-btn-sm popDelateBtn'><i class='layui-icon'></i></button></div>" +
-                        "<div class='settingBtn'><button class='layui-btn layui-btn-sm popSaveBtn' onclick='save(this)'>保存</button></div></td>" +
-                        "</tr>");
-                    addTr.appendTo(tsble);
-                })
-                //系统弹窗的编辑功能
-            $(".popEditBtn").click(function() {
-                $(this).parents("td").siblings().children(".layui-input").removeAttr("readOnly");
-                $(this).parents(".settingBtns").hide().siblings(".settingBtn").show();
-            });
-            //系统弹窗的删除功能
-            $(".popDelateBtn").click(function() {
-                var $this = $(this);
-                layer.confirm('确定要删除吗？', {
-                    btn: ['确定', '取消']
-                }, function() {
-                    $this.parents("tr").remove();
-                    layer.msg('删除成功', {
-                        icon: 1
-                    });
-                });
-            });
-        });
-        //保存信息方法
-        function save(index) {
-            $(index).parents("td").siblings().children(".layui-input").attr('readonly', 'readonly');
-            $(index).parents(".settingBtn").hide().siblings(".settingBtns").show();
-        }
-    </script>
+</div>
+<!-- //wrap -->
+<script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
+<script type="text/javascript" src="../../js/common.js"></script>
+
+<!--- vue -->
+<script type="text/javascript" src="../../plugin/js/vue.js"></script>
+<script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+<script type="text/javascript" src="../../config/configure.js"></script>
+<script type="text/javascript" src="../../js/page/datas/setting.js"></script>
 </body>
 
 </html>

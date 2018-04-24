@@ -78,6 +78,22 @@ function arrayIndexToValue(data,key)
    return list;
 }
 
+/****
+ * 数组索引转为普通数组
+ * @param data
+ */
+function IndexArrayToArray(data)
+{
+    if(data)
+    {
+        var list=[];
+        $.each(data,function(i,n){
+            list.push(n);
+        })
+    }
+    return list;
+}
+
 
 /**
  * 退出
@@ -87,4 +103,21 @@ function signOut()
 {
     localStorage.removeItem("userinfo");
     window.location.href = '/login.html';
+}
+
+/*获取对象、数组的长度、元素个数
+ *@param obj 要计算长度的元素，可以为object、array、string
+ */
+function count(obj){
+    var objType = typeof obj;
+    if(objType == "string"){
+        return obj.length;
+    }else if(objType == "object"){
+        var objLen = 0;
+        for(var i in obj){
+            objLen++;
+        }
+        return objLen;
+    }
+    return false;
 }
