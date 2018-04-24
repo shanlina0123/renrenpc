@@ -68,13 +68,16 @@ var vm = new Vue({
                 that.params.functionid.push($(this).attr('id'))
             });
             axios.put(url, that.params, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
-                var data = response.data;
-                console.log(data)
+                var data = response.data
                 layui.use('form', function() {
                     if (data.status == 1) {
-                        layer.msg("授权成功");
+                        layer.msg(data.messages, { time: 2000 }, function() {
+                            window.location.href = 'roles.html?id=' + that.uuid;
+                        });
+                    } else if (data.status == 10) {
+                        layer.msg(data.messages)
                     } else {
-                        layer.msg("授权失败")
+                        layer.msg(data.messages)
                     }
                 })
             }).catch(function(error) {})
@@ -106,7 +109,7 @@ var vm = new Vue({
     created: function() {
         var that = this;
         that.enterParam(); //获得浏览器传来的参数
-        that.getPowerList() //获得角色列表
+        that.getPowerList(); //获得角色列表
         that.getHadPowerList(); //获得角色已有的权限
     }
 });
