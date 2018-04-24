@@ -32,7 +32,7 @@
             <!--左侧导航-->
             <ul class="leftNav fl" id="left"></ul>
             <!--右侧主要内容-->
-            <div class="rightMain fl" id="adminTable">
+            <div class="rightMain fl" id="adminTable" v-cloak>
                 <div class="addClient"><button class="layui-btn" @click="getEditAdmin()"><i class="layui-icon"></i></button></div>
                 <form class="layui-form lockForm ckbox2">
                     <table class="layui-table">
@@ -42,7 +42,7 @@
                             <th>账号</th>
                             <th>角色</th>
                             <th>手机号</th>
-                            <th>状态</th>
+                            <!--<th>状态</th>-->
                             <th>操作</th>
                         </tr>
                         <tr v-for="item in adminList">
@@ -51,9 +51,9 @@
                             <td>{{item.name}}</td>
                             <td>{{item.dynamic_to_role.name}}</td>
                             <td>{{item.mobile}}</td>
-                            <td>
+                            <!--<td>
                                 <input type="checkbox" name="lockAdmin" :id="item.uuid" title="锁定">
-                            </td>
+                            </td>-->
                             <td>
                                 <div class="clientBtns">
                                     <button type="button" class="layui-btn layui-btn-sm editUser" @click="getEditAdmin(item.uuid)"><i class="layui-icon"></i></button>
@@ -118,8 +118,8 @@
                                         <div class="layui-inline">
                                             <div class="layui-input-inline">
                                                 <select lay-verify="required" id="roleIdID">
-                                                    <option :selected="params.status == 0?'selected':''">锁定</option> 
                                                     <option :selected="params.status == 1?'selected':''">启用</option>
+                                                    <option :selected="params.status == 0?'selected':''">锁定</option> 
                                                 </select>
                                             </div>
                                         </div>
