@@ -1,7 +1,8 @@
 (function() {
-    var host = "http://192.168.15.222:8081/";
-    //var host = "http://api.rrzhaofang.com/";
-    //未带toke请求
+    // var host = "http://192.168.15.222:8081/";
+    //  var host = "http://api.rrzhaofang.com/";
+    var host = "http://192.168.15.222:8081/"
+        //未带toke请求
     window.conf = {
             login: host + 'admin/login', //首页推荐
         }
@@ -100,54 +101,60 @@ function filterToken() {
  */
 function checkToken() {
     var tokenData = localStorage.getItem("userinfo");
-    var openid = JSON.parse(tokenData).wechatopenid;
+    var openid = JSON.parse(tokenData).wechatopenid; <<
+    <<
+    <<
+    <
+    HEAD
     if (!openid) {
         //window.location = "/page/index/bgopenid.html";
-    }
-    $.ajax({
-        headers: {
-            Authorization: JSON.parse(tokenData).token,
-        },
-        type: "GET", //方法类型
-        dataType: "json", //预期服务器返回的数据类型
-        url: auth_conf.token, //url
-        success: function(result) {
-            if (result.status != 1) {
-                if (result.status != 15) {
-                    localStorage.removeItem("userinfo");
-                    window.location.href = '/login.html';
+        if (!openid) {
+            window.location = "/page/index/bgopenid.html";
+        }
+        $.ajax({
+            headers: {
+                Authorization: JSON.parse(tokenData).token,
+            },
+            type: "GET", //方法类型
+            dataType: "json", //预期服务器返回的数据类型
+            url: auth_conf.token, //url
+            success: function(result) {
+                if (result.status != 1) {
+                    if (result.status != 15) {
+                        localStorage.removeItem("userinfo");
+                        window.location.href = '/login.html';
+                    } else {
+                        alert(result.messages);
+                    }
                 } else {
-                    alert(result.messages);
+                    //获取菜单
+                    getMune();
                 }
+            }
+        });
+    }
+    //获取权限菜单
+    function getMune() {
+        var userInfo = $.parseJSON(localStorage.getItem("userinfo"));
+        var menueList = userInfo.menuList;
+        if (userInfo.isadmin == 1) {
+            $("#top").load('/page/public/top.html');
+            $("#left").load('/page/public/left.html');
+        } else {
+            //权限菜单(现在页面只显示一级，接口和数据库设计支持多级)
+            var leftHtml = '';
+            if (menueList) {
+                $.each(menueList, function(i, n) {
+                    leftHtml += '<li><a href="../' + n.url + '"><i class="layui-icon">' + n.menuicon + '</i>' + n.menuname + '</a></li>' + '\r\n';
+                });
+                $("#left").html(leftHtml);
+                $("#top").load('/page/public/top.html');
             } else {
-                //获取菜单
-                getMune();
+                // alert("您暂时无任何权限，请联系管理员设置您的权限");
+                $("#left").html(leftHtml);
+                leftHtml = "<img src='/images/lock.jpg' style='margin:100px auto;display: block;'/>";
+                $(".main").html(leftHtml);
             }
         }
-    });
-}
-//获取权限菜单
-function getMune() {
-    var userInfo = $.parseJSON(localStorage.getItem("userinfo"));
-    var menueList = userInfo.menuList;
-    if (userInfo.isadmin == 1) {
-        $("#top").load('/page/public/top.html');
-        $("#left").load('/page/public/left.html');
-    } else {
-        //权限菜单(现在页面只显示一级，接口和数据库设计支持多级)
-        var leftHtml = '';
-        if (menueList) {
-            $.each(menueList, function(i, n) {
-                leftHtml += '<li><a href="../' + n.url + '"><i class="layui-icon">' + n.menuicon + '</i>' + n.menuname + '</a></li>' + '\r\n';
-            });
-            $("#left").html(leftHtml);
-            $("#top").load('/page/public/top.html');
-        } else {
-            // alert("您暂时无任何权限，请联系管理员设置您的权限");
-            $("#left").html(leftHtml);
-            leftHtml = "<img src='/images/lock.jpg' style='margin:100px auto;display: block;'/>";
-            $(".main").html(leftHtml);
-        }
-    }
 
-}
+    }
