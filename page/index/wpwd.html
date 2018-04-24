@@ -16,12 +16,7 @@
 </head>
 <body>
     <div class="wrap">
-        <div class="layui-layout layui-layout-admin" id="top"></div>
         <div class="main clearfix">
-            <!--左侧导航-->
-            <ul class="leftNav fl" id="left"><!--左侧导航--></ul>
-            <!--右侧主要内容-->
-             <div>
             <div class="loginFormWrap">
                 <form class="layui-form loginForm">
                     <div class="layui-form-item">
@@ -77,23 +72,23 @@
 		                }
 		            },beforeSubmit:function(curform)
                     {
+                        //密码
                         var base = new Base64();
                         var pass = $("input[name='password']").val();
                         var password64 = base.encode(pass);
 
                         var password_confirmation = $("input[name='password_confirmation']").val();
                         var password_confirmation64 = base.encode(password_confirmation);
-
-                        var data = {password_confirmation:password_confirmation,password:password64};
-
-                        var tokenValue = JSON.parse(localStorage.getItem("userinfo")).token;
+                        //openid
+                        var wechatopenid = getQueryString('openid');
+                        //用户id
+                        var uuid = getQueryString('uuid');
+                        var data = {password_confirmation:password_confirmation,password:password64,wechatopenid:wechatopenid,uuid:uuid};
+                        //请求
                         $.ajax({
-                            headers: {
-                                Authorization:tokenValue,
-                            },
                             type: "POST", //方法类型
                             dataType: "json", //预期服务器返回的数据类型
-                            url: auth_conf.edit_pass, //url
+                            url: auth_conf.edit_modify_pass, //url
                             data:data,
                             success: function(result) {
                                 if( result.status == 1 )
@@ -126,6 +121,20 @@
 		        });
 		    }
 		});
+
+        function getQueryString( name )
+        {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 匹配目标参数
+            var result = window.location.search.substr(1).match(reg); // 对querystring匹配目标参数
+            if (result != null)
+            {
+                return decodeURIComponent(result[2]);
+            }else
+            {
+                return null;
+            }
+        }
+
     </script>
 </body>
 </html>

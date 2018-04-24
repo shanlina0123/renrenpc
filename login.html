@@ -48,7 +48,7 @@
                         	<span  class="Validform_checktip"></span>
                         </div>
                     </div>
-                    <a href="page/index/chengePwd.html" class="forgetPwd">忘记密码?</a>
+                    <a href="page/index/chengePwd.html?v=1" class="forgetPwd">忘记密码?</a>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <button  class="layui-btn" id="btn_submit">登录</button>
@@ -94,10 +94,17 @@
                         {
                             if( data.status == 1 )
                             {
+                                var res =  data.data;
                                 var data = JSON.stringify( data.data );
-                                localStorage.setItem("userinfo", data );
-                                window.location.href='page/index/index.html';
+                                   localStorage.setItem('userinfo',data);
+                                if( res.wechatopenid )
+                                {
+                                    window.location.href='page/index/index.html';
+                                }else
+                                {
+                                    window.location.href='page/index/bgopenid.html';
 
+                                }
                             }else
                             {
                                 layer.msg( data.messages, {icon: 5, time: 2000, shift: 6});
