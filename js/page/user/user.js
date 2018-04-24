@@ -1,9 +1,7 @@
     var us=new Vue({
 	el: '#users',
 	data:{
-//		 tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token
-//		 users:[],
-        tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token   
+	   tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token
        params:{ //地址参数
             page:1,
 			economictid:'',
@@ -27,7 +25,6 @@
             .then(function(response)
             {
                   var data = response.data;
-
                   if ( data.status == 1 )
                     {                    	                                                
                     	 var list = data.data;
@@ -94,17 +91,16 @@
                     
                     if ( data.status == 1 )
                     {
-                       
-                        that.company = data.data;
                         var str = '';
                         var listData = data.data.data;
-                        that.company = listData;
                         for(var x in listData)
                         {
+                            var arr=[];
+                            arr[listData[x].id] = listData[x].name
                             str+='<option value="'+listData[x].id+'">'+listData[x].name+'</option>';
                         }
                         $("#company").append( str );
-                      
+                        that.company = arr;
                         layui.use(['form'], function() {
                             var form = layui.form;
                             form.render('select');
