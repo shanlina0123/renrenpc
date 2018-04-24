@@ -178,9 +178,9 @@ var vm = new Vue({
                 } else {
                     axios.put(url, that.params, { headers: { "Authorization": that.tokenValue } })
                         .then(function(response) {
-                            console.log(url);
-                            console.log(that.params);
-                            console.log(response);
+                            // console.log(url);
+                            // console.log(that.params);
+                            // console.log(response);
                             if (response.status == 1) {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
