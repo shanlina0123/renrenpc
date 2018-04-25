@@ -1,11 +1,11 @@
 (function() {
-    var host = "http://192.168.15.222:8081/";
-    //var host = "http://api.rrzhaofang.com/";
-    //未带toke请求
+    //var host = "http://192.168.15.222:8081/";
+    var host = "http://api.rrzhaofang.com/";
     window.conf = {
-            login: host + 'admin/login' //首页推荐
-        }
-        //带token的请求
+        login: host + 'admin/login', //首页推荐
+        wechat_testing: host + 'admin/wechat/testing', //检测扫描二维码
+    };
+    //带token的请求
     window.auth_conf = {
         token: host + "admin/token", //检查而已有token
         menue_list: host + "admin/auth-menu", //菜单列表
@@ -58,28 +58,22 @@
         edit_modify_pass: host + 'admin/user/modify-pass', //忘记密码修改
         datas_add: host + 'admin/datas', //添加属性
         datas_update: host + 'admin/datas/', //修改属性
-        datas_delete: host + 'admin/datas-delete/' //修改属性
-    }
+        datas_delete: host + 'admin/datas-delete/', //修改属性
+    };
     $("#top").load('/page/public/top.html');
+    $("#left").load('/page/public/left.html');
 })();
 
 /**
- * 排除登陆页
+ * 排除不跳转的页面
  * @type {string}
  */
+
 var url = window.location.href;
-
-//跳过登陆页
-if (url.indexOf("login.html") == -1) {
-    //跳过忘记密码页
-    if (url.indexOf('chengePwd.html') == -1) {
-        //跳过忘记密码修修改
-        if (url.indexOf('wpwd.html') == -1) {
-            filterToken()
-        }
-    }
+var arr = ["login.html", "chengePwd.html", 'erweimaLogin.html', "wpwd.html"];
+if ($.inArray(url, arr) != -1) {
+    filterToken();
 }
-
 /**
  * 判断session存在不
  */
@@ -118,11 +112,12 @@ function checkToken() {
                 }
             } else {
                 //获取菜单
-                getMune();
+                //getMune();
             }
         }
-    })
+    });
 }
+
 //获取权限菜单
 function getMune() {
     var userInfo = $.parseJSON(localStorage.getItem("userinfo"));
@@ -143,7 +138,8 @@ function getMune() {
             // alert("您暂时无任何权限，请联系管理员设置您的权限");
             $("#left").html(leftHtml);
             leftHtml = "<img src='/images/lock.jpg' style='margin:100px auto;display: block;'/>";
-            $(".main").html(leftHtml)
+            $(".main").html(leftHtml);
         }
     }
+
 }
