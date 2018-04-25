@@ -1,278 +1,370 @@
 .addBtnWrap {
-  text-align: center;
-  margin-top: 20px;
+    text-align: center;
+    margin-top: 20px;
 }
+
 .addBtnWrap .setttingPopInner {
-  width: 100%;
-  height: 268px;
-  overflow: auto;
+    width: 100%;
+    height: 268px;
+    overflow: auto;
 }
+
 .addBtnWrap .layui-btn {
-  padding: 0 60px;
+    padding: 0 60px;
 }
+
 .addClient {
-  text-align: right;
-  padding-right: 20px;
+    text-align: right;
+    padding-right: 20px;
 }
+
 .addClient .layui-btn {
-  padding: 0 30px;
+    padding: 0 30px;
 }
+
 .userPopTable,
 .clientPopTable {
-  margin: 20px  auto 0 auto;
+    margin: 20px auto 0 auto;
 }
+
 .userPopTable tr td,
 .clientPopTable tr td {
-  padding: 5px 0;
+    padding: 5px 0;
 }
+
 .userPopTable tr td:first-child,
 .clientPopTable tr td:first-child {
-  text-align: right;
-  padding-right: 10px;
+    text-align: right;
+    padding-right: 10px;
 }
+
 .submitBtnWrap {
-  text-align: center;
-  padding: 20px 0 10px 0;
+    text-align: center;
+    padding: 20px 0 10px 0;
 }
+
 .cartFlow {
-  margin-left: 20%;
+    margin-left: 20%;
 }
+
 .cartFlow .flow {
-  width: 160px;
-  text-align: center;
-  float: left;
+    width: 160px;
+    text-align: center;
+    float: left;
 }
+
 .cartFlow .flow.on .flowBg {
-  background-color: #eb7221;
-  border: 1px solid #eb7221;
-  border-right-color: #eb7221;
-  border-left-color: #eb7221;
+    background-color: #eb7221;
+    border: 1px solid #eb7221;
+    border-right-color: #eb7221;
+    border-left-color: #eb7221;
 }
+
 .cartFlow .flow.on .flowNum {
-  background-color: #eb7221;
+    background-color: #eb7221;
 }
+
 .cartFlow .flow.on .flowDes {
-  color: #eb7221;
+    color: #eb7221;
 }
+
 .cartFlow .flow .flowBgWrap {
-  position: relative;
-  margin-top: 39px;
+    position: relative;
+    margin-top: 39px;
 }
+
 .cartFlow .flow .flowDes {
-  color: #999;
-  margin-top: 20px;
-  font-size: 12px;
+    color: #999;
+    margin-top: 20px;
+    font-size: 12px;
 }
+
 .cartFlow .flowBg {
-  width: 160px;
-  height: 3px;
-  border: 1px solid #e4e4e4;
-  background-color: #ccc;
-  border-radius: 3px;
-  border-left: 1px solid #ccc;
-  border-right: 1px solid #ccc;
+    width: 160px;
+    height: 3px;
+    border: 1px solid #e4e4e4;
+    background-color: #ccc;
+    border-radius: 3px;
+    border-left: 1px solid #ccc;
+    border-right: 1px solid #ccc;
 }
+
 .cartFlow .flowNum {
-  display: block;
-  width: 23px;
-  height: 23px;
-  background-color: #ccc;
-  color: #fff;
-  font-family: SimSun;
-  font-size: 14px;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 23px;
-  position: absolute;
-  top: -10px;
-  left: 50%;
-  margin-left: -11.5px;
+    display: block;
+    width: 23px;
+    height: 23px;
+    background-color: #ccc;
+    color: #fff;
+    font-family: SimSun;
+    font-size: 14px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 23px;
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    margin-left: -11.5px;
 }
+
+
 /*第二步表单样式*/
+
 .formWrap {
-  margin-top: 60px;
+    margin-top: 60px;
 }
+
 .nextBtnWrap {
-  margin: 20px auto 0 auto;
-  text-align: center;
+    margin: 20px auto 0 auto;
+    text-align: center;
 }
+
 .nextBtnWrap .layui-btn {
-  padding: 0 35px;
+    padding: 0 35px;
 }
+
 .formWrap1 {
-  width: 330px;
-  margin: 0 auto;
+    width: 330px;
+    margin: 0 auto;
 }
-.addHouseTable{
-	width:900px;
+
+.addHouseTable {
+    width: 820px;
+    margin: 0 auto
 }
-.addHouseTable,
+
+.addHouseTable .layui-form-label {
+    width: 110px;
+}
+
+.addHouseTable .layui-input-block {
+    margin-left: 140px;
+}
+
 .editHouseTable {
-  margin: 0 345px;
+    margin: 0 345px;
 }
+
 .addHouseTable tr td,
 .editHouseTable tr td {
-  padding: 8px 0;
+    padding: 8px 0;
 }
+
 .addHouseTable .forSameWidth,
 .editHouseTable .forSameWidth {
-  padding-right: 30px;
+    padding-right: 30px;
 }
+
 .addHouseTable .layui-form-item .forAddrSelect,
 .editHouseTable .layui-form-item .forAddrSelect {
-  width: 100px;
+    width: 100px;
 }
+
+
 /*选择标签页面*/
+
 .chuiceTips {
-  width: 500px;
-  margin: 60px auto 0 auto;
+    width: 500px;
+    margin: 60px auto 0 auto;
 }
+
 .chuiceTips .notice {
-  padding: 10px 0;
-  text-align: center;
+    padding: 10px 0;
+    text-align: center;
 }
+
 .tipWrap span {
-  display: inline-block;
-  margin-bottom: 10px;
-  border: 1px solid #eb7221;
-  border-radius: 2px;
-  padding: 2px 3px;
-  margin: 7px;
-  cursor: pointer;
+    display: inline-block;
+    margin-bottom: 10px;
+    border: 1px solid #eb7221;
+    border-radius: 2px;
+    padding: 2px 3px;
+    margin: 7px;
+    cursor: pointer;
 }
+
 .tipWrap span.on {
-  background-color: #eb7221;
-  color: #fff;
+    background-color: #eb7221;
+    color: #fff;
 }
+
+
 /*上传图片页面*/
+
 .uploadTable {
-  margin: 0 auto;
+    margin: 0 auto;
 }
+
+
 /*添加成功页面*/
+
 .noticeTop {
-  text-align: center;
+    text-align: center;
 }
+
+
 /*房源编辑几个页面样式*/
+
 .chuiceTipWrasp {
-  width: 500px;
+    width: 500px;
 }
+
 .forEditLeftMargin {
-  margin-left: 0 !important;
+    margin-left: 0 !important;
 }
+
+
 /*客户列表页面*/
+
 .clientPopTable .layui-form-select .layui-input {
-  padding-right: 0;
+    padding-right: 0;
 }
+
 .clientPopTable .layui-form-label {
-  width: 90px;
+    width: 90px;
 }
+
 .clientPopTable .layui-input-block {
-  margin-left: 130px;
+    margin-left: 130px;
 }
+
 .followTable {
-  margin: 0 auto;
+    margin: 0 auto;
 }
+
 .followTable tr td {
-  padding: 10px 0;
+    padding: 10px 0;
 }
+
 .followTable .layui-textarea {
-  width: 500px;
+    width: 500px;
 }
+
 .followUl,
 .followText {
-  width: 610px;
-  margin: 10px auto;
+    width: 610px;
+    margin: 10px auto;
 }
+
 .followUl li,
 .followText li {
-  border: 1px solid #e6e6e6;
-  margin: 10px 0;
-  padding: 10px;
+    border: 1px solid #e6e6e6;
+    margin: 10px 0;
+    padding: 10px;
 }
-.followUl li > p,
-.followText li > p {
-  line-height: 20px;
+
+.followUl li>p,
+.followText li>p {
+    line-height: 20px;
 }
+
 .followUl li .followLog,
 .followText li .followLog {
-  padding: 5px 0;
+    padding: 5px 0;
 }
+
 .followText {
-  padding: 20px 0;
+    padding: 20px 0;
 }
+
 .clientHandlTable tr td {
-  padding: 10px 0;
+    padding: 10px 0;
 }
+
 .popFormWrap {
-  width: 400px;
-  margin: 0 auto;
+    width: 400px;
+    margin: 0 auto;
 }
+
+
 /*角色管理-编辑权限页面*/
+
 .powerTable {
-  margin: 0 auto;
+    margin: 0 auto;
 }
+
 .powerTable tr td {
-  padding: 10px 0;
+    padding: 10px 0;
 }
+
 .powerUl {
-  width: 700px;
+    width: 700px;
 }
-.powerUl > li {
-  margin-bottom: 10px;
-  border: 1px solid #D2D2D2;
-  border-radius: 4px;
+
+.powerUl>li {
+    margin-bottom: 10px;
+    border: 1px solid #D2D2D2;
+    border-radius: 4px;
 }
+
 .powerUl .topCheck {
-  padding: 10px;
-  border-bottom: 1px solid #D2D2D2;
+    padding: 10px;
+    border-bottom: 1px solid #D2D2D2;
 }
+
 .powerUl .powerInnerUl {
-  padding: 10px 10px 0 10px;
+    padding: 10px 10px 0 10px;
 }
+
 .powerUl .powerInnerUl li {
-  float: left;
-  margin-bottom: 10px;
+    float: left;
+    margin-bottom: 10px;
 }
+
 .timePadding {
-  padding-right: 30px;
+    padding-right: 30px;
 }
+
+
 /*111111111111111*/
-.size{
-	margin-top: 1.5%;margin-left: 10%;
+
+.size {
+    margin-top: 1.5%;
+    margin-left: 10%;
 }
+
+
 /*.popFormWrap .layui-form{
 	padding-top: 20%;
 }*/
 
+
 /*tubiao*/
-ul.leftNav li i{
-	margin-right: 10px;
+
+ul.leftNav li i {
+    margin-right: 10px;
 }
 
 
 /*限制图片大小*/
-.layui-upload-img{width: 92px; height: 92px; margin: 0 10px 10px 0;}
+
+.layui-upload-img {
+    width: 92px;
+    height: 92px;
+    margin: 0 10px 10px 0;
+}
+
+
 /*二维码*/
 
 .forInset .forShowSearch {
-  display: none;
-  position: absolute;
-  top: .8rem;
-  left: 0;
-  width: 84%;
-  line-height: 30px;
-  border: 1px solid #ccc;
-  padding: 0 10px;
-  background-color: #fff;
-  z-index: 20;
+    display: none;
+    position: absolute;
+    top: .8rem;
+    left: 0;
+    width: 84%;
+    line-height: 30px;
+    border: 1px solid #ccc;
+    padding: 0 10px;
+    background-color: #fff;
+    z-index: 20;
 }
 
 .forInset .forShowSearch li {
-  font-size: .3rem;
-  padding: .05rem 0;
-  border-top: 1px solid #ccc;
+    font-size: .3rem;
+    padding: .05rem 0;
+    border-top: 1px solid #ccc;
 }
 
 .forInset .forShowSearch li:first-child {
-  border-top: none;
+    border-top: none;
 }

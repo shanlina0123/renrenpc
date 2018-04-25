@@ -32,114 +32,110 @@
 </head>
 
 <body>
-<!--[if lt IE 7]>
+    <!--[if lt IE 7]>
 <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade
     your browser</a> to improve your experience.</p>
 <![endif]-->
-<div class="wrap" id="vue_datas_setting" v-cloak>
-    <div class="layui-layout layui-layout-admin">
-        <!--顶部-->
-        <!--顶部-->
-        <div class="layui-header header" id="top"></div>
-        <div class="main clearfix">
-            <!--左侧导航-->
-            <ul class="leftNav fl" id="left">
-            </ul>
-            <!--右侧主要内容-->
-            <div class="rightMain fl">
-                <form class="layui-form lockForm ckbox2">
-                    <table class="layui-table">
-                        <h2>系统配置列表</h2>
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>属性</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tr v-for="(item,index) in cateList">
-                            <td>{{index+1}}</td>
-                            <td>{{item.name}}</td>
-                            <td>
-                                <button class="layui-btn layui-btn-sm editBtn" type="button"
-                                        @click="showDatasList(item.id)">编辑查看
+    <div class="wrap" id="vue_datas_setting" v-cloak>
+        <div class="layui-layout layui-layout-admin">
+            <!--顶部-->
+            <!--顶部-->
+            <div class="layui-header header" id="top"></div>
+            <div class="main clearfix">
+                <!--左侧导航-->
+                <ul class="leftNav fl" id="left">
+                </ul>
+                <!--右侧主要内容-->
+                <div class="rightMain fl">
+                    <form class="layui-form lockForm ckbox2">
+                        <table class="layui-table">
+                            <h2>系统配置列表</h2>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>属性</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tr v-for="(item,index) in cateList">
+                                <td>{{index+1}}</td>
+                                <td>{{item.name}}</td>
+                                <td>
+                                    <button class="layui-btn layui-btn-sm editBtn" type="button" @click="showDatasList(item.id)">编辑查看
                                 </button>
-                            </td>
-                        </tr>
-                    </table>
-                </form>
+                                </td>
+                            </tr>
+                        </table>
+                    </form>
+                </div>
             </div>
+            <!--//main-->
+            <!--系统设置弹窗-->
+            <form class="layui-form lockForm ckbox2">
+                <div class="settingPop hidden">
+                    <div class="setttingPopInner">
+                        <table class="layui-table popSettingTable">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>值</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tr v-for="(item,index) in datasList" :index="index" class="dateOneTr" :uuid="item.uuid" :id="'existList_'+item.uuid">
+                                <td>{{index+1}}</td>
+                                <td><input type="text" :class="'layui-input  settingAllName settingName_'+item.uuid" name="settingName" id="settingName" :value="item.name" readonly style="background-color:#f2f2f2;"></td>
+                                <td>
+                                    <div :class="'settingBtns editAllDataBtn  editDatasBtn_'+item.uuid">
+                                        <!--编辑-->
+                                        <button class="layui-btn layui-btn-sm popEditBtn" type="button" @click="enableInupt(item.uuid)"><i class="layui-icon"></i>
+                                    </button>
+                                        <!--删除-->
+                                        <button class="layui-btn layui-btn-sm popDelateBtn" type="button" @click="removeDatas(item.uuid)"><i class="layui-icon"></i></button>
+                                    </div>
+                                    <div :class="'settingBtn hidden saveAllBtn saveBtn_'+item.uuid">
+                                        <!--新增-->
+                                        <button class="layui-btn layui-btn-sm popSaveBtn" type="button" @click="updateData(item.uuid)">保存
+                                    </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class=" hidden dateOneTrHide" :index="newIndex">
+                                <td v-if="newIndex">{{newIndex}}</td>
+                                <td v-else></td>
+                                <td><input type="text" class="layui-input settingAllName hieName"></td>
+                                <td>
+                                    <div class="settingBtns editAllDataBtn hidden hideEdit">
+                                        <!--编辑-->
+                                        <button class="layui-btn layui-btn-sm popEditBtn  newEditDatasBtn " type="button"><i class="layui-icon"></i></button>
+                                        <!--删除-->
+                                        <button class="layui-btn layui-btn-sm  popDelateBtn " type="button"><i class="layui-icon"></i></button>
+                                    </div>
+                                    <div class="settingBtn  saveAllBtn hideSave">
+                                        <!--新增-->
+                                        <button class="layui-btn layui-btn-sm popSaveBtn newSaveDatasBtn" type="button">保存</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="addBtnWrap">
+                        <button class="layui-btn addBtn" type="button" @click="addNewRow()"><i class="layui-icon"></i></button>
+                    </div>
+                </div>
+            </form>
         </div>
-        <!--//main-->
-        <!--系统设置弹窗-->
-        <form class="layui-form lockForm ckbox2">
-            <div class="settingPop ">
-                <div class="setttingPopInner">
-                    <table class="layui-table popSettingTable">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>值</th>
-                            <th>操作</th>
-                        </tr>
-                        </thead>
-                        <tr v-for="(item,index) in datasList" :index="index" class="dateOneTr" :uuid="item.uuid" :id="'existList_'+item.uuid">
-                            <td>{{index+1}}</td>
-                            <td><input type="text" :class="'layui-input  settingAllName settingName_'+item.uuid"
-                                       name="settingName" id="settingName" :value="item.name" readonly
-                                       style="background-color:#f2f2f2;"></td>
-                            <td>
-                                <div :class="'settingBtns editAllDataBtn  editDatasBtn_'+item.uuid" >
-                                    <!--编辑-->
-                                    <button class="layui-btn layui-btn-sm popEditBtn"
-                                            type="button" @click="enableInupt(item.uuid)"><i class="layui-icon"></i>
-                                    </button>
-                                    <!--删除-->
-                                    <button class="layui-btn layui-btn-sm popDelateBtn" type="button" @click="removeDatas(item.uuid)"><i class="layui-icon"></i></button>
-                                </div>
-                                <div :class="'settingBtn hidden saveAllBtn saveBtn_'+item.uuid">
-                                    <!--新增-->
-                                    <button class="layui-btn layui-btn-sm popSaveBtn" type="button"
-                                            @click="updateData(item.uuid)">保存
-                                    </button>
-                                </div>
-                            </td>
-                        </tr>
-                        <tr class=" hidden dateOneTrHide" :index="newIndex">
-                            <td v-if="newIndex">{{newIndex}}</td><td v-else></td>
-                            <td><input type="text" class="layui-input settingAllName hieName"></td>
-                            <td>
-                                <div class="settingBtns editAllDataBtn hidden hideEdit">
-                                    <!--编辑-->
-                                    <button class="layui-btn layui-btn-sm popEditBtn  newEditDatasBtn " type="button" ><i class="layui-icon"></i></button>
-                                    <!--删除-->
-                                    <button class="layui-btn layui-btn-sm  popDelateBtn " type="button"><i class="layui-icon"></i></button>
-                                </div>
-                                <div class="settingBtn  saveAllBtn hideSave">
-                                    <!--新增-->
-                                    <button class="layui-btn layui-btn-sm popSaveBtn newSaveDatasBtn" type="button">保存</button>
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div class="addBtnWrap">
-                    <button class="layui-btn addBtn" type="button" @click="addNewRow()"><i class="layui-icon"></i></button>
-                </div>
-            </div>
-        </form>
     </div>
-</div>
-<!-- //wrap -->
-<script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
-<script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
-<script type="text/javascript" src="../../js/common.js"></script>
+    <!-- //wrap -->
+    <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
+    <script type="text/javascript" src="../../js/common.js"></script>
 
-<!--- vue -->
-<script type="text/javascript" src="../../plugin/js/vue.js"></script>
-<script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
-<script type="text/javascript" src="../../config/configure.js"></script>
-<script type="text/javascript" src="../../js/page/datas/setting.js"></script>
+    <!--- vue -->
+    <script type="text/javascript" src="../../plugin/js/vue.js"></script>
+    <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
+    <script type="text/javascript" src="../../config/configure.js"></script>
+    <script type="text/javascript" src="../../js/page/datas/setting.js"></script>
 </body>
 
 </html>
