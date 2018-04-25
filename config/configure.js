@@ -75,7 +75,7 @@ var url = window.location.pathname;
 var arr = [ "/login.html", "/page/index/chengePwd.html",'/page/index/erweimaLogin.html'];
 if( $.inArray(url,arr) == -1 )
 {
-   filterToken();
+    filterToken();
 }
 
 /**
@@ -96,8 +96,13 @@ function filterToken() {
 function checkToken() {
     var tokenData = localStorage.getItem("userinfo");
     var openid = JSON.parse(tokenData).wechatopenid;
-    if (!openid) {
-         window.location = "/page/index/bgopenid.html";
+    //排除当前页
+    if( $.inArray(url,'/page/index/bgopenid.html') != -1 )
+    {
+        if (!openid)
+        {
+            //window.location = "/page/index/bgopenid.html";
+        }
     }
     $.ajax({
         headers: {

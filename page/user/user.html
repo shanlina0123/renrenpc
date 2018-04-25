@@ -79,16 +79,9 @@
                                     <td>{{item.id}}</td>
                                     <td>{{item.nickname}}</td>
                                     <td>{{userstype[item.economictid]?userstype[item.economictid].name:''}}</td>                                 	
-                                 	<td>{{company[item.companyid]?company[item.companyid]:''}}</td>
-                                    <!--<td v-if="userstype[item.economictid]">
-                                	{{userstype[item.economictid]["name"]}}
-                            		</td><td v-else></td>                            		
-                            		 <td v-if="company[item.companyid]">
-                                	{{company[item.company]["name"]}}
-                            		</td><td v-else></td>-->
-                                   <!--<td>{{item.name}}</td> -->
-                                 	<!--<td>{{company[item.name]?company[item.companyid].name:''}}</td>  -->                                                                                                                
-                                    <td>{{item.mobile}}</td>                                  
+                                 	<td v-if="item.companyid == 1">内部公司</td>
+                                 	<td v-else>{{company[item.companyid]?company[item.companyid]:''}}</td>
+                                    <td>{{item.mobile}}</td>
                                     <td>{{item.created_at}}</td></td>
                                                                                                   
                                    <!-- <td>
