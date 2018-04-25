@@ -38,6 +38,7 @@
     <!-- //wrap -->
     <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
+    <script type="text/javascript" src="../../config/configure.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="../../js/jquery.qrcode.min.js"></script>
     <script>
@@ -46,7 +47,7 @@
             var back = 'http://wx.rrzhaofang.com/authorization.html?uuid='+id+"&type=1";
                 back = encodeURIComponent(back);
             var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbe1cdb19d2290193&redirect_uri="+back+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
-            console.log(str);
+            //console.log(str);
             $('#code').qrcode(str);
         })
         var tokenData = localStorage.getItem("userinfo");

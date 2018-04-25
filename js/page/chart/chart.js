@@ -63,15 +63,18 @@ var ch = new Vue({
         //第一次加载数据
 		getChartsList:function (loading){		 
 		 	var url = auth_conf.chart_list;
+		 	
             var that = this;
 			
            axios.post(url,that.params,{headers: {"Authorization": that.tokenValue}})
             .then(function(response)
             {
-                  var data = response.data;				
+                  var data = response.data;	
+                
                   if ( data.status == 1 )
                     {                       
                         that.charts = data.data.data;
+                        console.log(that.charts)
                         that.page_data.total = data.data.total;
                         that.page_data.to= data.data.to;						
 						  if( loading!="loadingPageData")

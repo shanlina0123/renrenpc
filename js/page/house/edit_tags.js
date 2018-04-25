@@ -36,15 +36,16 @@ new Vue({
 
             var that = this;
             var len = that.tsgsData.length;
+            var id = tag.id;
             if( tag.chencked == true )
             {
-                that.tsgsData.splice($.inArray(tag.id,that.tsgsData),1);
+                that.tsgsData.splice($.inArray(id,that.tsgsData),1);
                 tag.chencked = false;
 
                 //要删除的
                 if( tag.istag == 1 )
                 {
-                    that.tsgsDel.push(tag.id);
+                    that.tsgsDel.push(id);
                 }
 
             }else
@@ -53,24 +54,24 @@ new Vue({
                 {
                     if( tag.chencked == false )
                     {
-                        that.tsgsData.push(tag.id);
+                        that.tsgsData.push(id);
                         tag.chencked = true;
 
                         //要删除的
                         if( tag.istag == 1 )
                         {
-                            that.tsgsDel.splice($.inArray(tag.id,that.tsgsDel),1);
+                            that.tsgsDel.splice($.inArray(id,that.tsgsDel),1);
                         }
 
                     }else
                     {
-                        that.tsgsData.splice($.inArray(tag.id,that.tsgsData),1);
+                        that.tsgsData.splice($.inArray(id,that.tsgsData),1);
                         tag.chencked = false;
 
                         //要删除的
                         if( tag.istag == 1 )
                         {
-                            that.tsgsDel.push(tag.id);
+                            that.tsgsDel.push(id);
                         }
                     }
                 }else
