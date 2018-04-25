@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>房源列表</title>
+    <link rel="icon" href="../../images/icon.ico">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../css/normalize.css">
@@ -16,12 +18,15 @@
     <script type="text/javascript" src="../../plugin/js/vue.js"></script>
     <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
 </head>
+
 <body>
     <div class="wrap">
         <div class="layui-layout layui-layout-admin" id="top"></div>
         <div class="main clearfix">
             <!--左侧导航-->
-            <ul class="leftNav fl" id="left"><!--左侧导航--></ul>
+            <ul class="leftNav fl" id="left">
+                <!--左侧导航-->
+            </ul>
             <!--右侧主要内容-->
             <div class="rightMain fl">
 
@@ -32,7 +37,7 @@
                             <div class="layui-inline">
                                 <label class="layui-form-label">房源类型</label>
                                 <div class="layui-input-inline">
-                                    <select  lay-verify="required" lay-filter="filter" id="roomType">
+                                    <select lay-verify="required" lay-filter="filter" id="roomType">
                                       <option value="">全部</option>
                                     </select>
                                 </div>
@@ -71,7 +76,7 @@
                         <a href="addHouseStep1.html" class="layui-btn">添加新房源</a>
                     </div>
                     <form class="layui-form">
-                    		<h2>房源列表</h2>
+                        <h2>房源列表</h2>
                         <table class="layui-table" lay-size="lg">
                             <thead>
                                 <tr>
@@ -126,4 +131,5 @@
     <script type="text/javascript" src="../../js/page/house/list.js"></script>
     <script type="text/javascript" src="../../config/bese64.js"></script>
 </body>
+
 </html>

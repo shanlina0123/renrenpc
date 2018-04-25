@@ -30,7 +30,7 @@ var vm = new Vue({
                 var data = response.data;
                 if (data.status == 1) {
                     that.adminList = data.data.data;
-                    //console.log(that.adminList);
+                    console.log(that.adminList);
                     that.page_data.total = data.data.total;
                     that.page_data.to = data.data.to;
                     if (loading != "loadingPageData") {
@@ -128,9 +128,10 @@ var vm = new Vue({
         },
         //提交客户修改、新增
         submitUser: function(uuid) {
+            //console.log(uuid);
             var that = this;
-            var roleidVal = $("#popRoleList").val();
-            var statusVal = $("#roleIdID").val();
+            var roleidVal = $("#popRoleList").val(); //角色名称
+            var statusVal = $("#roleIdID").val(); //状态值
             that.params.roleid = roleidVal;
             if (statusVal == "锁定") {
                 that.params.status = "0";
@@ -159,15 +160,15 @@ var vm = new Vue({
                 } else {
                     axios.put(url, that.params, { headers: { "Authorization": that.tokenValue } })
                         .then(function(response) {
-                            //console.log(response);
-                            var data = response.data;
+                            var data = response.data
                             if (data.status == 1) {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
                                     layer.msg(data.messages);
                                     layer.closeAll('page');
-                                    location.href = location.href;
-                                })
+                                    that.getAdminList();
+                                    that.page = 1;
+                                });
                             } else {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
@@ -202,7 +203,9 @@ var vm = new Vue({
                             layui.use(['layer'], function() {
                                 var layer = layui.layer;
                                 layer.msg(data.messages);
-                                layer.closeAll('page')
+                                layer.closeAll('page');
+                                that.getAdminList();
+                                that.page = 1;
                             })
                         } else {
                             layui.use(['layer'], function() {
