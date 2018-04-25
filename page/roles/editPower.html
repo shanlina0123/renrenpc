@@ -54,8 +54,8 @@
                                         <div class="layui-input-inline">
                                             <ul class="powerUl">
                                                 <li v-for="item in powerList">
-                                                    <div class="topCheck">
-                                                        <input type="checkbox" lay-skin="primary" lay-filter="allChoose" :id="item.id" class="checkAll" :title="item.name">
+                                                    <div class="topCheck" @click="checkAll($event)">
+                                                        <input type="checkbox" :id="item.id" lay-skin="primary" :title="item.name">
                                                     </div>
                                                     <ul class="powerInnerUl clearfix">
                                                         <li v-for="innerItem in item._child"><input type="checkbox" lay-skin="primary" :id="innerItem.id" :title="innerItem.name"></li>
@@ -72,9 +72,9 @@
                                         <label class="layui-form-label">视野权限</label>
                                         <div class="layui-input-inline ">
                                             <div class="layui-form-item">
-                                                <div class="layui-input-block forEditLeftMargin">
-                                                    <input type="radio" name="isShow" value="0" :checked="islook == 0" title="全部">
-                                                    <input type="radio" name="isShow" value="1" :checked="islook == 1" title="仅个人">
+                                                <div class="layui-input-block forEditLeftMargin" @click="forRadio()">
+                                                    <input type="radio" name="isShow" value="0" :checked="params.islook == 0" title="全部">
+                                                    <input type="radio" name="isShow" value="1" :checked="params.islook == 1" title="仅个人">
                                                 </div>
                                             </div>
                                         </div>
