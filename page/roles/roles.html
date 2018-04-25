@@ -46,7 +46,7 @@
                             </tr>
                             <tr v-for="item in roleList">
                                 <td>{{item.id}}</td>
-                                <td>{{item.name}}{{item.isdeafult}}</td>
+                                <td>{{item.name}}</td>
                                 <td>
                                     <div class="layui-btn-group" v-if="item.isdeafult == 0">
                                         <a type="button" @click="editRole(item.uuid,item.name,item.islook)" class="layui-btn layui-btn-sm editBtn">编辑权限</a>
