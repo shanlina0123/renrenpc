@@ -101,7 +101,7 @@ function checkToken() {
     {
         if (!openid)
         {
-            //window.location = "/page/index/bgopenid.html";
+            window.location = "/page/index/bgopenid.html";
         }
     }
     $.ajax({
