@@ -1,12 +1,11 @@
 (function() {
     //var host = "http://192.168.15.222:8081/";
     var host = "http://api.rrzhaofang.com/";
-
     window.conf = {
-            login: host + 'admin/login', //首页推荐
-            wechat_testing:host+'admin/wechat/testing',//检测扫描二维码
-        };
-        //带token的请求
+        login: host + 'admin/login', //首页推荐
+        wechat_testing: host + 'admin/wechat/testing', //检测扫描二维码
+    };
+    //带token的请求
     window.auth_conf = {
         token: host + "admin/token", //检查而已有token
         menue_list: host + "admin/auth-menu", //菜单列表
@@ -57,11 +56,9 @@
         edit_pass: host + 'admin/user/update-pass', //用户登陆状态修改密码
         check_user_name: host + 'admin/get/user', //检测用户名
         edit_modify_pass: host + 'admin/user/modify-pass', //忘记密码修改
-
         datas_add: host + 'admin/datas', //添加属性
         datas_update: host + 'admin/datas/', //修改属性
         datas_delete: host + 'admin/datas-delete/', //修改属性
-
     };
     $("#top").load('/page/public/top.html');
     //$("#left").load('/page/public/left.html');
@@ -79,8 +76,6 @@ if( $.inArray(url,arr) == -1 )
    filterToken();
 }
 
-
-
 /**
  * 判断session存在不
  */
@@ -96,12 +91,11 @@ function filterToken() {
 /**
  * 检测token
  */
-function checkToken()
-{
+function checkToken() {
     var tokenData = localStorage.getItem("userinfo");
     var openid = JSON.parse(tokenData).wechatopenid;
     if (!openid) {
-       // window.location = "/page/index/bgopenid.html";
+        // window.location = "/page/index/bgopenid.html";
     }
     $.ajax({
         headers: {
@@ -127,28 +121,28 @@ function checkToken()
     });
 }
 
-    //获取权限菜单
-    function getMune() {
-        var userInfo = $.parseJSON(localStorage.getItem("userinfo"));
-        var menueList = userInfo.menuList;
-        if (userInfo.isadmin == 1) {
+//获取权限菜单
+function getMune() {
+    var userInfo = $.parseJSON(localStorage.getItem("userinfo"));
+    var menueList = userInfo.menuList;
+    if (userInfo.isadmin == 1) {
+        $("#top").load('/page/public/top.html');
+        $("#left").load('/page/public/left.html');
+    } else {
+        //权限菜单(现在页面只显示一级，接口和数据库设计支持多级)
+        var leftHtml = '';
+        if (menueList) {
+            $.each(menueList, function(i, n) {
+                leftHtml += '<li><a href="../' + n.url + '"><i class="layui-icon">' + n.menuicon + '</i>' + n.menuname + '</a></li>' + '\r\n';
+            });
+            $("#left").html(leftHtml);
             $("#top").load('/page/public/top.html');
-            $("#left").load('/page/public/left.html');
         } else {
-            //权限菜单(现在页面只显示一级，接口和数据库设计支持多级)
-            var leftHtml = '';
-            if (menueList) {
-                $.each(menueList, function(i, n) {
-                    leftHtml += '<li><a href="../' + n.url + '"><i class="layui-icon">' + n.menuicon + '</i>' + n.menuname + '</a></li>' + '\r\n';
-                });
-                $("#left").html(leftHtml);
-                $("#top").load('/page/public/top.html');
-            } else {
-                // alert("您暂时无任何权限，请联系管理员设置您的权限");
-                $("#left").html(leftHtml);
-                leftHtml = "<img src='/images/lock.jpg' style='margin:100px auto;display: block;'/>";
-                $(".main").html(leftHtml);
-            }
+            // alert("您暂时无任何权限，请联系管理员设置您的权限");
+            $("#left").html(leftHtml);
+            leftHtml = "<img src='/images/lock.jpg' style='margin:100px auto;display: block;'/>";
+            $(".main").html(leftHtml);
         }
-
     }
+
+}

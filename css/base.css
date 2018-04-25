@@ -140,6 +140,14 @@ a:focus {
     width: 130px;
 }
 
+.layui-header.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 500;
+}
+
 .handelUl {
     position: absolute!important;
     right: 0;
@@ -147,10 +155,14 @@ a:focus {
 }
 
 .leftNav {
+    position: fixed;
+    left: 0;
+    top: 60px;
     width: 130px;
     /* padding: 20px 0;*/
     height: 900px;
     background-color: #23262E;
+    z-index: 500;
 }
 
 .leftNav>li>a {
@@ -203,9 +215,11 @@ a:focus {
 .rightMain {
     width: 1753px;
     height: 100%;
+    margin-left: 130px;
+    margin-top: 60px;
     min-height: 880px;
     padding-left: 20px;
-    padding-top: 12px;
+    padding-top: 10px;
 }
 
 

@@ -1,5 +1,5 @@
 ﻿// 顶部导航右侧操作
-$("body").on("click", ".layui-nav .layui-nav-item a", function () {
+$("body").on("click", ".layui-nav .layui-nav-item a", function() {
     $(this).siblings().addClass("layui-show");
 });
 //左侧导航效果
@@ -13,20 +13,20 @@ $("body").on("click", ".layui-nav .layui-nav-item a", function () {
 //       $(this).siblings(".leftSubNav").slideUp();
 //   }
 // });
-
-
 //导航添加背景图片
-$(".leftNav > li >a").each(function () {
+$(".leftNav > li >a").each(function() {
     if ($(this).siblings().hasClass("leftSubNav")) {
         $(this).addClass("hasBg")
     }
 });
-
+//控制左侧导航的高度
+$(".leftNav").height($(window).height());
 
 function onOver(obj) {
     var sub_url = obj.getElementsByTagName("ul")
     sub_url[0].style.display = "block";
 }
+
 function onOut(obj) {
     var sub_url = obj.getElementsByTagName("ul")
     sub_url[0].style.display = "none";
@@ -39,14 +39,12 @@ function onOut(obj) {
  * @param key
  * @param value
  */
-function selectAppendDd(tag,data,key,value)
-{
-   var str="";
-    for(var i in data)
-    {
-        str+='<option value="'+data[i][key]+'">'+data[i][value]+'</option>';
+function selectAppendDd(tag, data, key, value) {
+    var str = "";
+    for (var i in data) {
+        str += '<option value="' + data[i][key] + '">' + data[i][value] + '</option>';
     }
-    tag.append( str );
+    tag.append(str);
     layui.use(['form'], function() {
         var form = layui.form;
         form.render('select');
@@ -61,28 +59,24 @@ function selectAppendDd(tag,data,key,value)
  * @param key
  * @param value
  */
-function arrayIndexToValue(data,key)
-{
-    if(data)
-    {
-        var list=[];
-       $.each(data,function(i,n){
-           list[n[key]]=n;
-       })
+function arrayIndexToValue(data, key) {
+    if (data) {
+        var list = [];
+        $.each(data, function(i, n) {
+            list[n[key]] = n;
+        })
     }
-   return list;
+    return list;
 }
 
 /****
  * 数组索引转为普通数组
  * @param data
  */
-function IndexArrayToArray(data)
-{
-    if(data)
-    {
-        var list=[];
-        $.each(data,function(i,n){
+function IndexArrayToArray(data) {
+    if (data) {
+        var list = [];
+        $.each(data, function(i, n) {
             list.push(n);
         })
     }
@@ -94,8 +88,7 @@ function IndexArrayToArray(data)
  * 退出
  *
  */
-function signOut()
-{
+function signOut() {
     localStorage.removeItem("userinfo");
     window.location.href = '/login.html';
 }
@@ -103,13 +96,13 @@ function signOut()
 /*获取对象、数组的长度、元素个数
  *@param obj 要计算长度的元素，可以为object、array、string
  */
-function count(obj){
+function count(obj) {
     var objType = typeof obj;
-    if(objType == "string"){
+    if (objType == "string") {
         return obj.length;
-    }else if(objType == "object"){
+    } else if (objType == "object") {
         var objLen = 0;
-        for(var i in obj){
+        for (var i in obj) {
             objLen++;
         }
         return objLen;
