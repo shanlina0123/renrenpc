@@ -81,6 +81,7 @@ var vm = new Vue({
                 if(  value.url  == img )
                 {
                     that.res.splice(index,1);
+                    that.img.splice($.inArray(value.url,that.img),1)
                 }
             })
         }
@@ -137,6 +138,7 @@ layui.use(['upload','form','layer'], function() {
 
             var index_img = vm.$data.img.length;
             var index_aimg = vm.$data.addImg.length;//添加的img下标
+            console.log( vm.$data.img.length );
             if( vm.$data.img.length < 9 )
             {
                 obj.preview(function(index, file, result) {
@@ -150,6 +152,7 @@ layui.use(['upload','form','layer'], function() {
         {
             if( res.status == 1 )
             {
+                //console.log( vm.$data.img.length );
                 if( vm.$data.img.length < 9 )
                 {
                     vm.$data.img.push( res.data.name );
