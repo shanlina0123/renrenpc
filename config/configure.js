@@ -1,5 +1,10 @@
 (function() {
-    var host = "http://api.rrzhaofang.com/";
+    var host = "http://192.168.15.222:8081/";
+     //var host = "http://api.rrzhaofang.com/";
+    //未带toke请求
+
+    //var host = "http://api.rrzhaofang.com/";
+
     window.conf = {
             login: host + 'admin/login', //首页推荐
             wechat_testing:host+'admin/wechat/testing',//检测扫描二维码
@@ -98,7 +103,7 @@ function checkToken()
     var tokenData = localStorage.getItem("userinfo");
     var openid = JSON.parse(tokenData).wechatopenid;
     if (!openid) {
-        window.location = "/page/index/bgopenid.html";
+       // window.location = "/page/index/bgopenid.html";
     }
     $.ajax({
         headers: {
