@@ -4,7 +4,7 @@
     window.conf = {
         login: host + 'admin/login', //首页推荐
         wechat_testing: host + 'admin/wechat/testing', //检测扫描二维码
-        authorization: host, //绑定微信回调地址
+        authorization: 'http://wx.rrzhaofang.com/', //绑定微信回调地址
         appid:'wxbe1cdb19d2290193',//appid
     };
     //带token的请求

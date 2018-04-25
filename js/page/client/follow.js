@@ -25,9 +25,9 @@ var vm = new Vue({
             this.getFollowList(this.GetQueryString("uuid"));
         },
         //获取跟进列表
-        getFollowList: function (uuid) {
+        getFollowList: function () {
             var that = this;
-            var url = auth_conf.client_follow_list+uuid;
+            var url = auth_conf.client_follow_list+that.clientid;
             //token
             axios.get(url, {headers: {"Authorization": that.tokenValue}})
                 .then(function (response) {
@@ -75,6 +75,8 @@ var vm = new Vue({
                 .then(function(response) {
                     var data = response.data;
                     if (data.status == 1) {
+
+                        location = location;
                         //显示新录入的记录
                         that.newFollowData=data.data;
                         that.newFollowData.username=that.tokenUserInfo.nickname;
