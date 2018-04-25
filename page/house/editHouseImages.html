@@ -134,9 +134,6 @@
                                     <div class="layui-upload">
                                         <button type="button" class="layui-btn" id="infoImg">多图片上传</button>
                                         <blockquote id="imgs">
-                                            <div class="img3">
-                                                <img :src="path_url+img.url" class="layui-upload-img img1" /><img class="img2" @click="removeImg(img.url)" src="/images/a7.png"/>
-                                            </div>
                                             <template v-for="img in res">
                                                <div class="img3">
                                                    <img :src="path_url+img.url" class="layui-upload-img img1" /><img class="img2" @click="removeImg(img.url)" src="/images/a7.png"/>

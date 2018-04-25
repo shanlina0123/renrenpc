@@ -100,10 +100,12 @@ layui.use(['upload','form','layer'], function() {
         multiple: true,
         before: function(obj) {
             //预读本地文件示例，不支持ie8
+            var index_img = vm.$data.images.length;
             if( vm.$data.images.length < 9 )
             {
                 obj.preview(function(index, file, result) {
-                    $('#imgs').append('<img src="' + result + '" alt="' + file.name + '" class="layui-upload-img">')
+                    $('#imgs').append('<div class="img3"><img src="' + result + '" alt="' + file.name + '" class="layui-upload-img img1" /><img class="img2" onclick="removeTempImg('+index_img+',this)" src="/images/a7.png"/></div>');
+                    index_img++;
                 });
             }
         },
@@ -125,3 +127,12 @@ layui.use(['upload','form','layer'], function() {
         },
     });
 });
+
+/**
+ * 删除临时图片
+ * @param index
+ */
+function removeTempImg( index,even ) {
+    vm.$data.images.splice(index,1);
+    $(even).parent('div').remove();
+}

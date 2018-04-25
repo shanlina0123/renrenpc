@@ -140,7 +140,7 @@ layui.use(['upload','form','layer'], function() {
             if( vm.$data.img.length < 9 )
             {
                 obj.preview(function(index, file, result) {
-                    $('#imgs').append('<div><img src="' + result + '" alt="' + file.name + '" class="layui-upload-img"><img class="" onclick="removeTempImg('+index_img+','+index_aimg+',this)" src="/images/a7.png"></div>');
+                    $('#imgs').append('<div class="img3"><img src="' + result + '" alt="' + file.name + '" class="layui-upload-img"><img class="img2" onclick="removeTempImg('+index_img+','+index_aimg+',this)" src="/images/a7.png"></div>');
                     index_img++;
                     index_aimg++
                 });
@@ -176,7 +176,4 @@ function removeTempImg( index, aindex, even ) {
     vm.$data.img.splice(index,1);
     vm.$data.addImg.splice(aindex,1);
     $(even).parent('div').remove();
-    //console.log( vm.$data.img );
-   // console.log( vm.$data.addImg );
-    //alert( index );
 }
