@@ -6,7 +6,7 @@
                 laydate.render({
                     elem: '#test16',
                     type: 'datetime',
-                    range: '-',
+                    range: '|',
                     format: 'yyyy/M/d'
                 });
             });
@@ -16,7 +16,7 @@
                 laydate.render({
                     elem: '#test17',
                     type: 'datetime',
-                    range: '-',
+                    range: '|',
                     format: 'yyyy/M/d'
                 });
             });
@@ -26,7 +26,7 @@
                 laydate.render({
                     elem: '#test18',
                     type: 'datetime',
-                    range: '-',
+                    range: '|',
                     format: 'yyyy/M/d'
                 })
             });          
@@ -57,7 +57,7 @@ var ch = new Vue({
         state:[],//客户状态
         firm:[],//公司
         manager:[],//经纪人
-       admin_datas:[],//业务员
+        admin_datas:[],//业务员
     },
     methods:{
         //第一次加载数据
@@ -74,7 +74,6 @@ var ch = new Vue({
                   if ( data.status == 1 )
                     {                       
                         that.charts = data.data.data;
-                        console.log(that.charts)
                         that.page_data.total = data.data.total;
                         that.page_data.to= data.data.to;						
 						  if( loading!="loadingPageData")
@@ -155,7 +154,7 @@ var ch = new Vue({
                 });
          },
        //公司
-      		 companylist:function (){  
+         companylist:function (){
         	var url = auth_conf.company_list;       
             var that = this;
             axios.get(url,{headers: {"Authorization": that.tokenValue}})
@@ -164,11 +163,9 @@ var ch = new Vue({
                     var data = response.data;                 
                     if ( data.status == 1 )
                     {
-                       
-                        that.firm = data.data;
                         var str = '';
                         var listData = data.data.data;
-                        that.firm = listData;
+                        that.firm = arrayIndexToValue(listData,'id');
                         for(var x in listData)
                         {
                             str+='<option value="'+listData[x].id+'">'+listData[x].name+'</option>';
@@ -183,8 +180,7 @@ var ch = new Vue({
                 });
           },
           //经纪人
-           managerlist:function (){  
-    
+           managerlist:function (){
         	var url = auth_conf.chart_drop;       
             var that = this;
             axios.get(url,{headers: {"Authorization": that.tokenValue}})
@@ -195,11 +191,11 @@ var ch = new Vue({
                     {
                         var str = '';
                         var listData = data.data;
-
+                        that.manager = arrayIndexToValue(listData,'id');
                         for(var x in listData)
                         {
                             str+='<option value="'+listData[x].id+'">'+listData[x].nickname+'</option>';
-                        }                     
+                        }
                         $("#manager").append( str );
                         layui.use(['form'], function() {
                             var form = layui.form;
@@ -218,8 +214,7 @@ var ch = new Vue({
                     var data = response.data;
                     if (data.status == 1) {
                         //业务员
-                        that.admin_datas = data.data;                 
-                       // that.admin_show_datas = arrayIndexToValue(data.data, "id");
+                        that.admin_datas = arrayIndexToValue(data.data, "id");
                         selectAppendDd($("#workp"), that.admin_datas, "id", "nickname");
                     }
                 })
@@ -253,13 +248,14 @@ function search() {
     
     ch.$data.params.followstatusid = followstatusid;//客户状态    
     ch.$data.params.companyid = companyid;//公司
-   //经纪人，业务员
-   ch.$data.params.refereeuserid = refereeuserid;
-   ch.$data.params.ownadminid = ownadminid;
-   //日期
+    //经纪人，业务员
+    ch.$data.params.refereeuserid = refereeuserid;
+    ch.$data.params.ownadminid = ownadminid;
+    //日期
     ch.$data.params.makedate = makedate;
 	ch.$data.params.comedate = comedate;
 	ch.$data.params.dealdate = dealdate;
 	ch.$data.params.page = 1;
+
     ch.getChartsList();
 }

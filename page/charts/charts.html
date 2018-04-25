@@ -121,21 +121,24 @@
                         <tbody >
                             <tr v-for="item in charts">
                                 <td>{{item.clientid}}</td>
-                                <td>{{item.dynamic_to_client.name}}</td>                                 
-                                 <td v-if="state[item.followstatusid]">
+                                <td>{{item.dynamic_to_client.name}}</td>
+
+                                <td v-if="state[item.followstatusid]">
                                 {{state[item.followstatusid]["name"]}}
-	                            </td><td v-else></td>
-	                        
-                  				<td>{{firm[item.companyid]?commission[item.companyid].name:''}}</td>                  				                  		                				                                                              	   
-	                            <td v-if="admin_datas[item.followadminid]">
-                                {{admin_datas[item.ownadminid]["nickname"]}}
-                            	</td><td v-else></td>
+                                 </td><td v-else></td>
+
+                  				<td>{{item.companyid==1?'内部公司':firm[item.companyid]?firm[item.companyid].name:''}}</td>
+
+                                <td v-if="admin_datas[item.ownadminid]">
+                                    {{admin_datas[item.ownadminid]["nickname"]}}
+                                </td><td v-else></td>
+
                             	<td v-if="manager[item.refereeuserid]">
                                 {{manager[item.refereeuserid]["nickname"]}}
                             	</td><td v-else></td>
                             	
-                              <td>{{item.housename}}</td>   
-                              <td>{{item.iscommission?'是':'否'}}</td>
+                                <td>{{item.housename}}</td>
+                                <td>{{item.iscommission?'是':'否'}}</td>
                                 <td>{{item.makedate}}</td>
                                 <td>{{item.comedate}}</td>
                                 <td>{{item.dealdate}}</td>
