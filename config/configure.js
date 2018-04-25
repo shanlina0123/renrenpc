@@ -1,9 +1,6 @@
 (function() {
-    var host = "http://192.168.15.222:8081/";
-     //var host = "http://api.rrzhaofang.com/";
-    //未带toke请求
-
-    //var host = "http://api.rrzhaofang.com/";
+    //var host = "http://192.168.15.222:8081/";
+    var host = "http://api.rrzhaofang.com/";
 
     window.conf = {
             login: host + 'admin/login', //首页推荐
@@ -67,7 +64,7 @@
 
     };
     $("#top").load('/page/public/top.html');
-    $("#left").load('/page/public/left.html');
+    //$("#left").load('/page/public/left.html');
 })();
 
 /**
@@ -75,12 +72,13 @@
  * @type {string}
  */
 
-var url = window.location.href;
-var arr = [ "login.html", "chengePwd.html",'erweimaLogin.html',"wpwd.html"];
-if( $.inArray(url,arr) != -1 )
+var url = window.location.pathname;
+var arr = [ "/login.html", "/page/index/chengePwd.html",'/page/index/erweimaLogin.html'];
+if( $.inArray(url,arr) == -1 )
 {
-    filterToken();
+   filterToken();
 }
+
 
 
 /**
@@ -113,6 +111,7 @@ function checkToken()
         dataType: "json", //预期服务器返回的数据类型
         url: auth_conf.token, //url
         success: function(result) {
+            //console.log(result);
             if (result.status != 1) {
                 if (result.status != 15) {
                     localStorage.removeItem("userinfo");
@@ -122,7 +121,7 @@ function checkToken()
                 }
             } else {
                 //获取菜单
-                //getMune();
+                getMune();
             }
         }
     });

@@ -53,12 +53,14 @@
                                         <label class="layui-form-label">操作权限</label>
                                         <div class="layui-input-inline">
                                             <ul class="powerUl">
-                                                <li v-for="item in powerList">
+                                                <li v-for="item in hadPowerList">
                                                     <div class="topCheck" @click="checkAll($event)">
-                                                        <input type="checkbox" :id="item.id" lay-skin="primary" :title="item.name">
+                                                        <input type="checkbox"  :checked="item.checked"  :id="item.id" lay-skin="primary" :title="item.name">
                                                     </div>
                                                     <ul class="powerInnerUl clearfix">
-                                                        <li v-for="innerItem in item._child"><input type="checkbox" lay-skin="primary" :id="innerItem.id" :title="innerItem.name"></li>
+                                                        <li v-for="innerItem in item._child" @click="checkOne($event)">
+                                                            <input type="checkbox" lay-skin="primary" :id="innerItem.id" :checked="innerItem.checked" :title="innerItem.name">
+                                                        </li>
                                                     </ul>
                                                 </li>
                                             </ul>
@@ -72,9 +74,9 @@
                                         <label class="layui-form-label">视野权限</label>
                                         <div class="layui-input-inline ">
                                             <div class="layui-form-item">
-                                                <div class="layui-input-block forEditLeftMargin" @click="forRadio()">
-                                                    <input type="radio" name="isShow" value="0" :checked="params.islook == 0" title="全部">
-                                                    <input type="radio" name="isShow" value="1" :checked="params.islook == 1" title="仅个人">
+                                                <div class="layui-input-block forEditLeftMargin" @click="forRadio($event)">
+                                                    <input type="radio" name="isShow" value="0" :checked="islook == 0?true:false" title="全部">
+                                                    <input type="radio" name="isShow" value="1" :checked="islook == 1?true:false" title="仅个人">
                                                 </div>
                                             </div>
                                         </div>
