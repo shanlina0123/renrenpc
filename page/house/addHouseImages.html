@@ -122,7 +122,7 @@
                                     <div class="layui-upload">
                                         <button type="button" class="layui-btn" id="covermap">上传图片</button>
                                         <div class="layui-upload-list">
-                                            <img class="layui-upload-img" id="covermapUrl">
+                                            <img class="layui-upload-img" id="covermapUrl" src="/images/image.png">
                                             <p id="demoText"></p>
                                         </div>
                                     </div>
@@ -171,26 +171,4 @@
 <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
 <script type="text/javascript" src="../../js/common.js"></script>
 <script type="text/javascript" src="../../js/page/house/images.js"></script>
-<script type="text/javascript">
-	$("img").mouseenter(function () {
-                var myself = $(this);
-                var xx = $("<img src='a7.png' class='xx' />");
-                var top = $(this).offset().top;
-                var left = $(this).offset().left + $(this).width() - 12;
-                xx.css({ "position": "absolute", "top": top, "left": left, "display": "" });
-                $(document.body).append(xx);
- 
-                $(".xx").click(function () {
-                    myself.hide();
-                    $("img").each(function () {
-                        if ($(this).hasClass("hid")) {
-                            $(this).removeClass("hid");
-                            return false;
-                        }
-                    });
-                });
-            }).mouseleave(function () {
-                $(".xx").hide();
-            });
-</script>
 </html>

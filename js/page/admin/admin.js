@@ -30,7 +30,7 @@ var vm = new Vue({
                 var data = response.data;
                 if (data.status == 1) {
                     that.adminList = data.data.data;
-                    //console.log(that.adminList);
+                    console.log(that.adminList);
                     that.page_data.total = data.data.total;
                     that.page_data.to = data.data.to;
                     if (loading != "loadingPageData") {
@@ -62,7 +62,7 @@ var vm = new Vue({
                 form.render();
             });
         },
-        //查看用户
+        //查看和新增用户弹窗
         getEditAdmin: function(uuid) {
             var that = this;
             that.getRole(); //获取角色列表
@@ -92,7 +92,7 @@ var vm = new Vue({
                             form.render('select');
                         });
                     } else if (data.status == 10) {
-                        layer.msg("抱歉，您不能查看管理员信息！");
+                        layer.msg(data.messages);
                     }
                 })
             } else {
@@ -102,6 +102,7 @@ var vm = new Vue({
                 that.params.uuid = "";
                 that.params.status = "";
                 that.params.roleid = $("#popRoleList").val("");
+                that.params.roleid = $("#roleIdID").val("");
                 layer.open({
                     type: 1,
                     title: '新增用户',
@@ -113,7 +114,7 @@ var vm = new Vue({
                 })
             }
         },
-        //获取角色列表
+        //获取弹窗是下拉的角色列表
         getRole: function() {
             var url = auth_conf.role_list;
             var that = this;
@@ -131,18 +132,17 @@ var vm = new Vue({
             if (uuid) {
                 var url = auth_conf.admin_lock + uuid;
                 axios.put(url, {}, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
-                    var data = response.data;
-                    //console.log(response);
+                    // var data = response.data;
                     // if (data.status == 1) {
                     //     layer.msg("编辑成功");
+                    //     that.getAdminList();
                     // } else if (data.status == 10) {
                     //     layer.msg("您不能编辑管理员信息");
                     // } else {
                     //     layer.msg("编辑失败");
                     // }
-                });
+                })
             }
-            //that.getAdminList();
         },
         //提交客户修改、新增
         submitUser: function(uuid) {
@@ -157,8 +157,7 @@ var vm = new Vue({
             }
             if (uuid) {
                 //编辑查看用户
-                var url = auth_conf.admin_edit + uuid;
-                //console.log(url);
+                var url = auth_conf.admin_edit + uuid
                 if (that.params.nickname == "") {
                     layui.use("layer", function() {
                         layer.msg("请填写用户姓名");
@@ -178,28 +177,23 @@ var vm = new Vue({
                 } else {
                     axios.put(url, that.params, { headers: { "Authorization": that.tokenValue } })
                         .then(function(response) {
-                            // console.log(url);
-                            // console.log(that.params);
-                            // console.log(response);
-                            if (response.status == 1) {
+                            console.log(response);
+                            var data = response.data;
+                            if (data.status == 1) {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
-                                    layer.msg("编辑用户成功", function() {
-                                        layer.closeAll();
-                                    });
-                                });
-                                that.getAdminList();
+                                    layer.msg(data.messages);
+                                    layer.closeAll('page');
+                                    location.href = location.href;
+                                })
                             } else {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
-                                    layer.msg("编辑用户失败", function() {
-                                        layer.closeAll();
-                                    });
+                                    layer.msg(data.messages);
                                 });
                             }
                         })
                 }
-
             } else {
                 //新增用户
                 var url = auth_conf.admin_list;
@@ -221,21 +215,17 @@ var vm = new Vue({
                     })
                 } else {
                     axios.post(url, that.params, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
-                        //console.log(response);
-                        if (response.data.status == 1) {
+                        var data = response.data;
+                        if (data.status == 1) {
                             layui.use(['layer'], function() {
                                 var layer = layui.layer;
-                                layer.msg("新增用户成功", function() {
-                                    layer.closeAll();
-                                });
-                            });
-                            that.getAdminList();
+                                layer.msg(data.messages);
+                                layer.closeAll('page')
+                            })
                         } else {
                             layui.use(['layer'], function() {
                                 var layer = layui.layer;
-                                layer.msg("新增用户失败", function() {
-                                    layer.closeAll();
-                                });
+                                layer.msg(data.messages);
                             });
                         }
                     })
@@ -251,11 +241,7 @@ var vm = new Vue({
 $(function() {
     layui.use(["form", "layer"], function() {
         var form = layui.form;
-        var layer = layui.layer;
-        // console.log(data.elem); //得到checkbox原始DOM对象
-        // console.log(data.elem.checked); //是否被选中，true或者false
-        // console.log(data.value); //复选框value值，也可以通过data.elem.value得到
-        // console.log(data.othis); //得到美化后的DOM对象
+        var layer = layui.layer
         form.on('checkbox()', function(data) {
             var thisuuid = data.elem.id;
             var thischecked = data.elem.checked;

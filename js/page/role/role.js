@@ -16,10 +16,9 @@ var vm = new Vue({
                     var form = layui.form;
                 });
                 if (data.status == 1) {
-                    that.roleList = data.data;
-                    console.log(roleList);
+                    that.roleList = data.data
                 } else {
-                    layer.msg("错误")
+                    layer.msg(data.messages)
                 }
             })
         },
@@ -50,7 +49,7 @@ var vm = new Vue({
                     if (data.status == 1) {
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
-                            layer.msg("添加角色成功", { time: 500 }, function() {
+                            layer.msg(data.messages, { time: 500 }, function() {
                                 layer.closeAll();
                             })
                             that.getRoleList()
@@ -58,7 +57,7 @@ var vm = new Vue({
                     } else {
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
-                            layer.msg("添加角色失败", function() {
+                            layer.msg(data.messages, function() {
                                 layer.closeAll();
                             });
                         });
@@ -75,14 +74,14 @@ var vm = new Vue({
                 var url = auth_conf.role_delete + uuid;
                 axios.delete(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
                     if (response.data.status == 1) {
-                        layer.msg('删除成功', { icon: 1 });
+                        layer.msg(data.messages, { icon: 1 });
                         that.getRoleList();
                     } else if (response.data.status == 14) {
-                        layer.msg("角色下关联有用户，不能删除", function() {
+                        layer.msg(data.messages, function() {
                             layer.closeAll();
                         });
                     } else if (response.data.status == 10) {
-                        layer.msg("不能删除管理员角色", function() {
+                        layer.msg(data.messages, function() {
                             layer.closeAll();
                         });
                     }

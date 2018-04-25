@@ -44,24 +44,20 @@
     	}
     
     	
+        .img3{
+        	float: left;
+        	width: 100px;
+        	height: 100px;
+        }
         
         .img1{
         	position: relative;
-        	z-index: -1;
-        	display: block;
         }
         .img2{
-        	position: absolute;
-        	/*left: 830px;*/
-        	margin-left: 65px;
-        	margin-bottom: 20px;
-        	z-index: 2;
-        	display: inline-block;
-        }
-        .img3{
-        	overflow: hidden;
-        	width: 100px;
-        	float: left;
+        position: absolute;
+        z-index: 2;	
+        margin-left: 3.5%;
+        margin-top: -5.5%;
         }
    </style>
 <body>
@@ -139,6 +135,11 @@
                                         <blockquote id="imgs">
                                             <template v-for="img in res">
                                                <div class="img3"><img :src="path_url+img.url" class="layui-upload-img img1" /><img class="img2" @click="removeImg(img.url)" src="/images/a7.png"/></div>
+
+                                                 <div class="img3"><img :src="path_url+img.url" class="layui-upload-img img1" /><img class="img2" @click="removeImg(img.url)" src="/images/a7.png"/></div>
+												  <div class="img3"><img :src="path_url+img.url" class="layui-upload-img img1" /><img class="img2" @click="removeImg(img.url)" src="/images/a7.png"/></div>
+												  <div class="img3"><img :src="path_url+img.url" class="layui-upload-img img1" /><img class="img2" @click="removeImg(img.url)" src="/images/a7.png"/></div>
+                                           	
                                             </template>
                                         </blockquote>
                                     </div>

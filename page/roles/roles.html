@@ -33,7 +33,7 @@
                 <!--左侧导航-->
                 <ul class="leftNav fl" id="left"></ul>
                 <!--右侧主要内容-->
-                <div class="rightMain fl" id="roleId">
+                <div class="rightMain fl" id="roleId" v-cloak>
                     <div class="addClient"><button type="button" @click="addRole()" class="layui-btn changeClient">添加角色</button></div>
                     <form class="layui-form lockForm">
                         <h2>角色列表</h2>
@@ -46,11 +46,14 @@
                             </tr>
                             <tr v-for="item in roleList">
                                 <td>{{item.id}}</td>
-                                <td>{{item.name}}</td>
+                                <td>{{item.name}}{{item.isdeafult}}</td>
                                 <td>
-                                    <div class="layui-btn-group">
+                                    <div class="layui-btn-group" v-if="item.isdeafult == 0">
                                         <a type="button" @click="editRole(item.uuid,item.name,item.islook)" class="layui-btn layui-btn-sm editBtn">编辑权限</a>
                                         <button type="button" @click="deleteRole(item.uuid)" class="layui-btn layui-btn-sm deleteBtn">删除</button>
+                                    </div>
+                                    <div v-else>
+                                        默认角色，不可操作
                                     </div>
                                 </td>
                                 <!--<td class="ckbox2">
