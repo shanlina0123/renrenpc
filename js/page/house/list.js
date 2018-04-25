@@ -155,8 +155,7 @@ var vm = new Vue({
                 btn: ['确定', '取消']
             }, function() {
 
-                var url = auth_conf.company_delete+uuid;
-        
+                var url = auth_conf.house_delete+uuid;
                 axios.delete(url,{headers: {"Authorization": that.tokenValue}})
                     .then(function(response)
                     {
