@@ -21,11 +21,6 @@ $(".leftNav > li >a").each(function () {
         $(this).addClass("hasBg")
     }
 });
-/**
- * 引入top和right
- */
-$("#top").load('/page/public/top.html');
-$("#left").load('/page/public/left.html');
 
 
 function onOver(obj) {

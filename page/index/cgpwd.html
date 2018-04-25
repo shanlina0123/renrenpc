@@ -84,7 +84,7 @@
                         var password_confirmation = $("input[name='password_confirmation']").val();
                         var password_confirmation64 = base.encode(password_confirmation);
 
-                        var data = {password_confirmation:password_confirmation,password:password64};
+                        var data = {password_confirmation:password_confirmation64,password:password64};
 
                         var tokenValue = JSON.parse(localStorage.getItem("userinfo")).token;
                         $.ajax({
