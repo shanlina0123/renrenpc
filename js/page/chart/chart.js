@@ -243,6 +243,7 @@ var ch = new Vue({
 
 function search() {
 	var followstatusid=$("#state").val();//客户状态
+	console.log(followstatusid)
     var companyid = $("#firm").val();    //公司
    var refereeuserid = $("#manager").val();//经纪人
    var ownadminid = $("#workp").val();//业务员
@@ -260,6 +261,6 @@ function search() {
     ch.$data.params.makedate = makedate;
 	ch.$data.params.comedate = comedate;
 	ch.$data.params.dealdate = dealdate;
-	ch.$data.params.page = 1;
+	//ch.$data.params.page = 1;
     ch.getChartsList();
 }

@@ -95,12 +95,12 @@
                                     <input class="layui-input timePadding" id="test18" type="text" placeholder="请选择时间">
                                 </div>
                             </div>
-                            <button class="layui-btn sortBtn" type="button"   onclick="search()">查询</button>
+                            <button class="layui-btn sortBtn" type="button" onclick="search()">查询</button>
                         </div>
                     </form>
                 </div>
                 <!--客户数据表格-->
-                <div class="table1" id="charts" v-cloak>
+                <div class="table1" id="charts">
                     <h2>数据列表</h2>
                     <table class="layui-table" lay-size="lg">
                         <thead>
@@ -121,21 +121,25 @@
                         <tbody >
                             <tr v-for="item in charts">
                                 <td>{{item.clientid}}</td>
-                                <td>{{item.dynamic_to_client.name}}</td>                                 
+                                <td>{{item.dynamic_to_client.name}}</td>  
+                             <!--   客户状态-->
                                  <td v-if="state[item.followstatusid]">
                                 {{state[item.followstatusid]["name"]}}
-	                            </td><td v-else></td>
-	                        
-                  				<td>{{firm[item.companyid]?commission[item.companyid].name:''}}</td>                  				                  		                				                                                              	   
-	                            <td v-if="admin_datas[item.followadminid]">
+	                            </td>
+	                        <!--合作公司-->
+                  				<td>{{firm[item.companyid]?firm[item.companyid].name:''}}</td>                  				                  		                				                                                              	   
+	                            <!--业务员-->
+	                            <td v-if="admin_datas[item.ownadminid]">
                                 {{admin_datas[item.ownadminid]["nickname"]}}
-                            	</td><td v-else></td>
+                            	</td>
+                            	<!--   经纪人        -->                 	
                             	<td v-if="manager[item.refereeuserid]">
                                 {{manager[item.refereeuserid]["nickname"]}}
-                            	</td><td v-else></td>
+                            	</td>
                             	
                               <td>{{item.housename}}</td>   
-                              <td>{{item.iscommission?'是':'否'}}</td>
+                              <td v-if>{{item.iscommission?'是':'否'}}</td><td v-else=""></td>
+                              
                                 <td>{{item.makedate}}</td>
                                 <td>{{item.comedate}}</td>
                                 <td>{{item.dealdate}}</td>
