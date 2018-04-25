@@ -5,6 +5,8 @@
     window.conf = {
         login: host + 'admin/login', //首页推荐
         wechat_testing: host + 'admin/wechat/testing', //检测扫描二维码
+        authorization: host, //绑定微信
+        appid:'wxbe1cdb19d2290193',
     };
     //带token的请求
     window.auth_conf = {

@@ -44,9 +44,9 @@
     <script>
         $(function(){
             var id = JSON.parse(localStorage.getItem("userinfo")).token;
-            var back = 'http://wx.rrzhaofang.com/authorization.html?uuid='+id+"&type=2";
+            var back = conf.authorization+'authorization.html?uuid='+id+"&type=2";
                 back = encodeURIComponent(back);
-            var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbe1cdb19d2290193&redirect_uri="+back+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+            var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+conf.appid+"&redirect_uri="+back+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
             $('#code').qrcode(str);
         })
         var tokenData = localStorage.getItem("userinfo");
