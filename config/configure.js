@@ -1,6 +1,7 @@
 (function() {
     //var host = "http://192.168.15.222:8081/";
-    var host = "http://api.rrzhaofang.com/";
+    //var host = "http://api.rrzhaofang.com/";
+	 var host = "http://192.168.15.222:8081/";
     window.conf = {
         login: host + 'admin/login', //首页推荐
         wechat_testing: host + 'admin/wechat/testing', //检测扫描二维码
