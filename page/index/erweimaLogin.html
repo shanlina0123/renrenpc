@@ -26,15 +26,15 @@
     </div>
     <!-- //wrap -->
     <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../../config/configure.js?v=2"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="../../js/jquery.qrcode.min.js"></script>
     <script>
         $(function(){
             var uuid = getQueryString('uuid');
-            var back = 'http://wx.rrzhaofang.com/authorization.html?uuid='+uuid+"&type=1";
+            var back = conf.authorization+'authorization.html?uuid='+uuid+"&type=1";
             back = encodeURIComponent(back);
             var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbe1cdb19d2290193&redirect_uri="+back+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
-            console.log(str);
             $('#code').qrcode(str);
         })
 
@@ -43,7 +43,7 @@
         var i = setInterval(function()
         {
             num++;
-            $.post('http://api.rrzhaofang.com/admin/wechat/testing',{uuid:uuid},function ( res ) {
+            $.post(conf.wechat_testing,{uuid:uuid},function ( res ) {
                 if( res )
                 {
                     if( res.status == 1 )

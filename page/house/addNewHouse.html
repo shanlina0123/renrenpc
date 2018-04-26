@@ -90,8 +90,8 @@
                                                 <label class="layui-form-label ">推荐房源</label>
                                                 <div class="layui-input-block">
                                                     <select name="ishome" >
-                                                        <option value="0">推荐</option>
-                                                        <option value="1">不推荐</option>
+                                                        <option value="0">是</option>
+                                                        <option value="1">否</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -329,8 +329,8 @@
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">房型</label>
                                                 <div class="layui-input-block">
-                                                    <select name="roomtypeid" v-if="system[2]">
-                                                        <template v-for="roomtype in system[2].selectValue">
+                                                    <select name="roomtypeid" v-if="define[2]">
+                                                        <template v-for="roomtype in define[2].selectValue">
                                                             <option :value="roomtype.id">{{roomtype.name}}</option>
                                                         </template>
                                                     </select>

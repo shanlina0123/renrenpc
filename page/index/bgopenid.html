@@ -37,45 +37,48 @@
     </div>
     <!-- //wrap -->
     <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="../../config/configure.js?v=2"></script>
     <script type="text/javascript" src="../../layui-v2.2.6/layui/layui.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript" src="../../js/jquery.qrcode.min.js"></script>
     <script>
-        $(function(){
-            var id = JSON.parse(localStorage.getItem("userinfo")).token;
-            var back = 'http://wx.rrzhaofang.com/authorization.html?uuid='+id+"&type=2";
-                back = encodeURIComponent(back);
-            var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbe1cdb19d2290193&redirect_uri="+back+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
-            console.log( str );
-            $('#code').qrcode(str);
-        })
-        var tokenData = localStorage.getItem("userinfo");
-        var uuid = JSON.parse(tokenData).uuid;
-        var num = 0;
-        var i = setInterval(function()
+        if( localStorage.getItem("userinfo") )
         {
-            num++;
-            $.post('http://api.rrzhaofang.com/admin/wechat/testing',{uuid:uuid},function ( res ) {
-                if( res )
-                {
-                    if( res.status == 1 )
+            var id = JSON.parse(localStorage.getItem("userinfo")).token;
+            var back = conf.authorization+'authorization.html?uuid='+id+"&type=2";
+            back = encodeURIComponent(back);
+            var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid="+conf.appid+"&redirect_uri="+back+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+            $('#code').qrcode(str);
+
+
+            var tokenData = localStorage.getItem("userinfo");
+            var uuid = JSON.parse(tokenData).uuid;
+            var num = 0;
+            var i = setInterval(function()
+            {
+                num++;
+                $.post(auth_conf.wechat_testing,{uuid:uuid},function ( res ) {
+                    if( res )
                     {
-                        var openid = res.data.wechatopenid;
-                        var tokenData = localStorage.getItem("userinfo");
-                        var data = JSON.parse(tokenData);
+                        if( res.status == 1 )
+                        {
+                            var openid = res.data.wechatopenid;
+                            var tokenData = localStorage.getItem("userinfo");
+                            var data = JSON.parse(tokenData);
                             data.wechatopenid = openid;
-                        var data = JSON.stringify( data );
+                            var data = JSON.stringify( data );
                             localStorage.setItem('userinfo',data);
                             window.location.href='cgpwd.html';
+                        }
                     }
+                },'json');
+                if ( num > 90 )
+                {
+                    $('#code').html('');
+                    clearInterval(i);
                 }
-            },'json');
-            if ( num > 90 )
-            {
-                $('#code').html('');
-                clearInterval(i);
-            }
-        }, 3000);
+            }, 3000);
+        }
 
     </script>
 </body>

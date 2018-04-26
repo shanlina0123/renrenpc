@@ -51,6 +51,23 @@
             width:12px;
             height:12px;
         }
+
+        .img3{
+            float: left;
+            width: 100px;
+            height: 100px;
+        }
+
+        .img1{
+            position: relative;
+        }
+        .img2{
+            position: absolute;
+            z-index: 2;
+            margin-left: 3.5%;
+            margin-top: -5.5%;
+            display: block;
+        }
    </style>
 <body>
     <div class="wrap">
@@ -107,15 +124,6 @@
                 <div class="formWrap">
                     <form class="layui-form" id="image">
                         <table class="uploadTable">
-                            <!--<tr>
-                                <td>封面图(单张)</td>
-                                <td>
-                                    <div class="layui-upload-drag" id="covermap">
-                                        <i class="layui-icon"></i>
-                                        <p>点击上传，或将文件拖拽到此处</p>
-                                    </div>
-                                </td>
-                            </tr>-->
                             <tr>
                                 <td>封面图(单张)</td>
                                 <td>

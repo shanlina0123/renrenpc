@@ -13,18 +13,19 @@ var vm = new Vue({
             axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
                 var data = response.data;
                 layui.use('form', function() {
-                    var form = layui.form;
+                    var form = layui.form
+                    if (data.status == 1) {
+                        that.roleList = data.data
+                    } else {
+                        layer.msg(data.messages)
+                    }
                 });
-                if (data.status == 1) {
-                    that.roleList = data.data
-                } else {
-                    layer.msg(data.messages)
-                }
             })
         },
         //添加角色弹窗
         addRole: function() {
-            var that = "";
+            var that = this;
+            that.name = "";
             layer.open({
                 type: 1,
                 title: '添加角色',
@@ -49,18 +50,15 @@ var vm = new Vue({
                     if (data.status == 1) {
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
-                            layer.msg(data.messages, { time: 500 }, function() {
-                                layer.closeAll();
-                            })
+                            layer.msg(data.messages)
+                            layer.closeAll("page");
                             that.getRoleList()
                         })
                     } else {
                         layui.use(['layer'], function() {
                             var layer = layui.layer;
-                            layer.msg(data.messages, function() {
-                                layer.closeAll();
-                            });
-                        });
+                            layer.msg(data.messages);
+                        })
                     }
                 })
             }
@@ -73,17 +71,14 @@ var vm = new Vue({
             }, function() {
                 var url = auth_conf.role_delete + uuid;
                 axios.delete(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
-                    if (response.data.status == 1) {
+                    var data = response.data;
+                    if (data.status == 1) {
                         layer.msg(data.messages, { icon: 1 });
                         that.getRoleList();
-                    } else if (response.data.status == 14) {
-                        layer.msg(data.messages, function() {
-                            layer.closeAll();
-                        });
-                    } else if (response.data.status == 10) {
-                        layer.msg(data.messages, function() {
-                            layer.closeAll();
-                        });
+                    } else if (data.status == 14) {
+                        layer.msg(data.messages);
+                    } else if (data.status == 10) {
+                        layer.msg(data.messages);
                     }
                 })
             });
@@ -101,7 +96,7 @@ var vm = new Vue({
                 targetUrl += "&islook=" + islook;
             }
             window.location.href = "../roles/editPower.html?" + encodeURIComponent(targetUrl);
-        },
+        }
     },
     created: function() {
         var that = this;

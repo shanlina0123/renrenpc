@@ -81,6 +81,7 @@ var vm = new Vue({
                 if(  value.url  == img )
                 {
                     that.res.splice(index,1);
+                    that.img.splice($.inArray(value.url,that.img),1)
                 }
             })
         }
@@ -137,10 +138,11 @@ layui.use(['upload','form','layer'], function() {
 
             var index_img = vm.$data.img.length;
             var index_aimg = vm.$data.addImg.length;//添加的img下标
+            console.log( vm.$data.img.length );
             if( vm.$data.img.length < 9 )
             {
                 obj.preview(function(index, file, result) {
-                    $('#imgs').append('<div><img src="' + result + '" alt="' + file.name + '" class="layui-upload-img"><img class="" onclick="removeTempImg('+index_img+','+index_aimg+',this)" src="/images/a7.png"></div>');
+                    $('#imgs').append('<div class="img3"><img src="' + result + '" alt="' + file.name + '" class="layui-upload-img"><img class="img2" onclick="removeTempImg('+index_img+','+index_aimg+',this)" src="/images/a7.png"></div>');
                     index_img++;
                     index_aimg++
                 });
@@ -150,6 +152,7 @@ layui.use(['upload','form','layer'], function() {
         {
             if( res.status == 1 )
             {
+                //console.log( vm.$data.img.length );
                 if( vm.$data.img.length < 9 )
                 {
                     vm.$data.img.push( res.data.name );
@@ -176,7 +179,4 @@ function removeTempImg( index, aindex, even ) {
     vm.$data.img.splice(index,1);
     vm.$data.addImg.splice(aindex,1);
     $(even).parent('div').remove();
-    //console.log( vm.$data.img );
-   // console.log( vm.$data.addImg );
-    //alert( index );
 }

@@ -65,7 +65,7 @@ var vm = new Vue({
         //查看和新增用户弹窗
         getEditAdmin: function(uuid) {
             var that = this;
-            that.getRole(); //获取角色列表
+            that.getRole(); //获取角色列表（1是启用，0是锁定）
             if (uuid) {
                 var url = auth_conf.admin_edit + uuid;
                 axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
@@ -114,7 +114,7 @@ var vm = new Vue({
                 })
             }
         },
-        //获取弹窗是下拉的角色列表
+        //获取弹窗时下拉的角色列表
         getRole: function() {
             var url = auth_conf.role_list;
             var that = this;
@@ -126,29 +126,12 @@ var vm = new Vue({
                 }
             })
         },
-        //锁定和解锁用户
-        lockAdmin: function(thischecked, uuid) {
-            var that = this;
-            if (uuid) {
-                var url = auth_conf.admin_lock + uuid;
-                axios.put(url, {}, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
-                    // var data = response.data;
-                    // if (data.status == 1) {
-                    //     layer.msg("编辑成功");
-                    //     that.getAdminList();
-                    // } else if (data.status == 10) {
-                    //     layer.msg("您不能编辑管理员信息");
-                    // } else {
-                    //     layer.msg("编辑失败");
-                    // }
-                })
-            }
-        },
         //提交客户修改、新增
         submitUser: function(uuid) {
+            //console.log(uuid);
             var that = this;
-            var roleidVal = $("#popRoleList").val();
-            var statusVal = $("#roleIdID").val();
+            var roleidVal = $("#popRoleList").val(); //角色名称
+            var statusVal = $("#roleIdID").val(); //状态值
             that.params.roleid = roleidVal;
             if (statusVal == "锁定") {
                 that.params.status = "0";
@@ -177,15 +160,15 @@ var vm = new Vue({
                 } else {
                     axios.put(url, that.params, { headers: { "Authorization": that.tokenValue } })
                         .then(function(response) {
-                            console.log(response);
-                            var data = response.data;
+                            var data = response.data
                             if (data.status == 1) {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
                                     layer.msg(data.messages);
                                     layer.closeAll('page');
-                                    location.href = location.href;
-                                })
+                                    that.getAdminList();
+                                    that.page = 1;
+                                });
                             } else {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
@@ -220,7 +203,9 @@ var vm = new Vue({
                             layui.use(['layer'], function() {
                                 var layer = layui.layer;
                                 layer.msg(data.messages);
-                                layer.closeAll('page')
+                                layer.closeAll('page');
+                                that.getAdminList();
+                                that.page = 1;
                             })
                         } else {
                             layui.use(['layer'], function() {
@@ -230,6 +215,24 @@ var vm = new Vue({
                         }
                     })
                 }
+            }
+        },
+        //锁定和解锁用户
+        lockAdmin: function(thischecked, uuid) {
+            var that = this;
+            if (uuid) {
+                var url = auth_conf.admin_lock + uuid;
+                axios.put(url, {}, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
+                    // var data = response.data;
+                    // if (data.status == 1) {
+                    //     layer.msg("编辑成功");
+                    //     that.getAdminList();
+                    // } else if (data.status == 10) {
+                    //     layer.msg("您不能编辑管理员信息");
+                    // } else {
+                    //     layer.msg("编辑失败");
+                    // }
+                })
             }
         }
     },
@@ -241,7 +244,8 @@ var vm = new Vue({
 $(function() {
     layui.use(["form", "layer"], function() {
         var form = layui.form;
-        var layer = layui.layer
+        var layer = layui.layer;
+        //监听锁定按钮的时间
         form.on('checkbox()', function(data) {
             var thisuuid = data.elem.id;
             var thischecked = data.elem.checked;

@@ -100,7 +100,7 @@
                     </form>
                 </div>
                 <!--客户数据表格-->
-                <div class="table1" id="charts">
+                <div class="table1" id="charts" v-cloak>
                     <h2>数据列表</h2>
                     <table class="layui-table" lay-size="lg">
                         <thead>
@@ -121,15 +121,24 @@
                         <tbody >
                             <tr v-for="item in charts">
                                 <td>{{item.clientid}}</td>
-                                <td>{{item.dynamic_to_client.name}}</td>                                 
-                                 <td v-if="state[item.followstatusid]">
+                                <td>{{item.dynamic_to_client.name}}</td>
+
+                                <td v-if="state[item.followstatusid]">
                                 {{state[item.followstatusid]["name"]}}
-	                            </td>	                                                                    
-                  				<td>{{item.companyid}}</td>                  				                  		                				
-                                <td>{{item.ownadminid}}</td>                                 
-                                <td>{{item.refereeuserid}}</td>                                                                                          
-                              <td>{{item.housename}}</td>   
-                              <td>{{item.commissionid}}</td>
+                                 </td><td v-else></td>
+
+                  				<td>{{item.companyid==1?'内部公司':firm[item.companyid]?firm[item.companyid].name:''}}</td>
+
+                                <td v-if="admin_datas[item.ownadminid]">
+                                    {{admin_datas[item.ownadminid]["nickname"]}}
+                                </td><td v-else></td>
+
+                            	<td v-if="manager[item.refereeuserid]">
+                                {{manager[item.refereeuserid]["nickname"]}}
+                            	</td><td v-else></td>
+                            	
+                                <td>{{item.housename}}</td>
+                                <td>{{item.iscommission?'是':'否'}}</td>
                                 <td>{{item.makedate}}</td>
                                 <td>{{item.comedate}}</td>
                                 <td>{{item.dealdate}}</td>

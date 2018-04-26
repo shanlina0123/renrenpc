@@ -9,7 +9,7 @@ $(function() {
         laydate.render({
             elem: '#publishDate',
             type: 'datetime',
-            range: '-',
+            range: '|',
             format: 'yyyy-M-d'
         });
     });
@@ -35,6 +35,7 @@ var vm = new Vue({
             typeid:'',
             iscommission:'',
             created_at:'',
+            name:'',
         },
         houseList:[], //房源容器
         page_data:{ //分页数据
@@ -154,8 +155,7 @@ var vm = new Vue({
                 btn: ['确定', '取消']
             }, function() {
 
-                var url = auth_conf.company_delete+uuid;
-        
+                var url = auth_conf.house_delete+uuid;
                 axios.delete(url,{headers: {"Authorization": that.tokenValue}})
                     .then(function(response)
                     {
@@ -189,12 +189,14 @@ var vm = new Vue({
 function search() {
 
     var typeid = $("#roomType").val();
-    var name = $("input[name=name]").val();
+    var name = $("#name").val();
     var iscommission = $("#commission").val();
     var created_at = $("#publishDate").val();
     vm.$data.params.created_at = created_at;
+    vm.$data.params.name = name;
     vm.$data.params.typeid = typeid;
     vm.$data.params.iscommission = iscommission;
     vm.$data.params.page = 1;
+    console.log(created_at);
     vm.getHouseList();
 }
