@@ -129,6 +129,7 @@
                             <th>公司</th>
                             <th>经纪人</th>
                             <th>跟进人</th>
+                            <th>业务员</th>
                             <th>跟进次数</th>
                             <th>最后跟进时间</th>
                             <th>成交时间</th>
@@ -146,19 +147,21 @@
                             <td>{{item.comedate}}</td>
                             <td v-if="default_followstatus_datas[item.followstatusid]">
                                 {{default_followstatus_datas[item.followstatusid]["name"]}}
-                            </td>
-                            <td v-else></td>
+                            </td><td v-else></td>
                             <td v-if="item.dynamic_to_company">{{item.dynamic_to_company.name}}</td>
                             <td v-else></td>
                             <td v-if="item.dynamic_to_user">{{item.dynamic_to_user.nickname}}</td>
                             <td v-else></td>
                             <td v-if="admin_show_datas[item.followadminid]">
+                                {{admin_show_datas[item.followadminid]["nickname"]}}
+                            </td>  <td v-else></td>
+                            <td v-if="admin_show_datas[item.ownadminid]">
                                 {{admin_show_datas[item.ownadminid]["nickname"]}}
-                            </td>
-                            <td v-else></td>
+                            </td> <td v-else></td>
                             <td>{{item.followcount}}</td>
                             <td>{{item.followdate}}</td>
                             <td>{{item.dealdate}}</td>
+
                             <td>
                                 <div class="layui-btn-group">
                                     <a type="button" class="layui-btn"
@@ -221,9 +224,9 @@
                                 <div class="layui-inline">
                                     <label class="layui-form-label">上门时间</label>
                                     <div class="layui-input-inline">
-                                        <input type="text" name="date" id="comedate" lay-verify="date"
-                                               placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth"
-                                               :value="client_datas.comedate" ref="comedate">
+                                            <input type="text" name="date" id="comedate" lay-verify="date"
+                                                   placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth"
+                                                   :value="client_datas.comedate" ref="comedate">
                                     </div>
                                 </div>
                             </td>
@@ -298,7 +301,16 @@
                             </td>
                         </tr>
                         <tr>
-
+                            <td>
+                                <div class="layui-inline">
+                                    <label class="layui-form-label ">业务员</label>
+                                    <div class="layui-input-inline ">
+                                        <input type="text" class="layui-input" name="userHouse"
+                                               :value="client_datas.adminname" readonly
+                                               style=" background-color:#f2f2f2;">
+                                    </div>
+                                </div>
+                            </td>
                             <td>
                                 <div class="layui-inline">
                                     <label class="layui-form-label ">跟进业务员</label>
@@ -309,6 +321,8 @@
                                     </div>
                                 </div>
                             </td>
+                        </tr>
+                        <tr>
                             <td>
                                 <div class="layui-inline">
                                     <label class="layui-form-label">客户等级</label>
@@ -320,8 +334,6 @@
                                     </div>
                                 </div>
                             </td>
-                        </tr>
-                        <tr>
                             <td>
                                 <div class="layui-inline">
                                     <label class="layui-form-label">成交时间</label>
