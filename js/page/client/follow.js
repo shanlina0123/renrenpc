@@ -22,7 +22,6 @@ var vm = new Vue({
         //其他链接进去的参数获取
         enterParam: function() {
             this.clientid=this.GetQueryString("clientid");
-            this.getFollowList(this.GetQueryString("uuid"));
         },
         //获取跟进列表
         getFollowList: function () {
@@ -75,17 +74,7 @@ var vm = new Vue({
                 .then(function(response) {
                     var data = response.data;
                     if (data.status == 1) {
-
-                        location = location;
-                        //显示新录入的记录
-                        that.newFollowData=data.data;
-                        that.newFollowData.username=that.tokenUserInfo.nickname;
-                        //移除隐藏
-                        $("#ajaxNewFollowList").removeClass("hidden");
-                        layui.use('layer',  function(id)  {
-                            var  layer  =  layui.layer;
-                            layer.msg(data.messages);
-                        });
+                        layer.msg(data.messages);
                     } else {
                         //  alert(data.messages)
                         layui.use('layer',  function(id)  {
@@ -110,6 +99,7 @@ var vm = new Vue({
         var that = this;
         that.enterParam();//进入参数
         that.getDefaultDataOne();//所有客户状态
+        that.getFollowList();//跟进列表
     },mounted:function(){
         // $("#top").load('/page/public/top.html');
         // $("#left").load('/page/public/left.html');

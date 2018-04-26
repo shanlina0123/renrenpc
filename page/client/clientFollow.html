@@ -74,18 +74,18 @@
                 </div>
                 <h2 class="followText">跟进日志</h2>
                 <ul class="followUl">
-                    <li id="ajaxNewFollowList"class="hidden">
-                        <p>客户状态： <span v-if="show_followstatus_datas[newFollowData.followstatusid]"> {{show_followstatus_datas[newFollowData.followstatusid]["name"]}}</span></p>
-                        <p class="followLog">{{newFollowData.content}}</p>
-                        <div class="clearfix">
-                            <div class="fl">
-                                业务员:<span>{{newFollowData.username}}</span>
-                            </div>
-                            <div class="fr">
-                                跟进时间:<span >{{newFollowData.time}}</span>
-                            </div>
-                        </div>
-                    </li>
+                    <!--<li id="ajaxNewFollowList"class="hidden">-->
+                        <!--<p>客户状态： <span v-if="show_followstatus_datas[newFollowData.followstatusid]"> {{show_followstatus_datas[newFollowData.followstatusid]["name"]}}</span></p>-->
+                        <!--<p class="followLog">{{newFollowData.content}}</p>-->
+                        <!--<div class="clearfix">-->
+                            <!--<div class="fl">-->
+                                <!--业务员:<span>{{newFollowData.username}}</span>-->
+                            <!--</div>-->
+                            <!--<div class="fr">-->
+                                <!--跟进时间:<span >{{newFollowData.time}}</span>-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</li>-->
 
                     <li v-for="item in follow_list">
                         <p>客户状态：

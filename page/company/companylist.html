@@ -67,10 +67,11 @@
 	                            <td>{{item.conncat}}</td>
 	                            <td>{{item.mobile}}</td>
 	                            <td>
-	                                <div class="layui-btn-group">
+	                                <div class="layui-btn-group" v-if="item.isdefault==0">
 	                                   <button type="button" class="layui-btn editBtn"   type="button" @click="showEdit(item.uuid)">编辑</button>
                                        <button type="button" class="layui-btn deleteHouseBtn" type="button" @click="showDelete(item.uuid)">删除</button>
 	                                </div>
+                                    <div v-else>默认</div>
 	                            </td>
 	                        </tr>
 	                      

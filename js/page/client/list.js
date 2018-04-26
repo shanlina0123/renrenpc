@@ -117,9 +117,10 @@ var vm = new Vue({
                 .then(function(response) {
                     var data = response.data;
                     if (data.status == 1) {
-                        layer.msg(data.messages, {icon: 7},function () {
-                            window.location.href = "../client/client.html";
-                        });
+                        that.getClientList();
+                        layer.msg(data.messages);
+                        layer.closeAll('page');
+
                     } else {
                         layer.msg(data.messages, {icon: 6});
                     }
@@ -145,11 +146,6 @@ var vm = new Vue({
         },
         //进入移交客户
         transferClient:function(){
-            //成交时间
-            layui.use(["form",'jquery'], function() {
-                var form = layui.form,
-                    $ = layui.jquery;
-            });
             layer.open({
                 type: 1,
                 title: '移交客户',
@@ -197,9 +193,9 @@ var vm = new Vue({
                 .then(function(response) {
                     var data = response.data;
                     if (data.status == 1) {
-                        layer.msg(data.messages, {icon: 1},function () {
-                            window.location.href = "../client/client.html";
-                        });
+                        that.getClientList();
+                        layer.msg(data.messages);
+                        layer.closeAll('page');
                     } else {
                         layer.msg(data.messages, {icon: 6});
                     }
@@ -217,8 +213,9 @@ var vm = new Vue({
                 .then(function (response) {
                     var data = response.data;
                     if (data.status == 1) {
-                        layer.msg(data.messages, {icon: 1});
-                        $("#clientList_"+uuid).remove();
+                        that.getClientList();
+                        layer.msg(data.messages);
+                        layer.closeAll('page');
                     } else {
                         layer.msg(data.messages, {icon: 6});
                     }

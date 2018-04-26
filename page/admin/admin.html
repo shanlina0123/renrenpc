@@ -55,10 +55,11 @@
                                 <input type="checkbox" name="lockAdmin" :id="item.uuid" title="锁定">
                             </td>-->
                             <td>
-                                <div class="clientBtns">
+                                <div class="clientBtns" v-if="item.isdefault==0">
                                     <button type="button" class="layui-btn layui-btn-sm editUser" @click="getEditAdmin(item.uuid)"><i class="layui-icon"></i></button>
                                     <!--<button type="button" class="layui-btn layui-btn-sm deleteBtn"">删除<i class="layui-icon"></i></button>-->
                                 </div>
+                                <div v-else>默认</div>
                             </td>
                         </tr>
                     </table>
