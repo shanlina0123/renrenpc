@@ -154,6 +154,10 @@ var vm = new Vue({
         },
         //进入移交客户
         transferClient:function(){
+            $("#transAdmin").val("");
+            $("#acceptAdmin").val("");
+            $("#transClient").val("");
+            $("#transClient").html("");
             layer.open({
                 type: 1,
                 title: '移交客户',
@@ -162,7 +166,12 @@ var vm = new Vue({
                 skin: 'layui-layer-rim',
                 area: ['900px', '500px'],
                 content: $(".custormHandelPop")
-            })
+            });
+            layui.use(["form"], function() {
+                var form=layui.form;
+                form.render();
+            });
+
         },
         //获取移交人的所有客户
         changeAdmin:function(adminid,token){
@@ -180,10 +189,12 @@ var vm = new Vue({
                            newDataList.push(newData);
                        });
                         that.client_admin_list=newDataList;
+
+                        $("#transClient").html("");
                         selectAppendDd($("#transClient"), that.client_admin_list, "uuid", "name");
 
                     } else {
-                        layer.msg(data.messages, {icon: 6});
+                        layer.msg(data.messages, {icon: 7});
                     }
                 })
                 .catch(function(error) {
@@ -194,6 +205,7 @@ var vm = new Vue({
         transSubmit:function(){
             var url = auth_conf.client_trans;
             var that = this;
+            that.trans_params.uuid=[];
             that.trans_params.uuid.push($("#transClient").val());
             that.trans_params.accept =$("#acceptAdmin").val();
             that.trans_params.transfer = $("#transAdmin").val();
@@ -205,7 +217,7 @@ var vm = new Vue({
                         layer.msg(data.messages);
                         layer.closeAll('page');
                     } else {
-                        layer.msg(data.messages, {icon: 6});
+                        layer.msg(data.messages, {icon: 7});
                     }
                 })
                 .catch(function(error) {
@@ -225,7 +237,7 @@ var vm = new Vue({
                         layer.msg(data.messages);
                         layer.closeAll('page');
                     } else {
-                        layer.msg(data.messages, {icon: 6});
+                        layer.msg(data.messages, {icon: 7});
                     }
                 }).catch(function (error) { });
         },

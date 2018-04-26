@@ -82,6 +82,7 @@ var vm = new Vue({
                         that.params.mobile = data.data.mobile;
                         that.params.uuid = data.data.uuid;
                         that.params.status = data.data.status;
+                        $("#roleIdID").val(data.data.status);
                         layer.open({
                             type: 1,
                             title: '查看编辑用户',
@@ -162,6 +163,7 @@ var vm = new Vue({
                         layer.msg("请填写用户账号");
                     })
                 } else {
+                    that.params.status= $("#roleIdID").val();
                     axios.put(url, that.params, { headers: { "Authorization": that.tokenValue } })
                         .then(function(response) {
                             var data = response.data
@@ -238,6 +240,38 @@ var vm = new Vue({
                     // }
                 })
             }
+        },
+        //操作 - 删除
+        deleteAdmin: function (uuid) {
+            if (!uuid) {
+                layer.msg("请求错误", {icon: 6});
+            }
+            var that = this;
+            layer.confirm('确定要删除吗？', {
+                btn: ['确定', '取消']
+            }, function() {
+                var tag=$("#existList_"+uuid);
+                //删除
+                that.deleteData(uuid,null,tag);
+            });
+        },
+        //被调用删除
+        deleteData: function (uuid) {
+            var url = auth_conf.admin_delete + uuid;
+            var that = this;
+            axios.put(url, null, {headers: {"Authorization":that.tokenValue}})
+                .then(function (response) {
+                    var data = response.data;
+                    if (data.status == 1) {
+                        layer.msg(data.messages);
+                        that.getAdminList();
+                    } else {
+                        layer.msg(data.messages, {icon: 7});
+                    }
+                })
+                .catch(function (error) {
+                    //console.log(error);
+                });
         }
     },
     created: function() {

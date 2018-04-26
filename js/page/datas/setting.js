@@ -29,7 +29,7 @@ var vm = new Vue({
                     //console.log(error);
                 });
         },
-        //操作 - 设置锁定
+        //操作 - 删除
         removeDatas: function (uuid) {
             if (!uuid) {
                 layer.msg("请求错误", {icon: 6});
