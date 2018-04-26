@@ -84,7 +84,7 @@ var vm = new Vue({
                 shadeClose: true,
                 scrollbar: false,
                 skin: 'layui-layer-rim',
-                area: ['800px', '600px'],
+                area: ['600px', '400px'],
                 content: $(".userPopWrap")
             })
         },
@@ -120,10 +120,9 @@ var vm = new Vue({
                 .then(function (response) {
                     var data = response.data;
                     if (data.status == 1) {
-                        layer.msg(data.messages, {icon: 1},function(){
-                            $(".custormHandelPop").remove();
-                            window.location="../company/companylist.html";
-                        });
+                        that.getCompanyList();
+                        layer.msg(data.messages);
+                        layer.closeAll('page');
                     }else{
                         layer.msg(data.messages, {icon: 7});
                     }
@@ -154,10 +153,9 @@ var vm = new Vue({
                 .then(function (response) {
                     var data = response.data;
                     if (data.status == 1) {
-                        layer.msg(data.messages, {icon: 1},function(){
-                            $(".userPopWrap").remove();
-                            window.location="../company/companylist.html";
-                        });
+                        that.getCompanyList();
+                        layer.msg(data.messages);
+                        layer.closeAll('page');
                     }else{
                         layer.msg(data.messages, {icon: 7});
                     }
@@ -191,8 +189,9 @@ var vm = new Vue({
                 .then(function (response) {
                     var data = response.data;
                     if (data.status == 1) {
-                        $("#company_"+uuid).remove();
-                        layer.msg(data.messages, {icon: 1});
+                        that.getCompanyList();
+                        layer.msg(data.messages);
+                        layer.closeAll('page');
                     } else {
                         // layer.msg(data.messages,{icon: 6});
                     }

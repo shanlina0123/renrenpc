@@ -12,14 +12,7 @@ var vm = new Vue({
             var url = auth_conf.role_list
             axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
                 var data = response.data;
-                layui.use('form', function() {
-                    var form = layui.form
-                    if (data.status == 1) {
-                        that.roleList = data.data
-                    } else {
-                        layer.msg(data.messages)
-                    }
-                });
+                that.roleList = data.data
             })
         },
         //添加角色弹窗

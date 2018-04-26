@@ -44,8 +44,8 @@
                                 <th>操作</th>
                                 <!--<th>是否锁定</th>-->
                             </tr>
-                            <tr v-for="item in roleList">
-                                <td>{{item.id}}</td>
+                            <tr v-for="(item,index) in roleList">
+                                <td>{{index+1}}</td>
                                 <td>{{item.name}}</td>
                                 <td>
                                     <div class="layui-btn-group" v-if="item.isdeafult == 0">
@@ -53,7 +53,7 @@
                                         <button type="button" @click="deleteRole(item.uuid)" class="layui-btn layui-btn-sm deleteBtn">删除</button>
                                     </div>
                                     <div v-else>
-                                        默认角色，不可操作
+                                        默认
                                     </div>
                                 </td>
                                 <!--<td class="ckbox2">
