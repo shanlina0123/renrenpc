@@ -269,8 +269,8 @@
                                         <div class="layui-inline ">
                                             <label class="layui-form-label ">现状</label>
                                             <div class="layui-input-block">
-                                                <select name="salestatusid"  v-if="define[7]">
-                                                    <template v-for="salestatus in define[7].selectValue">
+                                                <select name="salestatusid"  v-if="system[7]">
+                                                    <template v-for="salestatus in system[7].selectValue">
                                                         <option :value="salestatus.id" v-if="salestatus.id == houseInfo.salestatusid" selected>{{salestatus.name}}</option>
                                                         <option :value="salestatus.id" v-else>{{salestatus.name}}</option>
                                                     </template>
@@ -301,8 +301,8 @@
                                         <div class="layui-inline ">
                                             <label class="layui-form-label ">房型</label>
                                             <div class="layui-input-block">
-                                                <select name="roomtypeid" v-if="system[2]">
-                                                    <template v-for="roomtype in system[2].selectValue">
+                                                <select name="roomtypeid" v-if="define[2]">
+                                                    <template v-for="roomtype in define[2].selectValue">
                                                         <option :value="roomtype.id" v-if="houseInfo.roomtypeid == roomtype.id" selected>{{roomtype.name}}</option>
                                                         <option :value="roomtype.id" v-else>{{roomtype.name}}</option>
                                                     </template>
@@ -337,8 +337,8 @@
                                         <div class="layui-inline ">
                                             <label class="layui-form-label ">房型</label>
                                             <div class="layui-input-block">
-                                                <select name="roomtypeid" v-if="system[2]">
-                                                    <template v-for="roomtype in system[2].selectValue">
+                                                <select name="roomtypeid" v-if="define[2]">
+                                                    <template v-for="roomtype in define[2].selectValue">
                                                         <option :value="roomtype.id" v-if="houseInfo.roomtypeid == roomtype.id" selected>{{roomtype.name}}</option>
                                                         <option :value="roomtype.id" v-else>{{roomtype.name}}</option>
                                                     </template>

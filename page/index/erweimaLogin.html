@@ -35,6 +35,7 @@
             var back = conf.authorization+'authorization.html?uuid='+uuid+"&type=1";
             back = encodeURIComponent(back);
             var str = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbe1cdb19d2290193&redirect_uri="+back+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect";
+            //console.log(str);
             $('#code').qrcode(str);
         })
 

@@ -153,9 +153,9 @@
                                 <td>公众号显示</td>
                                 <td>
                                     <div class="layui-form-item">
-                                        <div class="layui-input-block forEditLeftMargin">
-                                            <input type="radio" name="isShow" value="1" title="是" checked=""  lay-filter="business">
-                                            <input type="radio" name="isShow" value="0" title="否"  lay-filter="business" >
+                                        <div class="layui-input-block forEditLeftMargin" @click="forRadio($event)">
+                                            <input type="radio" name="status" :value="1" :checked="status == 1?true:false" title="是">
+                                            <input type="radio" name="status" :value="0" :checked="status == 0?true:false" title="否">
                                         </div>
                                     </div>
                                 </td>

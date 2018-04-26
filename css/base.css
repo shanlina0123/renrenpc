@@ -213,13 +213,18 @@ a:focus {
 }
 
 .rightMain {
-    width: 1753px;
-    height: 100%;
+    width: 89%;
     margin-left: 130px;
     margin-top: 60px;
     min-height: 880px;
     padding-left: 20px;
     padding-top: 10px;
+}
+
+@media(max-width:1240px) {
+    .rightMain {
+        width: 87%;
+    }
 }
 
 

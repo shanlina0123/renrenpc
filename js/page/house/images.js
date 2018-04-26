@@ -4,7 +4,7 @@ var vm = new Vue({
         tokenValue:JSON.parse(localStorage.getItem("userinfo")).token, //token
         covermap:'',
         images:[],
-        status:0,
+        status:1,
         id:''
     },
     methods:{
@@ -44,6 +44,19 @@ var vm = new Vue({
 
                     }
                 });
+        },
+        forRadio: function(event) {
+            var that = this;
+            var el = event.currentTarget;
+            var check = $(el).find('input');
+            check.each(function(index, item)
+            {
+                if($(item).is(':checked'))
+                {
+                    that.status = $(item).val();
+                }
+            });
+            //console.log( that.status );
         }
     }
     ,created: function () {
