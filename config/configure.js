@@ -38,6 +38,7 @@
         admin_edit: host + 'admin/admin/', //编辑查看用户
         admin_lock: host + 'admin/admin-setting/', //锁定用户
         role_list: host + 'admin/roles', //角色列表
+        role_dataList: host + 'admin/role-list', //角色列表-下拉框
         client_follow_list: host + 'admin/client-follow/edit/', //客户跟进列表
         client_follow: host + 'admin/client-follow/store', //跟进客户
         client_detail: host + 'admin/client/edit/', //客户详情

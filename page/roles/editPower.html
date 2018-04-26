@@ -58,8 +58,8 @@
                                                         <input type="checkbox"  :checked="item.checked"  :id="item.id" lay-skin="primary" :title="item.name">
                                                     </div>
                                                     <ul class="powerInnerUl clearfix">
-                                                        <li v-for="innerItem in item._child" @click="checkOne($event)">
-                                                            <input type="checkbox" lay-skin="primary" :id="innerItem.id" :checked="innerItem.checked" :title="innerItem.name">
+                                                        <li v-for="innerItem in item._child" >
+                                                            <input type="checkbox" lay-skin="primary" :id="innerItem.id" :checked="innerItem.checked" :title="innerItem.name" disabled>
                                                         </li>
                                                     </ul>
                                                 </li>

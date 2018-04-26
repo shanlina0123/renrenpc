@@ -120,7 +120,7 @@ var vm = new Vue({
         },
         //获取弹窗时下拉的角色列表
         getRole: function() {
-            var url = auth_conf.role_list;
+            var url = auth_conf.role_dataList;
             var that = this;
             axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
                 var data = response.data;

@@ -105,8 +105,16 @@ var vm = new Vue({
         },
         //修改客户信息
         editSubmit:function (uuid) {
+            if(!uuid)
+            {
+                layer.msg("请求错误", {icon: 6});
+            }
             var url = auth_conf.client_update+uuid;
             var that = this;
+            if(that.$refs.clientname.value=="")
+            {
+                layer.msg("客户名称不能为空", {icon: 7});
+            }
             that.add_params.name = that.$refs.clientname.value;//客户名称
             that.add_params.followstatusid = that.$refs.followstatusid.value;//客户状态
             that.add_params.levelid = that.$refs.levelid.value;//级别
