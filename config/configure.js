@@ -71,7 +71,7 @@
  */
 
 var url = window.location.pathname;
-var arr = [ "/login.html", "/page/index/chengePwd.html",'/page/index/erweimaLogin.html'];
+var arr = [ "/login.html", "/page/index/chengePwd.html",'/page/index/erweimaLogin.html','/page/index/wpwd.html'];
 if( $.inArray(url,arr) == -1 )
 {
     filterToken();

@@ -57,7 +57,7 @@
             var i = setInterval(function()
             {
                 num++;
-                $.post(auth_conf.wechat_testing,{uuid:uuid},function ( res ) {
+                $.post(conf.wechat_testing,{uuid:uuid},function ( res ) {
                     if( res )
                     {
                         if( res.status == 1 )
