@@ -2,8 +2,8 @@
     var host = "http://192.168.15.222:8081/";
     window.conf = {
         login: host + 'admin/login', //首页推荐
-        wechat_testing: host + 'admin/wechat/testing', //检测扫描二维码
-        authorization: 'http://wx.rrzhaofang.com/', //绑定微信回调地址
+        wechat_testing: host + 'admin/wechat/testing', //检测扫描二维码--线上才会调用到
+        authorization: 'http://wx.rrzhaofang.com/', //绑定微信回调地址--线上才会调用到
         appid:'wxbe1cdb19d2290193',//appid
     };
     //带token的请求
@@ -95,6 +95,14 @@ function filterToken() {
 function checkToken() {
     var tokenData = localStorage.getItem("userinfo");
     var openid = JSON.parse(tokenData).wechatopenid;
+    //排除当前页
+    if( $.inArray(url,'/page/index/bgopenid.html') != -1 )
+    {
+        if (!openid)
+        {
+            window.location = "/page/index/bgopenid.html";
+        }
+    }
     $.ajax({
         headers: {
             Authorization: JSON.parse(tokenData).token,
