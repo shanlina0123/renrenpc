@@ -65,7 +65,11 @@ var vm = new Vue({
         //查看和新增用户弹窗
         getEditAdmin: function(uuid) {
             var that = this;
-            that.getRole(); //获取角色列表（1是启用，0是锁定）
+            if(that.roleList.length==0)
+            {
+                that.getRole(); //获取角色列表（1是启用，0是锁定）
+            }
+
             if (uuid) {
                 var url = auth_conf.admin_edit + uuid;
                 axios.get(url, { headers: { "Authorization": that.tokenValue } }).then(function(response) {
@@ -239,6 +243,7 @@ var vm = new Vue({
     created: function() {
         var that = this;
         that.getAdminList() //用户列表
+        that.getRole(); //获取角色列表（1是启用，0是锁定）
     }
 });
 $(function() {
