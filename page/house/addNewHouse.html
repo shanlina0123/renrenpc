@@ -1,10 +1,11 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>添加房源第二步-新房</title>
-     <link rel="icon" href="../../images/icon.ico">
+    <link rel="icon" href="../../images/icon.ico">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../css/normalize.css">
@@ -17,13 +18,14 @@
     <script type="text/javascript" src="../../plugin/js/vue.js"></script>
     <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
 </head>
+
 <body>
     <div class="wrap">
         <div class="layui-layout layui-layout-admin">
             <!--顶部-->
-                <!--顶部-->
-            <div class="layui-header header" id="top"> </div>	 
-                <div class="main clearfix" >
+            <!--顶部-->
+            <div class="layui-header header" id="top"> </div>
+            <div class="main clearfix">
                 <!--左侧导航-->
                 <ul class="leftNav fl" id="left">
                 </ul>
@@ -89,7 +91,7 @@
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">推荐房源</label>
                                                 <div class="layui-input-block">
-                                                    <select name="ishome" >
+                                                    <select name="ishome">
                                                         <option value="0">是</option>
                                                         <option value="1">否</option>
                                                     </select>
@@ -102,7 +104,7 @@
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">佣金规则</label>
                                                 <div class="layui-input-inline ">
-                                                    <select name="commissionid"  v-if="define[1]">
+                                                    <select name="commissionid" v-if="define[1]">
                                                         <template v-for="commission in define[1].selectValue">
                                                             <option :value="commission.id">{{commission.name}}</option>
                                                         </template>
@@ -114,7 +116,7 @@
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">展示佣金</label>
                                                 <div class="layui-input-block">
-                                                    <select name="iscommission" >
+                                                    <select name="iscommission">
                                                         <option value="0">否</option>
                                                         <option value="1">是</option>
                                                     </select>
@@ -144,7 +146,7 @@
                                                 <div class="layui-input-inline">
                                                     <div class="layui-unselect layui-form-select layui-form-selected">
                                                         <div class="layui-select-title">
-                                                            <input type="text"   id="searchAddress" class="layui-input layui-unselect">
+                                                            <input type="text" id="searchAddress" class="layui-input layui-unselect">
                                                         </div>
                                                         <dl id="addressList" style="display: none">
 
@@ -171,8 +173,8 @@
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">楼层</label>
                                                 <div class="layui-input-inline">
-                                                    <input type="text" class="layui-input forSameWidth" name="floor"  datatype="*1-30" class="layui-input"  errormsg="* 楼层在1~30之间！">
-                                                     <span class="Validform_checktip"></span>
+                                                    <input type="text" class="layui-input forSameWidth" name="floor" datatype="*1-30" class="layui-input" errormsg="* 楼层在1~30之间！">
+                                                    <span class="Validform_checktip"></span>
                                                 </div>
                                             </div>
                                         </td>
@@ -207,9 +209,9 @@
                                         <td>
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">面积(m<sup>2</sup>)</label>
-                                              <div class="layui-input-inline ">
-                                                    <input type="text" class="layui-input forSameWidth" name="area"  datatype="*1-100" class="layui-input"  errormsg="面积大小在0~10000之间！">
-                                                     <span class="Validform_checktip"></span>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="area" datatype="*1-100" class="layui-input" errormsg="面积大小在0~10000之间！">
+                                                    <span class="Validform_checktip"></span>
                                                 </div>
 
                                             </div>
@@ -249,7 +251,7 @@
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">装修</label>
                                                 <div class="layui-input-block">
-                                                    <select name="decoratestyleid"  v-if="define[3]">
+                                                    <select name="decoratestyleid" v-if="define[3]">
                                                         <template v-for="decoratestyle in define[3].selectValue">
                                                             <option :value="decoratestyle.id">{{decoratestyle.name}}</option>
                                                         </template>
@@ -261,7 +263,7 @@
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">权属</label>
                                                 <div class="layui-input-block">
-                                                    <select name="ownershipid"  v-if="system[5]">
+                                                    <select name="ownershipid" v-if="system[5]">
                                                         <template v-for="ownership in system[5].selectValue">
                                                             <option :value="ownership.id">{{ownership.name}}</option>
                                                         </template>
@@ -275,7 +277,7 @@
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">双气</label>
                                                 <div class="layui-input-block">
-                                                    <select name="hasdoublegasid"  v-if="system[6]">
+                                                    <select name="hasdoublegasid" v-if="system[6]">
                                                         <template v-for="hasdoublegas in system[6].selectValue">
                                                             <option :value="hasdoublegas.id">{{hasdoublegas.name}}</option>
                                                         </template>
@@ -288,7 +290,7 @@
                                                 <label class="layui-form-label ">物业费(元/m<sup>2</sup>.月)</label>
                                                 <div class="layui-input-inline ">
                                                     <input type="text" class="layui-input forSameWidth" name="propertyfee" datatype="/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" maxlength="10" class="layui-input" sucmsg=" " errormsg="格式有误">
-                                                     <span class="Validform_checktip"></span>
+                                                    <span class="Validform_checktip"></span>
                                                 </div>
                                             </div>
                                         </td>
@@ -298,7 +300,7 @@
                                             <div class="layui-inline ">
                                                 <label class="layui-form-label ">现状</label>
                                                 <div class="layui-input-block">
-                                                    <select name="salestatusid"  v-if="system[7]">
+                                                    <select name="salestatusid" v-if="system[7]">
                                                         <template v-for="salestatus in system[7].selectValue">
                                                             <option :value="salestatus.id">{{salestatus.name}}</option>
                                                         </template>
@@ -318,9 +320,9 @@
                                     <tr>
                                         <td>
                                             <div class="layui-inline ">
-                                                <label class="layui-form-label ">单价(元)</label>
+                                                <label class="layui-form-label ">单价(元/平)</label>
                                                 <div class="layui-input-inline ">
-                                                    <input type="text" class="layui-input forSameWidth" name="price"  ignore="ignore" datatype="*/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" class="layui-input" sucmsg=" " errormsg="最多2位小数">
+                                                    <input type="text" class="layui-input forSameWidth" name="price" ignore="ignore" datatype="*/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" class="layui-input" sucmsg=" " errormsg="最多2位小数">
                                                     <span class="Validform_checktip"></span>
                                                 </div>
                                             </div>
@@ -365,4 +367,5 @@
 <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
 <!--- js -->
 <script type="text/javascript" src="../../js/page/house/news.js"></script>
+
 </html>
