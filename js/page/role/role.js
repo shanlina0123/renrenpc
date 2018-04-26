@@ -96,3 +96,11 @@ var vm = new Vue({
         that.getRoleList(); //角色列表
     }
 })
+
+$(function(){
+    //点击选择移交人
+    layui.use(["layer"], function() {
+        var layer=layui.layer;
+    });
+
+})
