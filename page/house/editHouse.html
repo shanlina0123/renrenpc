@@ -269,8 +269,8 @@
                                         <div class="layui-inline ">
                                             <label class="layui-form-label ">现状</label>
                                             <div class="layui-input-block">
-                                                <select name="salestatusid"  v-if="define[7]">
-                                                    <template v-for="salestatus in define[7].selectValue">
+                                                <select name="salestatusid"  v-if="system[7]">
+                                                    <template v-for="salestatus in system[7].selectValue">
                                                         <option :value="salestatus.id" v-if="salestatus.id == houseInfo.salestatusid" selected>{{salestatus.name}}</option>
                                                         <option :value="salestatus.id" v-else>{{salestatus.name}}</option>
                                                     </template>
