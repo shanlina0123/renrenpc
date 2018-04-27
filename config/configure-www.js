@@ -98,10 +98,10 @@ function filterToken() {
 function checkToken() {
     var tokenData = localStorage.getItem("userinfo");
     var openid = JSON.parse(tokenData).wechatopenid;
-    //排除当前页
-    if( $.inArray(url,'/page/index/bgopenid.html') != -1 )
+    if (!openid)
     {
-        if (!openid)
+        //排除当前页
+        if( $.inArray(url,'/page/index/bgopenid.html') == -1 )
         {
             window.location = "/page/index/bgopenid.html";
         }
