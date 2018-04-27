@@ -119,8 +119,8 @@ var vm = new Vue({
             that.add_params.followstatusid = that.$refs.followstatusid.value;//客户状态
             that.add_params.levelid = that.$refs.levelid.value;//级别
             that.add_params.houseid = $("#showSearchHouse").val()//楼盘id
-            that.add_params.comedate = that.$refs.comedate.value;//上门时间
-            that.add_params.dealdate = that.$refs.dealdate.value;//成交时间
+            that.add_params.comedate = that.$refs.comedate.value?that.$refs.comedate.value:null;//上门时间
+            that.add_params.dealdate = that.$refs.dealdate.value?that.$refs.dealdate.value:null;//成交时间
             axios.put(url, that.add_params, { headers: { "Authorization": that.tokenValue } })
                 .then(function(response) {
                     var data = response.data;
