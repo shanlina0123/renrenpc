@@ -223,7 +223,7 @@ a:focus {
 
 @media(max-width:1240px) {
     .rightMain {
-        width: 87%;
+        width: 1240px;
     }
 }
 
@@ -242,10 +242,10 @@ a:focus {
 
 .loginFormWrap {
     position: absolute;
-    width: 300px;
     left: 50%;
-    top: 30%;
-    margin-left: -150px;
+    top: 50%;
+    margin-left: -308px;
+    margin-top: -159px;
 }
 
 .loginFormWrap .layui-form-label {
@@ -253,18 +253,17 @@ a:focus {
 }
 
 .loginFormWrap .layui-input-block {
-    margin-left: 60px;
+    margin-left: 0;
 }
 
 .loginFormWrap .layui-btn {
-    width: 100%;
-    background-color: #eb7221;
+    background: #29bbff;
 }
 
 .loginFormWrap .forgetPwd {
     display: block;
     color: #eb7221;
-    padding: 10px 0 20px 18px;
+    padding: 0 0 15px 117px;
     float: left;
 }
 

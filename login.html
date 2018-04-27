@@ -11,6 +11,7 @@
 <!--[if gt IE 8]><!-->
 <html class="no-js">
 <!--<![endif]-->
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +19,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="css/normalize.css">
-    <link rel="stylesheet" href="css/common.css">   
+    <link rel="stylesheet" href="css/common.css">
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="layui-v2.2.6/layui/css/layui.css">
     <script src="js/modernizr-2.6.2.min.js"></script>
@@ -26,6 +27,7 @@
     <link rel="icon" href="images/icon.png">
 
 </head>
+
 <body>
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -33,25 +35,26 @@
     <div class="wrap">
         <div class="layui-layout loginBg">
             <div class="loginFormWrap">
+                <img src="images/logo.png" class="loginLogo" width="140">
                 <form class="layui-form loginForm">
                     <div class="layui-form-item">
                         <label class="layui-form-label">账号</label>
                         <div class="layui-input-block">
-                            <input type="text" name="username"  placeholder="请输入账号" datatype="*1-255" class="layui-input" sucmsg=" " errormsg="* 请输入用户名">
+                            <input type="text" name="username" placeholder="请输入账号" datatype="*1-255" class="layui-input" sucmsg=" " errormsg="* 请输入用户名">
                             <span class="Validform_checktip"></span>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">密码</label>
                         <div class="layui-input-block">
-                            <input  type="password" name="password" placeholder="请输入密码" datatype="*6-10" class="layui-input" sucmsg=" "  errormsg="* 密码范围在6~10位之间！">
-                        	<span  class="Validform_checktip"></span>
+                            <input type="password" name="password" placeholder="请输入密码" datatype="*6-10" class="layui-input" sucmsg=" " errormsg="* 密码范围在6~10位之间！">
+                            <span class="Validform_checktip"></span>
                         </div>
                     </div>
                     <a href="page/index/chengePwd.html?v=1" class="forgetPwd">忘记密码?</a>
                     <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <button  class="layui-btn" id="btn_submit">登录</button>
+                        <div class="layui-input-block loginblock">
+                            <button class="layui-btn" id="btn_submit">登录</button>
                         </div>
                     </div>
                 </form>
@@ -65,57 +68,56 @@
     <script type="text/javascript" src="js/Validform_v5.3.2_min.js"></script>
     <script type="text/javascript" src="config/bese64.js"></script>
     <script type="text/javascript">
-        $(function () {
-		    if( $(".loginForm").length )
-		    {
-		        $(".loginForm").Validform({
-		            btnSubmit: '#btn_submit',
-		            postonce: true,
-		            showAllError: false,
-                    ajaxPost:true,
-		            tiptype: function (msg, o, cssctl)
-		            {
-		                if ( !o.obj.is("form") )
-		                {
-		                    var objtip = o.obj.parents('.layui-input-block').find(".Validform_checktip");
-		                    objtip.removeClass('Validform_skate');
-		                    cssctl(objtip, o.type);
-		                    objtip.text(msg);
-		                }
-		            },
-                    beforeSubmit:function(curform)
-                    {
-		                var name = $("input[name='username']").val();
-		                var password = $("input[name='password']").val();
+        $(function() {
+            if ($(".loginForm").length) {
+                $(".loginForm").Validform({
+                    btnSubmit: '#btn_submit',
+                    postonce: true,
+                    showAllError: false,
+                    ajaxPost: true,
+                    tiptype: function(msg, o, cssctl) {
+                        if (!o.obj.is("form")) {
+                            var objtip = o.obj.parents('.layui-input-block').find(".Validform_checktip");
+                            objtip.removeClass('Validform_skate');
+                            cssctl(objtip, o.type);
+                            objtip.text(msg);
+                        }
+                    },
+                    beforeSubmit: function(curform) {
+                        var name = $("input[name='username']").val();
+                        var password = $("input[name='password']").val();
                         var base = new Base64();
                         var password64 = base.encode(password);
-                        var data = {name:name,password:password64};
-                        $.post(conf.login,data,function ( data )
-                        {
-                            if( data.status == 1 )
-                            {
-                                var res =  data.data;
-                                var data = JSON.stringify( data.data );
-                                   localStorage.setItem('userinfo',data);
-                                if( res.wechatopenid )
-                                {
-                                    window.location.href='page/index/index.html';
-                                }else
-                                {
-                                    window.location.href='page/index/bgopenid.html';
+                        var data = {
+                            name: name,
+                            password: password64
+                        };
+                        $.post(conf.login, data, function(data) {
+                            if (data.status == 1) {
+                                var res = data.data;
+                                var data = JSON.stringify(data.data);
+                                localStorage.setItem('userinfo', data);
+                                if (res.wechatopenid) {
+                                    window.location.href = 'page/index/index.html';
+                                } else {
+                                    window.location.href = 'page/index/bgopenid.html';
 
                                 }
-                            }else
-                            {
-                                layer.msg( data.messages, {icon: 5, time: 2000, shift: 6});
+                            } else {
+                                layer.msg(data.messages, {
+                                    icon: 5,
+                                    time: 2000,
+                                    shift: 6
+                                });
                             }
-                        },'json').error(function() {
-                            layer.msg( '请求数据异常' );
+                        }, 'json').error(function() {
+                            layer.msg('请求数据异常');
                         })
                     }
-		        });
-		    }
-		});
+                });
+            }
+        });
     </script>
 </body>
+
 </html>

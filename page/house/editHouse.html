@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,413 +18,414 @@
     <script type="text/javascript" src="../../plugin/js/vue.js"></script>
     <script type="text/javascript" src="../../plugin/js/axios.min.js"></script>
 </head>
+
 <body>
-<div class="wrap">
-    <div class="layui-layout layui-layout-admin">
-        <!--顶部-->
-        <!--顶部-->
-        <div class="layui-header header" id="top"> </div>
-        <div class="main clearfix" >
-            <!--左侧导航-->
-            <ul class="leftNav fl" id="left">
-            </ul>
-            <!--客户数据表格-->
-            <div class="rightMain fl">
-                <!-- 添加房源流程-->
-                <div class="formWrap">
-                    <div class="formWrap2">
-                        <form class="layui-form" action="addHouseStep3.html" id="house" v-cloak>
-                            <table class="addHouseTable">
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">楼盘</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input forSameWidth" name="name" :value="houseInfo.name" datatype="*1-100" maxlength="100" nullmsg="请输入楼盘名称" errormsg="输入有误">
+    <div class="wrap">
+        <div class="layui-layout layui-layout-admin">
+            <!--顶部-->
+            <!--顶部-->
+            <div class="layui-header header" id="top"> </div>
+            <div class="main clearfix">
+                <!--左侧导航-->
+                <ul class="leftNav fl" id="left">
+                </ul>
+                <!--客户数据表格-->
+                <div class="rightMain fl">
+                    <!-- 添加房源流程-->
+                    <div class="formWrap">
+                        <div class="formWrap2">
+                            <form class="layui-form" action="addHouseStep3.html" id="house" v-cloak>
+                                <table class="addHouseTable">
+                                    <tr>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">楼盘</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="name" :value="houseInfo.name" datatype="*1-100" maxlength="100" nullmsg="请输入楼盘名称" errormsg="输入有误">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">推荐房源</label>
-                                            <div class="layui-input-block">
-                                                <select name="ishome">
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">推荐房源</label>
+                                                <div class="layui-input-block">
+                                                    <select name="ishome">
                                                     <option value="1" v-if="houseInfo.ishome==1" selected>是</option>
                                                     <option value="1" v-else>是</option>
                                                     <option value="0" v-if="houseInfo.ishome==0" selected>否</option>
                                                     <option value="0" v-else>否</option>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">佣金规则</label>
-                                            <div class="layui-input-inline ">
-                                                <select name="commissionid"  v-if="define[1]">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">佣金规则</label>
+                                                <div class="layui-input-inline ">
+                                                    <select name="commissionid" v-if="define[1]">
                                                     <template v-for="commission in define[1].selectValue">
                                                         <option :value="commission.id" v-if="commission.id == houseInfo.commissionid" selected>{{commission.name}}</option>
                                                         <option :value="commission.id" v-else>{{commission.name}}</option>
                                                     </template>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">展示佣金</label>
-                                            <div class="layui-input-block">
-                                                <select name="iscommission" >
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">展示佣金</label>
+                                                <div class="layui-input-block">
+                                                    <select name="iscommission">
                                                     <option value="0" :selected="houseInfo.iscommission==0?'selected':''">否</option>
                                                     <option value="1" :selected="houseInfo.iscommission==1?'selected':''">是</option>
                                                 </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="layui-form-item">
-                                            <label class="layui-form-label">地址</label>
-                                            <div class="layui-input-inline forAddrSelect">
-                                                <select name="provinceid">
-                                                    <option value="1" selected="">陕西省</option>
-                                                </select>
-                                            </div>
-                                            <div class="layui-input-inline forAddrSelect">
-                                                <select name="cityid">
-                                                    <option value="1"  selected="">西安市</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label">详细地址</label>
-                                            <div class="layui-input-inline">
-                                                <div class="layui-unselect layui-form-select layui-form-selected">
-                                                    <div class="layui-select-title">
-                                                        <input type="text"  :value="houseInfo.fulladdr" id="searchAddress" class="layui-input layui-unselect">
-                                                    </div>
-                                                    <dl id="addressList" style="display: none">
-
-                                                    </dl>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">楼层位置</label>
-                                            <div class="layui-input-block">
-                                                <select name="floorpostionid" v-if="system[2]">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="layui-form-item">
+                                                <label class="layui-form-label">地址</label>
+                                                <div class="layui-input-inline forAddrSelect">
+                                                    <select name="provinceid">
+                                                    <option value="1" selected="">陕西省</option>
+                                                </select>
+                                                </div>
+                                                <div class="layui-input-inline forAddrSelect">
+                                                    <select name="cityid">
+                                                    <option value="1"  selected="">西安市</option>
+                                                </select>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label">详细地址</label>
+                                                <div class="layui-input-inline">
+                                                    <div class="layui-unselect layui-form-select layui-form-selected">
+                                                        <div class="layui-select-title">
+                                                            <input type="text" :value="houseInfo.fulladdr" id="searchAddress" class="layui-input layui-unselect">
+                                                        </div>
+                                                        <dl id="addressList" style="display: none">
+
+                                                        </dl>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">楼层位置</label>
+                                                <div class="layui-input-block">
+                                                    <select name="floorpostionid" v-if="system[2]">
                                                     <template v-for="floorpostion in system[2].selectValue">
                                                         <option  :value="floorpostion.id" v-if="floorpostion.id == houseInfo.floorpostionid" selected>{{floorpostion.name}}</option>
                                                         <option  :value="floorpostion.id" v-else>{{floorpostion.name}}</option>
                                                     </template>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">楼层</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" class="layui-input forSameWidth" name="floor"  :value="houseInfo.floor" datatype="*1-30" class="layui-input"  errormsg="* 楼层在1~30之间！">
-                                                <span class="Validform_checktip"></span>
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">楼层</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" class="layui-input forSameWidth" name="floor" :value="houseInfo.floor" datatype="*1-30" class="layui-input" errormsg="* 楼层在1~30之间！">
+                                                    <span class="Validform_checktip"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">朝向</label>
-                                            <div class="layui-input-block">
-                                                <select name="orientationid" v-if="system[3]">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">朝向</label>
+                                                <div class="layui-input-block">
+                                                    <select name="orientationid" v-if="system[3]">
                                                     <template v-for="orientation in system[3].selectValue">
                                                         <option  :value="orientation.id" v-if="orientation.id == houseInfo.orientationid" selected>{{orientation.name}}</option>
                                                         <option  :value="orientation.id" v-else>{{orientation.name}}</option>
                                                     </template>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">用途</label>
-                                            <div class="layui-input-block">
-                                                <select name="purposeid" v-if="system[4]">
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">用途</label>
+                                                <div class="layui-input-block">
+                                                    <select name="purposeid" v-if="system[4]">
                                                     <template v-for="purpose in system[4].selectValue">
                                                         <option  :value="purpose.id" v-if="purpose.id == houseInfo.purposeid" selected>{{purpose.name}}</option>
                                                         <option  :value="purpose.id" v-else>{{purpose.name}}</option>
                                                     </template>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">面积(m<sup>2</sup>)</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input forSameWidth" name="area"   :value="houseInfo.area"  datatype="*1-100" class="layui-input"  errormsg="面积大小在0~10000之间！">
-                                                <span class="Validform_checktip"></span>
-                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">面积(m<sup>2</sup>)</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="area" :value="houseInfo.area" datatype="*1-100" class="layui-input" errormsg="面积大小在0~10000之间！">
+                                                    <span class="Validform_checktip"></span>
+                                                </div>
 
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label">发布日期</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" name="created_at" id="pubDate" lay-verify="date"  :value="houseInfo.created_at" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth">
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">电梯</label>
-                                            <div class="layui-input-block">
-                                                <select name="iselevator" lay-filter="aihao">
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">发布日期</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" name="created_at" id="pubDate" lay-verify="date" :value="houseInfo.created_at" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth">
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">电梯</label>
+                                                <div class="layui-input-block">
+                                                    <select name="iselevator" lay-filter="aihao">
                                                     <option value="1" v-if="houseInfo.iselevator==1" selected>有</option>
                                                     <option value="1" v-else>有</option>
                                                     <option value="0" v-if="houseInfo.iselevator==0" selected>无</option>
                                                     <option value="0" v-else>无</option>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label">年代</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" name="years"  :value="houseInfo.years"  id="oldDate" lay-verify="date" placeholder="年" autocomplete="off" class="layui-input forSameWidth">
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">年代</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" name="years" :value="houseInfo.years" id="oldDate" lay-verify="date" placeholder="年" autocomplete="off" class="layui-input forSameWidth">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">装修</label>
-                                            <div class="layui-input-block">
-                                                <select name="decoratestyleid"  v-if="define[3]">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">装修</label>
+                                                <div class="layui-input-block">
+                                                    <select name="decoratestyleid" v-if="define[3]">
                                                     <template v-for="decoratestyle in define[3].selectValue">
                                                         <option  :value="decoratestyle.id" v-if="decoratestyle.id == houseInfo.decoratestyleid" selected>{{decoratestyle.name}}</option>
                                                         <option  :value="decoratestyle.id" v-else>{{decoratestyle.name}}</option>
                                                     </template>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">权属</label>
-                                            <div class="layui-input-block">
-                                                <select name="ownershipid"  v-if="system[5]">
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">权属</label>
+                                                <div class="layui-input-block">
+                                                    <select name="ownershipid" v-if="system[5]">
                                                     <template v-for="ownership in system[5].selectValue">
                                                         <option  :value="ownership.id" v-if="ownership.id == houseInfo.ownershipid" selected>{{ownership.name}}</option>
                                                         <option  :value="ownership.id" v-else>{{ownership.name}}</option>
                                                     </template>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">双气</label>
-                                            <div class="layui-input-block">
-                                                <select name="hasdoublegasid"  v-if="system[6]">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">双气</label>
+                                                <div class="layui-input-block">
+                                                    <select name="hasdoublegasid" v-if="system[6]">
                                                     <template v-for="hasdoublegas in system[6].selectValue">
                                                         <option  :value="hasdoublegas.id">{{hasdoublegas.name}}</option>
                                                         <option  :value="hasdoublegas.id" v-if="hasdoublegas.id == houseInfo.hasdoublegasid" selected>{{hasdoublegas.name}}</option>
                                                     </template>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">物业费(元/m<sup>2</sup>.月)</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input forSameWidth" name="propertyfee"  :value="houseInfo.propertyfee"   datatype="/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" maxlength="10" class="layui-input" sucmsg=" " errormsg="格式有误">
-                                                <span class="Validform_checktip"></span>
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">物业费(元/m<sup>2</sup>.月)</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="propertyfee" :value="houseInfo.propertyfee" datatype="/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" maxlength="10" class="layui-input" sucmsg=" " errormsg="格式有误">
+                                                    <span class="Validform_checktip"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
 
-                                <!--新房-->
-                                <tr v-if="houseInfo.typeid == 1">
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">现状</label>
-                                            <div class="layui-input-block">
-                                                <select name="salestatusid"  v-if="system[7]">
+                                    <!--新房-->
+                                    <tr v-if="houseInfo.typeid == 1">
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">现状</label>
+                                                <div class="layui-input-block">
+                                                    <select name="salestatusid" v-if="system[7]">
                                                     <template v-for="salestatus in system[7].selectValue">
                                                         <option :value="salestatus.id" v-if="salestatus.id == houseInfo.salestatusid" selected>{{salestatus.name}}</option>
                                                         <option :value="salestatus.id" v-else>{{salestatus.name}}</option>
                                                     </template>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline">
-                                            <label class="layui-form-label">开盘日期</label>
-                                            <div class="layui-input-inline">
-                                                <input type="text" name="opendate" id="saleDate" :value="houseInfo.opendate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth">
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline">
+                                                <label class="layui-form-label">开盘日期</label>
+                                                <div class="layui-input-inline">
+                                                    <input type="text" name="opendate" id="saleDate" :value="houseInfo.opendate" lay-verify="date" placeholder="年/月/日" autocomplete="off" class="layui-input forSameWidth">
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr v-if="houseInfo.typeid == 1">
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">单价(元)</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input forSameWidth" name="price"  :value="houseInfo.price" ignore="ignore" datatype="*/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" class="layui-input" sucmsg=" " errormsg="最多2位小数">
-                                                <span class="Validform_checktip"></span>
+                                        </td>
+                                    </tr>
+                                    <tr v-if="houseInfo.typeid == 1">
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">单价(元/平)</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="price" :value="houseInfo.price" ignore="ignore" datatype="*/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" class="layui-input" sucmsg=" " errormsg="最多2位小数">
+                                                    <span class="Validform_checktip"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">房型</label>
-                                            <div class="layui-input-block">
-                                                <select name="roomtypeid" v-if="define[2]">
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">房型</label>
+                                                <div class="layui-input-block">
+                                                    <select name="roomtypeid" v-if="define[2]">
                                                     <template v-for="roomtype in define[2].selectValue">
                                                         <option :value="roomtype.id" v-if="houseInfo.roomtypeid == roomtype.id" selected>{{roomtype.name}}</option>
                                                         <option :value="roomtype.id" v-else>{{roomtype.name}}</option>
                                                     </template>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <!--二手房-->
-                                <tr v-if="houseInfo.typeid == 2">
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">单价(元)</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input forSameWidth" name="price" :value="houseInfo.price" datatype="*/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" class="layui-input" sucmsg=" " errormsg="最多2位小数">
-                                                <span class="Validform_checktip"></span>
+                                        </td>
+                                    </tr>
+                                    <!--二手房-->
+                                    <tr v-if="houseInfo.typeid == 2">
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">单价(元/平)</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="price" :value="houseInfo.price" datatype="*/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" class="layui-input" sucmsg=" " errormsg="最多2位小数">
+                                                    <span class="Validform_checktip"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">总价</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input forSameWidth" name="total" :value="houseInfo.total" datatype="n1-11" class="layui-input" sucmsg=" " errormsg="总价为整数">
-                                                <span class="Validform_checktip"></span>
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">总价(万)</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="total" :value="houseInfo.total" datatype="n1-11" class="layui-input" sucmsg=" " errormsg="总价为整数">
+                                                    <span class="Validform_checktip"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr v-if="houseInfo.typeid == 2">
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">房型</label>
-                                            <div class="layui-input-block">
-                                                <select name="roomtypeid" v-if="define[2]">
+                                        </td>
+                                    </tr>
+                                    <tr v-if="houseInfo.typeid == 2">
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">房型</label>
+                                                <div class="layui-input-block">
+                                                    <select name="roomtypeid" v-if="define[2]">
                                                     <template v-for="roomtype in define[2].selectValue">
                                                         <option :value="roomtype.id" v-if="houseInfo.roomtypeid == roomtype.id" selected>{{roomtype.name}}</option>
                                                         <option :value="roomtype.id" v-else>{{roomtype.name}}</option>
                                                     </template>
                                                 </select>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
 
-                                <!--商铺-->
-                                <tr v-if="houseInfo.typeid == 3">
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">总价</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input forSameWidth" name="total"  :value="houseInfo.total"  datatype="n1-11" class="layui-input" sucmsg=" " errormsg="总价为整数">
-                                                <span class="Validform_checktip"></span>
+                                    <!--商铺-->
+                                    <tr v-if="houseInfo.typeid == 3">
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">总价(万)</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="total" :value="houseInfo.total" datatype="n1-11" class="layui-input" sucmsg=" " errormsg="总价为整数">
+                                                    <span class="Validform_checktip"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">进深</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input forSameWidth" name="depth" :value="houseInfo.depth" datatype="/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/"  ignore="ignore"  class="layui-input" sucmsg=" " errormsg="最多2位小数">
-                                                <span class="Validform_checktip"></span>
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">进深(m)</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="depth" :value="houseInfo.depth" datatype="/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" ignore="ignore" class="layui-input" sucmsg=" " errormsg="最多2位小数">
+                                                    <span class="Validform_checktip"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr  v-if="houseInfo.typeid == 3">
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">层高</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input forSameWidth" name="storey" :value="houseInfo.storey" datatype="/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/"  ignore="ignore"  class="layui-input" sucmsg=" " errormsg="最多2位小数">
-                                                <span class="Validform_checktip"></span>
+                                        </td>
+                                    </tr>
+                                    <tr v-if="houseInfo.typeid == 3">
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">层高(m)</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="storey" :value="houseInfo.storey" datatype="/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" ignore="ignore" class="layui-input" sucmsg=" " errormsg="最多2位小数">
+                                                    <span class="Validform_checktip"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">面宽</label>
-                                            <div class="layui-input-inline ">
-                                                <input type="text" class="layui-input forSameWidth" name="wide" :value="houseInfo.wide" datatype="/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/"  ignore="ignore"  class="layui-input" sucmsg=" " errormsg="最多2位小数">
-                                                <span class="Validform_checktip"></span>
+                                        </td>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">面宽(m)</label>
+                                                <div class="layui-input-inline ">
+                                                    <input type="text" class="layui-input forSameWidth" name="wide" :value="houseInfo.wide" datatype="/(^[1-9]([0-9]+)?(\.[0-9]{1,2})?$)|(^[0-9]\.[0-9]([1-9])?$)/" ignore="ignore" class="layui-input" sucmsg=" " errormsg="最多2位小数">
+                                                    <span class="Validform_checktip"></span>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
+                                        </td>
+                                    </tr>
 
-                                <tr>
-                                    <td>
-                                        <div class="layui-inline ">
-                                            <label class="layui-form-label ">公众号显示</label>
-                                            <div class="layui-input-inline">
-                                                <div class="layui-form-item">
-                                                    <div class="layui-input-block forEditLeftMargin">
-                                                        <input type="radio" name="status" value="1" title="是" v-if="houseInfo.status == 1" checked >
-                                                        <input type="radio" name="status" value="1" title="是" v-else>
-                                                        <input type="radio" name="status" value="0" title="否" v-if="houseInfo.status == 0" checked >
-                                                        <input type="radio" name="status" value="0" title="否" v-else>
+                                    <tr>
+                                        <td>
+                                            <div class="layui-inline ">
+                                                <label class="layui-form-label ">公众号显示</label>
+                                                <div class="layui-input-inline">
+                                                    <div class="layui-form-item">
+                                                        <div class="layui-input-block forEditLeftMargin">
+                                                            <input type="radio" name="status" value="1" title="是" v-if="houseInfo.status == 1" checked>
+                                                            <input type="radio" name="status" value="1" title="是" v-else>
+                                                            <input type="radio" name="status" value="0" title="否" v-if="houseInfo.status == 0" checked>
+                                                            <input type="radio" name="status" value="0" title="否" v-else>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                            <input type="hidden" name="typeid" :value="houseInfo.typeid">
-                            <input type="hidden" name="addr" :value="houseInfo.addr">
-                            <input type="hidden" name="street" :value="houseInfo.street">
-                            <input type="hidden" name="fulladdr" :value="houseInfo.fulladdr">
-                            <input type="hidden" name="lng" :value="houseInfo.lng">
-                            <input type="hidden" name="lat" :value="houseInfo.lat">
-                            <div class="nextBtnWrap">
-                                <button class="layui-btn nextBtn" type="button" id="submit">下一步</button>
-                            </div>
-                        </form>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <input type="hidden" name="typeid" :value="houseInfo.typeid">
+                                <input type="hidden" name="addr" :value="houseInfo.addr">
+                                <input type="hidden" name="street" :value="houseInfo.street">
+                                <input type="hidden" name="fulladdr" :value="houseInfo.fulladdr">
+                                <input type="hidden" name="lng" :value="houseInfo.lng">
+                                <input type="hidden" name="lat" :value="houseInfo.lat">
+                                <div class="nextBtnWrap">
+                                    <button class="layui-btn nextBtn" type="button" id="submit">下一步</button>
+                                </div>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </body>
 <script type="text/javascript" src="../../js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="../../config/configure.js"></script>
@@ -432,4 +434,5 @@
 <script type="text/javascript" src="../../js/Validform_v5.3.2_min.js"></script>
 <!--- js -->
 <script type="text/javascript" src="../../js/page/house/edit.js"></script>
+
 </html>

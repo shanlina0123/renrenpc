@@ -1,4 +1,5 @@
 ﻿<html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,35 +15,36 @@
     <link rel="stylesheet" href="../../css/style1.css">
     <link rel="stylesheet" href="../../css/style2.css">
 </head>
+
 <body>
     <div class="wrap">
         <div class="main clearfix">
             <div class="loginFormWrap">
                 <form class="layui-form loginForm">
                     <div class="layui-form-item">
-                        <div class="change fl">输入新密码</div>
+                        <div class="change fl">新密码</div>
                         <div class="layui-input-block">
-                            <input  type="password" name="password"  nullmsg="请设置密码！" placeholder="请输入密码" datatype="*6-10" class="layui-input" sucmsg=" "  errormsg="密码在6~10位之间！">
-                        	<span  class="Validform_checktip"></span>
+                            <input type="password" name="password" nullmsg="请设置密码！" placeholder="请输入密码" datatype="*6-10" class="layui-input" sucmsg=" " errormsg="密码在6~10位之间！">
+                            <span class="Validform_checktip"></span>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <div class="change fl">确认密码</div>
                         <div class="layui-input-block">
-                            <input type="password" name="password_confirmation"  nullmsg="请再输入一次密码！" placeholder="请输入新密码"  class="layui-input" sucmsg=" " datatype="*" recheck="password" errormsg="输入密码不一致！">
+                            <input type="password" name="password_confirmation" nullmsg="请再输入一次密码！" placeholder="请输入新密码" class="layui-input" sucmsg=" " datatype="*" recheck="password" errormsg="输入密码不一致！">
                             <span class="Validform_checktip"></span>
                         </div>
-                    </div>    
-     
+                    </div>
+
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <button  type="button" class="layui-btn btn2" id="btn_submit">提交</button>
+                            <button type="button" class="layui-btn btn2" id="btn_submit">提交</button>
                         </div>
                     </div>
                 </form>
-              </div>  
             </div>
         </div>
+    </div>
     </div>
     <!-- //wrap -->
 
@@ -53,25 +55,22 @@
     <script type="text/javascript" src="../../config/bese64.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript">
-        $(function () {
-		    if( $(".loginForm").length )
-		    {
-		        $(".loginForm").Validform({
+        $(function() {
+            if ($(".loginForm").length) {
+                $(".loginForm").Validform({
                     btnSubmit: '#btn_submit',
                     postonce: true,
                     showAllError: false,
-                    ajaxPost:true,
-		            tiptype: function (msg, o, cssctl)
-		            {
-		                if ( !o.obj.is("form") )
-		                {
-		                    var objtip = o.obj.parents('.layui-input-block').find(".Validform_checktip");
-		                    objtip.removeClass('Validform_skate');
-		                    cssctl(objtip, o.type);
-		                    objtip.text(msg);
-		                }
-		            },beforeSubmit:function(curform)
-                    {
+                    ajaxPost: true,
+                    tiptype: function(msg, o, cssctl) {
+                        if (!o.obj.is("form")) {
+                            var objtip = o.obj.parents('.layui-input-block').find(".Validform_checktip");
+                            objtip.removeClass('Validform_skate');
+                            cssctl(objtip, o.type);
+                            objtip.text(msg);
+                        }
+                    },
+                    beforeSubmit: function(curform) {
                         //密码
                         var base = new Base64();
                         var pass = $("input[name='password']").val();
@@ -83,58 +82,68 @@
                         var wechatopenid = getQueryString('openid');
                         //用户id
                         var uuid = getQueryString('uuid');
-                        var data = {password_confirmation:password_confirmation64,password:password64,wechatopenid:wechatopenid,uuid:uuid};
+                        var data = {
+                            password_confirmation: password_confirmation64,
+                            password: password64,
+                            wechatopenid: wechatopenid,
+                            uuid: uuid
+                        };
                         //请求
                         $.ajax({
                             type: "POST", //方法类型
                             dataType: "json", //预期服务器返回的数据类型
                             url: auth_conf.edit_modify_pass, //url
-                            data:data,
+                            data: data,
                             success: function(result) {
-                                if( result.status == 1 )
-                                {
+                                if (result.status == 1) {
                                     localStorage.removeItem("userinfo");
                                     layui.use(['layer'], function() {
                                         var layer = layui.layer;
-                                        layer.msg( result.messages, {icon: 1},function () {
-                                            window.location.href='/login.html';
+                                        layer.msg(result.messages, {
+                                            icon: 1
+                                        }, function() {
+                                            window.location.href = '/login.html';
                                         });
                                     });
 
-                                }else
-                                {
+                                } else {
                                     layui.use(['layer'], function() {
                                         var layer = layui.layer;
-                                        layer.msg( result.messages, {icon: 5, time: 2000, shift: 6});
+                                        layer.msg(result.messages, {
+                                            icon: 5,
+                                            time: 2000,
+                                            shift: 6
+                                        });
                                     });
 
                                 }
-                            },error:function()
-                            {
+                            },
+                            error: function() {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
-                                    layer.msg( '请求数据异常', {icon: 5, time: 2000, shift: 6});
+                                    layer.msg('请求数据异常', {
+                                        icon: 5,
+                                        time: 2000,
+                                        shift: 6
+                                    });
                                 });
                             }
                         });
                     }
-		        });
-		    }
-		});
+                });
+            }
+        });
 
-        function getQueryString( name )
-        {
+        function getQueryString(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); // 匹配目标参数
             var result = window.location.search.substr(1).match(reg); // 对querystring匹配目标参数
-            if (result != null)
-            {
+            if (result != null) {
                 return decodeURIComponent(result[2]);
-            }else
-            {
+            } else {
                 return null;
             }
         }
-
     </script>
 </body>
+
 </html>
