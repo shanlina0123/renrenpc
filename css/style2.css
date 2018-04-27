@@ -1,32 +1,92 @@
-.layui-form{
-	width: 500px;
+.layui-input-block input {
+    width: 60%;
+    float: left;
 }
-.layui-input-block input{
-	width: 60%;float: left;
+
+.layui-input-block span {
+    float: left;
+    margin-left: 2%;
+    margin-top: 2%;
+    color: red;
 }
-.layui-input-block span{
-	float: left;
-	margin-left: 2%;
-	margin-top: 2%;
-	color: red;
+
+.layui-input-block .layui-btn {
+    width: 150px;
 }
-.layui-input-block .layui-btn{
-	width: 60%;
+
+.Validform_right {
+    color: green;
 }
-.Validform_right{
-	color: green;
+
+.loginLogo {
+    display: block;
+    margin: 20px auto 0 auto
 }
-.loginFormWrap{
-	width: 800PX;
-	margin-left: -15%;
+
+.loginFormWrap {
+    width: 617px;
+    height: 317px;
+    text-align: center;
+    background: url(../images/loginFormBg.png) center center no-repeat;
+    background-size: 100%;
+    border-radius: 10px;
 }
-.pwd{
-	width: 100px;
+
+.loginFormWrap.cgpwdWrap {
+    background: none;
+    margin-top: 0;
+    top: 20%;
+    left: 40%
 }
-.change{
-	width: 80px;
-	float: left;
+
+.loginFormWrap.cgpwdWrap .layui-form {
+    margin-top: 0;
 }
-.btn2{
-	margin-left: 20px;
+
+.cgpwdWrap .layui-form-item {
+    height: 38px;
+    line-height: 38px;
+}
+
+.cgpwdWrap .cgPwdblock {
+    width: 400px;
+    margin-top: 40px;
+}
+
+.loginFormWrap .layui-form {
+    width: auto;
+    margin-top: 30px;
+}
+
+.loginFormWrap .layui-input-block input {
+    width: 50%
+}
+
+.loginFormWrap .changePwdForm {
+    margin-top: 120px
+}
+
+.loginFormWrap .changePwdItem {
+    margin-top: 40px;
+}
+
+.loginFormWrap .layui-form .layui-form-label {
+    width: 133px;
+}
+
+.loginFormWrap .loginblock {
+    margin-left: 0;
+}
+
+.pwd {
+    width: 100px;
+}
+
+.change {
+    width: 80px;
+    float: left;
+}
+
+.btn2 {
+    margin-left: 20px;
 }
