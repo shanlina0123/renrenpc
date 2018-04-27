@@ -64,6 +64,7 @@ var vm = new Vue({
         },
         //查看和新增用户弹窗
         getEditAdmin: function(uuid) {
+
             var that = this;
             if(that.roleList.length==0)
             {
@@ -106,8 +107,15 @@ var vm = new Vue({
                 that.params.mobile = "";
                 that.params.uuid = "";
                 that.params.status = "";
-                that.params.roleid = $("#popRoleList").val("");
-                that.params.roleid = $("#roleIdID").val("");
+                that.params.roleid = "";
+                that.params.status = "";
+
+                $("#popRoleList").val("");
+                $("#roleIdID").val("");
+                layui.use(['form'], function() {
+                    var form = layui.form;
+                    form.render('select');
+                });
                 layer.open({
                     type: 1,
                     title: '新增用户',
@@ -135,14 +143,8 @@ var vm = new Vue({
         submitUser: function(uuid) {
             //console.log(uuid);
             var that = this;
-            var roleidVal = $("#popRoleList").val(); //角色名称
-            var statusVal = $("#roleIdID").val(); //状态值
-            that.params.roleid = roleidVal;
-            if (statusVal == "锁定") {
-                that.params.status = "0";
-            } else {
-                that.params.status = "1";
-            }
+            that.params.roleid =  $("#popRoleList").val(); //角色名称
+            that.params.status= $("#roleIdID").val(); //状态值
             if (uuid) {
                 //编辑查看用户
                 var url = auth_conf.admin_edit + uuid
@@ -163,7 +165,6 @@ var vm = new Vue({
                         layer.msg("请填写用户账号");
                     })
                 } else {
-                    that.params.status= $("#roleIdID").val();
                     axios.put(url, that.params, { headers: { "Authorization": that.tokenValue } })
                         .then(function(response) {
                             var data = response.data
