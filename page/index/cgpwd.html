@@ -1,4 +1,5 @@
 ﻿<html>
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,38 +15,41 @@
     <link rel="stylesheet" href="../../css/style1.css">
     <link rel="stylesheet" href="../../css/style2.css">
 </head>
+
 <body>
     <div class="wrap">
         <div class="layui-layout layui-layout-admin" id="top"></div>
         <div class="main clearfix">
             <!--左侧导航-->
-            <ul class="leftNav fl" id="left"><!--左侧导航--></ul>
+            <ul class="leftNav fl" id="left">
+                <!--左侧导航-->
+            </ul>
             <!--右侧主要内容-->
-             <div>
-            <div class="loginFormWrap">
-                <form class="layui-form loginForm">
-                    <div class="layui-form-item">
-                        <div class="change fl">输入新密码</div>
-                        <div class="layui-input-block">
-                            <input  type="password" name="password"  nullmsg="请设置密码！" placeholder="请输入密码" datatype="*6-10" class="layui-input" sucmsg=" "  errormsg="密码在6~10位之间！">
-                        	<span  class="Validform_checktip"></span>
+            <div>
+                <div class="loginFormWrap cgpwdWrap">
+                    <form class="layui-form loginForm">
+                        <div class="layui-form-item">
+                            <div class="change fl">新密码</div>
+                            <div class="layui-input-block">
+                                <input type="password" name="password" nullmsg="请设置密码！" placeholder="请输入密码" datatype="*6-10" class="layui-input" sucmsg=" " errormsg="密码在6~10位之间！">
+                                <span class="Validform_checktip"></span>
+                            </div>
                         </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <div class="change fl">确认密码</div>
-                        <div class="layui-input-block">
-                            <input type="password" name="password_confirmation"  nullmsg="请再输入一次密码！" placeholder="请输入新密码"  class="layui-input" sucmsg=" " datatype="*" recheck="password" errormsg="输入密码不一致！">
-                            <span class="Validform_checktip"></span>
+                        <div class="layui-form-item">
+                            <div class="change fl">确认密码</div>
+                            <div class="layui-input-block">
+                                <input type="password" name="password_confirmation" nullmsg="请再输入一次密码！" placeholder="请输入新密码" class="layui-input" sucmsg=" " datatype="*" recheck="password" errormsg="输入密码不一致！">
+                                <span class="Validform_checktip"></span>
+                            </div>
                         </div>
-                    </div>    
-     
-                    <div class="layui-form-item">
-                        <div class="layui-input-block">
-                            <button  type="button" class="layui-btn btn2" id="btn_submit">提交</button>
+
+                        <div class="layui-form-item">
+                            <div class="layui-input-block cgPwdblock">
+                                <button type="button" class="layui-btn" id="btn_submit">提交</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
-              </div>  
+                    </form>
+                </div>
             </div>
         </div>
     </div>
@@ -58,25 +62,22 @@
     <script type="text/javascript" src="../../config/bese64.js"></script>
     <script type="text/javascript" src="../../js/common.js"></script>
     <script type="text/javascript">
-        $(function () {
-		    if( $(".loginForm").length )
-		    {
-		        $(".loginForm").Validform({
+        $(function() {
+            if ($(".loginForm").length) {
+                $(".loginForm").Validform({
                     btnSubmit: '#btn_submit',
                     postonce: true,
                     showAllError: false,
-                    ajaxPost:true,
-		            tiptype: function (msg, o, cssctl)
-		            {
-		                if ( !o.obj.is("form") )
-		                {
-		                    var objtip = o.obj.parents('.layui-input-block').find(".Validform_checktip");
-		                    objtip.removeClass('Validform_skate');
-		                    cssctl(objtip, o.type);
-		                    objtip.text(msg);
-		                }
-		            },beforeSubmit:function(curform)
-                    {
+                    ajaxPost: true,
+                    tiptype: function(msg, o, cssctl) {
+                        if (!o.obj.is("form")) {
+                            var objtip = o.obj.parents('.layui-input-block').find(".Validform_checktip");
+                            objtip.removeClass('Validform_skate');
+                            cssctl(objtip, o.type);
+                            objtip.text(msg);
+                        }
+                    },
+                    beforeSubmit: function(curform) {
                         var base = new Base64();
                         var pass = $("input[name='password']").val();
                         var password64 = base.encode(pass);
@@ -84,48 +85,60 @@
                         var password_confirmation = $("input[name='password_confirmation']").val();
                         var password_confirmation64 = base.encode(password_confirmation);
 
-                        var data = {password_confirmation:password_confirmation64,password:password64};
+                        var data = {
+                            password_confirmation: password_confirmation64,
+                            password: password64
+                        };
 
                         var tokenValue = JSON.parse(localStorage.getItem("userinfo")).token;
                         $.ajax({
                             headers: {
-                                Authorization:tokenValue,
+                                Authorization: tokenValue,
                             },
                             type: "POST", //方法类型
                             dataType: "json", //预期服务器返回的数据类型
                             url: auth_conf.edit_pass, //url
-                            data:data,
+                            data: data,
                             success: function(result) {
-                                if( result.status == 1 )
-                                {
+                                if (result.status == 1) {
                                     localStorage.removeItem("userinfo");
                                     layui.use(['layer'], function() {
                                         var layer = layui.layer;
-                                        layer.msg( result.messages, {icon: 1},function () {
-                                            window.location.href='/login.html';
+                                        layer.msg(result.messages, {
+                                            icon: 1
+                                        }, function() {
+                                            window.location.href = '/login.html';
                                         });
                                     });
 
-                                }else
-                                {
+                                } else {
                                     layui.use(['layer'], function() {
                                         var layer = layui.layer;
-                                        layer.msg( result.messages, {icon: 5, time: 2000, shift: 6});
+                                        layer.msg(result.messages, {
+                                            icon: 5,
+                                            time: 2000,
+                                            shift: 6
+                                        });
                                     });
 
                                 }
-                            },error:function()
-                            {
+                            },
+                            error: function() {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
-                                    layer.msg( '请求数据异常', {icon: 5, time: 2000, shift: 6});
+                                    layer.msg('请求数据异常', {
+                                        icon: 5,
+                                        time: 2000,
+                                        shift: 6
+                                    });
                                 });
                             }
                         });
                     }
-		        });
-		    }
-		});
+                });
+            }
+        });
     </script>
 </body>
+
 </html>

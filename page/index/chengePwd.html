@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>找回密码</title>
-     <link rel="icon" href="../../images/icon.ico">
+    <link rel="icon" href="../../images/icon.ico">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="../../css/normalize.css">
@@ -26,7 +26,7 @@
         <div class="layui-layout loginBg">
             <div class="loginFormWrap">
                 <div class="main clearfix">
-                    <form class="layui-form loginForm">
+                    <form class="layui-form changePwdForm loginForm">
                         <div class="layui-form-item">
                             <label class="layui-form-label">账号</label>
                             <div class="layui-input-block">
@@ -34,9 +34,9 @@
                                 <span class="Validform_checktip"></span>
                             </div>
                         </div>
-                        <div class="layui-form-item">
+                        <div class="layui-form-item changePwdItem">
                             <div class="layui-input-block">
-                                <button  type="button" class="layui-btn" id="btn_submit">提交</button>
+                                <button type="button" class="layui-btn" id="btn_submit">提交</button>
                             </div>
                         </div>
                     </form>
@@ -51,57 +51,62 @@
     <script type="text/javascript" src="../../config/configure.js?v=2"></script>
 
     <script type="text/javascript">
-        $(function () {
-		    if( $(".loginForm").length )
-		    {
-		        $(".loginForm").Validform({
+        $(function() {
+            if ($(".loginForm").length) {
+                $(".loginForm").Validform({
                     btnSubmit: '#btn_submit',
                     postonce: true,
                     showAllError: false,
-                    ajaxPost:true,
-		            tiptype: function (msg, o, cssctl)
-		            {
-		                if ( !o.obj.is("form") )
-		                {
-		                    var objtip = o.obj.parents('.layui-input-block').find(".Validform_checktip");
-		                    objtip.removeClass('Validform_skate');
-		                    cssctl(objtip, o.type);
-		                    objtip.text(msg);
-		                }
-		            },beforeSubmit:function(curform)
-                    {
+                    ajaxPost: true,
+                    tiptype: function(msg, o, cssctl) {
+                        if (!o.obj.is("form")) {
+                            var objtip = o.obj.parents('.layui-input-block').find(".Validform_checktip");
+                            objtip.removeClass('Validform_skate');
+                            cssctl(objtip, o.type);
+                            objtip.text(msg);
+                        }
+                    },
+                    beforeSubmit: function(curform) {
                         var name = $("input[name='name']").val();
                         $.ajax({
                             type: "POST", //方法类型
                             dataType: "json", //预期服务器返回的数据类型
                             url: auth_conf.check_user_name, //url
-                            data:{name:name},
+                            data: {
+                                name: name
+                            },
                             success: function(result) {
-                                if( result.status == 1 )
-                                {
+                                if (result.status == 1) {
 
-                                    window.location.href='erweimaLogin.html?uuid='+result.data;
+                                    window.location.href = 'erweimaLogin.html?uuid=' + result.data;
 
-                                }else
-                                {
+                                } else {
                                     layui.use(['layer'], function() {
                                         var layer = layui.layer;
-                                        layer.msg( result.messages, {icon: 5, time: 2000, shift: 6});
+                                        layer.msg(result.messages, {
+                                            icon: 5,
+                                            time: 2000,
+                                            shift: 6
+                                        });
                                     });
 
                                 }
-                            },error:function()
-                            {
+                            },
+                            error: function() {
                                 layui.use(['layer'], function() {
                                     var layer = layui.layer;
-                                    layer.msg( '请求数据异常', {icon: 5, time: 2000, shift: 6});
+                                    layer.msg('请求数据异常', {
+                                        icon: 5,
+                                        time: 2000,
+                                        shift: 6
+                                    });
                                 });
                             }
                         });
                     }
-		        });
-		    }
-		});
+                });
+            }
+        });
     </script>
 </body>
 

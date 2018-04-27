@@ -143,8 +143,8 @@
                             <td v-else></td>
                             <td>{{item.housename}}</td>
                             <td>{{item.dynamic_to_client.mobile}}</td>
-                            <td>{{item.makedate}}</td>
-                            <td>{{item.comedate}}</td>
+                            <td v-if="item.makedate!='0000-00-00 00:00:00'">{{item.makedate}}</td><td v-else></td>
+                            <td v-if="item.comedate!='0000-00-00 00:00:00'">{{item.comedate}}</td><td v-else></td>
                             <td v-if="default_followstatus_datas[item.followstatusid]">
                                 {{default_followstatus_datas[item.followstatusid]["name"]}}
                             </td><td v-else></td>
@@ -159,9 +159,8 @@
                                 {{admin_show_datas[item.ownadminid]["nickname"]}}
                             </td> <td v-else></td>
                             <td>{{item.followcount}}</td>
-                            <td>{{item.followdate}}</td>
-                            <td>{{item.dealdate}}</td>
-
+                            <td v-if="item.followdate!='0000-00-00 00:00:00'">{{item.followdate}}</td><td v-else></td>
+                            <td v-if="item.dealdate!='0000-00-00 00:00:00'">{{item.dealdate}}</td><td v-else></td>
                             <td>
                                 <div class="layui-btn-group">
                                     <a type="button" class="layui-btn"
