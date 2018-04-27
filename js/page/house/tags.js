@@ -31,9 +31,9 @@ new Vue({
 
             var that = this;
             var len = that.tsgsData.length;
-            if(  len < 6  )
-            {
-                var id = parseInt( tag.id );
+               if(  len < 6  || tag.chencked == true )
+              {
+                var id = tag.id ;
                 if( typeof tag.chencked == 'undefined' )
                 {
 
@@ -45,13 +45,15 @@ new Vue({
                     that.tsgsData.splice($.inArray(id,that.tsgsData),1);
                     tag.chencked = !tag.chencked;
                 }
-            }else
-            {
+              }else
+              {
                 layui.use(['layer'], function() {
                     var layer = layui.layer;
                     layer.msg('标签最多选择6个哦');
                 });
-            }
+              }
+
+
         },saveTages:function ()
         {
             var that = this;
