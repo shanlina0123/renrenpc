@@ -59,6 +59,8 @@ var vm = new Vue({
         },
         //进入添加
         showAdd:function () {
+
+            $("#addForm input").val("");
             layer.open({
                 type: 1,
                 title: '添加合作公司',
