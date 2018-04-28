@@ -31,7 +31,7 @@ new Vue({
 
             var that = this;
             var len = that.tsgsData.length;
-               if(  len < 6  || tag.chencked == true )
+               if(  len < 6  || tag.chencked == true)
               {
                 var id = tag.id ;
                 if( typeof tag.chencked == 'undefined' )
