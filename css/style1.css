@@ -368,3 +368,10 @@ ul.leftNav li i {
 .forInset .forShowSearch li:first-child {
     border-top: none;
 }
+/*弹窗提醒*/
+.popNotice{
+    width:600px;
+    line-height:25px;
+    color: #eb7221;
+    margin:20px auto;
+}

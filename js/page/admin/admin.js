@@ -122,7 +122,7 @@ var vm = new Vue({
                     shadeClose: true,
                     scrollbar: false,
                     skin: 'layui-layer-rim',
-                    area: ['500px', '500px'],
+                    area: ['650px', '600px'],
                     content: $(".userPopWrap")
                 })
             }
