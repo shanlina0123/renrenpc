@@ -120,8 +120,8 @@
                             </tr>
                         </thead>
                         <tbody >
-                            <tr v-for="item in charts">
-                                <td>{{item.clientid}}</td>
+                            <tr v-for="(item,index) in charts">
+                                <td>{{index+1}}</td>
                                 <td>{{item.dynamic_to_client.name}}</td>
 
                                 <td v-if="state[item.followstatusid]">

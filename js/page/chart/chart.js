@@ -59,6 +59,7 @@ var ch = new Vue({
         firm:[],//公司
         manager:[],//经纪人
         admin_datas:[],//业务员
+         list_index:0
     },
     methods:{
         //第一次加载数据
@@ -85,6 +86,7 @@ var ch = new Vue({
                             var form = layui.form;
                             form.render();
                         });
+                        that.list_index=data.data.from;
                     }else
                     {
                        layui.use(['layer'], function() {
