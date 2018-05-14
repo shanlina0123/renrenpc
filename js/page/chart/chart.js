@@ -305,9 +305,15 @@ function  excelExport() {
     ch.$data.params.dealdate = dealdate;
     ch.$data.params.isexcel = 1;
 
-    var cacheKey="excel"+followstatusid+companyid+ownadminid+refereeuserid+makedate+comedate+dealdate;
+    makedate = $("#test16").val();
+    comedate = $("#test17").val();
+    dealdate = $("#test18").val();
 
+
+    var cacheKey="excel"+followstatusid+companyid+ownadminid+refereeuserid+makedate+comedate+dealdate;
     cacheKey=cacheKey?cacheKey:0;
+    var base = new Base64();
+    cacheKey = base.encode(cacheKey);
     //导出
     ch.excelList(cacheKey);
 }
