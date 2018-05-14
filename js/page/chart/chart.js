@@ -40,6 +40,7 @@ var ch = new Vue({
          params:{ //地址参数
             page:1,
             typeid:'',
+             isexcel:0,
             followstatusid:'',//客户状态
             refereeuserid:'',//经纪人
             ownadminid:'',//业务员
@@ -221,7 +222,29 @@ var ch = new Vue({
                 .catch(function (error) {
                
                 });
-        },             
+        },
+        //导出excel
+        excelList:function (cacheKey){
+            var url = auth_conf.chart_list;
+            var that = this;
+            axios.post(url,that.params,{headers: {"Authorization": that.tokenValue}})
+                .then(function(response)
+                {
+                    var data = response.data;
+                    if (data.status == 1)
+                    {
+                        layer.msg("导出成功", {icon: 1});
+                        window.location.href= auth_conf.chart_excel_export+cacheKey;
+
+                    }else
+                        {
+                            layer.msg("数据加载失败", {icon: 2});
+                        }
+                    })
+                .catch(function (error) {
+                    layer.msg("请求异常", {icon: 3});
+                });
+        },
     },
     created:function () {
         var that = this;     
@@ -258,4 +281,33 @@ function search() {
 	ch.$data.params.page = 1;
 
     ch.getChartsList();
+}
+
+function  excelExport() {
+    //参数
+    var followstatusid=$("#state").val();//客户状态
+    var companyid = $("#firm").val();    //公司
+    var refereeuserid = $("#manager").val();//经纪人
+    var ownadminid = $("#workp").val();//业务员
+    //日期
+    var makedate = $("#test16").val();
+    var comedate = $("#test17").val();
+    var dealdate = $("#test18").val();
+
+    ch.$data.params.followstatusid = followstatusid;//客户状态
+    ch.$data.params.companyid = companyid;//公司
+    //经纪人，业务员
+    ch.$data.params.refereeuserid = refereeuserid;
+    ch.$data.params.ownadminid = ownadminid;
+    //日期
+    ch.$data.params.makedate = makedate;
+    ch.$data.params.comedate = comedate;
+    ch.$data.params.dealdate = dealdate;
+    ch.$data.params.isexcel = 1;
+
+    var cacheKey="excel"+followstatusid+companyid+ownadminid+refereeuserid+makedate+comedate+dealdate;
+
+    cacheKey=cacheKey?cacheKey:0;
+    //导出
+    ch.excelList(cacheKey);
 }
